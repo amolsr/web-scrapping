@@ -23,7 +23,7 @@ for i in soup.find_all('a', class_='a-popover-trigger a-declarative'):
 
     
 
-file_name = 'Laptops.csv'
+file_name = 'Amazon.csv'
 
 with open(file_name, 'w') as file:
     writer = csv.writer(file)
