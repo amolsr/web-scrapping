@@ -2,12 +2,12 @@
 The goal of this project is to help the beginners with their contributions in Open Source. We aim to achieve this collaboratively, so feel free to contribute in any way you want, just make sure to follow the contribution guidelines.
 
 
-# HacktoberFest-2021
+# HacktoberFest
 
 Open source is changing the world - one pull request at a time. 
 
 
-- [HacktoberFest-2021](#hacktoberfest-2021)
+- [HacktoberFest-2021](#hacktoberfest)
   - [What is Hacktoberfest?](#what-is-hacktoberfest)
   - [Why Should I Contribute?](#-why-should-i-contribute)
   - [What Can I Contribute?](#what-can-i-contribute)
@@ -60,3 +60,6 @@ You can contribute to any open source project hosted on Github.com and contribut
 - [A participation guide for Hacktoberfest](https://dev.to/zenika/a-participation-guide-for-hacktoberfest-19c1)
 - [What is Hacktoberfest and How can a beginner contribute?](https://medium.com/@bawantharathnayaka/what-is-hacktoberfest-and-how-can-a-beginner-contribute-39cf2081804e)
 - [Hacktoberfest 2019: How you can get your free shirt — even if you’re new to coding](https://www.freecodecamp.org/news/hacktoberfest-2018-how-you-can-get-your-free-shirt-even-if-youre-new-to-coding-96080dd0b01b/)
+
+## Stargazers over time
+[![Stargazers over time](https://starchart.cc/amolsr/web-scrapping.svg?variant=adaptive)](https://starchart.cc/amolsr/web-scrapping)
