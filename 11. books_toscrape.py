@@ -105,7 +105,7 @@ if __name__ == "__main__":
     df = pd.DataFrame(data)
     
     # save it as a CSV file
-    df.to_csv("books_toscrape_data.csv", index=False, encoding="utf-8")
+    df.to_csv("output/books_toscrape_data.csv", index=False, encoding="utf-8")
     
     print(f"Scraping completed. Total books found: {len(df)}")
     print("Data saved to books_toscrape_data.csv")
