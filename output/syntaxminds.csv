@@ -1,0 +1,26 @@
+question,option_A,option_B,option_C,option_D,answer
+What is Spring Boot primarily used for?,A) Developing mobile applications,B) Creating standalone Spring-based applications,C) Building desktop applications,D) Writing frontend code,B
+Which annotation is used to start a Spring Boot application?,A) @SpringApplication,B) @SpringBootApplication,C) @Application,D) @StartApplication,B
+What is the default packaging type for a Spring Boot application?,A) WAR,B) JAR,C) ZIP,D) EAR,B
+Which file is typically used for configuring application settings in Spring Boot?,A) config.yml,B) application.properties,C) appconfig.json,D) settings.xml,B
+What does the `@EnableAutoConfiguration` annotation do?,A) Enables aspect-oriented programming,B) Automatically configures beans based on classpath settings,C) Sets up database connections,D) Enables security features,B
+Which of the following is a Spring Boot starter for web applications?,A) spring-boot-starter-data-jpa,B) spring-boot-starter-web,C) spring-boot-starter-security,D) spring-boot-starter-test,B
+What is the Function of Spring Boot Actuator?,A) To manage database transactions,B) To provide monitoring and management capabilities,C) To handle user authentication,D) To facilitate dependency injection,B
+Which annotation is used to define a RESTful controller in Spring Boot?,A) @Controller,B) @Service,C) @RestController,D) @Component,C
+What is the default port for a Spring Boot application?,A) 5000,B) 8080,C) 3000,D) 8000,B
+Which annotation is used to inject dependencies in Spring?,A) @Inject,B) @Autowired,C) @Resource,D) @InjectDependency,B
+What is the purpose of the `application.yml` file?,A) To store XML configurations,B) To define environment-specific properties,C) To configure security settings,D) To manage database migrations,B
+Which of the following can be used to handle exceptions in Spring Boot?,A) @ExceptionHandler,B) @ControllerAdvice,C) @ResponseStatus,D) All of the above,D
+What does the `@Value` annotation do?,A) Specifies the value of a bean,B) Injects values from properties files,C) Defines a default value for a parameter,D) None of the above,B
+Which component is responsible for creating and managing beans in Spring?,A) Application Context,B) Bean Factory,C) Application Factory,D) Dependency Injector,A
+How do you define a Spring Boot application as a service?,A) @Service,B) @Component,C) @Repository,D) @Controller,A
+What is the role of Spring Boot DevTools?,A) To enhance security features,B) To provide developer-friendly tools for development,C) To manage database connections,D) To optimize application performance,B
+Which of the following annotations is used for defining a repository?,A) @Repository,B) @Service,C) @Component,D) @Data,A
+Which Spring Boot starter is used for testing applications?,A) spring-boot-starter-data-jpa,B) spring-boot-starter-web,C) spring-boot-starter-test,D) spring-boot-starter-security,C
+How can you enable Spring Security in a Spring Boot application?,A) By adding spring-security-core dependency,B) By adding spring-boot-starter-security dependency,C) By using @EnableWebSecurity annotation,D) All of the above,D
+What is the function of the `@Configuration` annotation?,A) To create a REST controller,B) To indicate a class as a source of bean definitions,C) To mark a class as a service,D) To handle application properties,B
+Which of the following is a characteristic of Spring Boot?,A) Convention over configuration,B) Built-in web server,C) Production-ready features,D) All of the above,D
+What does the `@ComponentScan` annotation do?,A) Scans the classpath for Spring components,B) Scans for configuration files,C) Scans for XML configurations,D) None of the above,A
+Which of the following is true about profiles in Spring Boot?,A) They are used to group configurations for different environments.,B) They can only be defined in application.properties.,C) They are used to handle exceptions.,D) They cannot be changed at runtime.,A
+How can you override default application properties in Spring Boot?,A) By modifying application.properties,B) By using command-line arguments,C) By using environment variables,D) All of the above,D
+Which Spring Boot starter is used for JPA and Hibernate?,A) spring-boot-starter-jdbc,B) spring-boot-starter-data-jpa,C) spring-boot-starter-orm,D) spring-boot-starter-web,B
