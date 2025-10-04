@@ -3,6 +3,8 @@
 # Description: This script collects all book details like title, price,
 # availability, rating, and link using BeautifulSoup and saves them into a CSV file.
 
+# I tried to explain each part of the script
+
 # importing all the required libraries
 import requests                # to send HTTP requests and get web pages
 from bs4 import BeautifulSoup  # to parse HTML content
