@@ -1,0 +1,35 @@
+Question,Option A,Option B,Option C,Option D,Correct Answer
+How long is an IPv6 address?,32 bits,128 bytes,64 bits,128 bits,D
+What flavor of Network Address Translation can be used to have one IP address allow many users to connect to the global Internet?,NAT,Static,Dynamic,PAT,D
+What are the two main types of access control lists (ACLs)? Standard IEEE Extended Specialized,1 and 3,2 and 4,3 and 4,1 and 2,A
+What command is used to create a backup configuration?,copy running backup,copy running-config startup-config,config mem,wr mem,B
+"You have 10 users plugged into a hub running 10Mbps half-duplex. There is a server connected to the switch running 10Mbps half-duplex as well. How much bandwidth does each 
+host have to the server?",100 kbps,1 Mbps,2 Mbps,10 Mbps,D
+Which WLAN IEEE specification allows up to 54Mbps at 2.4GHz?,A,B,G,N,C
+Which of the following is the valid host range for the subnet on which the IP address 192.168.168.188 255.255.255.192 resides?,192.168.168.129-190,192.168.168.129-191,192.168.168.128-190,192.168.168.128-192,A
+"To back up an IOS, what command will you use?",backup IOS disk,copy ios tftp,copy tftp flash,copy flash tftp,D
+What protocol does PPP use to identify the Network layer protocol?,NCP,ISDN,HDLC,LCP,A
+Which of the following commands will allow you to set your Telnet password on a Cisco router?,line telnet 0 4,line aux 0 4,line vty 0 4,line con 0,C
+Which protocol does DHCP use at the Transport layer?,IP,TCP,UDP,ARP,C
+Which command is used to determine if an IP access list is enabled on a particular interface?,show access-lists,show interface,show ip interface,show interface access-lists,C
+Where is a hub specified in the OSI model?,Session layer,Physical layer,Data Link layer,Application layer,B
+What does the passive command provide to dynamic routing protocols?,Stops an interface from sending or receiving periodic dynamic updates.,Stops an interface from sending periodic dynamic updates but not from receiving updates.,Stops the router from receiving any dynamic updates.,Stops the router from sending any dynamic updates.,B
+Which protocol is used to send a destination network unknown message back to originating hosts?,TCP,ARP,ICMP,BootP,C
+How often are BPDUs sent from a layer 2 device?,Never,Every 2 seconds,Every 10 minutes,Every 30 seconds,B
+How many broadcast domains are created when you segment a network with a 12-port switch?,1,2,5,12,A
+What does the command routerA(config)#line cons 0 allow you to perform next?,Set the Telnet password.,Shut down the router.,Set your console password.,Disable console connections.,C
+Which router command allows you to view the entire contents of all access lists?,show all access-lists,show access-lists,show ip interface,show interface,B
+Which class of IP address has the most host addresses available by default?,A,B,C,A and B,A
+"In a network with dozens of switches, how many root bridges would you have?",1,2,5,12,A
+"What PPP protocol provides dynamic addressing, authentication, and multilink?",NCP,HDLC,LCP,X.25,C
+What is a stub network?,A network with more than one exit point.,A network with more than one exit and entry point.,A network with only one entry and no exit point.,A network that has only one entry and exit point.,D
+"If your router is facilitating a CSU/DSU, which of the following commands do you need to use to provide the router with a 64000bps serial link?",RouterA(config)#bandwidth 64,RouterA(config-if)#bandwidth 64000,RouterA(config-if)#clock rate 64,RouterA(config-if)#clock rate 64000,D
+Which one of the following is true regarding VLANs?,Two VLANs are configured by default on all Cisco switches.,VLANs only work if you have a complete Cisco switched internetwork. No off-brand switches are allowed.,You should not have more than 10 switches in the same VTP domain.,VTP is used to send VLAN information to switches in a configured VTP domain.,D
+What does a VLAN do?,Acts as the fastest port to all servers.,Provides multiple collision domains on one switch port.,Breaks up broadcast domains in a layer 2 switch internetwork.,Provides multiple broadcast domains within a single collision domain.,C
+What is the main reason the OSI model was created?,To create a layered model larger than the DoD model.,So application developers can change only one layer's protocols at a time.,So different networks could communicate.,So Cisco could use the model.,C
+How many collision domains are created when you segment a network with a 12-port switch?,1,2,5,12,D
+"What command will display the line, protocol, DLCI, and LMI information of an interface?",sh pvc,show interface,show frame-relay pvc,show run,B
+Which protocol does Ping use?,TCP,ARP,ICMP,BootP,C
+Which command is used to upgrade an IOS on a Cisco router?,copy tftp run,copy tftp start,config net,copy tftp flash,D
+"If you wanted to delete the configuration stored in NVRAM, what would you type?",erase startup,erase nvram,delete nvram,erase running,A
+What protocols are used to configure trunking on a switch? VLAN Trunking Protocol VLAN 802.1Q ISL,1 and 2,3 and 4,1 only,2 only,B
