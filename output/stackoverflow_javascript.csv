@@ -1,0 +1,2254 @@
+Question,Answer
+How do I remove a specific value from an array? Something like: array.remove(value); Constraints: I have to usecoreJavaScript. Frameworks are not allowed.,"Find theindexof the array element you want to remove usingindexOf, and then remove that index withsplice. The splice() method changes the contents of an array by removing
+existing elements and/or adding new elements. const array = [2, 5, 9];
+
+console.log(array);
+
+const index = array.indexOf(5);
+if (index > -1) { // only splice array when item is found
+  array.splice(index, 1); // 2nd parameter means remove one item only
+}
+
+// array = [2, 9]
+console.log(array); const array = [2, 5, 9];
+
+console.log(array);
+
+const index = array.indexOf(5);
+if (index > -1) { // only splice array when item is found
+  array.splice(index, 1); // 2nd parameter means remove one item only
+}
+
+// array = [2, 9]
+console.log(array); The second parameter ofspliceis the number of elements to remove. Note thatsplicemodifies the array in place and returns a new array containing the elements that have been removed. For completeness, here are functions. The first function removes only a single occurrence (e.g., removing the first match of5from[2,5,9,1,5,8,5]), while the second function removes all occurrences: function removeItemOnce(arr, value) {
+  var index = arr.indexOf(value);
+  if (index > -1) {
+    arr.splice(index, 1);
+  }
+  return arr;
+}
+
+function removeItemAll(arr, value) {
+  var i = 0;
+  while (i < arr.length) {
+    if (arr[i] === value) {
+      arr.splice(i, 1);
+    } else {
+      ++i;
+    }
+  }
+  return arr;
+}
+// Usage
+console.log(removeItemOnce([2,5,9,1,5,8,5], 5))
+console.log(removeItemAll([2,5,9,1,5,8,5], 5)) function removeItemOnce(arr, value) {
+  var index = arr.indexOf(value);
+  if (index > -1) {
+    arr.splice(index, 1);
+  }
+  return arr;
+}
+
+function removeItemAll(arr, value) {
+  var i = 0;
+  while (i < arr.length) {
+    if (arr[i] === value) {
+      arr.splice(i, 1);
+    } else {
+      ++i;
+    }
+  }
+  return arr;
+}
+// Usage
+console.log(removeItemOnce([2,5,9,1,5,8,5], 5))
+console.log(removeItemAll([2,5,9,1,5,8,5], 5)) In TypeScript, these functions can stay type-safe with a type parameter: function removeItem<T>(arr: Array<T>, value: T): Array<T> {
+  const index = arr.indexOf(value);
+  if (index > -1) {
+    arr.splice(index, 1);
+  }
+  return arr;
+}"
+"How do I toggle the visibility of an element using.hide(),.show(), or.toggle()? How do I test if an element isvisibleorhidden?","Since the question refers to a single element, this code might be more suitable: // Checks CSS content for display:[none|block], ignores visibility:[true|false]
+$(element).is("":visible"");
+
+// The same works with hidden
+$(element).is("":hidden""); It is the same astwernt's suggestion, but applied to a single element; and itmatches the algorithm recommended in the jQuery FAQ. We use jQuery'sis()to check the selected element with another element, selector or any jQuery object. This method traverses along the DOM elements to find a match, which satisfies the passed parameter. It will return true if there is a match, otherwise return false."
+"Recently, I ran some of my JavaScript code through Crockford'sJSLint, and it gave the following error: Problem at line 1 character 1: Missing ""use strict"" statement. Doing some searching, I realized that some people add""use strict"";into their JavaScript code. Once I added the statement, the error stopped appearing. Unfortunately, Google did not reveal much of the history behind this string statement. Certainly it must have something to do with how the JavaScript is interpreted by the browser, but I have no idea what the effect would be. So what is""use strict"";all about, what does it imply, and is it still relevant? Do any of the current browsers respond to the""use strict"";string or is it for future use?","Insidenative ECMAScript modules(withimportandexportstatements) andES6 classes, strict mode is always enabled and cannot be disabled. This article about Javascript Strict Mode might interest you:John Resig - ECMAScript 5 Strict Mode, JSON, and More To quote some interesting parts: Strict Mode is a new feature in ECMAScript 5 that allows you to place a program, or a function, in a ""strict"" operating context. This strict context prevents certain actions from being taken and throws more exceptions. And: Strict mode helps out in a couple ways: Also note you can apply ""strict mode"" to the whole file... Or you can use it only for a specific function(still quoting from John Resig's article): // Non-strict code...
+
+(function(){
+  ""use strict"";
+
+  // Define your library strictly...
+})();
+
+// Non-strict code... Which might be helpful if you have to mix old and new code ;-) So, I suppose it's a bit like the""use strict""you can use in Perl(hence the name?): it helps you make fewer errors, by detecting more things that could lead to breakages. Strict mode is nowsupported by all major browsers."
+How can I redirect the user from one page to another using jQuery or pure JavaScript?,"jQuery is not necessary, andwindow.location.replace(...)will best simulate an HTTP redirect. window.location.replace(...)is better than usingwindow.location.href, becausereplace()does not keep the originating page in the session history, meaning the user won't get stuck in a never-ending back-button fiasco. If you want to simulate someone clicking on a link, uselocation.href If you want to simulate an HTTP redirect, uselocation.replace For example: // similar behavior as an HTTP redirect
+window.location.replace(""https://stackoverflow.com"");
+
+// similar behavior as clicking on a link
+window.location.href = ""https://stackoverflow.com"";"
+"I've recently started maintaining someone else's JavaScript code. I'm fixing bugs, adding features and also trying to tidy up the code and make it more consistent. The previous developer used two ways of declaring functions and I can't work out if there is a reason behind it or not. The two ways are: var functionOne = function() {
+    // Some code
+}; And, function functionTwo() {
+    // Some code
+} What are the reasons for using these two different methods and what are the pros and cons of each? Is there anything that can be done with one method that can't be done with the other?","The difference is thatfunctionOneis afunction expressionand so only defined when that line is reached, whereasfunctionTwois afunction declarationand is defined as soon as its surrounding function or script is executed (due tohoisting). For example, a function expression: // TypeError: functionOne is not a function
+functionOne();
+
+var functionOne = function() {
+  console.log(""Hello!"");
+}; // TypeError: functionOne is not a function
+functionOne();
+
+var functionOne = function() {
+  console.log(""Hello!"");
+}; And, a function declaration: // Outputs: ""Hello!""
+functionTwo();
+
+function functionTwo() {
+  console.log(""Hello!"");
+} // Outputs: ""Hello!""
+functionTwo();
+
+function functionTwo() {
+  console.log(""Hello!"");
+} Historically, function declarations defined within blocks were handled inconsistently between browsers.Strict mode(introduced in ES5) resolved this by scoping function declarations to their enclosing block. 'use strict';    
+{ // note this block!
+  function functionThree() {
+    console.log(""Hello!"");
+  }
+}
+functionThree(); // ReferenceError 'use strict';    
+{ // note this block!
+  function functionThree() {
+    console.log(""Hello!"");
+  }
+}
+functionThree(); // ReferenceError"
+"How would you explain JavaScript closures to someone with a knowledge of the concepts they consist of (for example functions, variables and the like), but does not understand closures themselves? I have seenthe Scheme examplegiven on Wikipedia, but unfortunately it did not help.","A closure is a pairing of: A lexical environment is part of every execution context (stack frame) and is a map between identifiers (i.e. local variable names) and values. Every function in JavaScript maintains a reference to its outer lexical environment. This reference is used to configure the execution context created when a function is invoked. This reference enables code inside the function to ""see"" variables declared outside the function, regardless of when and where the function is called. If a function was called by a function, which in turn was called by another function, then a chain of references to outer lexical environments is created. This chain is called the scope chain. In the following code,innerforms a closure with the lexical environment of the execution context created whenfoois invoked,closing overvariablesecret: function foo() {
+  const secret = Math.trunc(Math.random() * 100)
+  return function inner() {
+    console.log(`The secret number is ${secret}.`)
+  }
+}
+const f = foo() // `secret` is not directly accessible from outside `foo`
+f() // The only way to retrieve `secret` is to invoke `f` function foo() {
+  const secret = Math.trunc(Math.random() * 100)
+  return function inner() {
+    console.log(`The secret number is ${secret}.`)
+  }
+}
+const f = foo() // `secret` is not directly accessible from outside `foo`
+f() // The only way to retrieve `secret` is to invoke `f` In other words: in JavaScript, functions carry a reference to a private ""box of state"", to which only they (and any other functions declared within the same lexical environment) have access. This box of the state is invisible to the caller of the function, delivering an excellent mechanism for data-hiding and encapsulation. And remember: functions in JavaScript can be passed around like variables (first-class functions), meaning these pairings of functionality and state can be passed around your program, similar to how you might pass an instance of a class around in C++. If JavaScript did not have closures, then more states would have to be passed between functionsexplicitly, making parameter lists longer and code noisier. So, if you want a function to always have access to a private piece of state, you can use a closure. ...and frequently wedowant to associate the state with a function. For example, in Java or C++, when you add a private instance variable and a method to a class, you are associating the state with functionality. In C and most other common languages, after a function returns, all the local variables are no longer accessible because the stack-frame is destroyed. In JavaScript, if you declare a function within another function, then the local variables of the outer function can remain accessible after returning from it. In this way, in the code above,secretremains available to the function objectinner,afterit has been returned fromfoo. Closures are useful whenever you need a private state associated with a function. This is a very common scenario - and remember: JavaScript did not have a class syntax until 2015, and it still does not have a private field syntax. Closures meet this need. In the following code, the functiontoStringcloses over the details of the car. function Car(manufacturer, model, year, color) {
+  return {
+    toString() {
+      return `${manufacturer} ${model} (${year}, ${color})`
+    }
+  }
+}
+
+const car = new Car('Aston Martin', 'V8 Vantage', '2012', 'Quantum Silver')
+console.log(car.toString()) function Car(manufacturer, model, year, color) {
+  return {
+    toString() {
+      return `${manufacturer} ${model} (${year}, ${color})`
+    }
+  }
+}
+
+const car = new Car('Aston Martin', 'V8 Vantage', '2012', 'Quantum Silver')
+console.log(car.toString()) In the following code, the functioninnercloses over bothfnandargs. function curry(fn) {
+  const args = []
+  return function inner(arg) {
+    if(args.length === fn.length) return fn(...args)
+    args.push(arg)
+    return inner
+  }
+}
+
+function add(a, b) {
+  return a + b
+}
+
+const curriedAdd = curry(add)
+console.log(curriedAdd(2)(3)()) // 5 function curry(fn) {
+  const args = []
+  return function inner(arg) {
+    if(args.length === fn.length) return fn(...args)
+    args.push(arg)
+    return inner
+  }
+}
+
+function add(a, b) {
+  return a + b
+}
+
+const curriedAdd = curry(add)
+console.log(curriedAdd(2)(3)()) // 5 In the following code, functiononClickcloses over variableBACKGROUND_COLOR. const $ = document.querySelector.bind(document)
+const BACKGROUND_COLOR = 'rgba(200, 200, 242, 1)'
+
+function onClick() {
+  $('body').style.background = BACKGROUND_COLOR
+}
+
+$('button').addEventListener('click', onClick)<button>Set background color</button> const $ = document.querySelector.bind(document)
+const BACKGROUND_COLOR = 'rgba(200, 200, 242, 1)'
+
+function onClick() {
+  $('body').style.background = BACKGROUND_COLOR
+}
+
+$('button').addEventListener('click', onClick) <button>Set background color</button> In the following example, all the implementation details are hidden inside an immediately executed function expression. The functionstickandtoStringclose over the private state and functions they need to complete their work. Closures have enabled us to modularize and encapsulate our code. let namespace = {};
+
+(function foo(n) {
+  let numbers = []
+
+  function format(n) {
+    return Math.trunc(n)
+  }
+
+  function tick() {
+    numbers.push(Math.random() * 100)
+  }
+
+  function toString() {
+    return numbers.map(format)
+  }
+
+  n.counter = {
+    tick,
+    toString
+  }
+}(namespace))
+
+const counter = namespace.counter
+counter.tick()
+counter.tick()
+console.log(counter.toString()) let namespace = {};
+
+(function foo(n) {
+  let numbers = []
+
+  function format(n) {
+    return Math.trunc(n)
+  }
+
+  function tick() {
+    numbers.push(Math.random() * 100)
+  }
+
+  function toString() {
+    return numbers.map(format)
+  }
+
+  n.counter = {
+    tick,
+    toString
+  }
+}(namespace))
+
+const counter = namespace.counter
+counter.tick()
+counter.tick()
+console.log(counter.toString()) This example shows that the local variables are not copied in the closure: the closure maintains a reference to the original variablesthemselves. It is as though the stack-frame stays alive in memory even after the outer function exits. function foo() {
+  let x = 42
+  let inner = () => console.log(x)
+  x = x + 1
+  return inner
+}
+
+foo()() // logs 43 function foo() {
+  let x = 42
+  let inner = () => console.log(x)
+  x = x + 1
+  return inner
+}
+
+foo()() // logs 43 In the following code, three methodslog,increment, andupdateall close over the same lexical environment. And every timecreateObjectis called, a new execution context (stack frame) is created and a completely new variablex, and a new set of functions (logetc.) are created, that close over this new variable. function createObject() {
+  let x = 42;
+  return {
+    log() { console.log(x) },
+    increment() { x++ },
+    update(value) { x = value }
+  }
+}
+
+const o = createObject()
+o.increment()
+o.log() // 43
+o.update(5)
+o.log() // 5
+const p = createObject()
+p.log() // 42 function createObject() {
+  let x = 42;
+  return {
+    log() { console.log(x) },
+    increment() { x++ },
+    update(value) { x = value }
+  }
+}
+
+const o = createObject()
+o.increment()
+o.log() // 43
+o.update(5)
+o.log() // 5
+const p = createObject()
+p.log() // 42 If you are using variables declared usingvar, be careful you understand which variable you are closing over. Variables declared usingvarare hoisted. This is much less of a problem in modern JavaScript due to the introduction ofletandconst. In the following code, each time around the loop, a new functioninneris created, which closes overi. But becausevar iis hoisted outside the loop, all of these inner functions close over the same variable, meaning that the final value ofi(3) is printed, three times. function foo() {
+  var result = []
+  for (var i = 0; i < 3; i++) {
+    result.push(function inner() { console.log(i) } )
+  }
+
+  return result
+}
+
+const result = foo()
+// The following will print `3`, three times...
+for (var i = 0; i < 3; i++) {
+  result[i]() 
+} function foo() {
+  var result = []
+  for (var i = 0; i < 3; i++) {
+    result.push(function inner() { console.log(i) } )
+  }
+
+  return result
+}
+
+const result = foo()
+// The following will print `3`, three times...
+for (var i = 0; i < 3; i++) {
+  result[i]() 
+}"
+"Given an object: let myObject = {
+  ""ircEvent"": ""PRIVMSG"",
+  ""method"": ""newURI"",
+  ""regex"": ""^http://.*""
+}; How do I remove the propertyregexto end up with the followingmyObject? let myObject = {
+  ""ircEvent"": ""PRIVMSG"",
+  ""method"": ""newURI""
+};","To remove a property from an object (mutating the object), you can do it by using thedeletekeyword, like this: delete myObject.regex;
+// or,
+delete myObject['regex'];
+// or,
+var prop = ""regex"";
+delete myObject[prop]; Demo var myObject = {
+  ""ircEvent"": ""PRIVMSG"",
+  ""method"": ""newURI"",
+  ""regex"": ""^http://.*""
+};
+delete myObject.regex;
+
+console.log(myObject); var myObject = {
+  ""ircEvent"": ""PRIVMSG"",
+  ""method"": ""newURI"",
+  ""regex"": ""^http://.*""
+};
+delete myObject.regex;
+
+console.log(myObject); For anyone interested in reading more about it, Stack Overflow userkangaxhas written an incredibly in-depth blog post about thedeletestatement on their blog,Understanding delete. It is highly recommended. If you'd like anewobject with all the keys of the original except some, you could usedestructuring. Demolet myObject = {
+  ""ircEvent"": ""PRIVMSG"",
+  ""method"": ""newURI"",
+  ""regex"": ""^http://.*""
+};
+
+// assign the key regex to the variable _ indicating it will be unused
+const { regex: _, ...newObj } = myObject;
+
+console.log(newObj);   // has no 'regex' key
+console.log(myObject); // remains unchanged let myObject = {
+  ""ircEvent"": ""PRIVMSG"",
+  ""method"": ""newURI"",
+  ""regex"": ""^http://.*""
+};
+
+// assign the key regex to the variable _ indicating it will be unused
+const { regex: _, ...newObj } = myObject;
+
+console.log(newObj);   // has no 'regex' key
+console.log(myObject); // remains unchanged"
+"Usually I would expect aString.contains()method, but there doesn't seem to be one. What is a reasonable way to check for this?","ECMAScript 6  introducedString.prototype.includes: const string = ""foo"";
+const substring = ""oo"";
+
+console.log(string.includes(substring)); // true const string = ""foo"";
+const substring = ""oo"";
+
+console.log(string.includes(substring)); // true String.prototype.includesiscase-sensitiveandisnotsupported by Internet Explorerwithout apolyfill. In ECMAScript 5 or older environments, useString.prototype.indexOf, which returns -1 when a substring cannot be found: var string = ""foo"";
+var substring = ""oo"";
+
+console.log(string.indexOf(substring) !== -1); // true var string = ""foo"";
+var substring = ""oo"";
+
+console.log(string.indexOf(substring) !== -1); // true"
+"How do I return the response/result from a functionfoothat makes an asynchronous request? I am trying to return the value from the callback, as well as assigning the result to a local variable inside the function and returning that one, but none of those ways actually return the response — they all returnundefinedor whatever the initial value of the variableresultis. Example of an asynchronous function that accepts a callback(using jQuery'sajaxfunction): function foo() {
+    var result;
+
+    $.ajax({
+        url: '...',
+        success: function(response) {
+            result = response;
+            // return response; // <- I tried that one as well
+        }
+    });
+
+    return result; // It always returns `undefined`
+} Example using Node.js: function foo() {
+    var result;
+
+    fs.readFile(""path/to/file"", function(err, data) {
+        result = data;
+        // return data; // <- I tried that one as well
+    });
+
+    return result; // It always returns `undefined`
+} Example using thethenblock of a promise: function foo() {
+    var result;
+
+    fetch(url).then(function(response) {
+        result = response;
+        // return response; // <- I tried that one as well
+    });
+
+    return result; // It always returns `undefined`
+}","→ For a more general explanation of asynchronous behaviour with different examples, seeWhy is my variable unaltered after I modify it inside of a function? - Asynchronous code reference → If you already understand the problem, skip to the possible solutions below. TheAinAjaxstands forasynchronous. That means sending the request (or rather receiving the response) is taken out of the normal execution flow. In your example,$.ajaxreturns immediately and the next statement,return result;, is executed before the function you passed assuccesscallback was even called. Here is an analogy which hopefully makes the difference between synchronous and asynchronous flow clearer: Imagine you make a phone call to a friend and ask him to look something up for you. Although it might take a while, you wait on the phone and stare into space, until your friend gives you the answer that you needed. The same is happening when you make a function call containing ""normal"" code: function findItem() {
+    var item;
+    while(item_not_found) {
+        // search
+    }
+    return item;
+}
+
+var item = findItem();
+
+// Do something with item
+doSomethingElse(); Even thoughfindItemmight take a long time to execute, any code coming aftervar item = findItem();has towaituntil the function returns the result. You call your friend again for the same reason. But this time you tell him that you are in a hurry and he shouldcall you backon your mobile phone. You hang up, leave the house, and do whatever you planned to do. Once your friend calls you back, you are dealing with the information he gave to you. That's exactly what's happening when you do an Ajax request. findItem(function(item) {
+    // Do something with the item
+});
+doSomethingElse(); Instead of waiting for the response, the execution continues immediately and the statement after the Ajax call is executed. To get the response eventually, you provide a function to be called once the response was received, acallback(notice something?call back?). Any statement coming after that call is executed before the callback is called. Embrace the asynchronous nature of JavaScript!While certain asynchronous operations provide synchronous counterparts (so does ""Ajax""), it's generally discouraged to use them, especially in a browser context. Why is it bad do you ask? JavaScript runs in the UI thread of the browser and any long-running process will lock the UI, making it unresponsive. Additionally, there is an upper limit on the execution time for JavaScript and the browser will ask the user whether to continue the execution or not. All of this results in a really bad user experience. The user won't be able to tell whether everything is working fine or not. Furthermore, the effect will be worse for users with a slow connection. In the following we will look at three different solutions that are all building on top of each other: All three are available in current browsers, and node 7+. The ECMAScript version released in 2017 introducedsyntax-level supportfor asynchronous functions. With the help ofasyncandawait, you can write asynchronous in a ""synchronous style"". The code is still asynchronous, but it's easier to read/understand. async/awaitbuilds on top of promises: anasyncfunction always returns a promise.await""unwraps"" a promise and either result in the value the promise was resolved with or throws an error if the promise was rejected. Important:You can only useawaitinside anasyncfunction or in aJavaScript module. Top-levelawaitis not supported outside of modules, so you might have to make an async IIFE (Immediately Invoked Function Expression) to start anasynccontext if not using a module. You can read more aboutasyncandawaiton MDN. Here is an example that elaborates thedelayfunctionfindItem()above: // Using 'superagent' which will return a promise.
+var superagent = require('superagent')
+
+// This is isn't declared as `async` because it already returns a promise
+function delay() {
+  // `delay` returns a promise
+  return new Promise(function(resolve, reject) {
+    // Only `delay` is able to resolve or reject the promise
+    setTimeout(function() {
+      resolve(42); // After 3 seconds, resolve the promise with value 42
+    }, 3000);
+  });
+}
+
+async function getAllBooks() {
+  try {
+    // GET a list of book IDs of the current user
+    var bookIDs = await superagent.get('/user/books');
+    // wait for 3 seconds (just for the sake of this example)
+    await delay();
+    // GET information about each book
+    return superagent.get('/books/ids='+JSON.stringify(bookIDs));
+  } catch(error) {
+    // If any of the awaited promises was rejected, this catch block
+    // would catch the rejection reason
+    return null;
+  }
+}
+
+// Start an IIFE to use `await` at the top level
+(async function(){
+  let books = await getAllBooks();
+  console.log(books);
+})(); Currentbrowserandnodeversions supportasync/await. You can also support older environments by transforming your code to ES5 with the help ofregenerator(or tools that use regenerator, such asBabel). A callback is when function 1 is passed to function 2. Function 2 can call function 1 whenever it is ready. In the context of an asynchronous process, the callback will be called whenever the asynchronous process is done. Usually, the result is passed to the callback. In the example of the question, you can makefooaccept a callback and use it assuccesscallback. So this var result = foo();
+// Code that depends on 'result' becomes foo(function(result) {
+    // Code that depends on 'result'
+}); Here we defined the function ""inline"" but you can pass any function reference: function myCallback(result) {
+    // Code that depends on 'result'
+}
+
+foo(myCallback); fooitself is defined as follows: function foo(callback) {
+    $.ajax({
+        // ...
+        success: callback
+    });
+} callbackwill refer to the function we pass tofoowhen we call it and we pass it on tosuccess. I.e. once the Ajax request is successful,$.ajaxwill callcallbackand pass the response to the callback (which can be referred to withresult, since this is how we defined the callback). You can also process the response before passing it to the callback: function foo(callback) {
+    $.ajax({
+        // ...
+        success: function(response) {
+            // For example, filter the response
+            callback(filtered_response);
+        }
+    });
+} It's easier to write code using callbacks than it may seem. After all, JavaScript in the browser is heavily event-driven (DOM events). Receiving the Ajax response is nothing else but an event.
+Difficulties could arise when you have to work with third-party code, but most problems can be solved by just thinking through the application flow. ThePromise APIis a new feature of ECMAScript 6 (ES2015), but it has goodbrowser supportalready. There are also many libraries which implement the standard Promises API and provide additional methods to ease the use and composition of asynchronous functions (e.g.,bluebird). Promises are containers forfuturevalues. When the promise receives the value (it isresolved) or when it is canceled (rejected), it notifies all of its ""listeners"" who want to access this value. The advantage over plain callbacks is that they allow you to decouple your code and they are easier to compose. Here is an example of using a promise: function delay() {
+  // `delay` returns a promise
+  return new Promise(function(resolve, reject) {
+    // Only `delay` is able to resolve or reject the promise
+    setTimeout(function() {
+      resolve(42); // After 3 seconds, resolve the promise with value 42
+    }, 3000);
+  });
+}
+
+delay()
+  .then(function(v) { // `delay` returns a promise
+    console.log(v); // Log the value once it is resolved
+  })
+  .catch(function(v) {
+    // Or do something else if it is rejected
+    // (it would not happen in this example, since `reject` is not called).
+  });.as-console-wrapper { max-height: 100% !important; top: 0; } function delay() {
+  // `delay` returns a promise
+  return new Promise(function(resolve, reject) {
+    // Only `delay` is able to resolve or reject the promise
+    setTimeout(function() {
+      resolve(42); // After 3 seconds, resolve the promise with value 42
+    }, 3000);
+  });
+}
+
+delay()
+  .then(function(v) { // `delay` returns a promise
+    console.log(v); // Log the value once it is resolved
+  })
+  .catch(function(v) {
+    // Or do something else if it is rejected
+    // (it would not happen in this example, since `reject` is not called).
+  }); .as-console-wrapper { max-height: 100% !important; top: 0; } Applied to our Ajax call we could use promises like this: function ajax(url) {
+  return new Promise(function(resolve, reject) {
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function() {
+      resolve(this.responseText);
+    };
+    xhr.onerror = reject;
+    xhr.open('GET', url);
+    xhr.send();
+  });
+}
+
+ajax(""https://jsonplaceholder.typicode.com/todos/1"")
+  .then(function(result) {
+    console.log(result); // Code depending on result
+  })
+  .catch(function() {
+    // An error occurred
+  });.as-console-wrapper { max-height: 100% !important; top: 0; } function ajax(url) {
+  return new Promise(function(resolve, reject) {
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function() {
+      resolve(this.responseText);
+    };
+    xhr.onerror = reject;
+    xhr.open('GET', url);
+    xhr.send();
+  });
+}
+
+ajax(""https://jsonplaceholder.typicode.com/todos/1"")
+  .then(function(result) {
+    console.log(result); // Code depending on result
+  })
+  .catch(function() {
+    // An error occurred
+  }); .as-console-wrapper { max-height: 100% !important; top: 0; } Describing all the advantages that promise offer is beyond the scope of this answer, but if you write new code, you should seriously consider them. They provide a great abstraction and separation of your code. More information about promises:HTML5 rocks - JavaScript Promises. Deferred objectsare jQuery's custom implementation of promises (before the Promise API was standardized). They behave almost like promises but expose a slightly different API. Every Ajax method of jQuery already returns a ""deferred object"" (actually a promise of a deferred object) which you can just return from your function: function ajax() {
+    return $.ajax(...);
+}
+
+ajax().done(function(result) {
+    // Code depending on result
+}).fail(function() {
+    // An error occurred
+}); Keep in mind that promises and deferred objects are justcontainersfor a future value, they are not the value itself. For example, suppose you had the following: function checkPassword() {
+    return $.ajax({
+        url: '/password',
+        data: {
+            username: $('#username').val(),
+            password: $('#password').val()
+        },
+        type: 'POST',
+        dataType: 'json'
+    });
+}
+
+if (checkPassword()) {
+    // Tell the user they're logged in
+} This code misunderstands the above asynchronous issues. Specifically,$.ajax()doesn't freeze the code while it checks the '/password' page on your server - it sends a request to the server and while it waits, it immediately returns a jQuery Ajax Deferred object, not the response from the server. That means theifstatement is going to always get this Deferred object, treat it astrue, and proceed as though the user is logged in. Not good. But the fix is easy: checkPassword()
+.done(function(r) {
+    if (r) {
+        // Tell the user they're logged in
+    } else {
+        // Tell the user their password was bad
+    }
+})
+.fail(function(x) {
+    // Tell the user something bad happened
+}); As I mentioned, some(!) asynchronous operations have synchronous counterparts. I don't advocate their use, but for completeness' sake, here is how you would perform a synchronous call: If you directly use aXMLHttpRequestobject, passfalseas third argument to.open. If you usejQuery, you can set theasyncoption tofalse. Note that this option isdeprecatedsince jQuery 1.8.
+You can then either still use asuccesscallback or access theresponseTextproperty of thejqXHR object: function foo() {
+    var jqXHR = $.ajax({
+        //...
+        async: false
+    });
+    return jqXHR.responseText;
+} If you use any other jQuery Ajax method, such as$.get,$.getJSON, etc., you have to change it to$.ajax(since you can only pass configuration parameters to$.ajax). Heads up!It is not possible to make a synchronousJSONPrequest. JSONP by its very nature is always asynchronous (one more reason to not even consider this option)."
+"ECMAScript 6 introducedtheletdeclaration keyword. I've heard that it's described as a local variable, but I'm still not quite sure how it behaves differently than thevarkeyword. What are the differences? When shouldletbe used instead ofvar?","The main difference is scoping rules. Variables declared byvarkeyword are scoped to the immediate function body (hence the function scope) whileletvariables are scoped to the immediateenclosingblock denoted by{ }(hence the block scope). function run() {
+  var foo = ""Foo"";
+  let bar = ""Bar"";
+
+  console.log(foo, bar); // Foo Bar
+
+  {
+    var moo = ""Mooo""
+    let baz = ""Bazz"";
+    console.log(moo, baz); // Mooo Bazz
+  }
+
+  console.log(moo); // Mooo
+  console.log(baz); // ReferenceError
+}
+
+run(); function run() {
+  var foo = ""Foo"";
+  let bar = ""Bar"";
+
+  console.log(foo, bar); // Foo Bar
+
+  {
+    var moo = ""Mooo""
+    let baz = ""Bazz"";
+    console.log(moo, baz); // Mooo Bazz
+  }
+
+  console.log(moo); // Mooo
+  console.log(baz); // ReferenceError
+}
+
+run(); The reason whyletkeyword was introduced to the language was function scope is confusing and was one of the main sources of bugs in JavaScript. Take a look at this example fromanother Stack Overflow question: var funcs = [];
+// let's create 3 functions
+for (var i = 0; i < 3; i++) {
+  // and store them in funcs
+  funcs[i] = function() {
+    // each should log its value.
+    console.log(""My value: "" + i);
+  };
+}
+for (var j = 0; j < 3; j++) {
+  // and now let's run each one to see
+  funcs[j]();
+} var funcs = [];
+// let's create 3 functions
+for (var i = 0; i < 3; i++) {
+  // and store them in funcs
+  funcs[i] = function() {
+    // each should log its value.
+    console.log(""My value: "" + i);
+  };
+}
+for (var j = 0; j < 3; j++) {
+  // and now let's run each one to see
+  funcs[j]();
+} My value: 3was output to console each timefuncs[j]();was invoked since anonymous functions were bound to the same variable. People had to create immediately invoked functions to capture correct values from the loops but that was also hairy. Variables declared withvarkeyword arehoisted andinitializedwhich means they are accessible in their enclosing scope even before they are declared, however their value isundefinedbefore the declaration statement is reached: function checkHoisting() {
+  console.log(foo); // undefined
+  var foo = ""Foo"";
+  console.log(foo); // Foo
+}
+
+checkHoisting(); function checkHoisting() {
+  console.log(foo); // undefined
+  var foo = ""Foo"";
+  console.log(foo); // Foo
+}
+
+checkHoisting(); letvariables arehoisted butnot initializeduntil their definition is evaluated. Accessing them before the initialization results in aReferenceError. The variable is said to be inthe temporal dead zonefrom the start of the block until the declaration statement is processed. function checkHoisting() {
+  console.log(foo); // ReferenceError
+  let foo = ""Foo"";
+  console.log(foo); // Foo
+}
+
+checkHoisting(); function checkHoisting() {
+  console.log(foo); // ReferenceError
+  let foo = ""Foo"";
+  console.log(foo); // Foo
+}
+
+checkHoisting(); At the top level,let, unlikevar, does not create a property on the global object: var foo = ""Foo""; // globally scoped
+let bar = ""Bar""; // globally scoped but not part of the global object
+
+console.log(window.foo); // Foo
+console.log(window.bar); // undefined var foo = ""Foo""; // globally scoped
+let bar = ""Bar""; // globally scoped but not part of the global object
+
+console.log(window.foo); // Foo
+console.log(window.bar); // undefined In strict mode,varwill let you re-declare the same variable in the same scope whileletraises a SyntaxError. 'use strict';
+var foo = ""foo1"";
+var foo = ""foo2""; // No problem, 'foo1' is replaced with 'foo2'.
+
+let bar = ""bar1""; 
+let bar = ""bar2""; // SyntaxError: Identifier 'bar' has already been declared 'use strict';
+var foo = ""foo1"";
+var foo = ""foo2""; // No problem, 'foo1' is replaced with 'foo2'.
+
+let bar = ""bar1""; 
+let bar = ""bar2""; // SyntaxError: Identifier 'bar' has already been declared"
+"How do I include a JavaScript file inside another JavaScript file, similar to@importin CSS?","The old versions of JavaScript had no import, include, or require, so many different approaches to this problem have been developed. But since 2015 (ES6), JavaScript has had theES6 modulesstandard to import modules in Node.js, which is also supported bymost modern browsers. For compatibility with older browsers, build tools likeWebpackandRollupand/or transpilation tools likeBabelcan be used. ECMAScript (ES6) modules have beensupported in Node.jssince v8.5, with the--experimental-modulesflag, and since at least Node.js v13.8.0 without the flag. To enable ""ESM"" (vs. Node.js's previous CommonJS-style module system [""CJS""]) you either use""type"": ""module""inpackage.jsonor give the files the extension.mjs. (Similarly, modules written with Node.js's previous CJS module can be named.cjsif your default is ESM.) Usingpackage.json: {
+    ""type"": ""module""
+} Thenmodule.js: export function hello() {
+  return ""Hello"";
+} Thenmain.js: import { hello } from './module.js';
+let val = hello();  // val is ""Hello""; Using.mjs, you'd havemodule.mjs: export function hello() {
+  return ""Hello"";
+} Thenmain.mjs: import { hello } from './module.mjs';
+let val = hello();  // val is ""Hello""; Browsers have had support for loading ECMAScript modules directly (no tools like Webpack required)sinceSafari 10.1, Chrome 61, Firefox 60, and Edge 16. Check the current support atcaniuse. There is no need to use Node.js'.mjsextension; browsers completely ignore file extensions on modules/scripts. <script type=""module"">
+  import { hello } from './hello.mjs'; // Or the extension could be just `.js`
+  hello('world');
+</script> // hello.mjs -- or the extension could be just `.js`
+export function hello(text) {
+  const div = document.createElement('div');
+  div.textContent = `Hello ${text}`;
+  document.body.appendChild(div);
+} Read more athttps://jakearchibald.com/2017/es-modules-in-browsers/ Dynamic imports let the script load other scripts as needed: <script type=""module"">
+  import('hello.mjs').then(module => {
+      module.hello('world');
+    });
+</script> Read more athttps://developers.google.com/web/updates/2017/11/dynamic-import The older CJS module style, still widely used in Node.js, is themodule.exports/requiresystem. // mymodule.js
+module.exports = {
+   hello: function() {
+      return ""Hello"";
+   }
+} // server.js
+const myModule = require('./mymodule');
+let val = myModule.hello(); // val is ""Hello"" There are other ways for JavaScript to include external JavaScript contents in browsers that do not require preprocessing. You could load an additional script with an AJAX call and then useevalto run it. This is the most straightforward way, but it is limited to your domain because of the JavaScript sandbox security model. Usingevalalso opens the door to bugs, hacks and security issues. Like Dynamic Imports you can load one or many scripts with afetchcall using promises to control order of execution for script dependencies using theFetch Injectlibrary: fetchInject([
+  'https://cdn.jsdelivr.net/momentjs/2.17.1/moment.min.js'
+]).then(() => {
+  console.log(`Finish in less than ${moment().endOf('year').fromNow(true)}`)
+}) ThejQuerylibrary provides loading functionalityin one line: $.getScript(""my_lovely_script.js"", function() {
+   alert(""Script loaded but not necessarily executed."");
+}); You could add a script tag with the script URL into the HTML. To avoid the overhead of jQuery, this is an ideal solution. The script can even reside on a different server. Furthermore, the browser evaluates the code. The<script>tag can be injected into either the web page<head>, or inserted just before the closing</body>tag. Here is an example of how this could work: function dynamicallyLoadScript(url) {
+    var script = document.createElement(""script"");  // create a script DOM node
+    script.src = url;  // set its src to the provided URL
+   
+    document.head.appendChild(script);  // add it to the end of the head section of the page (could change 'head' to 'body' to add it to the end of the body section instead)
+} This function will add a new<script>tag to the end of the head section of the page, where thesrcattribute is set to the URL which is given to the function as the first parameter. Both of these solutions are discussed and illustrated inJavaScript Madness: Dynamic Script Loading. Now, there is a big issue you must know about. Doing that implies thatyou remotely load the code. Modern web browsers will load the file and keep executing your current script because they load everything asynchronously to improve performance. (This applies to both the jQuery method and the manual dynamic script loading method.) It means that if you use these tricks directly,you won't be able to use your newly loaded code the next line after you asked it to be loaded, because it will be still loading. For example:my_lovely_script.jscontainsMySuperObject: var js = document.createElement(""script"");
+
+js.type = ""text/javascript"";
+js.src = jsFilePath;
+
+document.body.appendChild(js);
+
+var s = new MySuperObject();
+
+Error : MySuperObject is undefined Then you reload the page hittingF5. And it works! Confusing... So what to do about it ? Well, you can use the hack the author suggests in the link I gave you. In summary, for people in a hurry, he uses an event to run a callback function when the script is loaded. So you can put all the code using the remote library in the callback function. For example: function loadScript(url, callback)
+{
+    // Adding the script tag to the head as suggested before
+    var head = document.head;
+    var script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = url;
+
+    // Then bind the event to the callback function.
+    // There are several events for cross browser compatibility.
+    script.onreadystatechange = callback;
+    script.onload = callback;
+
+    // Fire the loading
+    head.appendChild(script);
+} Then you write the code you want to use AFTER the script is loaded in alambda function: var myPrettyCode = function() {
+   // Here, do whatever you want
+}; Then you run all that: loadScript(""my_lovely_script.js"", myPrettyCode); Note that the script may execute after the DOM has loaded, or before, depending on the browser and whether you included the linescript.async = false;. There's agreat article on Javascript loading in generalwhich discusses this. As mentioned at the top of this answer, many developers use build/transpilation tool(s) like Parcel, Webpack, or Babel in their projects, allowing them to use upcoming JavaScript syntax, provide backward compatibility for older browsers, combine files, minify, perform code splitting etc."
+How can I loop through all the entries in an array using JavaScript?,"TL;DR Your best betsare usually for (const element of theArray) {
+    // ...use `element`...
+} theArray.forEach(element => {
+    // ...use `element`...
+}); for (let index = 0; index < theArray.length; ++index) {
+    const element = theArray[index];
+    // ...use `element`...
+} for (const propertyName in theArray) {
+    if (/*...is an array element property (see below)...*/) {
+        const element = theArray[propertyName];
+        // ...use `element`...
+    }
+} Some quick ""don't""s: But there'slotsmore to explore, read on... JavaScript has powerful semantics for looping through arrays and array-like objects. I've split the answer into two parts: Options for genuine arrays, and options for things that are just array-like, such as theargumentsobject, other iterable objects (ES2015+), DOM collections, and so on. Okay, let's look at our options: You have five options (two supported basically forever, another added by ECMAScript 5 [""ES5""], and two more added in ECMAScript 2015 (""ES2015"", aka ""ES6""): (You can see those old specs here:ES5,ES2015, but both have been superceded; the current editor's draft is alwayshere.) Details: ES2015 addediterators and iterablesto JavaScript. Arrays are iterable (so are strings,Maps, andSets, as well as DOM collections and lists, as you'll see later). Iterable objects provide iterators for their values. The newfor-ofstatement loops through the values returned by an iterator: const a = [""a"", ""b"", ""c""];
+for (const element of a) { // You can use `let` instead of `const` if you like
+    console.log(element);
+}
+// a
+// b
+// c const a = [""a"", ""b"", ""c""];
+for (const element of a) { // You can use `let` instead of `const` if you like
+    console.log(element);
+}
+// a
+// b
+// c It doesn't get simpler than that! Under the covers, that gets an iterator from the array and loops through the values the iterator returns. The iterator provided by arrays provides the values of the array elements, in order beginning to end. Notice howelementis scoped to each loop iteration; trying to useelementafter the end of the loop would fail because it doesn't exist outside the loop body. In theory, afor-ofloop involves several function calls (one to get the iterator, then one to get each value from it). Even when that's true, it's nothing to worry about, function calls areverycheap in modern JavaScript engines (it bothered me forforEach[below] until I looked into it;details). But additionally, JavaScript engines optimize those calls away (in performance-critical code) when dealing with native iterators for things like arrays. for-ofis entirelyasync-friendly. If you need the work in a loop body to be done in series (not in parallel), anawaitin the loop body will wait for the promise to settle before continuing. Here's a silly example: function delay(ms) {
+    return new Promise(resolve => {
+        setTimeout(resolve, ms);
+    });
+}
+
+async function showSlowly(messages) {
+    for (const message of messages) {
+        await delay(400);
+        console.log(message);
+    }
+}
+
+showSlowly([
+    ""So"", ""long"", ""and"", ""thanks"", ""for"", ""all"", ""the"", ""fish!""
+]);
+// `.catch` omitted because we know it never rejects function delay(ms) {
+    return new Promise(resolve => {
+        setTimeout(resolve, ms);
+    });
+}
+
+async function showSlowly(messages) {
+    for (const message of messages) {
+        await delay(400);
+        console.log(message);
+    }
+}
+
+showSlowly([
+    ""So"", ""long"", ""and"", ""thanks"", ""for"", ""all"", ""the"", ""fish!""
+]);
+// `.catch` omitted because we know it never rejects Note how the words appear with a delay before each one. It's a matter of coding style, butfor-ofis the first thing I reach for when looping through anything iterable. In any even vaguely-modern environment (so, not IE8) where you have access to theArrayfeatures added by ES5, you can useforEach(spec|MDN) if you're only dealing with synchronous code (or you don't need to wait for an asynchronous process to finish during the loop): const a = [""a"", ""b"", ""c""];
+a.forEach((element) => {
+    console.log(element);
+}); const a = [""a"", ""b"", ""c""];
+a.forEach((element) => {
+    console.log(element);
+}); forEachaccepts a callback function and, optionally, a value to use asthiswhen calling that callback (not used above). The callback is called for each element in the array, in order, skipping non-existent elements in sparse arrays. Although I only used one parameter above, the callback is called with three arguments: The element for that iteration, the index of that element, and a reference to the array you're iterating over (in case your function doesn't already have it handy). Likefor-of,forEachhas the advantage that you don't have to declare indexing and value variables in the containing scope; in this case, they're supplied as arguments to the iteration function, and so nicely scoped to just that iteration. Unlikefor-of,forEachhas the disadvantage that it doesn't understandasyncfunctions andawait. If you use anasyncfunction as the callback,forEachdoesnotwait for that function's promise to settle before continuing. Here's theasyncexample fromfor-ofusingforEachinstead — notice how there's an initial delay, but then all the text appears right away instead of waiting: function delay(ms) {
+    return new Promise(resolve => {
+        setTimeout(resolve, ms);
+    });
+}
+
+async function showSlowly(messages) {
+    // INCORRECT, doesn't wait before continuing,
+    // doesn't handle promise rejections
+    messages.forEach(async message => {
+        await delay(400);
+        console.log(message);
+    });
+}
+
+showSlowly([
+    ""So"", ""long"", ""and"", ""thanks"", ""for"", ""all"", ""the"", ""fish!""
+]);
+// `.catch` omitted because we know it never rejects function delay(ms) {
+    return new Promise(resolve => {
+        setTimeout(resolve, ms);
+    });
+}
+
+async function showSlowly(messages) {
+    // INCORRECT, doesn't wait before continuing,
+    // doesn't handle promise rejections
+    messages.forEach(async message => {
+        await delay(400);
+        console.log(message);
+    });
+}
+
+showSlowly([
+    ""So"", ""long"", ""and"", ""thanks"", ""for"", ""all"", ""the"", ""fish!""
+]);
+// `.catch` omitted because we know it never rejects forEachis the ""loop through them all"" function, but ES5 defined several other useful ""work your way through the array and do things"" functions, including: As withforEach, if you use anasyncfunction as your callback, none of those waits for the function's promise to settle. That means: Sometimes the old ways are the best: const a = [""a"", ""b"", ""c""];
+for (let index = 0; index < a.length; ++index) {
+    const element = a[index];
+    console.log(element);
+} const a = [""a"", ""b"", ""c""];
+for (let index = 0; index < a.length; ++index) {
+    const element = a[index];
+    console.log(element);
+} If the length of the array won't change during the loop, and it's in highly performance-sensitive code, a slightly more complicated version grabbing the length up front might be atinybit faster: const a = [""a"", ""b"", ""c""];
+for (let index = 0, len = a.length; index < len; ++index) {
+    const element = a[index];
+    console.log(element);
+} const a = [""a"", ""b"", ""c""];
+for (let index = 0, len = a.length; index < len; ++index) {
+    const element = a[index];
+    console.log(element);
+} And/or counting backward: const a = [""a"", ""b"", ""c""];
+for (let index = a.length - 1; index >= 0; --index) {
+    const element = a[index];
+    console.log(element);
+} const a = [""a"", ""b"", ""c""];
+for (let index = a.length - 1; index >= 0; --index) {
+    const element = a[index];
+    console.log(element);
+} But with modern JavaScript engines, it's rare you need to eke out that last bit of juice. Before ES2015, the loop variable had to exist in the containing scope, becausevaronly has function-level scope, not block-level scope. But as you saw in the examples above, you can useletwithin theforto scope the variables to just the loop. And when you do that, theindexvariable is recreated for each loop iteration, meaning closures created in the loop body keep a reference to theindexfor that specific iteration, which solves the old ""closures in loops"" problem: // (The `NodeList` from `querySelectorAll` is array-like)
+const divs = document.querySelectorAll(""div"");
+for (let index = 0; index < divs.length; ++index) {
+    divs[index].addEventListener('click', e => {
+        console.log(""Index is: "" + index);
+    });
+}<div>zero</div>
+<div>one</div>
+<div>two</div>
+<div>three</div>
+<div>four</div> // (The `NodeList` from `querySelectorAll` is array-like)
+const divs = document.querySelectorAll(""div"");
+for (let index = 0; index < divs.length; ++index) {
+    divs[index].addEventListener('click', e => {
+        console.log(""Index is: "" + index);
+    });
+} <div>zero</div>
+<div>one</div>
+<div>two</div>
+<div>three</div>
+<div>four</div> In the above, you get ""Index is: 0"" if you click the first and ""Index is: 4"" if you click the last. This doesnotwork if you usevarinstead oflet(you'd always see ""Index is: 5""). Likefor-of,forloops work well inasyncfunctions. Here's the earlier example using aforloop: function delay(ms) {
+    return new Promise(resolve => {
+        setTimeout(resolve, ms);
+    });
+}
+
+async function showSlowly(messages) {
+    for (let i = 0; i < messages.length; ++i) {
+        const message = messages[i];
+        await delay(400);
+        console.log(message);
+    }
+}
+
+showSlowly([
+    ""So"", ""long"", ""and"", ""thanks"", ""for"", ""all"", ""the"", ""fish!""
+]);
+// `.catch` omitted because we know it never rejects function delay(ms) {
+    return new Promise(resolve => {
+        setTimeout(resolve, ms);
+    });
+}
+
+async function showSlowly(messages) {
+    for (let i = 0; i < messages.length; ++i) {
+        const message = messages[i];
+        await delay(400);
+        console.log(message);
+    }
+}
+
+showSlowly([
+    ""So"", ""long"", ""and"", ""thanks"", ""for"", ""all"", ""the"", ""fish!""
+]);
+// `.catch` omitted because we know it never rejects for-inisn't for looping through arrays, it's for looping through the names of an object's properties. It does often seem to work for looping through arrays as a by-product of the fact that arrays are objects, but it doesn't just loop through the array indexes, it loops throughallenumerable properties of the object (including inherited ones). (It also used to be that the order wasn't specified; it is now [details inthis other answer], but even though the order is specified now, the rules are complex, there are exceptions, and relying on the order is not best practice.) The only real use cases forfor-inon an array are: Looking only at that first example: You can usefor-into visit those sparse array elements if you use appropriate safeguards: // `a` is a sparse array
+const a = [];
+a[0] = ""a"";
+a[10] = ""b"";
+a[10000] = ""c"";
+for (const name in a) {
+    if (Object.hasOwn(a, name) &&       // These checks are
+        /^0$|^[1-9]\d*$/.test(name) &&  // explained
+        name <= 4294967294              // below
+       ) {
+        const element = a[name];
+        console.log(a[name]);
+    }
+} // `a` is a sparse array
+const a = [];
+a[0] = ""a"";
+a[10] = ""b"";
+a[10000] = ""c"";
+for (const name in a) {
+    if (Object.hasOwn(a, name) &&       // These checks are
+        /^0$|^[1-9]\d*$/.test(name) &&  // explained
+        name <= 4294967294              // below
+       ) {
+        const element = a[name];
+        console.log(a[name]);
+    }
+} Note the three checks: That the object has itsownproperty by that name (not one it inherits from its prototype; this check is also often written asa.hasOwnProperty(name)but ES2022 addsObject.hasOwnwhich can be more reliable), and That the name is all decimal digits (e.g., normal string form, not scientific notation), and That the name's value when coerced to a number is <= 2^32 - 2 (which is 4,294,967,294). Where does that number come from? It's part of the definition of an array indexin the specification. Other numbers (non-integers, negative numbers, numbers greater than 2^32 - 2) are not array indexes. The reason it's 2^32 -2is that that makes the greatest index value one lower than 2^32 -1, which is the maximum value an array'slengthcan have. (E.g., an array's length fits in a 32-bit unsigned integer.) ...although with that said, most code only does thehasOwnPropertycheck. You wouldn't do that in inline code, of course. You'd write a utility function. Perhaps: // Utility function for antiquated environments without `forEach`
+const hasOwn = Object.prototype.hasOwnProperty.call.bind(Object.prototype.hasOwnProperty);
+const rexNum = /^0$|^[1-9]\d*$/;
+function sparseEach(array, callback, thisArg) {
+    for (const name in array) {
+        const index = +name;
+        if (hasOwn(a, name) &&
+            rexNum.test(name) &&
+            index <= 4294967294
+           ) {
+            callback.call(thisArg, array[name], index, array);
+        }
+    }
+}
+
+const a = [];
+a[5] = ""five"";
+a[10] = ""ten"";
+a[100000] = ""one hundred thousand"";
+a.b = ""bee"";
+
+sparseEach(a, (value, index) => {
+    console.log(""Value at "" + index + "" is "" + value);
+}); // Utility function for antiquated environments without `forEach`
+const hasOwn = Object.prototype.hasOwnProperty.call.bind(Object.prototype.hasOwnProperty);
+const rexNum = /^0$|^[1-9]\d*$/;
+function sparseEach(array, callback, thisArg) {
+    for (const name in array) {
+        const index = +name;
+        if (hasOwn(a, name) &&
+            rexNum.test(name) &&
+            index <= 4294967294
+           ) {
+            callback.call(thisArg, array[name], index, array);
+        }
+    }
+}
+
+const a = [];
+a[5] = ""five"";
+a[10] = ""ten"";
+a[100000] = ""one hundred thousand"";
+a.b = ""bee"";
+
+sparseEach(a, (value, index) => {
+    console.log(""Value at "" + index + "" is "" + value);
+}); Likefor,for-inworks well in asynchronous functions if the work within it needs to be done in series. function delay(ms) {
+    return new Promise(resolve => {
+        setTimeout(resolve, ms);
+    });
+}
+
+async function showSlowly(messages) {
+    for (const name in messages) {
+        if (messages.hasOwnProperty(name)) { // Almost always this is the only check people do
+            const message = messages[name];
+            await delay(400);
+            console.log(message);
+        }
+    }
+}
+
+showSlowly([
+    ""So"", ""long"", ""and"", ""thanks"", ""for"", ""all"", ""the"", ""fish!""
+]);
+// `.catch` omitted because we know it never rejects function delay(ms) {
+    return new Promise(resolve => {
+        setTimeout(resolve, ms);
+    });
+}
+
+async function showSlowly(messages) {
+    for (const name in messages) {
+        if (messages.hasOwnProperty(name)) { // Almost always this is the only check people do
+            const message = messages[name];
+            await delay(400);
+            console.log(message);
+        }
+    }
+}
+
+showSlowly([
+    ""So"", ""long"", ""and"", ""thanks"", ""for"", ""all"", ""the"", ""fish!""
+]);
+// `.catch` omitted because we know it never rejects for-ofuses an iterator implicitly, doing all the scut work for you. Sometimes, you might want to use an iteratorexplicitly. It looks like this: const a = [""a"", ""b"", ""c""];
+const it = a.values(); // Or `const it = a[Symbol.iterator]();` if you like
+let entry;
+while (!(entry = it.next()).done) {
+    const element = entry.value;
+    console.log(element);
+} const a = [""a"", ""b"", ""c""];
+const it = a.values(); // Or `const it = a[Symbol.iterator]();` if you like
+let entry;
+while (!(entry = it.next()).done) {
+    const element = entry.value;
+    console.log(element);
+} An iterator is an object matching the Iterator definition in the specification. Itsnextmethod returns a newresult objecteach time you call it. The result object has a property,done, telling us whether it's done, and a propertyvaluewith the value for that iteration. (doneis optional if it would befalse,valueis optional if it would beundefined.) What you get forvaluevaries depending on the iterator. On arrays, the default iterator provides the value of each array element (""a"",""b"", and""c""in the example earlier). Arrays also have three other methods that return iterators: Since iterator objects don't advance until you callnext, they work well inasyncfunction loops. Here's the earlierfor-ofexample using the iterator explicitly: function delay(ms) {
+    return new Promise(resolve => {
+        setTimeout(resolve, ms);
+    });
+}
+
+async function showSlowly(messages) {
+    const it = messages.values()
+    while (!(entry = it.next()).done) {
+        await delay(400);
+        const element = entry.value;
+        console.log(element);
+    }
+}
+
+showSlowly([
+    ""So"", ""long"", ""and"", ""thanks"", ""for"", ""all"", ""the"", ""fish!""
+]);
+// `.catch` omitted because we know it never rejects function delay(ms) {
+    return new Promise(resolve => {
+        setTimeout(resolve, ms);
+    });
+}
+
+async function showSlowly(messages) {
+    const it = messages.values()
+    while (!(entry = it.next()).done) {
+        await delay(400);
+        const element = entry.value;
+        console.log(element);
+    }
+}
+
+showSlowly([
+    ""So"", ""long"", ""and"", ""thanks"", ""for"", ""all"", ""the"", ""fish!""
+]);
+// `.catch` omitted because we know it never rejects Aside from true arrays, there are alsoarray-likeobjects that have alengthproperty and properties with all-digits names:NodeListinstances,HTMLCollectioninstances, theargumentsobject, etc. How do we loop through their contents? At least some, and possibly most or even all, of the array approaches above apply equally well to array-like objects: Usefor-of(use an iterator implicitly) (ES2015+) for-ofuses theiteratorprovided by the object (if any). That includes host-provided objects (like DOM collections and lists). For instance,HTMLCollectioninstances fromgetElementsByXYZmethods andNodeLists instances fromquerySelectorAllboth support iteration. (This is definedquitesubtly by the HTML and DOM specifications. Basically, any object withlengthand indexed access is automatically iterable. Itdoesn'thave to be markediterable; that is used only for collections that, in addition to being iterable, supportforEach,values,keys, andentriesmethods.NodeListdoes;HTMLCollectiondoesn't, but both are iterable.) Here's an example of looping throughdivelements: const divs = document.querySelectorAll(""div"");
+for (const div of divs) {
+    div.textContent = Math.random();
+}<div>zero</div>
+<div>one</div>
+<div>two</div>
+<div>three</div>
+<div>four</div> const divs = document.querySelectorAll(""div"");
+for (const div of divs) {
+    div.textContent = Math.random();
+} <div>zero</div>
+<div>one</div>
+<div>two</div>
+<div>three</div>
+<div>four</div> UseforEachand related (ES5+) The various functions onArray.prototypeare ""intentionally generic"" and can be used on array-like objects viaFunction#call(spec|MDN) orFunction#apply(spec|MDN). (If you have to deal with IE8 or earlier [ouch], see the ""Caveat for host-provided objects"" at the end of this answer, but it's not an issue with vaguely-modern browsers.) Suppose you wanted to useforEachon aNode'schildNodescollection (which, being anHTMLCollection, doesn't haveforEachnatively). You'd do this: Array.prototype.forEach.call(node.childNodes, (child) => {
+    // Do something with `child`
+}); (Note, though, that you could just usefor-ofonnode.childNodes.) If you're going to do that a lot, you might want to grab a copy of the function reference into a variable for reuse, e.g.: // (This is all presumably in a module or some scoping function)
+const forEach = Array.prototype.forEach.call.bind(Array.prototype.forEach);
+
+// Then later...
+forEach(node.childNodes, (child) => {
+    // Do something with `child`
+}); Use a simpleforloop Perhaps obviously, a simpleforloop works for array-like objects. Use an iterator explicitly (ES2015+) See #1. Youmaybe able to get away withfor-in(with safeguards), but with all of these more appropriate options, there's no reason to try. Other times, you may want to convert an array-like object into a true array. Doing that is surprisingly easy: UseArray.from Array.from(spec)|(MDN)(ES2015+, but easily polyfilled) creates an array from an array-like object, optionally passing the entries through a mapping function first. So: const divs = Array.from(document.querySelectorAll(""div"")); ...takes theNodeListfromquerySelectorAlland makes an array from it. The mapping function is handy if you were going to map the contents in some way. For instance, if you wanted to get an array of the tag names of the elements with a given class: // Typical use (with an arrow function):
+const divs = Array.from(document.querySelectorAll("".some-class""), element => element.tagName);
+
+// Traditional function (since `Array.from` can be polyfilled):
+var divs = Array.from(document.querySelectorAll("".some-class""), function(element) {
+    return element.tagName;
+}); Use spread syntax (...) It's also possible to use ES2015'sspread syntax. Likefor-of, this uses theiteratorprovided by the object (see #1 in the previous section): const trueArray = [...iterableObject]; So for instance, if we want to convert aNodeListinto a true array, with spread syntax this becomes quite succinct: const divs = [...document.querySelectorAll(""div"")]; Use theslicemethod of arrays We can use theslicemethod of arrays, which like the other methods mentioned above is ""intentionally generic"" and so can be used with array-like objects, like this: const trueArray = Array.prototype.slice.call(arrayLikeObject); So for instance, if we want to convert aNodeListinto a true array, we could do this: const divs = Array.prototype.slice.call(document.querySelectorAll(""div"")); (If you still have to handle IE8 [ouch], will fail; IE8 didn't let you use host-provided objects asthislike that.) If you useArray.prototypefunctions withhost-providedarray-like objects (for example, DOM collections and such provided by the browser rather than the JavaScript engine), obsolete browsers like IE8 didn't necessarily handle that way, so if you have to support them, be sure to test in your target environments. But it's not an issue with vaguely-modern browsers. (For non-browser environments, naturally it'll depend on the environment.)"
+"I'm usingJSLintto go through JavaScript, and it's returning many suggestions to replace==(two equals signs) with===(three equals signs) when doing things like comparingidSele_UNVEHtype.value.length == 0inside of anifstatement. Is there a performance benefit to replacing==with===? Any performance improvement would be welcomed as many comparison operators exist. If no type conversion takes place, would there be a performance gain over==?","The strict equality operator (===) behaves identically to the abstract equality operator (==) except no type conversion is done, and the types must be the same to be considered equal. Reference:JavaScript Tutorial: Comparison Operators The==operator will compare for equalityafter doing any necessary type conversions.  The===operator willnotdo the conversion, so if two values are not the same type===will simply returnfalse. Both are equally quick. To quote Douglas Crockford's excellentJavaScript: The Good Parts, JavaScript has two sets of equality operators:===and!==, and their evil twins==and!=.  The good ones work the way you would expect.  If the two operands are of the same type and have the same value, then===producestrueand!==producesfalse.  The evil twins do the right thing when the operands are of the same type, but if they are of different types, they attempt to coerce the values.  The rules by which they do that are complicated and unmemorable.  These are some of the interesting cases: '' == '0'           // false
+0 == ''             // true
+0 == '0'            // true false == 'false'    // false
+false == '0'        // true false == undefined  // false
+false == null       // false
+null == undefined   // true ' \t\r\n ' == 0     // true  The lack of transitivity is alarming.  My advice is to never use the evil twins.  Instead, always use===and!==.  All of the comparisons just shown producefalsewith the===operator. A good point was brought up by@Casebashin the comments and in@Phillipe Laybaert'sanswerconcerning objects.  For objects,==and===act consistently with one another (except in a special case). var a = [1,2,3];
+var b = [1,2,3];
+
+var c = { x: 1, y: 2 };
+var d = { x: 1, y: 2 };
+
+var e = ""text"";
+var f = ""te"" + ""xt"";
+
+a == b            // false
+a === b           // false
+
+c == d            // false
+c === d           // false
+
+e == f            // true
+e === f           // true The special case is when you compare a primitive with an object that evaluates to the same primitive, due to itstoStringorvalueOfmethod. For example, consider the comparison of a string primitive with a string object created using theStringconstructor. ""abc"" == new String(""abc"")    // true
+""abc"" === new String(""abc"")   // false Here the==operator is checking the values of the two objects and returningtrue, but the===is seeing that they're not the same type and returningfalse.  Which one is correct?  That really depends on what you're trying to compare.  My advice is to bypass the question entirely and just don't use theStringconstructor to create string objects from string literals. Referencehttps://262.ecma-international.org/5.1/#sec-11.9.3"
+"Given a string: string = ""Test abc test test abc test test test abc test test abc""; This seems to only remove the first occurrence ofabcin the string above: string = string.replace('abc', ''); How do I replacealloccurrences of it?","As of August 2020:Modern browsers have supportfor theString.replaceAll()methoddefined by the ECMAScript 2021 language specification. For older/legacy browsers: function escapeRegExp(str) {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+}
+
+function replaceAll(str, find, replace) {
+  return str.replace(new RegExp(escapeRegExp(find), 'g'), replace);
+} Here is how this answer evolved: str = str.replace(/abc/g, ''); In response to comment ""what's if 'abc' is passed as a variable?"": var find = 'abc';
+var re = new RegExp(find, 'g');
+
+str = str.replace(re, ''); In response toClick Upvote's comment, you could simplify it even more: function replaceAll(str, find, replace) {
+  return str.replace(new RegExp(find, 'g'), replace);
+} Note:Regular expressions contain special (meta) characters, and as such it is dangerous to blindly pass an argument in thefindfunction above without pre-processing it to escape those characters.  This is covered in theMozilla Developer Network'sJavaScript Guide on Regular Expressions, where they present the following utility function (which has changed at least twice since this answer was originally written, so make sure to check the MDN site for potential updates): function escapeRegExp(string) {
+  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+} So in order to make thereplaceAll()function above safer, it could be modified to the following if you also includeescapeRegExp: function replaceAll(str, find, replace) {
+  return str.replace(new RegExp(escapeRegExp(find), 'g'), replace);
+}"
+"How do I create GUIDs (globally-unique identifiers) in JavaScript? The GUID / UUID should be at least 32 characters and should stay in the ASCII range to avoid trouble when passing them around. I'm not sure what routines are available on all browsers, how ""random"" and seeded the built-in random number generator is, etc.","[Edited 2023-03-05 to reflect latest best-practices for producing RFC4122-compliant UUIDs] crypto.randomUUID()is now standard on all modern browsers and JS runtimes.  However, becausenew browser APIs are restricted to secure contexts, this method is only available to pages served locally (localhostor127.0.0.1) or over HTTPS. For readers interested in other UUID versions, generating UUIDs on legacy platforms or in non-secure contexts, there istheuuidmodule.  It is well-tested and supported. Failing the above, there is this method (based on the original answer to this question):function uuidv4() {
+  return ""10000000-1000-4000-8000-100000000000"".replace(/[018]/g, c =>
+    (+c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> +c / 4).toString(16)
+  );
+}
+
+console.log(uuidv4()); function uuidv4() {
+  return ""10000000-1000-4000-8000-100000000000"".replace(/[018]/g, c =>
+    (+c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> +c / 4).toString(16)
+  );
+}
+
+console.log(uuidv4()); Note:The use ofanyUUID generator that relies onMath.random()is strongly discouraged(including snippets featured in previous versions of this answer) forreasons best explained here.TL;DR:solutions based onMath.random()do not provide good uniqueness guarantees."
+"I'd like to check if the user input is an email address in JavaScript, before sending it to a server or attempting to send an email to it, to prevent the most basic mistyping. How could I achieve this?","Usingregular expressionsis probably the best way of validating an email address in JavaScript.View a bunch of tests on JSFiddletaken fromChromium. const validateEmail = (email) => {
+  return String(email)
+    .toLowerCase()
+    .match(
+      /^(([^<>()[\]\\.,;:\s@""]+(\.[^<>()[\]\\.,;:\s@""]+)*)|.("".+""))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    );
+}; The following is an example of a regular expression that accepts unicode. const re =
+  /^(([^<>()[\]\.,;:\s@\""]+(\.[^<>()[\]\.,;:\s@\""]+)*)|(\"".+\""))@(([^<>()[\]\.,;:\s@\""]+\.)+[^<>()[\]\.,;:\s@\""]{2,})$/i; Keep in mind that one should not rely on JavaScript validation alone, as JavaScript can be easily disabled by the client. Furthermore, it is important to validate on the server side. The following snippet of code is an example of JavaScript validating an email address on the client side. const validateEmail = (email) => {
+  return email.match(
+    /^(([^<>()[\]\\.,;:\s@\""]+(\.[^<>()[\]\\.,;:\s@\""]+)*)|(\"".+\""))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  );
+};
+
+const validate = () => {
+  const $result = $('#result');
+  const email = $('#email').val();
+  $result.text('');
+
+  if(validateEmail(email)){
+    $result.text(email + ' is valid.');
+    $result.css('color', 'green');
+  } else{
+    $result.text(email + ' is invalid.');
+    $result.css('color', 'red');
+  }
+  return false;
+}
+
+$('#email').on('input', validate);<script src=""https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js""></script>
+
+<label for=""email"">Enter email address</label>
+<input id=""email"" type=""email"">
+
+<p id=""result""></p> const validateEmail = (email) => {
+  return email.match(
+    /^(([^<>()[\]\\.,;:\s@\""]+(\.[^<>()[\]\\.,;:\s@\""]+)*)|(\"".+\""))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  );
+};
+
+const validate = () => {
+  const $result = $('#result');
+  const email = $('#email').val();
+  $result.text('');
+
+  if(validateEmail(email)){
+    $result.text(email + ' is valid.');
+    $result.css('color', 'green');
+  } else{
+    $result.text(email + ' is invalid.');
+    $result.css('color', 'red');
+  }
+  return false;
+}
+
+$('#email').on('input', validate); <script src=""https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js""></script>
+
+<label for=""email"">Enter email address</label>
+<input id=""email"" type=""email"">
+
+<p id=""result""></p>"
+"How do I make the first character of a string uppercase if it's a letter, but not change the case of any of the other letters? For example:","function capitalizeFirstLetter(val) {
+    return String(val).charAt(0).toUpperCase() + String(val).slice(1);
+} Some other answers modifyString.prototype(this answer used to as well), but I would advise against this now due to maintainability (hard to find out where the function is being added to theprototypeand could cause conflicts if other code uses the same name/a browser adds a native function with that same name in future)."
+"I need to check thecheckedproperty of a checkbox and perform an action based on the checked property using jQuery. For example, if theagecheckbox is checked, then I need to show a textbox to enterage, else hide the textbox. But the following code returnsfalseby default: if ($('#isAgeSelected').attr('checked')) {
+  $(""#txtAge"").show();
+} else {
+  $(""#txtAge"").hide();
+}<script src=""https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js""></script>
+<input type=""checkbox"" id=""isAgeSelected""/>
+<div id=""txtAge"" style=""display:none"">
+  Age is selected
+</div> if ($('#isAgeSelected').attr('checked')) {
+  $(""#txtAge"").show();
+} else {
+  $(""#txtAge"").hide();
+} <script src=""https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js""></script>
+<input type=""checkbox"" id=""isAgeSelected""/>
+<div id=""txtAge"" style=""display:none"">
+  Age is selected
+</div> How do I successfully query thecheckedproperty?","How do I successfully query the checked property? Thecheckedproperty of a checkbox DOM element will give you thecheckedstate of the element. Given your existing code, you could therefore do this: if(document.getElementById('isAgeSelected').checked) {
+    $(""#txtAge"").show();
+} else {
+    $(""#txtAge"").hide();
+} However, there's a much prettier way to do this, usingtoggle: $('#isAgeSelected').click(function() {
+    $(""#txtAge"").toggle(this.checked);
+});<script src=""https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js""></script>
+<input type=""checkbox"" id=""isAgeSelected""/>
+<div id=""txtAge"" style=""display:none"">Age is something</div> $('#isAgeSelected').click(function() {
+    $(""#txtAge"").toggle(this.checked);
+}); <script src=""https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js""></script>
+<input type=""checkbox"" id=""isAgeSelected""/>
+<div id=""txtAge"" style=""display:none"">Age is something</div>"
+"What is the most efficient way to clone a JavaScript object? I've seenobj = eval(uneval(o));being used, butthat's non-standard and only supported by Firefox.I've done things likeobj = JSON.parse(JSON.stringify(o));but question the efficiency.I've also seen recursive copying functions with various flaws.I'm surprised no canonical solution exists.","There's now astructuredClone(value)function supported in all major browsers and node >= 17. It haspolyfills for older systems. structuredClone(value) If needed, loading the polyfill first: import structuredClone from '@ungap/structured-clone'; Seethis answerfor more details, butnote these limitations: If you do not useDates, functions,undefined,Infinity, RegExps, Maps, Sets, Blobs, FileLists, ImageDatas, sparse Arrays, Typed Arrays or other complex types within your object, a very simple one liner to deep clone an object is: JSON.parse(JSON.stringify(object)) const a = {
+  string: 'string',
+  number: 123,
+  bool: false,
+  nul: null,
+  date: new Date(),  // stringified
+  undef: undefined,  // lost
+  inf: Infinity,  // forced to 'null'
+  re: /.*/,  // lost
+}
+console.log(a);
+console.log(typeof a.date);  // Date object
+const clone = JSON.parse(JSON.stringify(a));
+console.log(clone);
+console.log(typeof clone.date);  // result of .toISOString() const a = {
+  string: 'string',
+  number: 123,
+  bool: false,
+  nul: null,
+  date: new Date(),  // stringified
+  undef: undefined,  // lost
+  inf: Infinity,  // forced to 'null'
+  re: /.*/,  // lost
+}
+console.log(a);
+console.log(typeof a.date);  // Date object
+const clone = JSON.parse(JSON.stringify(a));
+console.log(clone);
+console.log(typeof clone.date);  // result of .toISOString() SeeCorban's answerfor benchmarks. Since cloning objects is not trivial (complex types, circular references, function etc.), most major libraries provide function to clone objects.Don't reinvent the wheel- if you're already using a library, check if it has an object cloning function. For example,"
+"What is the most concise and efficient way to find out if a JavaScript array contains a value? This is the only way I know to do it: function contains(a, obj) {
+    for (var i = 0; i < a.length; i++) {
+        if (a[i] === obj) {
+            return true;
+        }
+    }
+    return false;
+} Is there a better and more concise way to accomplish this? This is very closely related to Stack Overflow questionBest way to find an item in a JavaScript Array?which addresses finding objects in an array usingindexOf.","Modern browsers haveArray#includes, which doesexactlythat andis widely supportedby everyone except IE: console.log(['joe', 'jane', 'mary'].includes('jane')); // true console.log(['joe', 'jane', 'mary'].includes('jane')); // true You can also useArray#indexOf, which is less direct, but doesn't require polyfills for outdated browsers. console.log(['joe', 'jane', 'mary'].indexOf('jane') >= 0); // true console.log(['joe', 'jane', 'mary'].indexOf('jane') >= 0); // true Many frameworks also offer similar methods: Notice that some frameworks implement this as a function, while others add the function to the array prototype."
+"I want a single number that represents the current date and time, like aUnix timestamp.","To get the number of milliseconds sinceUnix epoch, callDate.now: Date.now() Alternatively, use the unary operator+to callDate.prototype.valueOf: + new Date() Alternatively, callvalueOfdirectly: new Date().valueOf() To support IE8 and earlier (seecompatibility table), create ashimforDate.now: if (!Date.now) {
+    Date.now = function() { return new Date().getTime(); }
+} Alternatively, callgetTimedirectly: new Date().getTime() To get the number of seconds sinceUnix epoch, i.e.Unix timestamp: Math.floor(Date.now() / 1000) Alternatively, using bitwise-or to floor is slightly faster, but also less readable and may break in the future (see explanations1,2): Date.now() / 1000 | 0 Useperformance.now: var isPerformanceSupported = (
+    window.performance &&
+    window.performance.now &&
+    window.performance.timing &&
+    window.performance.timing.navigationStart
+);
+
+var timeStampInMs = (
+    isPerformanceSupported ?
+    window.performance.now() +
+    window.performance.timing.navigationStart :
+    Date.now()
+);
+
+console.log(timeStampInMs, Date.now()); var isPerformanceSupported = (
+    window.performance &&
+    window.performance.now &&
+    window.performance.timing &&
+    window.performance.timing.navigationStart
+);
+
+var timeStampInMs = (
+    isPerformanceSupported ?
+    window.performance.now() +
+    window.performance.timing.navigationStart :
+    Date.now()
+);
+
+console.log(timeStampInMs, Date.now());"
+"I'd like to do something like this to tick acheckboxusingjQuery: $("".myCheckBox"").checked(true); or $("".myCheckBox"").selected(true); Does such a thing exist?","Use.prop(): $('.myCheckbox').prop('checked', true);
+$('.myCheckbox').prop('checked', false); If you're working with just one element, you can always just access the underlyingHTMLInputElementand modify its.checkedproperty: $('.myCheckbox')[0].checked = true;
+$('.myCheckbox')[0].checked = false; The benefit to using the.prop()and.attr()methods instead of this is that they will operate on all matched elements. The.prop()method is not available, so you need to use.attr(). $('.myCheckbox').attr('checked', true);
+$('.myCheckbox').attr('checked', false); Note that this isthe approach used by jQuery's unit tests prior to version 1.6and is preferable to using$('.myCheckbox').removeAttr('checked');since the latter will, if the box was initially checked, change the behaviour of a call to.reset()on any form that contains it – a subtle but probably unwelcome behaviour change. For more context, some incomplete discussion of the changes to the handling of thecheckedattribute/property in the transition from 1.5.x to 1.6 can be found in theversion 1.6 release notesand theAttributes vs. Propertiessection of the.prop()documentation."
+"Why does Google prependwhile(1);to their (private) JSON responses? For example, here's a response while turning a calendar on and off inGoogle Calendar: while (1);
+[
+  ['u', [
+    ['smsSentFlag', 'false'],
+    ['hideInvitations', 'false'],
+    ['remindOnRespondedEventsOnly', 'true'],
+    ['hideInvitations_remindOnRespondedEventsOnly', 'false_true'],
+    ['Calendar ID stripped for privacy', 'false'],
+    ['smsVerifiedFlag', 'true']
+  ]]
+] I would assume this is to prevent people from doing aneval()on it, but all you'd really have to do is replace thewhileand then you'd be set. I would assume the eval prevention is to make sure people write safe JSON parsing code. I've seen this used in a couple of other places, too, but a lot more so with Google (Mail, Calendar, Contacts, etc.) Strangely enough,Google Docsstarts with&&&START&&&instead, and Google Contacts seems to start withwhile(1); &&&START&&&. What's going on here?","It preventsJSON hijacking, a major JSON security issue that is formallyfixedin all major browserssince 2011with ECMAScript 5. Contrived example: say Google has a URL likemail.google.com/json?action=inboxwhich returns the first 50 messages of your inbox in JSON format. Evil websites on other domains can't make AJAX requests to get this data due to the same-origin policy, but they can include the URL via a<script>tag. The URL is visited withyourcookies, and byoverriding the global array constructor or accessor methodsthey can have a method called whenever an object (array or hash) attribute is set, allowing them to read the JSON content. Thewhile(1);or&&&BLAH&&&prevents this: an AJAX request atmail.google.comwill have full access to the text content, and can strip it away. But a<script>tag insertion blindly executes the JavaScript without any processing, resulting in either an infinite loop or a syntax error. This does not address the issue ofcross-site request forgery."
+"Suppose I'm familiar with developing client-side applications injQuery, but now I'd like to start usingAngularJS. Can you describe the paradigm shift that is necessary? Here are a few questions that might help you frame an answer: I'm not looking for a detailed comparison betweenjQueryandAngularJS.","In jQuery, you design a page, and then you make it dynamic. This is because jQuery was designed for augmentation and has grown incredibly from that simple premise. But in AngularJS, you must start from the ground up with your architecture in mind. Instead of starting by thinking ""I have this piece of the DOM and I want to make it do X"", you have to start with what you want to accomplish, then go about designing your application, and then finally go about designing your view. Similarly, don't start with the idea that jQuery does X, Y, and Z, so I'll just add AngularJS on top of that for models and controllers. This isreallytempting when you're just starting out, which is why I always recommend that new AngularJS developers don't use jQuery at all, at least until they get used to doing things the ""Angular Way"". I've seen many developers here and on the mailing list create these elaborate solutions with jQuery plugins of 150 or 200 lines of code that they then glue into AngularJS with a collection of callbacks and$applys that are confusing and convoluted; but they eventually get it working! The problem is that inmostcases that jQuery plugin could be rewritten in AngularJS in a fraction of the code, where suddenly everything becomes comprehensible and straightforward. The bottom line is this: when solutioning, first ""think in AngularJS""; if you can't think of a solution, ask the community; if after all of that there is no easy solution,thenfeel free to reach for the jQuery. But don't let jQuery become a crutch or you'll never master AngularJS. First know thatsingle-page applicationsareapplications. They'renotwebpages. So we need to think like a server-side developerin additionto thinking like a client-side developer. We have to think about how to divide our application into individual, extensible, testable components. So thenhowdo you do that? How do you ""think in AngularJS""? Here are some general principles, contrasted with jQuery. In jQuery, we programmatically change the view. We could have a dropdown menu defined as aullike so: <ul class=""main-menu"">
+    <li class=""active"">
+        <a href=""#/home"">Home</a>
+    </li>
+    <li>
+        <a href=""#/menu1"">Menu 1</a>
+        <ul>
+            <li><a href=""#/sm1"">Submenu 1</a></li>
+            <li><a href=""#/sm2"">Submenu 2</a></li>
+            <li><a href=""#/sm3"">Submenu 3</a></li>
+        </ul>
+    </li>
+    <li>
+        <a href=""#/home"">Menu 2</a>
+    </li>
+</ul> In jQuery, in our application logic, we would activate it with something like: $('.main-menu').dropdownMenu(); When we just look at the view, it's not immediately obvious that there is any functionality here. For small applications, that's fine. But for non-trivial applications, things quickly get confusing and hard to maintain. In AngularJS, though, the view is the official record of view-based functionality. Ouruldeclaration would look like this instead: <ul class=""main-menu"" dropdown-menu>
+    ...
+</ul> These two do the same thing, but in the AngularJS version anyone looking at the template knows what's supposed to happen. Whenever a new member of the development team comes on board, she can look at this and thenknowthat there is a directive calleddropdownMenuoperating on it; she doesn't need to intuit the right answer or sift through any code. The view told us what was supposed to happen. Much cleaner. Developers new to AngularJS often ask a question like: how do I find all links of a specific kind and add a directive onto them. The developer is always flabbergasted when we reply: you don't. But the reason you don't do that is that this is like half-jQuery, half-AngularJS, and no good. The problem here is that the developer is trying to ""do jQuery"" in the context of AngularJS. That's never going to work well. The viewisthe official record. Outside of a directive (more on this below), you never, ever,neverchange the DOM. And directives are appliedin the view, so intent is clear. Remember: don't design, and then mark up. You must architect, and then design. This is by far one of the most awesome features of AngularJS and cuts out a lot of the need to do the kinds of DOM manipulations I mentioned in the previous section. AngularJS will automatically update your view so you don't have to! In jQuery, we respond to events and then update content. Something like: $.ajax({
+  url: '/myEndpoint.json',
+  success: function ( data, status ) {
+    $('ul#log').append('<li>Data Received!</li>');
+  }
+}); For a view that looks like this: <ul class=""messages"" id=""log"">
+</ul> Apart from mixing concerns, we also have the same problems of signifying intent that I mentioned before. But more importantly, we had to manually reference and update a DOM node. And if we want to delete a log entry, we have to code against the DOM for that too. How do we test the logic apart from the DOM? And what if we want to change the presentation? This a little messy and a trifle frail. But in AngularJS, we can do this: $http( '/myEndpoint.json' ).then( function ( response ) {
+    $scope.log.push( { msg: 'Data Received!' } );
+}); And our view can look like this: <ul class=""messages"">
+    <li ng-repeat=""entry in log"">{{ entry.msg }}</li>
+</ul> But for that matter, our view could look like this: <div class=""messages"">
+    <div class=""alert"" ng-repeat=""entry in log"">
+        {{ entry.msg }}
+    </div>
+</div> And now instead of using an unordered list, we're using Bootstrap alert boxes. And we never had to change the controller code! But more importantly, no matterwhereorhowthe log gets updated, the view will change too. Automatically. Neat! Though I didn't show it here, the data binding is two-way. So those log messages could also be editable in the view just by doing this:<input ng-model=""entry.msg"" />. And there was much rejoicing. In jQuery, the DOM is kind of like the model. But in AngularJS, we have a separate model layer that we can manage in any way we want, completely independently from the view. This helps for the above data binding, maintainsseparation of concerns, and introduces far greater testability. Other answers mentioned this point, so I'll just leave it at that. And all of the above tie into this over-arching theme: keep your concerns separate. Your view acts as the official record of what is supposed to happen (for the most part); your model represents your data; you have a service layer to perform reusable tasks; you do DOM manipulation and augment your view with directives; and you glue it all together with controllers. This was also mentioned in other answers, and the only thing I would add pertains to testability, which I discuss in another section below. To help us out with separation of concerns isdependency injection(DI). If you come from a server-side language (fromJavatoPHP) you're probably familiar with this concept already, but if you're a client-side guy coming from jQuery, this concept can seem anything from silly to superfluous to hipster. But it's not. :-) From a broad perspective, DI means that you can declare components very freely and then from any other component, just ask for an instance of it and it will be granted. You don't have to know about loading order, or file locations, or anything like that. The power may not immediately be visible, but I'll provide just one (common) example: testing. Let's say in our application, we require a service that implements server-side storage through aRESTAPI and, depending on application state, local storage as well. When running tests on our controllers, we don't want to have to communicate with the server - we're testing thecontroller, after all. We can just add a mock service of the same name as our original component, and the injector will ensure that our controller gets the fake one automatically - our controller doesn't and needn't know the difference. Speaking of testing... This is really part of section 3 on architecture, but it's so important that I'm putting it as its own top-level section. Out of all of the many jQuery plugins you've seen, used, or written, how many of them had an accompanying test suite? Not very many because jQuery isn't very amenable to that. But AngularJS is. In jQuery, the only way to test is often to create the component independently with a sample/demo page against which our tests can perform DOM manipulation. So then we have to develop a component separately andthenintegrate it into our application. How inconvenient! So much of the time, when developing with jQuery, we opt for iterative instead of test-driven development. And who could blame us? But because we have separation of concerns, we can do test-driven development iteratively in AngularJS! For example, let's say we want a super-simple directive to indicate in our menu what our current route is. We can declare what we want in the view of our application: <a href=""/hello"" when-active>Hello</a> Okay, now we can write a test for the non-existentwhen-activedirective: it( 'should add ""active"" when the route changes', inject(function() {
+    var elm = $compile( '<a href=""/hello"" when-active>Hello</a>' )( $scope );
+
+    $location.path('/not-matching');
+    expect( elm.hasClass('active') ).toBeFalsey();
+
+    $location.path( '/hello' );
+    expect( elm.hasClass('active') ).toBeTruthy();
+})); And when we run our test, we can confirm that it fails. Only now should we create our directive: .directive( 'whenActive', function ( $location ) {
+    return {
+        scope: true,
+        link: function ( scope, element, attrs ) {
+            scope.$on( '$routeChangeSuccess', function () {
+                if ( $location.path() == element.attr( 'href' ) ) {
+                    element.addClass( 'active' );
+                }
+                else {
+                    element.removeClass( 'active' );
+                }
+            });
+        }
+    };
+}); Our test now passesandour menu performs as requested. Our development isbothiterativeandtest-driven. Wicked-cool. You'll often hear ""only do DOM manipulation in a directive"".This is a necessity.Treat it with due deference! But let's dive a little deeper... Some directives just decorate what's already in the view (thinkngClass) and therefore sometimes do DOM manipulation straight away and then are basically done. But if a directive is like a ""widget"" and has a template, it shouldalsorespect separation of concerns. That is, the templatetooshould remain largely independent from its implementation in the link and controller functions. AngularJS comes with an entire set of tools to make this very easy; withngClasswe can dynamically update the class;ngModelallows two-way data binding;ngShowandngHideprogrammatically show or hide an element; and many more - including the ones we write ourselves. In other words, we can do all kinds of awesomenesswithoutDOM manipulation. The less DOM manipulation, the easier directives are to test, the easier they are to style, the easier they are to change in the future, and the more re-usable and distributable they are. I see lots of developers new to AngularJS using directives as the place to throw a bunch of jQuery. In other words, they think ""since I can't do DOM manipulation in the controller, I'll take that code put it in a directive"". While that certainly is much better, it's oftenstill wrong. Think of the logger we programmed in section 3. Even if we put that in a directive, westillwant to do it the ""Angular Way"". Itstilldoesn't take any DOM manipulation! There are lots of times when DOM manipulation is necessary, but it's alotrarer than you think! Before doing DOM manipulationanywherein your application, ask yourself if you really need to. There might be a better way. Here's a quick example that shows the pattern I see most frequently. We want a toggleable button. (Note: this example is a little contrived and a skosh verbose to represent more complicated cases that are solved in exactly the same way.) .directive( 'myDirective', function () {
+    return {
+        template: '<a class=""btn"">Toggle me!</a>',
+        link: function ( scope, element, attrs ) {
+            var on = false;
+
+            $(element).click( function () {
+                on = !on;
+                $(element).toggleClass('active', on);
+            });
+        }
+    };
+}); There are a few things wrong with this: This directive can be rewritten (even for very complicated cases!) much more simply like so: .directive( 'myDirective', function () {
+    return {
+        scope: true,
+        template: '<a class=""btn"" ng-class=""{active: on}"" ng-click=""toggle()"">Toggle me!</a>',
+        link: function ( scope, element, attrs ) {
+            scope.on = false;
+
+            scope.toggle = function () {
+                scope.on = !scope.on;
+            };
+        }
+    };
+}); Again, the template stuff is in the template, so you (or your users) can easily swap it out for one that meets any style necessary, and thelogicnever had to be touched. Reusability - boom! And there are still all those other benefits, like testing - it's easy! No matter what's in the template, the directive's internal API is never touched, so refactoring is easy. You can change the template as much as you want without touching the directive. And no matter what you change, your tests still pass. w00t! So if directives aren't just collections of jQuery-like functions, what are they? Directives are actuallyextensions of HTML. If HTML doesn't do something you need it to do, you write a directive to do it for you, and then use it just as if it was part of HTML. Put another way, if AngularJS doesn't do something out of the box, think how the team would accomplish it to fit right in withngClick,ngClass, et al. Don't even use jQuery. Don't even include it. It will hold you back. And when you come to a problem that you think you know how to solve in jQuery already, before you reach for the$, try to think about how to do it within the confines the AngularJS. If you don't know, ask! 19 times out of 20, the best way to do it doesn't need jQuery and to try to solve it with jQuery results in more work for you."
+"The following are two methods of building a link that has the sole purpose of running JavaScript code. Which is better, in terms of functionality, page load speed, validation purposes, etc.? function myJsFunc() {
+    alert(""myJsFunc"");
+}<a href=""#"" onclick=""myJsFunc();"">Run JavaScript Code</a> function myJsFunc() {
+    alert(""myJsFunc"");
+} <a href=""#"" onclick=""myJsFunc();"">Run JavaScript Code</a> or function myJsFunc() {
+    alert(""myJsFunc"");
+}<a href=""javascript:void(0)"" onclick=""myJsFunc();"">Run JavaScript Code</a> function myJsFunc() {
+    alert(""myJsFunc"");
+} <a href=""javascript:void(0)"" onclick=""myJsFunc();"">Run JavaScript Code</a>","I usejavascript:void(0). Three reasons. Encouraging the use of#amongst a team of developers inevitably leads to some using the return value of the function called like this: function doSomething() {
+    //Some code
+    return false;
+} But then they forget to usereturn doSomething()in the onclick and just usedoSomething(). A second reason for avoiding#is that the finalreturn false;will not execute if the called function throws an error. Hence the developers have to also remember to handle any error appropriately in the called function. A third reason is that there are cases where theonclickevent property is assigned dynamically.  I prefer to be able to call a function or assign it dynamically without having to code the function specifically for one method of attachment or another. Hence myonclick(or on anything) in HTML markup look like this: onclick=""someFunc.call(this)"" OR onclick=""someFunc.apply(this, arguments)"" Usingjavascript:void(0)avoids all of the above headaches, and I haven't found any examples of a downside. So if you're a lone developer then you can clearly make your own choice, but if you work as a team you have to either state: Usehref=""#"", make sureonclickalways containsreturn false;at the end, that any called function does not throw an error and if you attach a function dynamically to theonclickproperty make sure that as well as not throwing an error it returnsfalse. OR Usehref=""javascript:void(0)"" The second is clearly much easier to communicate."
+"I am looking for a JavaScript array insert method, in the style of: arr.insert(index, item) Preferably in jQuery, but any JavaScript implementation will do at this point.","You want thesplicefunction on the native array object. arr.splice(index, 0, item);will insertitemintoarrat the specifiedindex(deleting0items first, that is, it's just an insert). In this example we will create an array and add an element to it into index 2: var arr = [];
+arr[0] = ""Jani"";
+arr[1] = ""Hege"";
+arr[2] = ""Stale"";
+arr[3] = ""Kai Jim"";
+arr[4] = ""Borge"";
+
+console.log(arr.join()); // Jani,Hege,Stale,Kai Jim,Borge
+arr.splice(2, 0, ""Lene"");
+console.log(arr.join()); // Jani,Hege,Lene,Stale,Kai Jim,Borge var arr = [];
+arr[0] = ""Jani"";
+arr[1] = ""Hege"";
+arr[2] = ""Stale"";
+arr[3] = ""Kai Jim"";
+arr[4] = ""Borge"";
+
+console.log(arr.join()); // Jani,Hege,Stale,Kai Jim,Borge
+arr.splice(2, 0, ""Lene"");
+console.log(arr.join()); // Jani,Hege,Lene,Stale,Kai Jim,Borge UPDATE (24 May 2024) You can now use thetoSplicedmethod which behaves just likesplice, however it returns a new array without mutating the existing one. You could update the previous example like so: const updated = arr.toSpliced(2, 0, ""Lene"");"
+How do I copy text to the clipboard (multi-browser)? Related:How does Trello access the user's clipboard?,"There are three primary browser APIs for copying to the clipboard: Async Clipboard API[navigator.clipboard.writeText] document.execCommand('copy')(deprecated) 👎 Overriding the copy event Don't expect clipboard related commands to work whilst you are testing code in the console. Generally, the page is required to be active (Async Clipboard API) or requires user interaction (e.g. a user click) to allow (document.execCommand('copy')) to access the clipboard see below for more detail. Note that since this post was originally writtendeprecation of permissions in cross-origin IFRAMEsand otherIFRAME ""sandboxing""prevents the embedded demos ""Run code snippet"" buttons and ""codepen.io example"" from working in some browsers (including Chrome and Microsoft Edge). To develop create your own web page, serve that page over an HTTPS connection to test and develop against. Here is a test/demo page which demonstrates the code working:https://deanmarktaylor.github.io/clipboard-test/ Due to the level of browser support for the new Async Clipboard API, you will likely want to fall back to thedocument.execCommand('copy')method to get good browser coverage. Here is a simple example (may not work embedded in this site, read ""important"" note above): function fallbackCopyTextToClipboard(text) {
+  var textArea = document.createElement(""textarea"");
+  textArea.value = text;
+  
+  // Avoid scrolling to bottom
+  textArea.style.top = ""0"";
+  textArea.style.left = ""0"";
+  textArea.style.position = ""fixed"";
+
+  document.body.appendChild(textArea);
+  textArea.focus();
+  textArea.select();
+
+  try {
+    var successful = document.execCommand('copy');
+    var msg = successful ? 'successful' : 'unsuccessful';
+    console.log('Fallback: Copying text command was ' + msg);
+  } catch (err) {
+    console.error('Fallback: Oops, unable to copy', err);
+  }
+
+  document.body.removeChild(textArea);
+}
+function copyTextToClipboard(text) {
+  if (!navigator.clipboard) {
+    fallbackCopyTextToClipboard(text);
+    return;
+  }
+  navigator.clipboard.writeText(text).then(function() {
+    console.log('Async: Copying to clipboard was successful!');
+  }, function(err) {
+    console.error('Async: Could not copy text: ', err);
+  });
+}
+
+var copyBobBtn = document.querySelector('.js-copy-bob-btn'),
+  copyJaneBtn = document.querySelector('.js-copy-jane-btn');
+
+copyBobBtn.addEventListener('click', function(event) {
+  copyTextToClipboard('Bob');
+});
+
+
+copyJaneBtn.addEventListener('click', function(event) {
+  copyTextToClipboard('Jane');
+});<div style=""display:inline-block; vertical-align:top;"">
+  <button class=""js-copy-bob-btn"">Set clipboard to BOB</button><br /><br />
+  <button class=""js-copy-jane-btn"">Set clipboard to JANE</button>
+</div>
+<div style=""display:inline-block;"">
+  <textarea class=""js-test-textarea"" cols=""35"" rows=""4"">Try pasting into here to see what you have on your clipboard:
+
+  </textarea>
+</div> function fallbackCopyTextToClipboard(text) {
+  var textArea = document.createElement(""textarea"");
+  textArea.value = text;
+  
+  // Avoid scrolling to bottom
+  textArea.style.top = ""0"";
+  textArea.style.left = ""0"";
+  textArea.style.position = ""fixed"";
+
+  document.body.appendChild(textArea);
+  textArea.focus();
+  textArea.select();
+
+  try {
+    var successful = document.execCommand('copy');
+    var msg = successful ? 'successful' : 'unsuccessful';
+    console.log('Fallback: Copying text command was ' + msg);
+  } catch (err) {
+    console.error('Fallback: Oops, unable to copy', err);
+  }
+
+  document.body.removeChild(textArea);
+}
+function copyTextToClipboard(text) {
+  if (!navigator.clipboard) {
+    fallbackCopyTextToClipboard(text);
+    return;
+  }
+  navigator.clipboard.writeText(text).then(function() {
+    console.log('Async: Copying to clipboard was successful!');
+  }, function(err) {
+    console.error('Async: Could not copy text: ', err);
+  });
+}
+
+var copyBobBtn = document.querySelector('.js-copy-bob-btn'),
+  copyJaneBtn = document.querySelector('.js-copy-jane-btn');
+
+copyBobBtn.addEventListener('click', function(event) {
+  copyTextToClipboard('Bob');
+});
+
+
+copyJaneBtn.addEventListener('click', function(event) {
+  copyTextToClipboard('Jane');
+}); <div style=""display:inline-block; vertical-align:top;"">
+  <button class=""js-copy-bob-btn"">Set clipboard to BOB</button><br /><br />
+  <button class=""js-copy-jane-btn"">Set clipboard to JANE</button>
+</div>
+<div style=""display:inline-block;"">
+  <textarea class=""js-test-textarea"" cols=""35"" rows=""4"">Try pasting into here to see what you have on your clipboard:
+
+  </textarea>
+</div> (codepen.io example may not work, read ""important"" note above)
+Note that this snippet is not working well in Stack Overflow's embedded preview you can try it here:https://codepen.io/DeanMarkTaylor/pen/RMRaJX?editors=1011 Note that there is an ability to ""request permission"" and test for access to the clipboard via the permissions API in Chrome 66. var text = ""Example text to appear on clipboard"";
+navigator.clipboard.writeText(text).then(function() {
+  console.log('Async: Copying to clipboard was successful!');
+}, function(err) {
+  console.error('Async: Could not copy text: ', err);
+}); The rest of this post goes into the nuances and detail of thedocument.execCommand('copy')API. The JavaScriptdocument.execCommand('copy')support has grown, see the links below for browser updates:(deprecated) 👎 (may not work embedded in this site, read ""important"" note above)var copyTextareaBtn = document.querySelector('.js-textareacopybtn');
+
+copyTextareaBtn.addEventListener('click', function(event) {
+  var copyTextarea = document.querySelector('.js-copytextarea');
+  copyTextarea.focus();
+  copyTextarea.select();
+
+  try {
+    var successful = document.execCommand('copy');
+    var msg = successful ? 'successful' : 'unsuccessful';
+    console.log('Copying text command was ' + msg);
+  } catch (err) {
+    console.log('Oops, unable to copy');
+  }
+});<p>
+  <button class=""js-textareacopybtn"" style=""vertical-align:top;"">Copy Textarea</button>
+  <textarea class=""js-copytextarea"">Hello I'm some text</textarea>
+</p> var copyTextareaBtn = document.querySelector('.js-textareacopybtn');
+
+copyTextareaBtn.addEventListener('click', function(event) {
+  var copyTextarea = document.querySelector('.js-copytextarea');
+  copyTextarea.focus();
+  copyTextarea.select();
+
+  try {
+    var successful = document.execCommand('copy');
+    var msg = successful ? 'successful' : 'unsuccessful';
+    console.log('Copying text command was ' + msg);
+  } catch (err) {
+    console.log('Oops, unable to copy');
+  }
+}); <p>
+  <button class=""js-textareacopybtn"" style=""vertical-align:top;"">Copy Textarea</button>
+  <textarea class=""js-copytextarea"">Hello I'm some text</textarea>
+</p> The above simple example works great if there is atextareaorinputelement visible on the screen. In some cases, you might wish to copy text to the clipboard without displaying aninput/textareaelement. This is one example of a way to work around this (basically insert an element, copy to clipboard, remove element): Tested with Google Chrome 44, Firefox 42.0a1, and Internet Explorer 11.0.8600.17814. (may not work embedded in this site, read ""important"" note above)function copyTextToClipboard(text) {
+  var textArea = document.createElement(""textarea"");
+
+  //
+  // *** This styling is an extra step which is likely not required. ***
+  //
+  // Why is it here? To ensure:
+  // 1. the element is able to have focus and selection.
+  // 2. if the element was to flash render it has minimal visual impact.
+  // 3. less flakyness with selection and copying which **might** occur if
+  //    the textarea element is not visible.
+  //
+  // The likelihood is the element won't even render, not even a
+  // flash, so some of these are just precautions. However in
+  // Internet Explorer the element is visible whilst the popup
+  // box asking the user for permission for the web page to
+  // copy to the clipboard.
+  //
+
+  // Place in the top-left corner of screen regardless of scroll position.
+  textArea.style.position = 'fixed';
+  textArea.style.top = 0;
+  textArea.style.left = 0;
+
+  // Ensure it has a small width and height. Setting to 1px / 1em
+  // doesn't work as this gives a negative w/h on some browsers.
+  textArea.style.width = '2em';
+  textArea.style.height = '2em';
+
+  // We don't need padding, reducing the size if it does flash render.
+  textArea.style.padding = 0;
+
+  // Clean up any borders.
+  textArea.style.border = 'none';
+  textArea.style.outline = 'none';
+  textArea.style.boxShadow = 'none';
+
+  // Avoid flash of the white box if rendered for any reason.
+  textArea.style.background = 'transparent';
+
+
+  textArea.value = text;
+
+  document.body.appendChild(textArea);
+  textArea.focus();
+  textArea.select();
+
+  try {
+    var successful = document.execCommand('copy');
+    var msg = successful ? 'successful' : 'unsuccessful';
+    console.log('Copying text command was ' + msg);
+  } catch (err) {
+    console.log('Oops, unable to copy');
+  }
+
+  document.body.removeChild(textArea);
+}
+
+
+var copyBobBtn = document.querySelector('.js-copy-bob-btn'),
+  copyJaneBtn = document.querySelector('.js-copy-jane-btn');
+
+copyBobBtn.addEventListener('click', function(event) {
+  copyTextToClipboard('Bob');
+});
+
+
+copyJaneBtn.addEventListener('click', function(event) {
+  copyTextToClipboard('Jane');
+});<div style=""display:inline-block; vertical-align:top;"">
+  <button class=""js-copy-bob-btn"">Set clipboard to BOB</button><br /><br />
+  <button class=""js-copy-jane-btn"">Set clipboard to JANE</button>
+</div>
+<div style=""display:inline-block;"">
+  <textarea class=""js-test-textarea"" cols=""35"" rows=""4"">Try pasting into here to see what you have on your clipboard:
+
+  </textarea>
+</div> function copyTextToClipboard(text) {
+  var textArea = document.createElement(""textarea"");
+
+  //
+  // *** This styling is an extra step which is likely not required. ***
+  //
+  // Why is it here? To ensure:
+  // 1. the element is able to have focus and selection.
+  // 2. if the element was to flash render it has minimal visual impact.
+  // 3. less flakyness with selection and copying which **might** occur if
+  //    the textarea element is not visible.
+  //
+  // The likelihood is the element won't even render, not even a
+  // flash, so some of these are just precautions. However in
+  // Internet Explorer the element is visible whilst the popup
+  // box asking the user for permission for the web page to
+  // copy to the clipboard.
+  //
+
+  // Place in the top-left corner of screen regardless of scroll position.
+  textArea.style.position = 'fixed';
+  textArea.style.top = 0;
+  textArea.style.left = 0;
+
+  // Ensure it has a small width and height. Setting to 1px / 1em
+  // doesn't work as this gives a negative w/h on some browsers.
+  textArea.style.width = '2em';
+  textArea.style.height = '2em';
+
+  // We don't need padding, reducing the size if it does flash render.
+  textArea.style.padding = 0;
+
+  // Clean up any borders.
+  textArea.style.border = 'none';
+  textArea.style.outline = 'none';
+  textArea.style.boxShadow = 'none';
+
+  // Avoid flash of the white box if rendered for any reason.
+  textArea.style.background = 'transparent';
+
+
+  textArea.value = text;
+
+  document.body.appendChild(textArea);
+  textArea.focus();
+  textArea.select();
+
+  try {
+    var successful = document.execCommand('copy');
+    var msg = successful ? 'successful' : 'unsuccessful';
+    console.log('Copying text command was ' + msg);
+  } catch (err) {
+    console.log('Oops, unable to copy');
+  }
+
+  document.body.removeChild(textArea);
+}
+
+
+var copyBobBtn = document.querySelector('.js-copy-bob-btn'),
+  copyJaneBtn = document.querySelector('.js-copy-jane-btn');
+
+copyBobBtn.addEventListener('click', function(event) {
+  copyTextToClipboard('Bob');
+});
+
+
+copyJaneBtn.addEventListener('click', function(event) {
+  copyTextToClipboard('Jane');
+}); <div style=""display:inline-block; vertical-align:top;"">
+  <button class=""js-copy-bob-btn"">Set clipboard to BOB</button><br /><br />
+  <button class=""js-copy-jane-btn"">Set clipboard to JANE</button>
+</div>
+<div style=""display:inline-block;"">
+  <textarea class=""js-test-textarea"" cols=""35"" rows=""4"">Try pasting into here to see what you have on your clipboard:
+
+  </textarea>
+</div> Alldocument.execCommand('copy')calls must take place as a direct result of a user action, e.g. click event handler. This is a measure to prevent messing with the user's clipboard when they don't expect it. See theGoogle Developers post herefor more info. Note the full Clipboard API draft specification can be found here:https://w3c.github.io/clipboard-apis/ However, as an example of browser compatibility issues, Google Chrome from ~April to ~October 2015 only returnedtruefromdocument.queryCommandSupported('copy')if the command was called from a user-initiated thread. Note compatibility detail below. Whilst a simple call todocument.execCommand('copy')wrapped in atry/catchblock called as a result of a user click will get you the most compatibility use the following has some provisos: Any call todocument.execCommand,document.queryCommandSupportedordocument.queryCommandEnabledshould be wrapped in atry/catchblock. Different browser implementations and browser versions throw differing types of exceptions when called instead of returningfalse. Different browser implementations are still in flux and theClipboard APIis still in draft, so remember to do your testing."
+"I'd like to round at most two decimal places, butonly if necessary. Input: 10
+1.7777777
+9.1 Output: 10
+1.78
+9.1 How can I do this in JavaScript?","UseMath.round(): Math.round(num * 100) / 100 Or to be more specific and to ensure things like 1.005 round correctly, useNumber.EPSILON: Math.round((num + Number.EPSILON) * 100) / 100"
+"I have an array of JavaScript objects: var objs = [ 
+    { first_nom: 'Laszlo', last_nom: 'Jamf'     },
+    { first_nom: 'Pig',    last_nom: 'Bodine'   },
+    { first_nom: 'Pirate', last_nom: 'Prentice' }
+]; How can I sort them by the value oflast_nomin JavaScript? I know aboutsort(a,b), but that only seems to work on strings and numbers. Do I need to add atoString()method to my objects?","It's easy enough to write your own comparison function: function compare( a, b ) {
+  if ( a.last_nom < b.last_nom ){
+    return -1;
+  }
+  if ( a.last_nom > b.last_nom ){
+    return 1;
+  }
+  return 0;
+}
+
+objs.sort( compare ); Or inline (c/o Marco Demaio): objs.sort((a,b) => (a.last_nom > b.last_nom) ? 1 : ((b.last_nom > a.last_nom) ? -1 : 0)) Or simplified for numeric (c/o Andre Figueiredo): objs.sort((a,b) => a.last_nom - b.last_nom); // b - a for reverse sort"
+"I saw this code: this.vertical = vertical !== undefined ? !!vertical : this.vertical; It seems to be using!!as an operator, which I don't recognize. What does it do?","It convertsObjecttoboolean. If it was falsy (e.g.,0,null,undefined, etc.), it would befalse, otherwise,true. !object  // Inverted Boolean
+!!object // Noninverted Boolean, so true Boolean representation So!!is not an operator; it's just the!operator twice. It is generally simpler to do: Boolean(object) // Boolean Real World Example ""Test IE version"": const isIE8 = !! navigator.userAgent.match(/MSIE 8.0/);
+console.log(isIE8); // Returns true or false If you ⇒ console.log(navigator.userAgent.match(/MSIE 8.0/));
+// Returns either an Array or null But if you ⇒ console.log(!!navigator.userAgent.match(/MSIE 8.0/));
+// Returns either true or false"
+"Is there astring.Emptyin JavaScript, or is it just a case of checking for""""?","To check for atruthy value: if (strValue) {
+    // strValue was non-empty string, true, 42, Infinity, [], ...
+} To check for afalsy value: if (!strValue) {
+    // strValue was empty string, false, 0, null, undefined, ...
+} To check for exactly an empty string, compare for strict equality against""""using the===operator: if (strValue === """") {
+    // strValue was empty string
+} To check for not an empty string strictly, use the!==operator: if (strValue !== """") {
+    // strValue was not an empty string
+}"
+"How do I check if a particular key exists in a JavaScript object or array? If a key doesn't exist, and I try to access it, will it return false? Or throw an error?","Checking for undefined-ness is not an accurate way of testing whether a key exists. What if the key exists but the value is actuallyundefined? var obj = { key: undefined };
+console.log(obj[""key""] !== undefined); // false, but the key exists! var obj = { key: undefined };
+console.log(obj[""key""] !== undefined); // false, but the key exists! You should instead use theinoperator: var obj = { key: undefined };
+console.log(""key"" in obj); // true, regardless of the actual value var obj = { key: undefined };
+console.log(""key"" in obj); // true, regardless of the actual value If you want to check if a key doesn't exist, remember to use parenthesis: var obj = { not_key: undefined };
+console.log(!(""key"" in obj)); // true if ""key"" doesn't exist in object
+console.log(!""key"" in obj);   // Do not do this! It is equivalent to ""false in obj"" var obj = { not_key: undefined };
+console.log(!(""key"" in obj)); // true if ""key"" doesn't exist in object
+console.log(!""key"" in obj);   // Do not do this! It is equivalent to ""false in obj"" Or, if you want to particularly test for properties of the object instance (and not inherited properties), usehasOwnProperty: var obj = { key: undefined };
+console.log(obj.hasOwnProperty(""key"")); // true var obj = { key: undefined };
+console.log(obj.hasOwnProperty(""key"")); // true For performance comparison between the methods that arein,hasOwnPropertyand key isundefined, seethisbenchmark: "
+"In Java, you can use aforloop to traverse objects in an array as follows: String[] myStringArray = {""Hello"", ""World""};
+for (String s : myStringArray) {
+    // Do something
+} Can I do the same in JavaScript?","Three main options: Detailed examples are below. var myStringArray = [""Hello"",""World""];
+var arrayLength = myStringArray.length;
+for (var i = 0; i < arrayLength; i++) {
+    console.log(myStringArray[i]);
+    //Do something
+} var myStringArray = [""Hello"",""World""];
+var arrayLength = myStringArray.length;
+for (var i = 0; i < arrayLength; i++) {
+    console.log(myStringArray[i]);
+    //Do something
+} Pros Cons TheES5specification introduced a lot of beneficial array methods. One of them, theArray.prototype.forEach, gave us a concise way to iterate over an array: const array = [""one"", ""two"", ""three""]
+array.forEach(function (item, index) {
+  console.log(item, index);
+}); const array = [""one"", ""two"", ""three""]
+array.forEach(function (item, index) {
+  console.log(item, index);
+}); Being almost ten years as the time of writing that the ES5 specification was released (Dec. 2009), it has been implemented by nearly all modern engines in the desktop, server, and mobile environments, so it's safe to use them. And with the ES6 arrow function syntax, it's even more succinct: array.forEach(item => console.log(item)); Arrow functions are also widely implemented unless you plan to support ancient platforms (e.g.,Internet Explorer 11); you are also safe to go. Pros Cons Normally, you can replace the need tobreakout of imperative loops by filtering the array elements before iterating them, for example: array.filter(item => item.condition < 10)
+     .forEach(item => console.log(item)) Keep in mind if you are iterating an arrayto build another array from it, you should usemap. I've seen this anti-pattern so many times. Anti-pattern: const numbers = [1,2,3,4,5], doubled = [];
+
+numbers.forEach((n, i) => { doubled[i] = n * 2 }); Proper use case ofmap: const numbers = [1,2,3,4,5];
+const doubled = numbers.map(n => n * 2);
+
+console.log(doubled); const numbers = [1,2,3,4,5];
+const doubled = numbers.map(n => n * 2);
+
+console.log(doubled); Also, if you are trying toreducethe array to a value, for example, you want to sum an array of numbers, you should use thereducemethod. Anti-pattern: const numbers = [1,2,3,4,5];
+const sum = 0;
+numbers.forEach(num => { sum += num }); Proper use ofreduce: const numbers = [1,2,3,4,5];
+const sum = numbers.reduce((total, n) => total + n, 0);
+
+console.log(sum); const numbers = [1,2,3,4,5];
+const sum = numbers.reduce((total, n) => total + n, 0);
+
+console.log(sum); TheES6standard introduces the concept of iterable objects and defines a new construct for traversing data, thefor...ofstatement. This statement works for any kind of iterable object and also for generators (any object that has a\[Symbol.iterator\]property). Array objects are by definition built-in iterables in ES6, so you can use this statement on them: let colors = ['red', 'green', 'blue'];
+for (const color of colors){
+    console.log(color);
+} Pros Cons @zipcodeman suggests the use of thefor...instatement, but for iterating arraysfor-inshould be avoided, that statement is meant toenumerateobject properties. It shouldn't be used for array-like objects because: The second point is that it can give you a lot of problems, for example, if you extend theArray.prototypeobject to include a method there, that property will also be enumerated. For example: Array.prototype.foo = ""foo!"";
+var array = ['a', 'b', 'c'];
+
+for (var i in array) {
+    console.log(array[i]);
+} Array.prototype.foo = ""foo!"";
+var array = ['a', 'b', 'c'];
+
+for (var i in array) {
+    console.log(array[i]);
+} The above code will console log ""a"", ""b"", ""c"", and ""foo!"". That can be particularly a problem if you use some library that relies heavily on native prototypes augmentation (such asMooTools). Thefor-instatement, as I said before, is there toenumerateobject properties, for example: var obj = {
+    ""a"": 1,
+    ""b"": 2,
+    ""c"": 3
+};
+
+for (var prop in obj) {
+    if (obj.hasOwnProperty(prop)) {
+        // or if (Object.prototype.hasOwnProperty.call(obj,prop)) for safety...
+        console.log(""prop: "" + prop + "" value: "" + obj[prop])
+    }
+} var obj = {
+    ""a"": 1,
+    ""b"": 2,
+    ""c"": 3
+};
+
+for (var prop in obj) {
+    if (obj.hasOwnProperty(prop)) {
+        // or if (Object.prototype.hasOwnProperty.call(obj,prop)) for safety...
+        console.log(""prop: "" + prop + "" value: "" + obj[prop])
+    }
+} In the above example, thehasOwnPropertymethod allows you to enumerate onlyown properties. That's it, only the properties that the object physically has, no inherited properties. I would recommend you to read the following article:"
+"Is there a better way to engineer asleepin JavaScript than the followingpausecompfunction (taken from here)? function pausecomp(millis)
+{
+    var date = new Date();
+    var curDate = null;
+    do { curDate = new Date(); }
+    while(curDate-date < millis);
+} This is not a duplicate ofSleep in JavaScript - delay between actions; I want areal sleepin the middle of a function, and not a delay before a piece of code executes.","Since 2009 when this question was asked, JavaScript has evolved significantly. All other answers are now obsolete or overly complicated. Here is the current best practice: function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+} Or as a one-liner: await new Promise(r => setTimeout(r, 2000)); As a function: const sleep = ms => new Promise(r => setTimeout(r, ms)); or in Typescript: const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms)); use it as: await sleep(<duration>); function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function demo() {
+    for (let i = 0; i < 5; i++) {
+        console.log(`Waiting ${i} seconds...`);
+        await sleep(i * 1000);
+    }
+    console.log('Done');
+}
+
+demo(); function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function demo() {
+    for (let i = 0; i < 5; i++) {
+        console.log(`Waiting ${i} seconds...`);
+        await sleep(i * 1000);
+    }
+    console.log('Done');
+}
+
+demo(); Note that, Two new JavaScript features (as of 2017) helped write this ""sleep"" function: If for some reason you're using Node older than 7 (which reachedend of life in 2017), or are targeting old browsers,async/awaitcan still be used viaBabel(a tool that willtranspileJavaScript + new features into plain old JavaScript), with thetransform-async-to-generatorplugin."
+"After an AJAX request, sometimes my application may return an empty object, like: var a = {}; How can I check whether that's the case?","You can use a for…in loop with anObject.hasOwn(ECMA 2022+) test to check whether an object has any own properties: function isEmpty(obj) {
+  for (const prop in obj) {
+    if (Object.hasOwn(obj, prop)) {
+      return false;
+    }
+  }
+
+  return true;
+} If you also need to distinguish{}-like empty objects from other objects with no own properties (e.g.Dates), you can do various (and unfortunately need-specific) type checks: function isEmptyObject(value) {
+  if (value == null) {
+    // null or undefined
+    return false;
+  }
+
+  if (typeof value !== 'object') {
+    // boolean, number, string, function, etc.
+    return false;
+  }
+
+  const proto = Object.getPrototypeOf(value);
+
+  // consider `Object.create(null)`, commonly used as a safe map
+  // before `Map` support, an empty object as well as `{}`
+  if (proto !== null && proto !== Object.prototype) {
+    return false;
+  }
+
+  return isEmpty(value);
+} Note that comparing againstObject.prototypelike in this example will fail to recognize cross-realm objects. Do not useObject.keys(obj).length. It is O(N) complexity because it creates an array containing all the property names only to get the length of that array. Iterating over the object accomplishes the same goal but is O(1). For compatibility with JavaScript engines that don’t support ES 2022+,constcan be replaced withvarandObject.hasOwnwithObject.prototype.hasOwnProperty.call: function isEmpty(obj) {
+  for (var prop in obj) {
+    if (Object.prototype.hasOwnProperty.call(obj, prop)) {
+      return false;
+    }
+  }
+
+  return true
+} Many popular libraries also provide functions to check for empty objects: jQuery: jQuery.isEmptyObject({}); // true lodash: _.isEmpty({}); // true Underscore: _.isEmpty({}); // true Hoek: Hoek.deepEqual({}, {}); // true ExtJS: Ext.Object.isEmpty({}); // true AngularJS (version 1): angular.equals({}, {}); // true Ramda: R.isEmpty({}); // true"
+"All I want is to get the website URL. Not the URL as taken from a link. On the page loading I need to be able to grab the full, current URL of the website and set it as a variable to do with as I please.","Use: window.location.href As noted in the comments, the line below works, but breaks if you have a frame, image, or form withname=""URL"". document.URL SeeURL of type DOMString, readonly."
+"I have an objectx. I'd like to copy it as objecty, such that changes toydo not modifyx. I realized that copying objects derived from built-in JavaScript objects will result in extra, unwanted properties. This isn't a problem, since I'm copying one of my own literal-constructed objects. How do I correctly clone a JavaScript object?","There's a new JS standard calledstructured cloning. It works in many browsers (seeCan I Use). const clone = structuredClone(object); To do this for any object in JavaScript will not be simple or straightforward. You will run into the problem of erroneously picking up attributes from the object's prototype that should be left in the prototype and not copied to the new instance. If, for instance, you are adding aclonemethod toObject.prototype, as some answers depict, you will need to explicitly skip that attribute. But what if there are other additional methods added toObject.prototype, or other intermediate prototypes, that you don't know about? In that case, you will copy attributes you shouldn't, so you need to detect unforeseen, non-local attributes with thehasOwnPropertymethod. In addition to non-enumerable attributes, you'll encounter a tougher problem when you try to copy objects that have hidden properties. For example,prototypeis a hidden property of a function. Also, an object's prototype is referenced with the attribute__proto__, which is also hidden, and will not be copied by a for/in loop iterating over the source object's attributes. I think__proto__might be specific to Firefox's JavaScript interpreter and it may be something different in other browsers, but you get the picture. Not everything is enumerable. You can copy a hidden attribute if you know its name, but I don't know of any way to discover it automatically. Yet another snag in the quest for an elegant solution is the problem of setting up the prototype inheritance correctly. If your source object's prototype isObject, then simply creating a new general object with{}will work, but if the source's prototype is some descendant ofObject, then you are going to be missing the additional members from that prototype which you skipped using thehasOwnPropertyfilter, or which were in the prototype, but weren't enumerable in the first place. One solution might be to call the source object'sconstructorproperty to get the initial copy object and then copy over the attributes, but then you still will not get non-enumerable attributes. For example, aDateobject stores its data as a hidden member: function clone(obj) {
+    if (null == obj || ""object"" != typeof obj) return obj;
+    var copy = obj.constructor();
+    for (var attr in obj) {
+        if (obj.hasOwnProperty(attr)) copy[attr] = obj[attr];
+    }
+    return copy;
+}
+
+var d1 = new Date();
+
+/* Executes function after 5 seconds. */
+setTimeout(function(){
+    var d2 = clone(d1);
+    alert(""d1 = "" + d1.toString() + ""\nd2 = "" + d2.toString());
+}, 5000); The date string ford1will be 5 seconds behind that ofd2. A way to make oneDatethe same as another is by calling thesetTimemethod, but that is specific to theDateclass. I don't think there is a bullet-proof general solution to this problem, though I would be happy to be wrong! When I had to implement general deep copying I ended up compromising by assuming that I would only need to copy a plainObject,Array,Date,String,Number, orBoolean. The last 3 types are immutable, so I could perform a shallow copy and not worry about it changing. I further assumed that any elements contained inObjectorArraywould also be one of the 6 simple types in that list. This can be accomplished with code like the following: function clone(obj) {
+    var copy;
+
+    // Handle the 3 simple types, and null or undefined
+    if (null == obj || ""object"" != typeof obj) return obj;
+
+    // Handle Date
+    if (obj instanceof Date) {
+        copy = new Date();
+        copy.setTime(obj.getTime());
+        return copy;
+    }
+
+    // Handle Array
+    if (obj instanceof Array) {
+        copy = [];
+        for (var i = 0, len = obj.length; i < len; i++) {
+            copy[i] = clone(obj[i]);
+        }
+        return copy;
+    }
+
+    // Handle Object
+    if (obj instanceof Object) {
+        copy = {};
+        for (var attr in obj) {
+            if (obj.hasOwnProperty(attr)) copy[attr] = clone(obj[attr]);
+        }
+        return copy;
+    }
+
+    throw new Error(""Unable to copy obj! Its type isn't supported."");
+} The above function will work adequately for the 6 simple types I mentioned, as long as the data in the objects and arrays form a tree structure. That is, there isn't more than one reference to the same data in the object. For example: // This would be cloneable:
+var tree = {
+    ""left""  : { ""left"" : null, ""right"" : null, ""data"" : 3 },
+    ""right"" : null,
+    ""data""  : 8
+};
+
+// This would kind-of work, but you would get 2 copies of the 
+// inner node instead of 2 references to the same copy
+var directedAcylicGraph = {
+    ""left""  : { ""left"" : null, ""right"" : null, ""data"" : 3 },
+    ""data""  : 8
+};
+directedAcyclicGraph[""right""] = directedAcyclicGraph[""left""];
+
+// Cloning this would cause a stack overflow due to infinite recursion:
+var cyclicGraph = {
+    ""left""  : { ""left"" : null, ""right"" : null, ""data"" : 3 },
+    ""data""  : 8
+};
+cyclicGraph[""right""] = cyclicGraph; It will not be able to handle any JavaScript object, but it may be sufficient for many purposes as long as you don't assume that it will just work for anything you throw at it."
+"I have a JavaScript object like the following: var p = {
+    ""p1"": ""value1"",
+    ""p2"": ""value2"",
+    ""p3"": ""value3""
+}; How do I loop through all ofp's elements (p1,p2,p3...) and get their keys and values?","You can use thefor-inloop as shown by others. However, you also have to make sure that the key you get is an actual property of an object, and doesn't come from the prototype. Here is the snippet:var p = {
+    ""p1"": ""value1"",
+    ""p2"": ""value2"",
+    ""p3"": ""value3""
+};
+
+for (var key in p) {
+    if (p.hasOwnProperty(key)) {
+        console.log(key + "" -> "" + p[key]);
+    }
+} var p = {
+    ""p1"": ""value1"",
+    ""p2"": ""value2"",
+    ""p3"": ""value3""
+};
+
+for (var key in p) {
+    if (p.hasOwnProperty(key)) {
+        console.log(key + "" -> "" + p[key]);
+    }
+} For-of with Object.keys() alternative: var p = {
+    0: ""value1"",
+    ""b"": ""value2"",
+    key: ""value3""
+};
+
+for (var key of Object.keys(p)) {
+    console.log(key + "" -> "" + p[key])
+} var p = {
+    0: ""value1"",
+    ""b"": ""value2"",
+    key: ""value3""
+};
+
+for (var key of Object.keys(p)) {
+    console.log(key + "" -> "" + p[key])
+} Notice the use offor-ofinstead offor-in, if not used it will return undefined on named properties, andObject.keys()ensures the use of only the object's own properties without the whole prototype-chain properties Using the newObject.entries()method: Note:This method is not supported natively by Internet Explorer. You may consider using a Polyfill for older browsers. const p = {
+    ""p1"": ""value1"",
+    ""p2"": ""value2"",
+    ""p3"": ""value3""
+};
+
+for (const [key, value] of Object.entries(p)) {
+  console.log(`${key}: ${value}`);
+}"
+"Can I convert a string representing a boolean value (e.g., 'true', 'false') into an intrinsic type in JavaScript? I have a hidden form in HTML that is updated based on a user's selection within a list. This form contains some fields which represent boolean values and are dynamically populated with an intrinsic boolean value. However, once this value is placed into the hidden input field it becomes a string. The only way I could find to determine the field's boolean value, once it was converted into a string, was to depend upon the literal value of its string representation. var myValue = document.myForm.IS_TRUE.value;
+var isTrueSet = myValue == 'true'; Is there a better way to accomplish this?","var isTrueSet = (myValue === 'true'); Use the strict equality operator (===), which doesn't make any implicit type conversions when the compared variables have different types. This will setisTrueSetto a booleantrueif the string is ""true"" and booleanfalseif it is string ""false"" or not set at all. For making it case-insensitive, try: var isTrueSet = /^true$/i.test(myValue);
+// or
+var isTrueSet = (myValue?.toLowerCase?.() === 'true');
+// or
+var isTrueSet = (String(myValue).toLowerCase() === 'true'); You shouldbe cautious about using these two methodsfor your specific needs. var myBool = Boolean(""false""); // evaluates to true
+var myBool = !!""false""; // evaluates to true Any string which isn't the empty string will evaluate totrueby using them. Although they're the cleanest methods I can think of concerning to boolean conversion, I think they're not what you're looking for."
+How do I format a JavascriptDateobject as a string? (Preferable format:10-Aug-2010),"If you need slightly less control over formatting than the currently accepted answer,Date#toLocaleDateStringcan be used to create standard locale-specific renderings. Thelocaleandoptionsarguments let applications specify the language whose formatting conventions should be used, and allow some customization of the rendering. All these keys are optional.  You can change the number of options values based on your requirements, and this will also reflect the presence of each date time term. Note: If you would only like to configure the content options, but still use the current locale, passingnullfor the first parameter will cause an error.  Useundefinedinstead. You can use more language options. var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+var today  = new Date();
+
+console.log(today.toLocaleDateString(""en-US"")); // 9/17/2016
+console.log(today.toLocaleDateString(""en-US"", options)); // Saturday, September 17, 2016
+console.log(today.toLocaleDateString(""hi-IN"", options)); // शनिवार, 17 सितंबर 2016 var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+var today  = new Date();
+
+console.log(today.toLocaleDateString(""en-US"")); // 9/17/2016
+console.log(today.toLocaleDateString(""en-US"", options)); // Saturday, September 17, 2016
+console.log(today.toLocaleDateString(""hi-IN"", options)); // शनिवार, 17 सितंबर 2016 You can also use thetoLocaleString()method for the same purpose. The only difference is this function provides the time when you don't pass any options. // Example
+9/17/2016, 1:21:34 PM toLocaleString() toLocaleDateString()"
+"How can I display JSON in an easy-to-read (for human readers) format? I'm looking primarily for indentation and whitespace, with perhaps even colors / font-styles / etc.","Pretty-printing is implemented natively inJSON.stringify(). The third argument enables pretty printing and sets the spacing to use: var str = JSON.stringify(obj, null, 2); // spacing level = 2 If you need syntax highlighting, you might use some regex magic like so: function syntaxHighlight(json) {
+    if (typeof json != 'string') {
+         json = JSON.stringify(json, undefined, 2);
+    }
+    json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    return json.replace(/(""(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\""])*""(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+        var cls = 'number';
+        if (/^""/.test(match)) {
+            if (/:$/.test(match)) {
+                cls = 'key';
+            } else {
+                cls = 'string';
+            }
+        } else if (/true|false/.test(match)) {
+            cls = 'boolean';
+        } else if (/null/.test(match)) {
+            cls = 'null';
+        }
+        return '<span class=""' + cls + '"">' + match + '</span>';
+    });
+} See in action here:jsfiddle Or a full snippet provided below: function output(inp) {
+    document.body.appendChild(document.createElement('pre')).innerHTML = inp;
+}
+
+function syntaxHighlight(json) {
+    json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    return json.replace(/(""(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\""])*""(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+        var cls = 'number';
+        if (/^""/.test(match)) {
+            if (/:$/.test(match)) {
+                cls = 'key';
+            } else {
+                cls = 'string';
+            }
+        } else if (/true|false/.test(match)) {
+            cls = 'boolean';
+        } else if (/null/.test(match)) {
+            cls = 'null';
+        }
+        return '<span class=""' + cls + '"">' + match + '</span>';
+    });
+}
+
+var obj = {a:1, 'b':'foo', c:[false,'false',null, 'null', {d:{e:1.3e5,f:'1.3e5'}}]};
+var str = JSON.stringify(obj, undefined, 4);
+
+output(str);
+output(syntaxHighlight(str));pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; }
+.string { color: green; }
+.number { color: darkorange; }
+.boolean { color: blue; }
+.null { color: magenta; }
+.key { color: red; } function output(inp) {
+    document.body.appendChild(document.createElement('pre')).innerHTML = inp;
+}
+
+function syntaxHighlight(json) {
+    json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    return json.replace(/(""(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\""])*""(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+        var cls = 'number';
+        if (/^""/.test(match)) {
+            if (/:$/.test(match)) {
+                cls = 'key';
+            } else {
+                cls = 'string';
+            }
+        } else if (/true|false/.test(match)) {
+            cls = 'boolean';
+        } else if (/null/.test(match)) {
+            cls = 'null';
+        }
+        return '<span class=""' + cls + '"">' + match + '</span>';
+    });
+}
+
+var obj = {a:1, 'b':'foo', c:[false,'false',null, 'null', {d:{e:1.3e5,f:'1.3e5'}}]};
+var str = JSON.stringify(obj, undefined, 4);
+
+output(str);
+output(syntaxHighlight(str)); pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; }
+.string { color: green; }
+.number { color: darkorange; }
+.boolean { color: blue; }
+.null { color: magenta; }
+.key { color: red; }"
+"How do I convert this Ruby code with a multiline string into JavaScript? text = <<""HERE""
+This
+Is
+A
+Multiline
+String
+HERE","ECMAScript 6(ES6) introduces a new type of literal, namelytemplate literals. They have many features, variable interpolation among others, but most importantly for this question, they can be multiline. A template literal is delimited bybackticks: var html = `
+  <div>
+    <span>Some HTML here</span>
+  </div>
+`; (Note: I'm not advocating to use HTML in strings) Browser support is OK, but you can usetranspilersto be more compatible. JavaScript doesn't have aheredocsyntax. You can escape the literal newline, however, which comes close: ""foo \
+bar"""
+"What is the difference between usingFunction.prototype.apply()andFunction.prototype.call()to invoke a function? const func = function() {
+    alert(""Hello world!"");
+}; func.apply()vs.func.call() Are there performance differences between the two aforementioned methods? When is it best to usecalloverapplyand vice versa?","The difference is thatapplylets you invoke the function withargumentsas an array;callrequires the parameters be listed explicitly. A useful mnemonic is""Aforarray andCforcomma."" See MDN's documentation onapplyandcall. Pseudo syntax: theFunction.apply(valueForThis, arrayOfArgs) theFunction.call(valueForThis, arg1, arg2, ...) There is also, as of ES6, the possibility tospreadthe array for use with thecallfunction, you can see the compatibilitieshere. Sample code: function theFunction(name, profession) {
+    console.log(""My name is "" + name + "" and I am a "" + profession +""."");
+}
+theFunction(""John"", ""fireman"");
+theFunction.apply(undefined, [""Susan"", ""school teacher""]);
+theFunction.call(undefined, ""Claude"", ""mathematician"");
+theFunction.call(undefined, ...[""Matthew"", ""physicist""]); // used with the spread operator function theFunction(name, profession) {
+    console.log(""My name is "" + name + "" and I am a "" + profession +""."");
+}
+theFunction(""John"", ""fireman"");
+theFunction.apply(undefined, [""Susan"", ""school teacher""]);
+theFunction.call(undefined, ""Claude"", ""mathematician"");
+theFunction.call(undefined, ...[""Matthew"", ""physicist""]); // used with the spread operator"
+How can I change the class of an HTML element in response to anonclickor any other events using JavaScript?,"Modern browsers have addedclassListwhich provides methods to make it easier to manipulate classes without needing a library: document.getElementById(""MyElement"").classList.add('MyClass');
+
+document.getElementById(""MyElement"").classList.remove('MyClass');
+
+if ( document.getElementById(""MyElement"").classList.contains('MyClass') )
+
+document.getElementById(""MyElement"").classList.toggle('MyClass'); Unfortunately, these do not work in Internet Explorer prior to v10, though there is ashimto add support for it to IE8 and IE9, available fromthis page. It is, though, getting more and moresupported. The standard JavaScript way to select an element is usingdocument.getElementById(""Id""), which is what the following examples use - you can of course obtain elements in other ways, and in the right situation may simply usethisinstead - however, going into detail on this is beyond the scope of the answer. To replace all existing classes with one or more new classes, set the className attribute: document.getElementById(""MyElement"").className = ""MyClass""; (You can use a space-delimited list to apply multiple classes.) To add a class to an element, without removing/affecting existing values, append a space and the new classname, like so: document.getElementById(""MyElement"").className += "" MyClass""; To remove a single class to an element, without affecting other potential classes, a simple regex replace is required: document.getElementById(""MyElement"").className =
+   document.getElementById(""MyElement"").className.replace
+      ( /(?:^|\s)MyClass(?!\S)/g , '' )
+/* Code wrapped for readability - above is all one statement */ An explanation of this regex is as follows: (?:^|\s) # Match the start of the string or any single whitespace character
+
+MyClass  # The literal text for the classname to remove
+
+(?!\S)   # Negative lookahead to verify the above is the whole classname
+         # Ensures there is no non-space character following
+         # (i.e. must be the end of the string or space) Thegflag tells the replace to repeat as required, in case the class name has been added multiple times. The same regex used above for removing a class can also be used as a check as to whether a particular class exists: if ( document.getElementById(""MyElement"").className.match(/(?:^|\s)MyClass(?!\S)/) ) Whilst it is possible to write JavaScript directly inside the HTML event attributes (such asonClick=""this.className+=' MyClass'"") this is not recommended behavior. Especially on larger applications, more maintainable code is achieved by separating HTML markup from JavaScript interaction logic. The first step to achieving this is by creating a function, and calling the function in the onClick attribute, for example: <script type=""text/javascript"">
+    function changeClass(){
+        // Code examples from above
+    }
+</script>
+...
+<button onClick=""changeClass()"">My Button</button> (It is not required to have this code in script tags, this is simply for the brevity of example, and including the JavaScript in a distinct file may be more appropriate.) The second step is to move the onClick event out of the HTML and into JavaScript, for example usingaddEventListener <script type=""text/javascript"">
+    function changeClass(){
+        // Code examples from above
+    }
+
+    window.onload = function(){
+        document.getElementById(""MyElement"").addEventListener( 'click', changeClass);
+    }
+</script>
+...
+<button id=""MyElement"">My Button</button> (Note that the window.onload part is required so that the contents of that function are executedafterthe HTML has finished loading - without this, the MyElement might not exist when the JavaScript code is called, so that line would fail.) The above code is all in standard JavaScript, however, it is common practice to use either a framework or a library to simplify common tasks, as well as benefit from fixed bugs and edge cases that you might not think of when writing your code. Whilst some people consider it overkill to add a ~50  KB framework for simply changing a class, if you are doing any substantial amount of JavaScript work or anything that might have unusual cross-browser behavior, it is well worth considering. (Very roughly, a library is a set of tools designed for a specific task, whilst a framework generally contains multiple libraries and performs a complete set of duties.) The examples above have been reproduced below usingjQuery, probably the most commonly used JavaScript library (though there are others worth investigating too). (Note that$here is the jQuery object.) $('#MyElement').addClass('MyClass');
+
+$('#MyElement').removeClass('MyClass');
+
+if ( $('#MyElement').hasClass('MyClass') ) In addition, jQuery provides a shortcut for adding a class if it doesn't apply, or removing a class that does: $('#MyElement').toggleClass('MyClass'); $('#MyElement').click(changeClass); or, without needing an id: $(':button:contains(My Button)').click(changeClass);"
+"I need to be able to merge two (very simple) JavaScript objects at runtime. For example I'd like to: var obj1 = { food: 'pizza', car: 'ford' }
+var obj2 = { animal: 'dog' }
+
+obj1.merge(obj2);
+
+//obj1 now has three properties: food, car, and animal Is there a built in way to do this? I do not need recursion, and I do not need to merge functions, just methods on flat objects.","ECMAScript 2018 Standard Method You would useobject spread: let merged = {...obj1, ...obj2}; mergedis now the union ofobj1andobj2. Properties inobj2will overwrite those inobj1. /** There's no limit to the number of objects you can merge.
+ *  Later properties overwrite earlier properties with the same name. */
+const allRules = {...obj1, ...obj2, ...obj3}; Here is also theMDN documentationfor this syntax. If you're using babel you'll need the@babel/plugin-proposal-object-rest-spreadplugin for it to work (This plugin is included in@babel/preset-env, inES2018). ECMAScript 2015 (ES6) Standard Method /* For the case in question, you would do: */
+Object.assign(obj1, obj2);
+
+/** There's no limit to the number of objects you can merge.
+ *  All objects get merged into the first object. 
+ *  Only the object in the first argument is mutated and returned.
+ *  Later properties overwrite earlier properties with the same name. */
+const allRules = Object.assign({}, obj1, obj2, obj3, etc); (seeMDN JavaScript Reference) Method for ES5 and Earlier for (var attrname in obj2) { obj1[attrname] = obj2[attrname]; } Note that this will simply add all attributes ofobj2toobj1which might not be what you want if you still want to use the unmodifiedobj1. If you're using a framework that craps all over your prototypes then you have to get fancier with checks likehasOwnProperty, but that code will work for 99% of cases. Example function: /**
+ * Overwrites obj1's values with obj2's and adds obj2's if non existent in obj1
+ * @param obj1
+ * @param obj2
+ * @returns obj3 a new object based on obj1 and obj2
+ */
+function merge_options(obj1,obj2){
+    var obj3 = {};
+    for (var attrname in obj1) { obj3[attrname] = obj1[attrname]; }
+    for (var attrname in obj2) { obj3[attrname] = obj2[attrname]; }
+    return obj3;
+} additionally :-check this programfor see differnce between Object.assign & spread syntax object literals"
