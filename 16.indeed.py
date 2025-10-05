@@ -1,23 +1,31 @@
+"""
+Indeed Job Scraper
+
+NOTE: Requires Selenium to be installed:
+    pip install selenium
+
+Also requires ChromeDriver to be available in your system PATH.
+Download from: https://chromedriver.chromium.org/
+"""
+
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import pandas as pd
-import time
 
-def scrape_indeed_jobs(query='python developer', location='Remote', num_jobs=10):
+def scrape_indeed_jobs():
     """
-    Scrapes job listings from Indeed using Selenium to bypass blocking.
+    Scrapes job listings from Indeed.com using Selenium.
 
-    Args:
-        query: Job search term (e.g., 'python developer', 'data analyst')
-        location: Job location (e.g., 'New York, NY', 'Remote')
-        num_jobs: Number of jobs to scrape (default: 10)
-
-    Returns:
-        DataFrame with job listings saved to output/indeed.csv
+    Indeed blocks standard HTTP requests, so this uses Selenium with
+    a headless Chrome browser to bypass the blocking.
     """
+    # Configuration
+    query = 'python developer'
+    location = 'Remote'
+    num_jobs = 15
 
     # Configure Chrome to run headless (no browser window)
     chrome_options = Options()
@@ -129,5 +137,4 @@ def scrape_indeed_jobs(query='python developer', location='Remote', num_jobs=10)
     return df
 
 if __name__ == "__main__":
-    # Example: Scrape 15 Python jobs
-    scrape_indeed_jobs(query='python developer', location='Remote', num_jobs=15)
+    scrape_indeed_jobs()
