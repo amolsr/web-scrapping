@@ -1,0 +1,2196 @@
+Question,Answer
+"In this C++ code, sorting the data (beforethe timed region) makes the primary loop ~6x faster: #include <algorithm>
+#include <ctime>
+#include <iostream>
+
+int main()
+{
+    // Generate data
+    const unsigned arraySize = 32768;
+    int data[arraySize];
+
+    for (unsigned c = 0; c < arraySize; ++c)
+        data[c] = std::rand() % 256;
+
+    // !!! With this, the next loop runs faster.
+    std::sort(data, data + arraySize);
+
+    // Test
+    clock_t start = clock();
+    long long sum = 0;
+    for (unsigned i = 0; i < 100000; ++i)
+    {
+        for (unsigned c = 0; c < arraySize; ++c)
+        {   // Primary loop.
+            if (data[c] >= 128)
+                sum += data[c];
+        }
+    }
+
+    double elapsedTime = static_cast<double>(clock()-start) / CLOCKS_PER_SEC;
+
+    std::cout << elapsedTime << '\n';
+    std::cout << ""sum = "" << sum << '\n';
+} (Sorting itself takes more time than this one pass over the array, so it's not actually worth doing if we needed to calculate this for an unknown array.) Initially, I thought this might be just a language or compiler anomaly, so I tried Java: import java.util.Arrays;
+import java.util.Random;
+
+public class Main
+{
+    public static void main(String[] args)
+    {
+        // Generate data
+        int arraySize = 32768;
+        int data[] = new int[arraySize];
+
+        Random rnd = new Random(0);
+        for (int c = 0; c < arraySize; ++c)
+            data[c] = rnd.nextInt() % 256;
+
+        // !!! With this, the next loop runs faster
+        Arrays.sort(data);
+
+        // Test
+        long start = System.nanoTime();
+        long sum = 0;
+        for (int i = 0; i < 100000; ++i)
+        {
+            for (int c = 0; c < arraySize; ++c)
+            {   // Primary loop.
+                if (data[c] >= 128)
+                    sum += data[c];
+            }
+        }
+
+        System.out.println((System.nanoTime() - start) / 1000000000.0);
+        System.out.println(""sum = "" + sum);
+    }
+} With a similar but less extreme result. My first thought was that sorting brings the data into thecache, but that's silly because the array was just generated. The code is summing up some independent terms, so the order should not matter.","You are a victim ofbranch predictionfail. Consider a railroad junction: Imageby Mecanismo, via Wikimedia Commons. Used under theCC-By-SA 3.0license. Now for the sake of argument, suppose this is back in the 1800s - before long-distance or radio communication. You are a blind operator of a junction and you hear a train coming. You have no idea which way it is supposed to go. You stop the train to ask the driver which direction they want. And then you set the switch appropriately. Trains are heavy and have a lot of inertia, so they take forever to start up and slow down. Is there a better way? You guess which direction the train will go! If you guess right every time, the train will never have to stop.If you guess wrong too often, the train will spend a lot of time stopping, backing up, and restarting. Consider an if-statement:At the processor level, it is a branch instruction:  You are a processor and you see a branch. You have no idea which way it will go. What do you do? You halt execution and wait until the previous instructions are complete. Then you continue down the correct path. Modern processors are complicated and have long pipelines. This means they take forever to ""warm up"" and ""slow down"". Is there a better way? You guess which direction the branch will go! If you guess right every time, the execution will never have to stop.If you guess wrong too often, you spend a lot of time stalling, rolling back, and restarting. This is branch prediction. I admit it's not the best analogy since the train could just signal the direction with a flag. But in computers, the processor doesn't know which direction a branch will go until the last moment. How would you strategically guess to minimize the number of times that the train must back up and go down the other path? You look at the past history! If the train goes left 99% of the time, then you guess left. If it alternates, then you alternate your guesses. If it goes one way every three times, you guess the same... In other words, you try to identify a pattern and follow it.This is more or less how branch predictors work. Most applications have well-behaved branches. Therefore, modern branch predictors will typically achieve >90% hit rates. But when faced with unpredictable branches with no recognizable patterns, branch predictors are virtually useless. Further reading:""Branch predictor"" article on Wikipedia. if (data[c] >= 128)
+    sum += data[c]; Notice that the data is evenly distributed between 0 and 255. When the data is sorted, roughly the first half of the iterations will not enter the if-statement. After that, they will all enter the if-statement. This is very friendly to the branch predictor since the branch consecutively goes the same direction many times. Even a simple saturating counter will correctly predict the branch except for the few iterations after it switches direction. Quick visualization: T = branch taken
+N = branch not taken
+
+data[] = 0, 1, 2, 3, 4, ... 126, 127, 128, 129, 130, ... 250, 251, 252, ...
+branch = N  N  N  N  N  ...   N    N    T    T    T  ...   T    T    T  ...
+
+       = NNNNNNNNNNNN ... NNNNNNNTTTTTTTTT ... TTTTTTTTTT  (easy to predict) However, when the data is completely random, the branch predictor is rendered useless, because it can't predict random data. Thus there will probably be around 50% misprediction (no better than random guessing). data[] = 226, 185, 125, 158, 198, 144, 217, 79, 202, 118,  14, 150, 177, 182, ...
+branch =   T,   T,   N,   T,   T,   T,   T,  N,   T,   N,   N,   T,   T,   T  ...
+
+       = TTNTTTTNTNNTTT ...   (completely random - impossible to predict) What can be done? If the compiler isn't able to optimize the branch into a conditional move, you can try some hacks if you are willing to sacrifice readability for performance. Replace: if (data[c] >= 128)
+    sum += data[c]; with: int t = (data[c] - 128) >> 31;
+sum += ~t & data[c]; This eliminates the branch and replaces it with some bitwise operations. (Note that this hack is not strictly equivalent to the original if-statement. But in this case, it's valid for all the input values ofdata[].) Benchmarks: Core i7 920 @ 3.5 GHz C++ - Visual Studio 2010 - x64 Release Java - NetBeans 7.1.1 JDK 7 - x64 Observations: A general rule of thumb is to avoid data-dependent branching in critical loops (such as in this example). Update: GCC 4.6.1 with-O3or-ftree-vectorizeon x64 is able to generate a conditional move, so there is no difference between the sorted and unsorted data - both are fast.  This is called ""if-conversion"" (to branchless) and is necessary for vectorization but also sometimes good for scalar. (Or somewhat fast: for the already-sorted case,cmovcan be slower especially if GCC puts it on the critical path instead of justadd, especially on Intel before Broadwell wherecmovhas 2-cycle latency:gcc optimization flag -O3 makes code slower than -O2) VC++ 2010 is unable to generate conditional moves for this branch even under/Ox. Intel C++ Compiler(ICC) 11 does something miraculous. Itinterchanges the two loops, thereby hoisting the unpredictable branch to the outer loop. Not only is it immune to the mispredictions, it's also twice as fast as whatever VC++ and GCC can generate! In other words, ICC took advantage of the test-loop to defeat the benchmark... If you give the Intel compiler the branchless code, it just outright vectorizes it... and is just as fast as with the branch (with the loop interchange). This goes to show that even mature modern compilers can vary wildly in their ability to optimize code..."
+"After readingHidden Features and Dark Corners of C++/STLoncomp.lang.c++.moderated, I was completely surprised that the following snippet compiled and worked in both Visual Studio 2008 and G++ 4.4. I would assume this is also valid C since it works in GCC as well. Here's the code: #include <stdio.h>
+int main()
+{
+    int x = 10;
+    while (x --> 0) // x goes to 0
+    {
+        printf(""%d "", x);
+    }
+} Output: 9 8 7 6 5 4 3 2 1 0 Where is this defined in the standard, and where has it come from?","-->is not an operator. It is in fact two separate operators,--and>. The code in the condition decrementsx, while returningx's original (not decremented) value, and then compares the original value with0using the>operator. To better understand, the statement could be written as follows: while( (x--) > 0 )"
+"This question attempts to collect the few pearls among the dozens of bad C++ books that are published every year. Unlike many other programming languages, which are often picked up on the go from tutorials found on the Internet, few are able to quickly pick up C++ without studying a well-written C++ book. It is way too big and complex for doing this. In fact, it is so big and complex, thatthere are very many very bad C++ booksout there. And we are not talking about bad style, but things like sportingglaringly obvious factual errorsandpromoting abysmally bad programming styles. Please edit the accepted answer to providequality booksand an approximate skill level —preferablyafterdiscussing your addition inthe C++ chat room. (The regulars might mercilessly undo your work if they disagree with a recommendation.) Add a short blurb/description about each book that you have personally read/benefited from. Feel free to debate quality, headings, etc. Books that meet the criteria will be added to the list.  Books that have reviews by the Association of C and C++ Users (ACCU) have links to the review. *Note: FAQs and other resources can be found in theC++ tag infoand underc++-faq.","C++11/14/17/… References: Working Draft, Standard for Programming Language C++generated fromLaTeX sources published on GitHub. C++ Standard Papers, latest standard working draft:ISO working draft The C++11/14/17Standard (INCITS/ISO/IEC 14882:2011/2014/2017)This, of course, is the final arbiter of all that is or isn't C++. Be aware, however, that it is intended purely as a reference forexperiencedusers willing to devote considerable time and effort to its understanding. The C++17 standard is released in electronic form for 198 Swiss Francs. The C++17 standard is available, but seemingly not in an economical form –directly from the ISOit costs 198 Swiss Francs (about $200 US). For most people, thefinal draft before standardizationis more than adequate (and free). Many will prefer aneven newer draft, documenting new features that are likely to be included in C++20. C++20 draftis available on GitHub assome older too. Overview of the New C++ (C++11/14) (PDF only)(Scott Meyers) (updated for C++14) These are the presentation materials (slides and some lecture notes) of a three-day training course offered by Scott Meyers, who's a highly respected author on C++. Even though the list of items is short, the quality is high. TheC++ Core Guidelines (C++11/14/17/…)(edited by Bjarne Stroustrup and Herb Sutter) is an evolving online document consisting of a set of guidelines for using modern C++ well. The guidelines are focused on relatively higher-level issues, such as interfaces, resource management, memory management, and concurrency affecting application architecture and library design. The project wasannounced at CppCon'15 by Bjarne Stroustrup and othersand welcomes contributions from the community. Most guidelines are supplemented with a rationale and examples as well as discussions of possible tool support. Many rules are designed specifically to be automatically checkable by static analysis tools. TheC++ Super-FAQ(Marshall Cline, Bjarne Stroustrup, and others) is an effort by the Standard C++ Foundation to unify the C++ FAQs previously maintained individually by Marshall Cline and Bjarne Stroustrup and also incorporating new contributions. The items mostly address issues at an intermediate level and are often written with a humorous tone. Not all items might be fully up to date with the latest edition of the C++ standard yet. cppreference.com (C++03/11/14/17/…)(initiated by Nate Kohl) is a wiki that summarizes the basic core-language features and has extensive documentation of the C++ standard library. The documentation is very precise but is easier to read than the official standard document and provides better navigation due to its wiki nature. The project documents all versions of the C++ standard and the site allows filtering the display for a specific version. The project waspresented by Nate Kohl at CppCon'14. Note:Some information contained within these books may not be up-to-date or no longer considered best practice. The Design and Evolution of C++(Bjarne Stroustrup)  If you want to knowwhythe language is the way it is, this book is where you find answers. This covers everythingbefore the standardizationof C++. Ruminations on C++- (Andrew Koenig and Barbara Moo)[Review] Advanced C++ Programming Styles and Idioms(James Coplien)  A predecessor of the pattern movement, it describes many C++-specific “idioms”. It's certainly a very good book and might still be worth a read if you can spare the time, but quite old and not up-to-date with current C++. Large Scale C++ Software Design(John Lakos)  Lakos explains techniques to manage very big C++ software projects. Certainly, a good read, if it only was up to date. It was written long before C++ 98 and misses on many features (e.g. namespaces) important for large-scale projects. If you need to work on a big C++ software project, you might want to read it, although you need to take more than a grain of salt with it. Not to be confused with the extended and later book series Large Scale C++ volume I-III. Inside the C++ Object Model(Stanley Lippman)  If you want to know how virtual member functions are commonly implemented and how base objects are commonly laid out in memory in a multi-inheritance scenario, and how all this affects performance, this is where you will find thorough discussions of such topics. The Annotated C++ Reference Manual(Bjarne Stroustrup, Margaret A. Ellis) This book is quite outdated in the fact that it explores the 1989 C++ 2.0 version - Templates, exceptions, namespaces, and new casts were not yet introduced. Saying that however, this book goes through the entire C++ standard of the time explaining the rationale, the possible implementations, and features of the language. This is not a book to learn programming principles and patterns on C++, but to understand every aspect of the C++ language. Thinking in C++(Bruce Eckel, 2nd Edition, 2000).  Two volumes; is a tutorial-stylefreeset of intro-level books. Downloads:vol 1,vol 2. Unfortunately, they're marred by a number of trivial errors (e.g. maintaining that temporaries are automaticconst), with no official errata list. A partial 3rdparty errata list is available athttp://www.computersciencelab.com/Eckel.htm, but it is apparently not maintained. Scientific and Engineering C++: An Introduction to Advanced Techniques and Examples(John Barton and Lee Nackman)
+It is a comprehensive and very detailed book that tried to explain and make use of all the features available in C++, in the context of numerical methods. It introduced at the time several new techniques, such as the Curiously Recurring Template Pattern (CRTP, also called Barton-Nackman trick).
+It pioneered several techniques such as dimensional analysis and automatic differentiation.
+It came with a lot of compilable and useful code, ranging from an expression parser to a Lapack wrapper.
+The code isstill available online.
+Unfortunately, the books have become somewhat outdated in style and C++ features, however, it was an incredible tour-de-force at the time (1994, pre-STL).
+The chapters on dynamics inheritance are a bit complicated to understand and not very useful.
+An updated version of this classic book that includes move semantics and the lessons learned from the STL would be very nice."
+What is the difference between a pointer variable and a reference variable?,"A pointer can be re-assigned: int x = 5;
+int y = 6;
+int *p;
+p = &x;
+p = &y;
+*p = 10;
+assert(x == 5);
+assert(y == 10); A reference cannot be re-bound, and must be bound at initialization: int x = 5;
+int y = 6;
+int &q; // error
+int &r = x; A pointer variable has its own identity: a distinct, visible memory address that can be taken with the unary&operator and a certain amount of space that can be measured with thesizeofoperator. Using those operators on a reference returns a value corresponding to whatever the reference is bound to; the reference’s own address and size are invisible. Since the reference assumes the identity of the original variable in this way, it is convenient to think of a reference as another name for the same variable. int x = 0;
+int &r = x;
+int *p = &x;
+int *p2 = &r;
+
+assert(p == p2); // &x == &r
+assert(&p != &p2); It is possible to create a pointer to a pointer, but not a pointer to a reference. int **pp; // OK, pointer to pointer
+ int &*pr; // ill-formed, pointer to reference It is possible to create an array of pointers, but not an array of references. int *ap[]; // OK, array of pointers
+int &ar[]; // ill-formed, array of references You can have arbitrarily nested pointers to pointers offering extra levels of indirection. References only offer one level of indirection because references to referencescollapse. int x = 0;
+int y = 0;
+int *p = &x;
+int *q = &y;
+int **pp = &p;
+
+**pp = 2;
+pp = &q; // *pp is now q
+**pp = 4;
+
+assert(y == 4);
+assert(x == 2); A pointer can be assignednullptr, whereas a reference must be bound to an existing object. If you try hard enough, you can bind a reference tonullptr, but this isundefinedand will not behave consistently. /* the code below is undefined; your compiler may optimise it
+ * differently, emit warnings, or outright refuse to compile it */
+
+int &r = *static_cast<int *>(nullptr);
+
+// prints ""null"" under GCC 10
+std::cout
+    << (&r != nullptr
+        ? ""not null"" : ""null"")
+    << std::endl;
+
+bool f(int &r) { return &r != nullptr; }
+
+// prints ""not null"" under GCC 10
+std::cout
+    << (f(*static_cast<int *>(nullptr))
+        ? ""not null"" : ""null"")
+    << std::endl; You can, however, have a reference to a pointer whose value isnullptr. Pointers areContiguousIterators(of an array). You can use++to go to the next item that a pointer is pointing to, and+ 4to go to the 5th element. A pointer needs to be dereferenced with*to access the object it points to, whereas a reference can be used directly.  A pointer to a class/struct uses->to access its members whereas a reference uses a.. Const references and rvalue references can be bound to temporaries (seetemporary materialization). Pointers cannot (not without some indirection): const int &x = int(12); // legal C++
+int *y = &int(12); // illegal to take the address of a temporary. This makesconst &more convenient to use in argument lists and so forth."
+What does theexplicitkeyword mean in C++?,"The compiler is allowed to make one implicit conversion to resolve the parameters to a function. This means that the compiler can use constructors callable with asingle parameterto convert from one type to another in order to get the right type for a parameter. Here's an example withconverting constructorsthat shows how it works: struct Foo {
+    // Single parameter constructor, can be used as an implicit conversion.
+    // Such a constructor is called ""converting constructor"".
+    Foo(int x) {}
+};
+struct Faz {
+    // Also a converting constructor.
+    Faz(Foo foo) {}
+};
+
+// The parameter is of type Foo, not of type int, so it looks like
+// we have to pass a Foo.
+void bar(Foo foo) {};
+
+int main() {
+    // However, the converting constructor allows us to pass an int.
+    bar(42);
+    // Also allowed thanks to the converting constructor.
+    Foo foo = 42;
+    // Error! This would require two conversions (int -> Foo -> Faz).
+    Faz faz = 42;
+} Prefixing theexplicitkeyword to the constructor prevents the compiler from using that constructor for implicit conversions. Adding it to the above class will create a compiler error at the function callbar(42).  It is now necessary to call for conversion explicitly withbar(Foo(42)) The reason you might want to do this is to avoid accidental construction that can hide bugs.Contrived example:"
+"I have heardusing namespace std;is wrong, and that I should usestd::coutandstd::cindirectly instead. Why is this? Does it risk declaring variables that share the same name as something in thestdnamespace? Are there performance implications?","Consider two libraries called Foo and Bar: using namespace foo;
+using namespace bar; Everything works fine, and you can callBlah()from Foo andQuux()from Bar without problems. But one day you upgrade to a new version of Foo 2.0, which now offers a function calledQuux(). Now you've got a conflict: Both Foo 2.0 and Bar importQuux()into your global namespace. This is going to take some effort to fix, especially if the function parameters happen to match. If you had usedfoo::Blah()andbar::Quux(), then the introduction offoo::Quux()would have been a non-event."
+"How do I iterate over the words of a string composed of words separated by whitespace? Note that I'm not interested in C string functions or that kind of character manipulation/access. I prefer elegance over efficiency. My current solution: #include <iostream>
+#include <sstream>
+#include <string>
+
+using namespace std;
+
+int main() {
+    string s = ""Somewhere down the road"";
+    istringstream iss(s);
+
+    do {
+        string subs;
+        iss >> subs;
+        cout << ""Substring: "" << subs << endl;
+    } while (iss);
+}","I use this to split string by a delimiter. The first puts the results in a pre-constructed vector, the second returns a new vector. #include <string>
+#include <sstream>
+#include <vector>
+#include <iterator>
+
+template <typename Out>
+void split(const std::string &s, char delim, Out result) {
+    std::istringstream iss(s);
+    std::string item;
+    while (std::getline(iss, item, delim)) {
+        *result++ = item;
+    }
+}
+
+std::vector<std::string> split(const std::string &s, char delim) {
+    std::vector<std::string> elems;
+    split(s, delim, std::back_inserter(elems));
+    return elems;
+} Note that this solution does not skip empty tokens, so the following will find 4 items, one of which is empty: std::vector<std::string> x = split(""one:two::three"", ':');"
+What are the proper uses of: How does one decide which to use in which specific cases?,"static_castis the first cast you should attempt to use. It does things like implicit conversions between types (such asinttofloat, or pointer tovoid*), and it can also call explicit conversion functions (or implicit ones). In many cases, explicitly statingstatic_castisn't necessary, but it's important to note that theT(something)syntax is equivalent to(T)somethingand should be avoided (more on that later). AT(something, something_else)is safe, however, and guaranteed to call the constructor. static_castcan also cast through inheritance hierarchies. It is unnecessary when casting upwards (towards a base class), but when casting downwards it can be used as long as it doesn't cast throughvirtualinheritance. It does not do checking, however, and it is undefined behavior tostatic_castdown a hierarchy to a type that isn't actually the type of the object. const_castcan be used to remove or addconstto a variable; no other C++ cast is capable of removing it (not evenreinterpret_cast). It is important to note that modifying a formerlyconstvalue is only undefined if the original variable isconst; if you use it to take theconstoff a reference to something that wasn't declared withconst, it is safe. This can be useful when overloading member functions based onconst, for instance. It can also be used to addconstto an object, such as to call a member function overload. const_castalso works similarly onvolatile, though that's less common. dynamic_castis exclusively used for handling polymorphism. You can cast a pointer or reference to any polymorphic type to any other class type (a polymorphic type has at least one virtual function, declared or inherited). You can use it for more than just casting downwards – you can cast sideways or even up another chain. Thedynamic_castwill seek out the desired object and return it if possible. If it can't, it will returnnullptrin the case of a pointer, or throwstd::bad_castin the case of a reference. dynamic_casthas some limitations, though. It doesn't work if there are multiple objects of the same type in the inheritance hierarchy (the so-called 'dreaded diamond') and you aren't usingvirtualinheritance. It also can only go through public inheritance - it will always fail to travel throughprotectedorprivateinheritance. This is rarely an issue, however, as such forms of inheritance are rare. reinterpret_castis the most dangerous cast, and should be used very sparingly. It turns one type directly into another — such as casting the value from one pointer to another, or storing a pointer in anint, or all sorts of other nasty things. Largely, the only guarantee you get withreinterpret_castis that normally if you cast the result back to the original type, you will get the exact same value (butnotif the intermediate type is smaller than the original type). There are a number of conversions thatreinterpret_castcannot do, too. It's often abused for particularly weird conversions and bit manipulations, like turning a raw data stream into actual data, or storing data in the low bits of a pointer to aligned data. For those cases, seestd::bit_cast. C-style cast and function-style cast are casts using(type)objectortype(object), respectively, and are functionally equivalent. They are defined as the first of the following which succeeds: It can therefore be used as a replacement for other casts in some instances, but can be extremely dangerous because of the ability to devolve into areinterpret_cast, and the latter should be preferred when explicit casting is needed, unless you are surestatic_castwill succeed orreinterpret_castwill fail. Even then, consider the longer, more explicit option. C-style casts also ignore access control when performing astatic_cast, which means that they have the ability to perform an operation that no other cast can. This is mostly a kludge, though, and in my mind is just another reason to avoid C-style casts. std::bit_castcopies the bits and bytes of the source object (its representation) directly into a new object of the target type.  It's a standards-compliant way to do type punning.  If you find yourself writing*reinterpret_cast<SomeType*>(&x), you probably should usestd::bit_cast<SomeType>(x)instead. std::bit_castis declared in<bit>.  The objects must be the same size and be trivially copyable.  If you can't yet use C++20, usememcpyto copy the source value into a variable of the desired type."
+"How can I set, clear, and toggle a bit?","Use the bitwise OR operator (|) to setnth bit ofnumberto1. // Can be whatever unsigned integer type you want, but
+// it's important to use the same type everywhere to avoid
+// performance issues caused by mixing integer types.
+typedef unsigned long Uint;
+
+// In C++, this can be template.
+// In C11, you can make it generic with _Generic, or with macros prior to C11.
+inline Uint bit_set(Uint number, Uint n) {
+    return number | ((Uint)1 << n);
+} Note that it's undefined behavior to shift by more than the width of aUint. The same applies to all remaining examples. Use the bitwise AND operator (&) to set thenth bit ofnumberto0. inline Uint bit_clear(Uint number, Uint n) {
+    return number & ~((Uint)1 << n);
+} You must invert the bit string with the bitwise NOT operator (~), then AND it. Use the bitwise XOR operator (^) to toggle thenth bit ofnumber. inline Uint bit_toggle(Uint number, Uint n) {
+    return number ^ ((Uint)1 << n);
+} You didn't ask for this, but I might as well add it. To check a bit, shiftnumbernto the right, then bitwise AND it: // bool requires #include <stdbool.h> prior to C23
+inline bool bit_check(Uint number, Uint n) {
+    return (number >> n) & (Uint)1;
+} There are alternatives with worse codegen, but the best way is to clear the bit like inbit_clear, then set the bit to value, similar tobit_set. inline Uint bit_set_to(Uint number, Uint n, bool x) {
+    return (number & ~((Uint)1 << n)) | ((Uint)x << n);
+} All solutions have been tested to provide optimal codegen with GCC and clang. Seehttps://godbolt.org/z/Wfzh8xsjW."
+What is the difference between using angle brackets and quotes in anincludedirective?,"What differs is the locations in which the preprocessor searches for the file to be included. #include <filename>The preprocessor searches in an implementation-defined manner, normally in directories pre-designated by the compiler/IDE. This method is normally used to include header files for the C standard library and other header files associated with the target platform. #include ""filename""The preprocessor also searches in an implementation-defined manner, but one that is normally used to include programmer-defined header files and typically includes same directory as the file containing the directive (unless an absolute path is given). For GCC, a more complete description is available in the GCCdocumentation on search paths."
+"Note: The answers were given in a specific order, and have received varying amounts of votes over time. Since the order of answers depends on your answer sorting preferences, here's anindex of the answersin the order in which they make the most sense: (Note: This is meant to be an entry toStack Overflow's C++ FAQ. If you want to critique the idea of providing an FAQ in this form, thenthe posting on meta that started all thiswould be the place to do that. Answers to that question are monitored in theC++ chatroom, where the FAQ idea started in the first place, so your answer is very likely to get read by those who came up with the idea.)","Most of the work in overloading operators is boilerplate code. That is little wonder, since operators are merely syntactic sugar. Their actual work could be done by (and often is forwarded to) plain functions. But it is important that you get this boilerplate code right. If you fail, either your operator’s code won’t compile, your users’ code won’t compile, or your users’ code will behave surprisingly. There's a lot to be said about assignment. However, most of it has already been said inGMan's famous Copy-And-Swap FAQ, so I'll skip most of it here, only listing the perfect assignment operator for reference: X& X::operator=(X rhs)
+{
+  swap(rhs);
+  return *this;
+} The bitwise shift operators<<and>>, although still used in hardware interfacing for the bit-manipulation functions they inherit from C, have become more prevalent as overloaded stream input and output operators in most applications. The stream operators, among the most commonly overloaded operators, are binary infix operators for which the syntax does not specify any restriction on whether they should be members or non-members.
+However, their left operands are streams from the standard library, and you cannot add member functions to those1, so you need to implement these operators for your own types as non-member functions2.
+The canonical forms of the two are these: std::ostream& operator<<(std::ostream& os, const T& obj)
+{
+  // Write obj to stream
+  return os;
+}
+
+std::istream& operator>>(std::istream& is, T& obj)
+{
+  // Read obj from stream
+  if( /* no valid object of T found in stream */ )
+    is.setstate(std::ios::failbit);
+  return is;
+} When implementingoperator>>, manually setting the stream’s state is only necessary when the reading itself succeeded, but the result is not what would be expected. 1Note that some of the<<overloads of the standard library are implemented as member functions, and some as free functions. Only the locale-dependent functions are member functions, such asoperator<<(long). 2According to the rules of thumb, the insertion/extraction operators should be member functions because they modify the left operand. However, we cannot follow the rules of thumb here. The function call operator, used to create function objects, also known asfunctors, must be defined as amemberfunction, so it always has the implicitthisargument of member functions. Other than this, it can be overloaded to take any number of additional arguments, including zero. Here's an example of the syntax: struct X {
+    // Overloaded call operator
+    int operator()(const std::string& y) {
+        return /* ... */;
+    }
+}; Usage: X f;
+int a = f(""hello""); Throughout the C++ standard library, function objects are always copied. Your own function objects should therefore be cheap to copy. If a function object absolutely needs to use data which is expensive to copy, it is better to store that data elsewhere and have the function object refer to it. In the most simple case, you can overload all comparison comparison operators by defaulting<=>inC++20: #include <compare>
+
+struct X {
+  // defines ==, !=, <, >, <=, >=, <=>
+  friend auto operator<=>(const X&, const X&) = default;
+}; If you can't do this, continue to the linked answer. The unary prefix negation!should be implemented as a member function. It is usually not a good idea to overload it because of how rare and surprising it is. struct X {
+  X operator!() const { return /* ... */; }
+}; The remaining binary logical operators (||,&&) should be implemented as free functions. However, it isveryunlikely that you would find a reasonable use case for these1. X operator&&(const X& lhs, const X& rhs) { return /* ... */; }
+X operator||(const X& lhs, const X& rhs) { return /* ... */; } 1It should be noted that the built-in version of||and&&use shortcut semantics. While the user defined ones (because they are syntactic sugar for method calls) do not use shortcut semantics. User will expect these operators to have shortcut semantics, and their code may depend on it, Therefore it is highly advised NEVER to define them. The unary increment and decrement operators come in both prefix and postfix flavor. To tell one from the other, the postfix variants take an additional dummy int argument. If you overload increment or decrement, be sure to always implement both prefix and postfix versions. Here is the canonical implementation of increment, decrement follows the same rules: struct X {
+  X& operator++()
+  {
+    // Do actual increment
+    return *this;
+  }
+  X operator++(int)
+  {
+    X tmp(*this);
+    operator++();
+    return tmp;
+  }
+}; Note that the postfix variant is implemented in terms of prefix. Also note that postfix does an extra copy.1 Overloading unary minus and plus is not very common and probably best avoided. If needed, they should probably be overloaded as member functions. 1Also note that the postfix variant does more work and is therefore less efficient to use than the prefix variant. This is a good reason to generally prefer prefix increment over postfix increment. While compilers can usually optimize away the additional work of postfix increment for built-in types, they might not be able to do the same for user-defined types (which could be something as innocently looking as a list iterator). Once you got used to doi++, it becomes very hard to remember to do++iinstead wheniis not of a built-in type (plus you'd have to change code when changing a type), so it is better to make a habit of always using prefix increment, unless postfix is explicitly needed. For the binary arithmetic operators, do not forget to obey the third basic rule operator overloading: If you provide+, also provide+=, if you provide-, do not omit-=, etc.Andrew Koenigis said to have been the first to observe that the compound assignment operators can be used as a base for their non-compound counterparts. That is, operator+is implemented in terms of+=,-is implemented in terms of-=, etc. According to our rules of thumb,+and its companions should be non-members, while their compound assignment counterparts (+=, etc.), changing their left argument, should be a member. Here is the exemplary code for+=and+; the other binary arithmetic operators should be implemented in the same way: struct X {
+  X& operator+=(const X& rhs)
+  {
+    // actual addition of rhs to *this
+    return *this;
+  }
+};
+
+inline X operator+(const X& lhs, const X& rhs)
+{
+  X result = lhs;
+  result += rhs;
+  return result;
+} operator+=returns its result per reference, whileoperator+returns a copy of its result. Of course, returning a reference is usually more efficient than returning a copy, but in the case ofoperator+, there is no way around the copying. When you writea + b, you expect the result to be a new value, which is whyoperator+has to return a new value.1 Also note thatoperator+can be slightly shortened by passinglhsby value, not by reference.
+However, this would be leaking implementation details, make the function signature asymmetric, and would preventnamed return value optimizationwhereresultis the same object as the one being returned. Sometimes, it's impractical to implement@in terms of@=, such as for matrix multiplication.
+In that case, you can also delegate@=to@: struct Matrix {
+  // You can also define non-member functions inside the class, i.e. ""hidden friends""
+  friend Matrix operator*(const Matrix& lhs, const Matrix& rhs) {
+    Matrix result;
+    // Do matrix multiplication
+    return result;
+  }
+  Matrix& operator*=(const Matrix& rhs)
+  {
+    return *this = *this * rhs; // Assuming operator= returns a reference
+  }
+}; The bit manipulation operators~&|^<<>>should be implemented in the same way as the arithmetic operators. However, (except for overloading<<and>>for output and input) there are very few reasonable use cases for overloading these. 1Again, the lesson to be taken from this is thata += bis, in general, more efficient thana + band should be preferred if possible. The subscript operator is a binary operator which must be implemented as a class member. It is used for container-like types that allow access to their data elements by a key.
+The canonical form of providing these is this: struct X {
+        value_type& operator[](index_type idx);
+  const value_type& operator[](index_type idx) const;
+  // ...
+}; Unless you do not want users of your class to be able to change data elements returned byoperator[](in which case you can omit the non-const variant), you should always provide both variants of the operator. For defining your own iterators or smart pointers, you have to overload the unary prefix dereference operator*and the binary infix pointer member access operator->: struct my_ptr {
+        value_type& operator*();
+  const value_type& operator*() const;
+        value_type* operator->();
+  const value_type* operator->() const;
+}; Note that these, too, will almost always need both a const and a non-const version.
+For the->operator, ifvalue_typeis ofclass(orstructorunion) type, anotheroperator->()is called recursively, until anoperator->()returns a value of non-class type. The unary address-of operator should never be overloaded. Foroperator->*()(and more details aboutoperator->) seethis question.operator->*()is rarely used and thus rarely ever overloaded. In fact, even iterators do not overload it. Continue toConversion Operators."
+"Supposea1,b1,c1, andd1point to heap memory, and my numerical code has the following core loop. const int n = 100000;
+
+for (int j = 0; j < n; j++) {
+    a1[j] += b1[j];
+    c1[j] += d1[j];
+} This loop is executed 10,000 times via another outerforloop. To speed it up, I changed the code to: for (int j = 0; j < n; j++) {
+    a1[j] += b1[j];
+}
+
+for (int j = 0; j < n; j++) {
+    c1[j] += d1[j];
+} Compiled onMicrosoft Visual C++ 10.0with full optimization andSSE2enabled for 32-bit on aIntel Core 2Duo (x64), the first example takes 5.5 seconds and the double-loop example takes only 1.9 seconds. Disassembly for the first loop basically looks like this (this block is repeated about five times in the full program): movsd       xmm0,mmword ptr [edx+18h]
+addsd       xmm0,mmword ptr [ecx+20h]
+movsd       mmword ptr [ecx+20h],xmm0
+movsd       xmm0,mmword ptr [esi+10h]
+addsd       xmm0,mmword ptr [eax+30h]
+movsd       mmword ptr [eax+30h],xmm0
+movsd       xmm0,mmword ptr [edx+20h]
+addsd       xmm0,mmword ptr [ecx+28h]
+movsd       mmword ptr [ecx+28h],xmm0
+movsd       xmm0,mmword ptr [esi+18h]
+addsd       xmm0,mmword ptr [eax+38h] Each loop of the double loop example produces this code (the following block is repeated about three times): addsd       xmm0,mmword ptr [eax+28h]
+movsd       mmword ptr [eax+28h],xmm0
+movsd       xmm0,mmword ptr [ecx+20h]
+addsd       xmm0,mmword ptr [eax+30h]
+movsd       mmword ptr [eax+30h],xmm0
+movsd       xmm0,mmword ptr [ecx+28h]
+addsd       xmm0,mmword ptr [eax+38h]
+movsd       mmword ptr [eax+38h],xmm0
+movsd       xmm0,mmword ptr [ecx+30h]
+addsd       xmm0,mmword ptr [eax+40h]
+movsd       mmword ptr [eax+40h],xmm0 The question turned out to be of no relevance, as the behavior severely depends on the sizes of the arrays (n) and the CPU cache. So if there is further interest, I rephrase the question: Could you provide some solid insight into the details that lead to the different cache behaviors as illustrated by the five regions on the following graph? It might also be interesting to point out the differences between CPU/cache architectures, by providing a similar graph for these CPUs. Here is the full code. It usesTBBTick_Countfor higher resolution timing, which can be disabled by not defining theTBB_TIMINGMacro: #include <iostream>
+#include <iomanip>
+#include <cmath>
+#include <string>
+
+//#define TBB_TIMING
+
+#ifdef TBB_TIMING   
+#include <tbb/tick_count.h>
+using tbb::tick_count;
+#else
+#include <time.h>
+#endif
+
+using namespace std;
+
+//#define preallocate_memory new_cont
+
+enum { new_cont, new_sep };
+
+double *a1, *b1, *c1, *d1;
+
+
+void allo(int cont, int n)
+{
+    switch(cont) {
+      case new_cont:
+        a1 = new double[n*4];
+        b1 = a1 + n;
+        c1 = b1 + n;
+        d1 = c1 + n;
+        break;
+      case new_sep:
+        a1 = new double[n];
+        b1 = new double[n];
+        c1 = new double[n];
+        d1 = new double[n];
+        break;
+    }
+
+    for (int i = 0; i < n; i++) {
+        a1[i] = 1.0;
+        d1[i] = 1.0;
+        c1[i] = 1.0;
+        b1[i] = 1.0;
+    }
+}
+
+void ff(int cont)
+{
+    switch(cont){
+      case new_sep:
+        delete[] b1;
+        delete[] c1;
+        delete[] d1;
+      case new_cont:
+        delete[] a1;
+    }
+}
+
+double plain(int n, int m, int cont, int loops)
+{
+#ifndef preallocate_memory
+    allo(cont,n);
+#endif
+
+#ifdef TBB_TIMING   
+    tick_count t0 = tick_count::now();
+#else
+    clock_t start = clock();
+#endif
+        
+    if (loops == 1) {
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++){
+                a1[j] += b1[j];
+                c1[j] += d1[j];
+            }
+        }
+    } else {
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                a1[j] += b1[j];
+            }
+            for (int j = 0; j < n; j++) {
+                c1[j] += d1[j];
+            }
+        }
+    }
+    double ret;
+
+#ifdef TBB_TIMING   
+    tick_count t1 = tick_count::now();
+    ret = 2.0*double(n)*double(m)/(t1-t0).seconds();
+#else
+    clock_t end = clock();
+    ret = 2.0*double(n)*double(m)/(double)(end - start) *double(CLOCKS_PER_SEC);
+#endif
+    
+#ifndef preallocate_memory
+    ff(cont);
+#endif
+
+    return ret;
+}
+
+
+void main()
+{   
+    freopen(""C:\\test.csv"", ""w"", stdout);
+
+    char *s = "" "";
+
+    string na[2] ={""new_cont"", ""new_sep""};
+
+    cout << ""n"";
+
+    for (int j = 0; j < 2; j++)
+        for (int i = 1; i <= 2; i++)
+#ifdef preallocate_memory
+            cout << s << i << ""_loops_"" << na[preallocate_memory];
+#else
+            cout << s << i << ""_loops_"" << na[j];
+#endif
+            
+    cout << endl;
+
+    long long nmax = 1000000;
+
+#ifdef preallocate_memory
+    allo(preallocate_memory, nmax);
+#endif
+    
+    for (long long n = 1L; n < nmax; n = max(n+1, long long(n*1.2)))
+    {
+        const long long m = 10000000/n;
+        cout << n;
+
+        for (int j = 0; j < 2; j++)
+            for (int i = 1; i <= 2; i++)
+                cout << s << plain(n, m, j, i);
+        cout << endl;
+    }
+} It shows FLOPS for different values ofn. ","Upon further analysis of this, I believe this is (at least partially) caused by the data alignment of the four-pointers. This will cause some level of cache bank/way conflicts. If I've guessed correctly on how you are allocating your arrays, theyare likely to be aligned to the page line. This means that all your accesses in each loop will fall on the same cache way. However, Intel processors have had 8-way L1 cache associativity for a while. But in reality, the performance isn't completely uniform. Accessing 4-ways is still slower than say 2-ways. EDIT: It does in fact look like you are allocating all the arrays separately.Usually when such large allocations are requested, the allocator will request fresh pages from the OS. Therefore, there is a high chance that large allocations will appear at the same offset from a page-boundary. Here's the test code: int main(){
+    const int n = 100000;
+
+#ifdef ALLOCATE_SEPERATE
+    double *a1 = (double*)malloc(n * sizeof(double));
+    double *b1 = (double*)malloc(n * sizeof(double));
+    double *c1 = (double*)malloc(n * sizeof(double));
+    double *d1 = (double*)malloc(n * sizeof(double));
+#else
+    double *a1 = (double*)malloc(n * sizeof(double) * 4);
+    double *b1 = a1 + n;
+    double *c1 = b1 + n;
+    double *d1 = c1 + n;
+#endif
+
+    //  Zero the data to prevent any chance of denormals.
+    memset(a1,0,n * sizeof(double));
+    memset(b1,0,n * sizeof(double));
+    memset(c1,0,n * sizeof(double));
+    memset(d1,0,n * sizeof(double));
+
+    //  Print the addresses
+    cout << a1 << endl;
+    cout << b1 << endl;
+    cout << c1 << endl;
+    cout << d1 << endl;
+
+    clock_t start = clock();
+
+    int c = 0;
+    while (c++ < 10000){
+
+#if ONE_LOOP
+        for(int j=0;j<n;j++){
+            a1[j] += b1[j];
+            c1[j] += d1[j];
+        }
+#else
+        for(int j=0;j<n;j++){
+            a1[j] += b1[j];
+        }
+        for(int j=0;j<n;j++){
+            c1[j] += d1[j];
+        }
+#endif
+
+    }
+
+    clock_t end = clock();
+    cout << ""seconds = "" << (double)(end - start) / CLOCKS_PER_SEC << endl;
+
+    system(""pause"");
+    return 0;
+} Benchmark Results: 2 x Intel Xeon X5482 Harpertown @ 3.2 GHz: #define ALLOCATE_SEPERATE
+#define ONE_LOOP
+00600020
+006D0020
+007A0020
+00870020
+seconds = 6.206
+
+#define ALLOCATE_SEPERATE
+//#define ONE_LOOP
+005E0020
+006B0020
+00780020
+00850020
+seconds = 2.116
+
+//#define ALLOCATE_SEPERATE
+#define ONE_LOOP
+00570020
+00633520
+006F6A20
+007B9F20
+seconds = 1.894
+
+//#define ALLOCATE_SEPERATE
+//#define ONE_LOOP
+008C0020
+00983520
+00A46A20
+00B09F20
+seconds = 1.993 Observations: 6.206 secondswith one loop and2.116 secondswith two loops. This reproduces the OP's results exactly. In the first two tests, the arrays are allocated separately.You'll notice that they all have the same alignment relative to the page. In the second two tests, the arrays are packed together to break that alignment.Here you'll notice both loops are faster. Furthermore, the second (double) loop is now the slower one as you would normally expect. As @Stephen Cannon points out in the comments, there is a very likely possibility that this alignment causesfalse aliasingin the load/store units or the cache. I Googled around for this and found that Intel actually has a hardware counter forpartial address aliasingstalls: http://software.intel.com/sites/products/documentation/doclib/stdxe/2013/~amplifierxe/pmw_dp/events/partial_address_alias.html Region 1: This one is easy. The dataset is so small that the performance is dominated by overhead like looping and branching. Region 2: Here, as the data sizes increase, the amount of relative overhead goes down and the performance ""saturates"". Here two loops is slower because it has twice as much loop and branching overhead. I'm not sure exactly what's going on here... Alignment could still play an effect as Agner Fog mentionscache bank conflicts. (That link is about Sandy Bridge, but the idea should still be applicable to Core 2.) Region 3: At this point, the data no longer fits in the L1 cache. So performance is capped by the L1 <-> L2 cache bandwidth. Region 4: The performance drop in the single-loop is what we are observing. And as mentioned, this is due to the alignment which (most likely) causesfalse aliasingstalls in the processor load/store units. However, in order for false aliasing to occur, there must be a large enough stride between the datasets. This is why you don't see this in region 3. Region 5: At this point, nothing fits in the cache. So you're bound by memory bandwidth. "
+What is the copy-and-swap idiom and when should it be used? What problems does it solve? Does it change for C++11? Related:,"Any class that manages a resource (awrapper, like a smart pointer) needs to implementThe Big Three. While the goals and implementation of the copy-constructor and destructor are straightforward, the copy-assignment operator is arguably the most nuanced and difficult. How should it be done? What pitfalls need to be avoided? Thecopy-and-swap idiomis the solution, and elegantly assists the assignment operator in achieving two things: avoidingcode duplication, and providing astrong exception guarantee. Conceptually, it works by using the copy-constructor's functionality to create a local copy of the data, then takes the copied data with aswapfunction, swapping the old data with the new data. The temporary copy then destructs, taking the old data with it. We are left with a copy of the new data. In order to use the copy-and-swap idiom, we need three things: a working copy-constructor, a working destructor (both are the basis of any wrapper, so should be complete anyway), and aswapfunction. A swap function is anon-throwingfunction that swaps two objects of a class, member for member. We might be tempted to usestd::swapinstead of providing our own, but this would be impossible;std::swapuses the copy-constructor and copy-assignment operator within its implementation, and we'd ultimately be trying to define the assignment operator in terms of itself! (Not only that, but unqualified calls toswapwill use our custom swap operator, skipping over the unnecessary construction and destruction of our class thatstd::swapwould entail.) Let's consider a concrete case. We want to manage, in an otherwise useless class, a dynamic array. We start with a working constructor, copy-constructor, and destructor: #include <algorithm> // std::copy
+#include <cstddef> // std::size_t
+
+class dumb_array
+{
+public:
+    // (default) constructor
+    dumb_array(std::size_t size = 0)
+        : mSize(size),
+          mArray(mSize ? new int[mSize]() : nullptr)
+    {
+    }
+
+    // copy-constructor
+    dumb_array(const dumb_array& other)
+        : mSize(other.mSize),
+          mArray(mSize ? new int[mSize] : nullptr)
+    {
+        // note that this is non-throwing, because of the data
+        // types being used; more attention to detail with regards
+        // to exceptions must be given in a more general case, however
+        std::copy(other.mArray, other.mArray + mSize, mArray);
+    }
+
+    // destructor
+    ~dumb_array()
+    {
+        delete [] mArray;
+    }
+
+private:
+    std::size_t mSize;
+    int* mArray;
+}; This class almost manages the array successfully, but it needsoperator=to work correctly. Here's how a naive implementation might look: // the hard part
+dumb_array& operator=(const dumb_array& other)
+{
+    if (this != &other) // (1)
+    {
+        // get rid of the old data...
+        delete [] mArray; // (2)
+        mArray = nullptr; // (2) *(see footnote for rationale)
+
+        // ...and put in the new
+        mSize = other.mSize; // (3)
+        mArray = mSize ? new int[mSize] : nullptr; // (3)
+        std::copy(other.mArray, other.mArray + mSize, mArray); // (3)
+    }
+
+    return *this;
+} And we say we're finished; this now manages an array, without leaks. However, it suffers from three problems, marked sequentially in the code as(n). The first is the self-assignment test.This check serves two purposes: it's an easy way to prevent us from running needless code on self-assignment, and it protects us from subtle bugs (such as deleting the array only to try and copy it). But in all other cases it merely serves to slow the program down, and act as noise in the code; self-assignment rarely occurs, so most of the time this check is a waste.It would be better if the operator could work properly without it. The second is that it only provides a basic exception guarantee. Ifnew int[mSize]fails,*thiswill have been modified. (Namely, the size is wrong and the data is gone!)For a strong exception guarantee, it would need to be something akin to: dumb_array& operator=(const dumb_array& other)
+ {
+     if (this != &other) // (1)
+     {
+         // get the new data ready before we replace the old
+         std::size_t newSize = other.mSize;
+         int* newArray = newSize ? new int[newSize]() : nullptr; // (3)
+         std::copy(other.mArray, other.mArray + newSize, newArray); // (3)
+
+         // replace the old data (all are non-throwing)
+         delete [] mArray;
+         mSize = newSize;
+         mArray = newArray;
+     }
+
+     return *this;
+ } The code has expanded! Which leads us to the third problem: code duplication. Our assignment operator effectively duplicates all the code we've already written elsewhere, and that's a terrible thing. In our case, the core of it is only two lines (the allocation and the copy), but with more complex resources this code bloat can be quite a hassle. We should strive to never repeat ourselves. (One might wonder: if this much code is needed to manage one resource correctly, what if my class manages more than one?While this may seem to be a valid concern, and indeed it requires non-trivialtry/catchclauses, this is a non-issue.That's because a class should manageone resource only!) As mentioned, the copy-and-swap idiom will fix all these issues. But right now, we have all the requirements except one: aswapfunction. While The Rule of Three successfully entails the existence of our copy-constructor, assignment operator, and destructor, it should really be called ""The Big Three and A Half"": any time your class manages a resource it also makes sense to provide aswapfunction. We need to add swap functionality to our class, and we do that as follows†: class dumb_array
+{
+public:
+    // ...
+
+    friend void swap(dumb_array& first, dumb_array& second) // nothrow
+    {
+        // enable ADL (not necessary in our case, but good practice)
+        using std::swap;
+
+        // by swapping the members of two objects,
+        // the two objects are effectively swapped
+        swap(first.mSize, second.mSize);
+        swap(first.mArray, second.mArray);
+    }
+
+    // ...
+}; (Hereis the explanation whypublic friend swap.) Now not only can we swap ourdumb_array's, but swaps in general can be more efficient; it merely swaps pointers and sizes, rather than allocating and copying entire arrays. Aside from this bonus in functionality and efficiency, we are now ready to implement the copy-and-swap idiom. Without further ado, our assignment operator is: dumb_array& operator=(dumb_array other) // (1)
+{
+    swap(*this, other); // (2)
+
+    return *this;
+} And that's it! With one fell swoop, all three problems are elegantly tackled at once. We first notice an important choice: the parameter argument is takenby-value. While one could just as easily do the following (and indeed, many naive implementations of the idiom do): dumb_array& operator=(const dumb_array& other)
+{
+    dumb_array temp(other);
+    swap(*this, temp);
+
+    return *this;
+} We lose animportant optimization opportunity. Not only that, but this choice is critical in C++11, which is discussed later. (On a general note, a remarkably useful guideline is as follows: if you're going to make a copy of something in a function, let the compiler do it in the parameter list.‡) Either way, this method of obtaining our resource is the key to eliminating code duplication: we get to use the code from the copy-constructor to make the copy, and never need to repeat any bit of it. Now that the copy is made, we are ready to swap. Observe that upon entering the function that all the new data is already allocated, copied, and ready to be used. This is what gives us a strong exception guarantee for free: we won't even enter the function if construction of the copy fails, and it's therefore not possible to alter the state of*this. (What we did manually before for a strong exception guarantee, the compiler is doing for us now; how kind.) At this point we are home-free, becauseswapis non-throwing. We swap our current data with the copied data, safely altering our state, and the old data gets put into the temporary. The old data is then released when the function returns. (Where upon the parameter's scope ends and its destructor is called.) Because the idiom repeats no code, we cannot introduce bugs within the operator. Note that this means we are rid of the need for a self-assignment check, allowing a single uniform implementation ofoperator=. (Additionally, we no longer have a performance penalty on non-self-assignments.) And that is the copy-and-swap idiom. The next version of C++, C++11, makes one very important change to how we manage resources: the Rule of Three is nowThe Rule of Four(and a half). Why? Because not only do we need to be able to copy-construct our resource,we need to move-construct it as well. Luckily for us, this is easy: class dumb_array
+{
+public:
+    // ...
+
+    // move constructor
+    dumb_array(dumb_array&& other) noexcept ††
+        : dumb_array() // initialize via default constructor, C++11 only
+    {
+        swap(*this, other);
+    }
+
+    // ...
+}; What's going on here? Recall the goal of move-construction: to take the resources from another instance of the class, leaving it in a state guaranteed to be assignable and destructible. So what we've done is simple: initialize via the default constructor (a C++11 feature), then swap withother; we know a default constructed instance of our class can safely be assigned and destructed, so we knowotherwill be able to do the same, after swapping. (Note that some compilers do not support constructor delegation; in this case, we have to manually default construct the class. This is an unfortunate but luckily trivial task.) That is the only change we need to make to our class, so why does it work? Remember the ever-important decision we made to make the parameter a value and not a reference: dumb_array& operator=(dumb_array other); // (1) Now, ifotheris being initialized with an rvalue,it will be move-constructed. Perfect. In the same way C++03 let us re-use our copy-constructor functionality by taking the argument by-value, C++11 willautomaticallypick the move-constructor when appropriate as well. (And, of course, as mentioned in previously linked article, the copying/moving of the value may simply be elided altogether.) And so concludes the copy-and-swap idiom. *Why do we setmArrayto null? Because if any further code in the operator throws, the destructor ofdumb_arraymight be called; and if that happens without setting it to null, we attempt to delete memory that's already been deleted! We avoid this by setting it to null, as deleting null is a no-operation. †There are other claims that we should specializestd::swapfor our type, provide an in-classswapalong-side a free-functionswap, etc. But this is all unnecessary: any proper use ofswapwill be through an unqualified call, and our function will be found throughADL. One function will do. ‡The reason is simple: once you have the resource to yourself, you may swap and/or move it (C++11) anywhere it needs to be. And by making the copy in the parameter list, you maximize optimization. ††The move constructor should generally benoexcept, otherwise some code (e.g.std::vectorresizing logic) will use the copy constructor even when a move would make sense. Of course, only mark it noexcept if the code inside doesn't throw exceptions."
+Quote fromThe C++ standard library: a tutorial and handbook: The only portable way of using templates at the moment is to implement them in header files by using inline functions. Why is this? (Clarification: header files are not theonlyportable solution. But they are the most convenient portable solution.),"Caveat: It isnotnecessary to put the implementation in the header file, see the alternative solution at the end of this answer. Anyway, the reason your code is failing is that, when instantiating a template, the compiler creates a new class with the given template argument. For example: template<typename T>
+struct Foo
+{
+    T bar;
+    void doSomething(T param) {/* do stuff using T */}
+};
+
+// somewhere in a .cpp
+Foo<int> f; When reading this line, the compiler will create a new class (let's call itFooInt), which is equivalent to the following: struct FooInt
+{
+    int bar;
+    void doSomething(int param) {/* do stuff using int */}
+}; Consequently, the compiler needs to have access to the implementation of the methods, to instantiate them with the template argument (in this caseint). If these implementations were not in the header, they wouldn't be accessible, and therefore the compiler wouldn't be able to instantiate the template. A common solution to this is to write the template declaration in a header file, then implement the class in an implementation file (for example .tpp), and include this implementation file at the end of the header. Foo.h template <typename T>
+struct Foo
+{
+    void doSomething(T param);
+};
+
+#include ""Foo.tpp"" Foo.tpp template <typename T>
+void Foo<T>::doSomething(T param)
+{
+    //implementation
+} This way, implementation is still separated from declaration, but is accessible to the compiler. Another solution is to keep the implementation separated, and explicitly instantiate all the template instances you'll need: Foo.h // no implementation
+template <typename T> struct Foo { ... }; Foo.cpp // implementation of Foo's methods
+
+// explicit instantiations
+template class Foo<int>;
+template class Foo<float>;
+// You will only be able to use Foo with int or float If my explanation isn't clear enough, you can have a look at theC++ Super-FAQ on this subject."
+"C++11 introduced a standardized memory model, but what exactly does that mean? And how is it going to affect C++ programming? This article(byGavin Clarkewho quotesHerb Sutter) says that, The memory model means that C++ code
+now has a standardized library to call
+regardless of who made the compiler
+and on what platform it's running.
+There's a standard way to control how
+different threads talk to the
+processor's memory. ""When you are talking about splitting
+[code] across different cores that's
+in the standard, we are talking about
+the memory model. We are going to
+optimize it without breaking the
+following assumptions people are going
+to make in the code,""Suttersaid. Well, I canmemorizethis and similar paragraphs available online (as I've had my own memory model since birth :P) and can even post as an answer to questions asked by others, but to be honest, I don't exactly understand this. C++ programmers used to develop multi-threaded applications even before, so how does it matter if it's POSIX threads, or Windows threads, or C++11 threads? What are the benefits? I want to understand the low-level details. I also get this feeling that the C++11 memory model is somehow related to C++11 multi-threading support, as I often see these two together. If it is, how exactly? Why should they be related? I don't know how the internals of multi-threading work, and what memory model means in general.","First, you have to learn to think like a Language Lawyer. The C++ specification does not make reference to any particular compiler, operating system, or CPU.  It makes reference to anabstract machinethat is a generalization of actual systems.  In the Language Lawyer world, the job of the programmer is to write code for the abstract machine; the job of the compiler is to actualize that code on a concrete machine.  By coding rigidly to the spec, you can be certain that your code will compile and run without modification on any system with a compliant C++ compiler, whether today or 50 years from now. The abstract machine in the C++98/C++03 specification is fundamentally single-threaded.  So it is not possible to write multi-threaded C++ code that is ""fully portable"" with respect to the spec.  The spec does not even say anything about theatomicityof memory loads and stores or theorderin which loads and stores might happen, never mind things like mutexes. Of course, you can write multi-threaded code in practice for particular concrete systems – like pthreads or Windows.  But there is nostandardway to write multi-threaded code for C++98/C++03. The abstract machine in C++11 is multi-threaded by design.  It also has a well-definedmemory model; that is, it says what the compiler may and may not do when it comes to accessing memory. Consider the following example, where a pair of global variables are accessed concurrently by two threads: Global
+           int x, y;
+
+Thread 1            Thread 2
+x = 17;             cout << y << "" "";
+y = 37;             cout << x << endl; What might Thread 2 output? Under C++98/C++03, this is not even Undefined Behavior; the question itself ismeaninglessbecause the standard does not contemplate anything called a ""thread"". Under C++11, the result is Undefined Behavior, because loads and stores need not be atomic in general.  Which may not seem like much of an improvement...  And by itself, it's not. But with C++11, you can write this: Global
+           atomic<int> x, y;
+
+Thread 1                 Thread 2
+x.store(17);             cout << y.load() << "" "";
+y.store(37);             cout << x.load() << endl; Now things get much more interesting.  First of all, the behavior here isdefined.  Thread 2 could now print0 0(if it runs before Thread 1),37 17(if it runs after Thread 1), or0 17(if it runs after Thread 1 assigns to x but before it assigns to y). What it cannot print is37 0, because the default mode for atomic loads/stores in C++11 is to enforcesequential consistency.  This just means all loads and stores must be ""as if"" they happened in the order you wrote them within each thread, while operations among threads can be interleaved however the system likes.  So the default behavior of atomics provides bothatomicityandorderingfor loads and stores. Now, on a modern CPU, ensuring sequential consistency can be expensive.  In particular, the compiler is likely to emit full-blown memory barriers between every access here.  But if your algorithm can tolerate out-of-order loads and stores; i.e., if it requires atomicity but not ordering; i.e., if it can tolerate37 0as output from this program, then you can write this: Global
+           atomic<int> x, y;
+
+Thread 1                            Thread 2
+x.store(17,memory_order_relaxed);   cout << y.load(memory_order_relaxed) << "" "";
+y.store(37,memory_order_relaxed);   cout << x.load(memory_order_relaxed) << endl; The more modern the CPU, the more likely this is to be faster than the previous example. Finally, if you just need to keep particular loads and stores in order, you can write: Global
+           atomic<int> x, y;
+
+Thread 1                            Thread 2
+x.store(17,memory_order_release);   cout << y.load(memory_order_acquire) << "" "";
+y.store(37,memory_order_release);   cout << x.load(memory_order_acquire) << endl; This takes us back to the ordered loads and stores – so37 0is no longer a possible output – but it does so with minimal overhead.  (In this trivial example, the result is the same as full-blown sequential consistency; in a larger program, it would not be.) Of course, if the only outputs you want to see are0 0or37 17, you can just wrap a mutex around the original code.  But if you have read this far, I bet you already know how that works, and this answer is already longer than I intended :-). So, bottom line. Mutexes are great, and C++11 standardizes them. But sometimes for performance reasons you want lower-level primitives (e.g., the classicdouble-checked locking pattern).  The new standard provides high-level gadgets like mutexes and condition variables, and it also provides low-level gadgets like atomic types and the various flavors of memory barrier.  So now you can write sophisticated, high-performance concurrent routines entirely within the language specified by the standard, and you can be certain your code will compile and run unchanged on both today's systems and tomorrow's. Although to be frank, unless you are an expert and working on some serious low-level code, you should probably stick to mutexes and condition variables.  That's what I intend to do. For more on this stuff, seethis blog post."
+"I wanted to compare reading lines of string input from stdin using Python and C++ and was shocked to see my C++ code run an order of magnitude slower than the equivalent Python code. Since my C++ is rusty and I'm not yet an expert Pythonista, please tell me if I'm doing something wrong or if I'm misunderstanding something. (TLDR answer:include the statement:cin.sync_with_stdio(false)or just usefgetsinstead. TLDR results:scroll all the way down to the bottom of my question and look at the table.) C++ code: #include <iostream>
+#include <time.h>
+
+using namespace std;
+
+int main() {
+    string input_line;
+    long line_count = 0;
+    time_t start = time(NULL);
+    int sec;
+    int lps;
+
+    while (cin) {
+        getline(cin, input_line);
+        if (!cin.eof())
+            line_count++;
+    };
+
+    sec = (int) time(NULL) - start;
+    cerr << ""Read "" << line_count << "" lines in "" << sec << "" seconds."";
+    if (sec > 0) {
+        lps = line_count / sec;
+        cerr << "" LPS: "" << lps << endl;
+    } else
+        cerr << endl;
+    return 0;
+}
+
+// Compiled with:
+// g++ -O3 -o readline_test_cpp foo.cpp Python Equivalent: #!/usr/bin/env python
+import time
+import sys
+
+count = 0
+start = time.time()
+
+for line in  sys.stdin:
+    count += 1
+
+delta_sec = int(time.time() - start_time)
+if delta_sec >= 0:
+    lines_per_sec = int(round(count/delta_sec))
+    print(""Read {0} lines in {1} seconds. LPS: {2}"".format(count, delta_sec,
+       lines_per_sec)) Here are my results: $ cat test_lines | ./readline_test_cpp
+Read 5570000 lines in 9 seconds. LPS: 618889
+
+$ cat test_lines | ./readline_test.py
+Read 5570000 lines in 1 seconds. LPS: 5570000 I should note that I tried this both under Mac OS X v10.6.8 (Snow Leopard) and Linux 2.6.32 (Red Hat Linux 6.2). The former is a MacBook Pro, and the latter is a very beefy server, not that this is too pertinent. $ for i in {1..5}; do echo ""Test run $i at `date`""; echo -n ""CPP:""; cat test_lines | ./readline_test_cpp ; echo -n ""Python:""; cat test_lines | ./readline_test.py ; done Test run 1 at Mon Feb 20 21:29:28 EST 2012
+CPP:   Read 5570001 lines in 9 seconds. LPS: 618889
+Python:Read 5570000 lines in 1 seconds. LPS: 5570000
+Test run 2 at Mon Feb 20 21:29:39 EST 2012
+CPP:   Read 5570001 lines in 9 seconds. LPS: 618889
+Python:Read 5570000 lines in 1 seconds. LPS: 5570000
+Test run 3 at Mon Feb 20 21:29:50 EST 2012
+CPP:   Read 5570001 lines in 9 seconds. LPS: 618889
+Python:Read 5570000 lines in 1 seconds. LPS: 5570000
+Test run 4 at Mon Feb 20 21:30:01 EST 2012
+CPP:   Read 5570001 lines in 9 seconds. LPS: 618889
+Python:Read 5570000 lines in 1 seconds. LPS: 5570000
+Test run 5 at Mon Feb 20 21:30:11 EST 2012
+CPP:   Read 5570001 lines in 10 seconds. LPS: 557000
+Python:Read 5570000 lines in  1 seconds. LPS: 5570000 Tiny benchmark addendum and recap For completeness, I thought I'd update the read speed for the same file on the same box with the original (synced) C++ code. Again, this is for a 100M line file on a fast disk. Here's the comparison, with several solutions/approaches:","By default,cinis synchronized with stdio, which causes it to avoid any input buffering.  If you add this to the top of your main, you should see much better performance: std::ios_base::sync_with_stdio(false); Normally, when an input stream is buffered, instead of reading one character at a time, the stream will be read in larger chunks.  This reduces the number of system calls, which are typically relatively expensive.  However, since theFILE*basedstdioandiostreamsoften have separate implementations and therefore separate buffers, this could lead to a problem if both were used together.  For example: int myvalue1;
+cin >> myvalue1;
+int myvalue2;
+scanf(""%d"",&myvalue2); If more input was read bycinthan it actually needed, then the second integer value wouldn't be available for thescanffunction, which has its own independent buffer.  This would lead to unexpected results. To avoid this, by default, streams are synchronized withstdio.  One common way to achieve this is to havecinread each character one at a time as needed usingstdiofunctions.  Unfortunately, this introduces a lot of overhead.  For small amounts of input, this isn't a big problem, but when you are reading millions of lines, the performance penalty is significant. Fortunately, the library designers decided that you should also be able to disable this feature to get improved performance if you knew what you were doing, so they provided thesync_with_stdiomethod. From this link (emphasis added): If the synchronization is turned off, the C++ standard streams are allowed to buffer their I/O independently,which may be considerably faster in some cases."
+What is a smart pointer and when should I use one?,"UPDATE This answer is rather old, and so describes what was 'good' at the time, which was smart pointers provided by the Boost library. Since C++11, the standard library has provided sufficient smart pointers types, and so you should favour the use ofstd::unique_ptr,std::shared_ptrandstd::weak_ptr. There was alsostd::auto_ptr. It was very much like a scoped pointer, except that it also had the ""special"" dangerous ability to be copied — which also unexpectedly transfers ownership.It was deprecated in C++11 and removed in C++17, so you shouldn't use it. std::auto_ptr<MyObject> p1 (new MyObject());
+std::auto_ptr<MyObject> p2 = p1; // Copy and transfer ownership. 
+                                 // p1 gets set to empty!
+p2->DoSomething(); // Works.
+p1->DoSomething(); // Oh oh. Hopefully raises some NULL pointer exception. OLD ANSWER A smart pointer is a class that wraps a 'raw' (or 'bare') C++ pointer, to manage the lifetime of the object being pointed to. There is no single smart pointer type, but all of them try to abstract a raw pointer in a practical way. Smart pointers should be preferred over raw pointers. If you feel you need to use pointers (first consider if youreallydo), you would normally want to use a smart pointer as this can alleviate many of the problems with raw pointers, mainly forgetting to delete the object and leaking memory. With raw pointers, the programmer has to explicitly destroy the object when it is no longer useful. // Need to create the object to achieve some goal
+MyObject* ptr = new MyObject(); 
+ptr->DoSomething(); // Use the object in some way
+delete ptr; // Destroy the object. Done with it.
+// Wait, what if DoSomething() raises an exception...? A smart pointer by comparison defines a policy as to when the object is destroyed. You still have to create the object, but you no longer have to worry about destroying it. SomeSmartPtr<MyObject> ptr(new MyObject());
+ptr->DoSomething(); // Use the object in some way.
+
+// Destruction of the object happens, depending 
+// on the policy the smart pointer class uses.
+
+// Destruction would happen even if DoSomething() 
+// raises an exception The simplest policy in use involves the scope of the smart pointer wrapper object, such as implemented byboost::scoped_ptrorstd::unique_ptr. void f()
+{
+    {
+       std::unique_ptr<MyObject> ptr(new MyObject());
+       ptr->DoSomethingUseful();
+    } // ptr goes out of scope -- 
+      // the MyObject is automatically destroyed.
+
+    // ptr->Oops(); // Compile error: ""ptr"" not defined
+                    // since it is no longer in scope.
+} Note thatstd::unique_ptrinstances cannot be copied. This prevents the pointer from being deleted multiple times (incorrectly). You can, however, pass references to it around to other functions you call. std::unique_ptrs are useful when you want to tie the lifetime of the object to a particular block of code, or if you embedded it as member data inside another object, the lifetime of that other object. The object exists until the containing block of code is exited, or until the containing object is itself destroyed. A more complex smart pointer policy involves reference counting the pointer. This does allow the pointer to be copied. When the last ""reference"" to the object is destroyed, the object is deleted. This policy is implemented byboost::shared_ptrandstd::shared_ptr. void f()
+{
+    typedef std::shared_ptr<MyObject> MyObjectPtr; // nice short alias
+    MyObjectPtr p1; // Empty
+
+    {
+        MyObjectPtr p2(new MyObject());
+        // There is now one ""reference"" to the created object
+        p1 = p2; // Copy the pointer.
+        // There are now two references to the object.
+    } // p2 is destroyed, leaving one reference to the object.
+} // p1 is destroyed, leaving a reference count of zero. 
+  // The object is deleted. Reference counted pointers are very useful when the lifetime of your object is much more complicated, and is not tied directly to a particular section of code or to another object. There is one drawback to reference counted pointers — the possibility of creating a dangling reference: // Create the smart pointer on the heap
+MyObjectPtr* pp = new MyObjectPtr(new MyObject())
+// Hmm, we forgot to destroy the smart pointer,
+// because of that, the object is never destroyed! Another possibility is creating circular references: struct Owner {
+   std::shared_ptr<Owner> other;
+};
+
+std::shared_ptr<Owner> p1 (new Owner());
+std::shared_ptr<Owner> p2 (new Owner());
+p1->other = p2; // p1 references p2
+p2->other = p1; // p2 references p1
+
+// Oops, the reference count of of p1 and p2 never goes to zero!
+// The objects are never destroyed! To work around this problem, both Boost and C++11 have defined aweak_ptrto define a weak (uncounted) reference to ashared_ptr."
+"How can I convert fromintto the equivalentstringin C++?  I am aware of two methods. Is there another way? (1) int a = 10;
+char *intStr = itoa(a);
+string str = string(intStr); (2) int a = 10;
+stringstream ss;
+ss << a;
+string str = ss.str();","C++11 introducesstd::stoi(and variants for each numeric type) andstd::to_string, the counterparts of the Catoianditoabut expressed in term ofstd::string. #include <string> 
+
+std::string s = std::to_string(42); is therefore the shortest way I can think of. You can even omit naming the type, using theautokeyword: auto s = std::to_string(42); Note: see[string.conversions](21.5inn3242) Note: for faster/non-allocating conversions, consider the{fmt}library'sfmt::format_intas per@vitaut's answer."
+"What exactly does puttingextern ""C""into C++ code do? For example: extern ""C"" {
+   void foo();
+}","extern ""C""makes a function-name in C++ have C linkage (compiler does not mangle the name) so that client C code can link to (use) your function using a C compatible header file that contains just the declaration of your function. Your function definition is contained in a binary format (that was compiled by your C++ compiler) that the client C linker will then link to using the C name. Since C++ has overloading of function names and C does not, the C++ compiler cannot just use the function name as a unique id to link to, so it mangles the name by adding information about the arguments.  A C compiler does not need to mangle the name since you can not overload function names in C.  When you state that a function hasextern ""C""linkage in C++, the C++ compiler does not add argument/parameter type information to the name used for linkage. Just so you know, you can specifyextern ""C""linkage to each individual declaration/definition explicitly or use a block to group a sequence of declarations/definitions to have a certain linkage: extern ""C"" void foo(int);
+extern ""C""
+{
+   void g(char);
+   int i;
+} If you care about the technicalities, they are listed in section 7.5 of the C++03 standard, here is a brief summary (with emphasis onextern ""C""):"
+"Want to improve this question?Guide the asker to update the question so it focuses on a single, specific problem. Narrowing the question will help others answer the question concisely. You mayedit the questionif you feel you can improve it yourself. If edited, the question will be reviewed and might be reopened. Closed10 months ago. How do I find areas of my code that run slowly in a C++ application running on Linux?","If your goal is to use a profiler, use one of the suggested ones. However, if you're in a hurry and you can manually interrupt your program under the debugger while it's being subjectively slow, there's a simple way to find performance problems. Execute your code in a debugger like gdb, halt it and each time look at the call stack (e.g. backtrace) several times. If there is some code that is wasting some percentage of the time, 20% or 50% or whatever, that is the probability that you will catch it in the act on each sample. So, that is roughly the percentage of samples on which you will see it. There is no educated guesswork required. If you do have a guess as to what the problem is, this will prove or disprove it. You probably have multiple performance problems of different sizes. If you clean out any one of them, the remaining ones will take a larger percentage, and be easier to spot, on subsequent passes. Thismagnification effect, when compounded over multiple problems, can lead to truly massive speedup factors. Caveat: Programmers tend to be skeptical of this technique unless they've used it themselves. They will say that profilers give you this information, but that is only true if they sample the entire call stack, and then let you examine a random set of samples. (The summaries are where the insight is lost.) Call graphs don't give you the same information, because They will also say it only works on toy programs, when actually it works on any program, and it seems to work better on bigger programs, because they tend to have more problems to find. They will say it sometimes finds things that aren't problems, but that is only true if you see somethingonce. If you see a problem on more than one sample, it is real. P.S.This can also be done on multi-thread programs if there is a way to collect call-stack samples of the thread pool at a point in time, as there is in Java. P.P.SAs a rough generality, the more layers of abstraction you have in your software, the more likely you are to find that that is the cause of performance problems (and the opportunity to get speedup). Added: It might not be obvious, but the stack sampling technique works equally well in the presence of recursion. The reason is that the time that would be saved by removal of an instruction is approximated by the fraction of samples containing it, regardless of the number of times it may occur within a sample. Another objection I often hear is: ""It will stop someplace random, and it will miss the real problem"".
+This comes from having a prior concept of what the real problem is.
+A key property of performance problems is that they defy expectations.
+Sampling tells you something is a problem, and your first reaction is disbelief.
+That is natural, but you can be sure if it finds a problem it is real, and vice-versa. Added: Let me make a Bayesian explanation of how it works.  Suppose there is some instructionI(call or otherwise) which is on the call stack some fractionfof the time (and thus costs that much). For simplicity, suppose we don't know whatfis, but assume it is either 0.1, 0.2, 0.3, ... 0.9, 1.0, and the prior probability of each of these possibilities is 0.1, so all of these costs are equally likely a-priori. Then suppose we take just 2 stack samples, and we see instructionIon both samples, designated observationo=2/2. This gives us new estimates of the frequencyfofI, according to this: Prior
+P(f=x) x  P(o=2/2|f=x) P(o=2/2&&f=x)  P(o=2/2&&f >= x)  P(f >= x | o=2/2)
+
+0.1    1     1             0.1          0.1            0.25974026
+0.1    0.9   0.81          0.081        0.181          0.47012987
+0.1    0.8   0.64          0.064        0.245          0.636363636
+0.1    0.7   0.49          0.049        0.294          0.763636364
+0.1    0.6   0.36          0.036        0.33           0.857142857
+0.1    0.5   0.25          0.025        0.355          0.922077922
+0.1    0.4   0.16          0.016        0.371          0.963636364
+0.1    0.3   0.09          0.009        0.38           0.987012987
+0.1    0.2   0.04          0.004        0.384          0.997402597
+0.1    0.1   0.01          0.001        0.385          1
+
+                  P(o=2/2) 0.385 The last column says that, for example, the probability thatf>= 0.5 is 92%, up from the prior assumption of 60%. Suppose the prior assumptions are different. Suppose we assumeP(f=0.1)is .991 (nearly certain), and all the other possibilities are almost impossible (0.001). In other words, our prior certainty is thatIis cheap. Then we get: Prior
+P(f=x) x  P(o=2/2|f=x) P(o=2/2&& f=x)  P(o=2/2&&f >= x)  P(f >= x | o=2/2)
+
+0.001  1    1              0.001        0.001          0.072727273
+0.001  0.9  0.81           0.00081      0.00181        0.131636364
+0.001  0.8  0.64           0.00064      0.00245        0.178181818
+0.001  0.7  0.49           0.00049      0.00294        0.213818182
+0.001  0.6  0.36           0.00036      0.0033         0.24
+0.001  0.5  0.25           0.00025      0.00355        0.258181818
+0.001  0.4  0.16           0.00016      0.00371        0.269818182
+0.001  0.3  0.09           0.00009      0.0038         0.276363636
+0.001  0.2  0.04           0.00004      0.00384        0.279272727
+0.991  0.1  0.01           0.00991      0.01375        1
+
+                  P(o=2/2) 0.01375 Now it saysP(f >= 0.5)is 26%, up from the prior assumption of 0.6%. So Bayes allows us to update our estimate of the probable cost ofI. If the amount of data is small, it doesn't tell us accurately what the cost is, only that it is big enough to be worth fixing. Yet another way to look at it is called theRule Of Succession.
+If you flip a coin 2 times, and it comes up heads both times, what does that tell you about the probable weighting of the coin?
+The respected way to answer is to say that it's a Beta distribution, with average value(number of hits + 1) / (number of tries + 2) = (2+1)/(2+2) = 75%. (The key is that we seeImore than once. If we only see it once, that doesn't tell us much except thatf> 0.) So, even a very small number of samples can tell us a lot about the cost of instructions that it sees. (And it will see them with a frequency, on average, proportional to their cost. Ifnsamples are taken, andfis the cost, thenIwill appear onnf+/-sqrt(nf(1-f))samples. Example,n=10,f=0.3, that is3+/-1.4samples.) Added: To give an intuitive feel for the difference between measuring and random stack sampling:
+There are profilers now that sample the stack, even on wall-clock time, butwhat comes outis measurements (or hot path, or hot spot, from which a ""bottleneck"" can easily hide). What they don't show you (and they easily could) is the actual samples themselves. And if your goal is tofindthe bottleneck, the number of them you need to see is,on average, 2 divided by the fraction of time it takes.
+So if it takes 30% of time, 2/.3 = 6.7 samples, on average, will show it, and the chance that 20 samples will show it is 99.2%. Here is an off-the-cuff illustration of the difference between examining measurements and examining stack samples.
+The bottleneck could be one big blob like this, or numerous small ones, it makes no difference.  Measurement is horizontal; it tells you what fraction of time specific routines take.
+Sampling is vertical.
+If there is any way to avoid what the whole program is doing at that moment,and if you see it on a second sample, you've found the bottleneck.
+That's what makes the difference - seeing the whole reason for the time being spent, not just how much."
+"I've just finished listening to the Software Engineering radiopodcast interview with Scott MeyersregardingC++11. Most of the new features made sense to me, with the exception of one. I still don't getmove semantics... What is it exactly?","I find it easiest to understand move semantics with example code. Let's start with a very simple string class which only holds a pointer to a heap-allocated block of memory: #include <cstring>
+#include <algorithm>
+
+class string
+{
+    char* data;
+
+public:
+
+    string(const char* p)
+    {
+        size_t size = std::strlen(p) + 1;
+        data = new char[size];
+        std::memcpy(data, p, size);
+    } Since we chose to manage the memory ourselves, we need to follow therule of three. I am going to defer writing the assignment operator and only implement the destructor and the copy constructor for now: ~string()
+    {
+        delete[] data;
+    }
+
+    string(const string& that)
+    {
+        size_t size = std::strlen(that.data) + 1;
+        data = new char[size];
+        std::memcpy(data, that.data, size);
+    } The copy constructor defines what it means to copy string objects. The parameterconst string& thatbinds to all expressions of type string which allows you to make copies in the following examples: string a(x);                                    // Line 1
+string b(x + y);                                // Line 2
+string c(some_function_returning_a_string());   // Line 3 Now comes the key insight into move semantics. Note that only in the first line where we copyxis this deep copy really necessary, because we might want to inspectxlater and would be very surprised ifxhad changed somehow. Did you notice how I just saidxthree times (four times if you include this sentence) and meant theexact same objectevery time? We call expressions such asx""lvalues"". The arguments in lines 2 and 3 are not lvalues, but rvalues, because the underlying string objects have no names, so the client has no way to inspect them again at a later point in time.
+rvalues denote temporary objects which are destroyed at the next semicolon (to be more precise: at the end of the full-expression that lexically contains the rvalue). This is important because during the initialization ofbandc, we could do whatever we wanted with the source string, andthe client couldn't tell a difference! C++0x introduces a new mechanism called ""rvalue reference"" which, among other things,
+allows us to detect rvalue arguments via function overloading. All we have to do is write a constructor with an rvalue reference parameter. Inside that constructor we can doanything we wantwith the source, as long as we leave it insomevalid state: string(string&& that)   // string&& is an rvalue reference to a string
+    {
+        data = that.data;
+        that.data = nullptr;
+    } What have we done here? Instead of deeply copying the heap data, we have just copied the pointer and then set the original pointer to null (to prevent 'delete[]' from source object's destructor from releasing our 'just stolen data'). In effect, we have ""stolen"" the data that originally belonged to the source string. Again, the key insight is that under no circumstance could the client detect that the source had been modified. Since we don't really do a copy here, we call this constructor a ""move constructor"". Its job is to move resources from one object to another instead of copying them. Congratulations, you now understand the basics of move semantics! Let's continue by implementing the assignment operator. If you're unfamiliar with thecopy and swap idiom, learn it and come back, because it's an awesome C++ idiom related to exception safety. string& operator=(string that)
+    {
+        std::swap(data, that.data);
+        return *this;
+    }
+}; Huh, that's it? ""Where's the rvalue reference?"" you might ask. ""We don't need it here!"" is my answer :) Note that we pass the parameterthatby value, sothathas to be initialized just like any other string object. Exactly how isthatgoing to be initialized? In the olden days ofC++98, the answer would have been ""by the copy constructor"". In C++0x, the compiler chooses between the copy constructor and the move constructor based on whether the argument to the assignment operator is an lvalue or an rvalue. So if you saya = b, thecopy constructorwill initializethat(because the expressionbis an lvalue), and the assignment operator swaps the contents with a freshly created, deep copy. That is the very definition of the copy and swap idiom -- make a copy, swap the contents with the copy, and then get rid of the copy by leaving the scope. Nothing new here. But if you saya = x + y, themove constructorwill initializethat(because the expressionx + yis an rvalue), so there is no deep copy involved, only an efficient move.thatis still an independent object from the argument, but its construction was trivial,
+since the heap data didn't have to be copied, just moved. It wasn't necessary to copy it becausex + yis an rvalue, and again, it is okay to move from string objects denoted by rvalues. To summarize, the copy constructor makes a deep copy, because the source must remain untouched.
+The move constructor, on the other hand, can just copy the pointer and then set the pointer in the source to null. It is okay to ""nullify"" the source object in this manner, because the client has no way of inspecting the object again. I hope this example got the main point across. There is a lot more to rvalue references and move semantics which I intentionally left out to keep it simple. If you want more details please seemy supplementary answer."
+"The community reviewed whether to reopen this question2 years agoand left it closed: Original close reason(s) were not resolved I've been writing C and C++ code for almost twenty years, but there's one aspect of these languages that I've never really understood. I've obviously used regular casts i.e. MyClass *m = (MyClass *)ptr; all over the place, but there seem to be two other types of casts, and I don't know the difference. What's the difference between the following lines of code? MyClass *m = (MyClass *)ptr;
+MyClass *m = static_cast<MyClass *>(ptr);
+MyClass *m = dynamic_cast<MyClass *>(ptr);","static_castis used for cases where you basically want to reverse an implicit conversion, with a few restrictions and additions.static_castperforms no runtime checks. This should be used if you know that you refer to an object of a specific type, and thus a check would be unnecessary. Example: void func(void *data) {
+  // Conversion from MyClass* -> void* is implicit
+  MyClass *c = static_cast<MyClass*>(data);
+  ...
+}
+
+int main() {
+  MyClass c;
+  start_thread(&func, &c)  // func(&c) will be called
+      .join();
+} In this example, you know that you passed aMyClassobject, and thus there isn't any need for a runtime check to ensure this. dynamic_castis useful when you don't know what the dynamic type of the object is. It returns a null pointer if the object referred to doesn't contain the type casted to as a base class (when you cast to a reference, abad_castexception is thrown in that case). if (JumpStm *j = dynamic_cast<JumpStm*>(&stm)) {
+  ...
+} else if (ExprStm *e = dynamic_cast<ExprStm*>(&stm)) {
+  ...
+} You cannotusedynamic_castfor downcast (casting to a derived class)ifthe argument type is not polymorphic. For example, the following code is not valid, becauseBasedoesn't contain any virtual function: struct Base { };
+struct Derived : Base { };
+int main() {
+  Derived d; Base *b = &d;
+  dynamic_cast<Derived*>(b); // Invalid
+} An ""up-cast"" (cast to the base class) is always valid with bothstatic_castanddynamic_cast, and also without any cast, as an ""up-cast"" is an implicit conversion (assuming the base class is accessible, i.e. it's apublicinheritance). These casts are also called C-style cast. A C-style cast is basically identical to trying out a range of sequences of C++ casts, and taking the first C++ cast that works, without ever consideringdynamic_cast. Needless to say, this is much more powerful as it combines all ofconst_cast,static_castandreinterpret_cast, but it's also unsafe, because it does not usedynamic_cast. In addition, C-style casts not only allow you to do this, but they also allow you to safely cast to a private base-class, while the ""equivalent""static_castsequence would give you a compile-time error for that. Some people prefer C-style casts because of their brevity. I use them for numeric casts only, and use the appropriate C++ casts when user defined types are involved, as they provide stricter checking."
+I have a solid understanding of mostOOPtheory but the one thing that confuses me a lot is virtual destructors. I thought that the destructor always gets called no matter what and for every object in the chain. When are you meant to make them virtual and why?,"Virtual destructors are useful when you might potentially delete an instance of a derived class through a pointer to base class: class Base 
+{
+    // some virtual methods
+};
+
+class Derived : public Base
+{
+    ~Derived()
+    {
+        // Do some important cleanup
+    }
+}; Here, you'll notice that I didn't declare Base's destructor to bevirtual. Now, let's have a look at the following snippet: Base *b = new Derived();
+// use b
+delete b; // Here's the problem! Since Base's destructor is notvirtualandbis aBase*pointing to aDerivedobject,delete bhasundefined behaviour: [Indelete b], if the static type of the
+  object to be deleted is different from its dynamic type, the static
+  type shall be a base class of the dynamic type of the object to be
+  deleted andthe static type shall have a virtual destructor or the
+  behavior is undefined. In most implementations, the call to the destructor will be resolved like any non-virtual code, meaning that the destructor of the base class will be called but not the one of the derived class, resulting in a resources leak. To sum up, always make base classes' destructorsvirtualwhen they're meant to be manipulated polymorphically. If you want to prevent the deletion of an instance through a base class pointer, you can make the base class destructor protected and nonvirtual; by doing so, the compiler won't let you calldeleteon a base class pointer. You can learn more about virtuality and virtual base class destructor inthis article from Herb Sutter."
+"One of the most interesting projects I've worked on in the past couple of years was a project aboutimage processing. The goal was to develop a system to be able to recognize Coca-Cola'cans'(note that I'm stressing the word 'cans', you'll see why in a minute). You can see a sample below, with the can recognized in thegreen rectanglewith scale and rotation.  Some constraints on the project: So you could end up with tricky things like this (which in this case had my algorithm totally fail):  I did this project a while ago, and had a lot of fun doing it, and I had a decent implementation. Here are some details about my implementation: Language: Done in C++ usingOpenCVlibrary. Pre-processing: For the image pre-processing, i.e. transforming the image into a more raw form to give to the algorithm, I used 2 methods: Algorithm: The algorithm itself I chose for this task was taken fromthisawesome book on feature extraction and calledGeneralized Hough Transform(pretty different from the regular Hough Transform). It basically says a few things: In the end, you end up with a heat map of the votes, for example here all the pixels of the contour of the can will vote for its gravitational center, so you'll have a lot of votes in the same pixel corresponding to the center, and will see a peak in the heat map as below:  Once you have that, a simple threshold-based heuristic can give you the location of the center pixel, from which you can derive the scale and rotation and then plot your little rectangle around it (final scale and rotation factor will obviously be relative to your original template). In theory at least... Results: Now, while this approach worked in the basic cases, it was severely lacking in some areas: How do I improve myspecificalgorithm, usingexclusively OpenCVfeatures, to resolve thefour specificissues mentioned?","An alternative approach would be to extract features (keypoints) using thescale-invariant feature transform(SIFT) orSpeeded Up Robust Features(SURF). You can find a nice OpenCV code example in Java, C++, and Python on this page:Features2D + Homography to find a known object Both algorithms are invariant to scaling and rotation. Since they work with features, you can also handleocclusion(as long as enough keypoints are visible).  Image source: tutorial example The processing takes a few hundred ms for SIFT, SURF is bit faster, but it not suitable for real-time applications. ORB uses FAST which is weaker regarding rotation invariance."
+"I'm coming from a Java background and have started working with objects in C++. But one thing that occurred to me is that people often use pointers to objects rather than the objects themselves, for example this declaration: Object *myObject = new Object; rather than: Object myObject; Or instead of using a function, let's saytestFunc(), like this: myObject.testFunc(); we have to write: myObject->testFunc(); But I can't figure out why should we do it this way. I would assume it has to do with efficiency and speed since we get direct access to the memory address. Am I right?","It's very unfortunate that you see dynamic allocation so often. That just shows how many bad C++ programmers there are. In a sense, you have two questions bundled up into one. The first is when should we use dynamic allocation (usingnew)? The second is when should we use pointers? The important take-home message is that you shouldalways use the appropriate tool for the job. In almost all situations, there is something more appropriate and safer than performing manual dynamic allocation and/or using raw pointers. In your question, you've demonstrated two ways of creating an object. The main difference is the storage duration of the object. When doingObject myObject;within a block, the object is created with automatic storage duration, which means it will be destroyed automatically when it goes out of scope. When you donew Object(), the object has dynamic storage duration, which means it stays alive until you explicitlydeleteit. You should only use dynamic storage duration when you need it. 
+That is,you shouldalwaysprefer creating objects with automatic storage duration when you can. The main two situations in which you might require dynamic allocation: When you do absolutely require dynamic allocation, you should encapsulate it in a smart pointer or some other type that performsRAII(like the standard containers). Smart pointers provide ownership semantics of dynamically allocated objects. Take a look atstd::unique_ptrandstd::shared_ptr, for example. If you use them appropriately, you can almost entirely avoid performing your own memory management (see theRule of Zero). However, there are other more general uses for raw pointers beyond dynamic allocation, but most have alternatives that you should prefer. As before,always prefer the alternatives unless you really need pointers. You need reference semantics. Sometimes you want to pass an object using a pointer (regardless of how it was allocated) because you want the function to which you're passing it to have access that that specific object (not a copy of it). However, in most situations, you should prefer reference types to pointers, because this is specifically what they're designed for. Note this is not necessarily about extending the lifetime of the object beyond the current scope, as in situation 1 above. As before, if you're okay with passing a copy of the object, you don't need reference semantics. You need polymorphism. You can only call functions polymorphically (that is, according to the dynamic type of an object) through a pointer or reference to the object. If that's the behavior you need, then you need to use pointers or references. Again, references should be preferred. You want to represent that an object is optionalby allowing anullptrto be passed when the object is being omitted. If it's an argument, you should prefer to use default arguments or function overloads. Otherwise, you should preferably use a type that encapsulates this behavior, such asstd::optional(introduced in C++17 - with earlier C++ standards, useboost::optional). You want to decouple compilation units to improve compilation time. The useful property of a pointer is that you only require a forward declaration of the pointed-to type (to actually use the object, you'll need a definition). This allows you to decouple parts of your compilation process, which may significantly improve compilation time. See thePimpl idiom. You need to interface with a C libraryor a C-style library. At this point, you're forced to use raw pointers. The best thing you can do is make sure you only let your raw pointers loose at the last possible moment. You can get a raw pointer from a smart pointer, for example, by using itsgetmember function. If a library performs some allocation for you which it expects you to deallocate via a handle, you can often wrap the handle up in a smart pointer with a custom deleter that will deallocate the object appropriately."
+"I always mess up how to useconst int *,const int * const, andint * constcorrectly. Is there a set of rules defining what you can and cannot do? I want to know all the do's and all don'ts in terms of assignments, passing to the functions, etc.","Read it backwards (as driven byClockwise/Spiral Rule): Now the firstconstcan be on either side of the type so: If you want to go really crazy you can do things like this: If you're ever uncertain, you can use a tool likecdecl+to convert declarations to prose automatically. To make sure we are clear on the meaning ofconst: int a = 5, b = 10, c = 15;
+
+const int* foo;     // pointer to constant int.
+foo = &a;           // assignment to where foo points to.
+
+/* dummy statement*/
+*foo = 6;           // the value of a can´t get changed through the pointer.
+
+foo = &b;           // the pointer foo can be changed.
+
+
+
+int *const bar = &c;  // constant pointer to int 
+                      // note, you actually need to set the pointer 
+                      // here because you can't change it later ;)
+
+*bar = 16;            // the value of c can be changed through the pointer.    
+
+/* dummy statement*/
+bar = &a;             // not possible because bar is a constant pointer. foois a variable pointer to a constant integer. This lets you change what you point to but not the value that you point to. Most often this is seen with C-style strings where you have a pointer to aconst char. You may change which string you point to but you can't change the content of these strings. This is important when the string itself is in the data segment of a program and shouldn't be changed. baris a constant or fixed pointer to a value that can be changed. This is like a reference without the extra syntactic sugar. Because of this fact, usually you would use a reference where you would use aT* constpointer unless you need to allowNULLpointers."
+"What are undefined reference/unresolved external symbol errors? What are common causes, and how do I fix and prevent these errors?","Say you have the following code: // a.cpp
+int get() { return 0; } // b.cpp
+int get(); // usually, one doesn't write this directly, but gets these
+           // declarations from included header files
+int x = get(); When compilingb.cpp, the compiler simply assumes thatget()symbol was definedsomewhere, but it doesn't yet care where. The linking phase is responsible for finding the symbol and correctly linking the object files produced froma.cppandb.cpp. Ifa.cppdidn't defineget, you would get a linker error saying ""undefined reference"" or ""unresolved external symbol"". Compiling a C++ program takes place in several phases specified in[lex.phases], the last of which is relevant: 9.All external entity references are resolved.
+Library components are linked to satisfy external references to entities not defined in the current translation.
+All such translator output is collected into a program image which contains information needed for execution in its execution environment. SeeKeith Thompson's answerfor a summary of these phases. The specified errors occur during this last stage of compilation, most commonly referred to as linking. It basically means that you compiled a bunch of source files into object files or libraries, and now you want to get them to work together. If you're using Microsoft Visual Studio, you'll see that projects generate.libfiles. These contain a table of exported symbols, and a table of imported symbols. The imported symbols are resolved against the libraries you link against, and the exported symbols are provided for the libraries that use that.lib(if any). Similar mechanisms exist for other compilers/ platforms. Common error messages areerror LNK2001,error LNK1120,error LNK2019forMicrosoft Visual Studioandundefined reference tosymbolNameforGCC. The code: struct X
+{
+   virtual void foo();
+};
+struct Y : X
+{
+   void foo() {}
+};
+struct A
+{
+   virtual ~A() = 0;
+};
+struct B: A
+{
+   virtual ~B(){}
+};
+extern int x;
+void foo();
+int main()
+{
+   x = 0;
+   foo();
+   Y y;
+   B b;
+} will generate the following errors withGCC: /home/AbiSfw/ccvvuHoX.o: In function `main':
+prog.cpp:(.text+0x10): undefined reference to `x'
+prog.cpp:(.text+0x19): undefined reference to `foo()'
+prog.cpp:(.text+0x2d): undefined reference to `A::~A()'
+/home/AbiSfw/ccvvuHoX.o: In function `B::~B()':
+prog.cpp:(.text._ZN1BD1Ev[B::~B()]+0xb): undefined reference to `A::~A()'
+/home/AbiSfw/ccvvuHoX.o: In function `B::~B()':
+prog.cpp:(.text._ZN1BD0Ev[B::~B()]+0x12): undefined reference to `A::~A()'
+/home/AbiSfw/ccvvuHoX.o:(.rodata._ZTI1Y[typeinfo for Y]+0x8): undefined reference to `typeinfo for X'
+/home/AbiSfw/ccvvuHoX.o:(.rodata._ZTI1B[typeinfo for B]+0x8): undefined reference to `typeinfo for A'
+collect2: ld returned 1 exit status and similar errors withMicrosoft Visual Studio: 1>test2.obj : error LNK2001: unresolved external symbol ""void __cdecl foo(void)"" (?foo@@YAXXZ)
+1>test2.obj : error LNK2001: unresolved external symbol ""int x"" (?x@@3HA)
+1>test2.obj : error LNK2001: unresolved external symbol ""public: virtual __thiscall A::~A(void)"" (??1A@@UAE@XZ)
+1>test2.obj : error LNK2001: unresolved external symbol ""public: virtual void __thiscall X::foo(void)"" (?foo@X@@UAEXXZ)
+1>...\test2.exe : fatal error LNK1120: 4 unresolved externals"
+"Isif (a < 901)faster thanif (a <= 900)? Not exactly as in this simple example, but there are slight performance changes on loop complex code. I suppose this has to do something with generated machine code in case it's even true.","No, it will not be faster on most architectures. You didn't specify, but on x86, all of the integral comparisons will be typically implemented in two machine instructions: Example(Edited for brevity) Compiled with$ gcc -m32 -S -masm=intel test.c if (a < b) {
+        // Do something 1
+    } Compiles to: mov     eax, DWORD PTR [esp+24]      ; a
+    cmp     eax, DWORD PTR [esp+28]      ; b
+    jge     .L2                          ; jump if a is >= b
+    ; Do something 1
+.L2: And if (a <= b) {
+        // Do something 2
+    } Compiles to: mov     eax, DWORD PTR [esp+24]      ; a
+    cmp     eax, DWORD PTR [esp+28]      ; b
+    jg      .L5                          ; jump if a is > b
+    ; Do something 2
+.L5: So the only difference between the two is ajgversus ajgeinstruction. The two will take the same amount of time. I'd like to address the comment that nothing indicates that the different jump instructions take the same amount of time.  This one is a little tricky to answer, but here's what I can give: In theIntel Instruction Set Reference, they are all grouped together under one common instruction,Jcc(Jump if condition is met). The same grouping is made together under theOptimization Reference Manual, in Appendix C. Latency and Throughput. Latency— The number of clock cycles that are required for the
+execution core to  complete the execution of all of the μops that form
+an instruction. Throughput— The number of clock cycles required to
+wait before the issue  ports are free to accept the same instruction
+again. For many instructions, the  throughput of an instruction can be
+significantly less than its latency The values forJccare: Latency   Throughput
+Jcc     N/A        0.5 with the following footnote onJcc: So, nothing in the Intel docs ever treats oneJccinstruction any differently from the others. If one thinks about the actual circuitry used to implement the instructions, one can assume that there would be simple AND/OR gates on the different bits inEFLAGS, to determine whether the conditions are met. There is then, no reason that an instruction testing two bits should take any more or less time than one testing only one (Ignoring gate propagation delay, which is much less than the clock period.) Edit: Floating Point This holds true for x87 floating point as well:  (Pretty much same code as above, but withdoubleinstead ofint.) fld     QWORD PTR [esp+32]
+        fld     QWORD PTR [esp+40]
+        fucomip st, st(1)              ; Compare ST(0) and ST(1), and set CF, PF, ZF in EFLAGS
+        fstp    st(0)
+        seta    al                     ; Set al if above (CF=0 and ZF=0).
+        test    al, al
+        je      .L2
+        ; Do something 1
+.L2:
+
+        fld     QWORD PTR [esp+32]
+        fld     QWORD PTR [esp+40]
+        fucomip st, st(1)              ; (same thing as above)
+        fstp    st(0)
+        setae   al                     ; Set al if above or equal (CF=0).
+        test    al, al
+        je      .L5
+        ; Do something 2
+.L5:
+        leave
+        ret"
+"What is a C++ lambda expression? Why does C++ have them, what problems do they solve that were not solvable prior to their addition? And how can I benifit from using them? Please provide an example or two, and/or examples of when & where the lambda expression feature should be applied.","C++ includes useful generic functions likestd::for_eachandstd::transform, which can be very handy. Unfortunately they can also be quite cumbersome to use, particularly if thefunctoryou would like to apply is unique to the particular function. #include <algorithm>
+#include <vector>
+
+namespace {
+  struct f {
+    void operator()(int) {
+      // do something
+    }
+  };
+}
+
+void func(std::vector<int>& v) {
+  f f;
+  std::for_each(v.begin(), v.end(), f);
+} If you only usefonce and in that specific place it seems overkill to be writing a whole class just to do something trivial and one off. In C++03 you might be tempted to write something like the following, to keep the functor local: void func2(std::vector<int>& v) {
+  struct {
+    void operator()(int) {
+       // do something
+    }
+  } f;
+  std::for_each(v.begin(), v.end(), f);
+} however this is not allowed,fcannot be passed to atemplatefunction in C++03. C++11 introduces lambdas allow you to write an inline, anonymous functor to replace thestruct f. For small simple examples this can be cleaner to read (it keeps everything in one place) and potentially simpler to maintain, for example in the simplest form: void func3(std::vector<int>& v) {
+  std::for_each(v.begin(), v.end(), [](int) { /* do something here*/ });
+} Lambda functions are just syntactic sugar for anonymous functors. In simple cases the return type of the lambda is deduced for you, e.g.: void func4(std::vector<double>& v) {
+  std::transform(v.begin(), v.end(), v.begin(),
+                 [](double d) { return d < 0.00001 ? 0 : d; }
+                 );
+} however when you start to write more complex lambdas you will quickly encounter cases where the return type cannot be deduced by the compiler, e.g.: void func4(std::vector<double>& v) {
+    std::transform(v.begin(), v.end(), v.begin(),
+        [](double d) {
+            if (d < 0.0001) {
+                return 0;
+            } else {
+                return d;
+            }
+        });
+} To resolve this you are allowed to explicitly specify a return type for a lambda function, using-> T: void func4(std::vector<double>& v) {
+    std::transform(v.begin(), v.end(), v.begin(),
+        [](double d) -> double {
+            if (d < 0.0001) {
+                return 0;
+            } else {
+                return d;
+            }
+        });
+} So far we've not used anything other than what was passed to the lambda within it, but we can also use other variables, within the lambda. If you want to access other variables you can use the capture clause (the[]of the expression), which has so far been unused in these examples, e.g.: void func5(std::vector<double>& v, const double& epsilon) {
+    std::transform(v.begin(), v.end(), v.begin(),
+        [epsilon](double d) -> double {
+            if (d < epsilon) {
+                return 0;
+            } else {
+                return d;
+            }
+        });
+} You can capture by both reference and value, which you can specify using&and=respectively: The generatedoperator()isconstby default, with the implication that captures will beconstwhen you access them by default. This has the effect that each call with the same input would produce the same result, however you canmark the lambda asmutableto request that theoperator()that is produced is notconst."
+"In C++03, an expression is either anrvalueor anlvalue. In C++11, an expression can be an: Two categories have become five categories.","I guess this document might serve as a not so short introduction :n3055 The whole massacre began with the move semantics. Once we have expressions that can be moved and not copied, suddenly easy to grasp rules demanded distinction between expressions that can be moved, and in which direction. From what I guess based on the draft, the r/l value distinction stays the same, only in the context of moving things get messy. Are they needed? Probably not if we wish to forfeit the new features. But to allow better optimization we should probably embrace them. Quotingn3055: The document in question is a great reference for this question, because it shows the exact changes in the standard that have happened as a result of the introduction of the new nomenclature."
+"Why does this bit of code, const float x[16] = {  1.1,   1.2,   1.3,     1.4,   1.5,   1.6,   1.7,   1.8,
+                       1.9,   2.0,   2.1,     2.2,   2.3,   2.4,   2.5,   2.6};
+const float z[16] = {1.123, 1.234, 1.345, 156.467, 1.578, 1.689, 1.790, 1.812,
+                     1.923, 2.034, 2.145,   2.256, 2.367, 2.478, 2.589, 2.690};
+float y[16];
+for (int i = 0; i < 16; i++)
+{
+    y[i] = x[i];
+}
+
+for (int j = 0; j < 9000000; j++)
+{
+    for (int i = 0; i < 16; i++)
+    {
+        y[i] *= x[i];
+        y[i] /= z[i];
+        y[i] = y[i] + 0.1f; // <--
+        y[i] = y[i] - 0.1f; // <--
+    }
+} run more than 10 times faster than the following bit (identical except where noted)? const float x[16] = {  1.1,   1.2,   1.3,     1.4,   1.5,   1.6,   1.7,   1.8,
+                       1.9,   2.0,   2.1,     2.2,   2.3,   2.4,   2.5,   2.6};
+const float z[16] = {1.123, 1.234, 1.345, 156.467, 1.578, 1.689, 1.790, 1.812,
+                     1.923, 2.034, 2.145,   2.256, 2.367, 2.478, 2.589, 2.690};
+float y[16];
+for (int i = 0; i < 16; i++)
+{
+    y[i] = x[i];
+}
+
+for (int j = 0; j < 9000000; j++)
+{
+    for (int i = 0; i < 16; i++)
+    {
+        y[i] *= x[i];
+        y[i] /= z[i];
+        y[i] = y[i] + 0; // <--
+        y[i] = y[i] - 0; // <--
+    }
+} when compiling with Visual Studio 2010 SP1. 
+The optimization level was-02withsse2enabled.
+I haven't tested with other compilers.","Welcome to the world ofdenormalized floating-point!They can wreak havoc on performance!!! Denormal (or subnormal) numbers are kind of a hack to get some extra values very close to zero out of the floating point representation. Operations on denormalized floating-point can betens to hundreds of times slowerthan on normalized floating-point. This is because many processors can't handle them directly and must trap and resolve them using microcode. If you print out the numbers after 10,000 iterations, you will see that they have converged to different values depending on whether0or0.1is used. Here's the test code compiled on x64: int main() {
+
+    double start = omp_get_wtime();
+
+    const float x[16]={1.1,1.2,1.3,1.4,1.5,1.6,1.7,1.8,1.9,2.0,2.1,2.2,2.3,2.4,2.5,2.6};
+    const float z[16]={1.123,1.234,1.345,156.467,1.578,1.689,1.790,1.812,1.923,2.034,2.145,2.256,2.367,2.478,2.589,2.690};
+    float y[16];
+    for(int i=0;i<16;i++)
+    {
+        y[i]=x[i];
+    }
+    for(int j=0;j<9000000;j++)
+    {
+        for(int i=0;i<16;i++)
+        {
+            y[i]*=x[i];
+            y[i]/=z[i];
+#ifdef FLOATING
+            y[i]=y[i]+0.1f;
+            y[i]=y[i]-0.1f;
+#else
+            y[i]=y[i]+0;
+            y[i]=y[i]-0;
+#endif
+
+            if (j > 10000)
+                cout << y[i] << ""  "";
+        }
+        if (j > 10000)
+            cout << endl;
+    }
+
+    double end = omp_get_wtime();
+    cout << end - start << endl;
+
+    system(""pause"");
+    return 0;
+} Output: #define FLOATING
+1.78814e-007  1.3411e-007  1.04308e-007  0  7.45058e-008  6.70552e-008  6.70552e-008  5.58794e-007  3.05474e-007  2.16067e-007  1.71363e-007  1.49012e-007  1.2666e-007  1.11759e-007  1.04308e-007  1.04308e-007
+1.78814e-007  1.3411e-007  1.04308e-007  0  7.45058e-008  6.70552e-008  6.70552e-008  5.58794e-007  3.05474e-007  2.16067e-007  1.71363e-007  1.49012e-007  1.2666e-007  1.11759e-007  1.04308e-007  1.04308e-007
+
+//#define FLOATING
+6.30584e-044  3.92364e-044  3.08286e-044  0  1.82169e-044  1.54143e-044  2.10195e-044  2.46842e-029  7.56701e-044  4.06377e-044  3.92364e-044  3.22299e-044  3.08286e-044  2.66247e-044  2.66247e-044  2.24208e-044
+6.30584e-044  3.92364e-044  3.08286e-044  0  1.82169e-044  1.54143e-044  2.10195e-044  2.45208e-029  7.56701e-044  4.06377e-044  3.92364e-044  3.22299e-044  3.08286e-044  2.66247e-044  2.66247e-044  2.24208e-044 Note how in the second run the numbers are very close to zero. Denormalized numbers are generally rare and thus most processors don't try to handle them efficiently. To demonstrate that this has everything to do with denormalized numbers, if weflush denormals to zeroby adding this to the start of the code: _MM_SET_FLUSH_ZERO_MODE(_MM_FLUSH_ZERO_ON); Then the version with0is no longer 10x slower and actually becomes faster. (This requires that the code be compiled with SSE enabled.) This means that rather than using these weird lower precision almost-zero values, we just round to zero instead. Timings: Core i7 920 @ 3.5 GHz: //  Don't flush denormals to zero.
+0.1f: 0.564067
+0   : 26.7669
+
+//  Flush denormals to zero.
+0.1f: 0.587117
+0   : 0.341406 In the end, this really has nothing to do with whether it's an integer or floating-point. The0or0.1fis converted/stored into a register outside of both loops. So that has no effect on performance."
+"From what I've read,virtual functionsare functions in the base class that you can override in its derived classes. But earlier, when learning about basicinheritance, I was able to override base functions in derived classes without usingvirtual. What am I missing here? I know there is more to virtual functions, and it seems to be important so I want to be clear on what it is exactly.","Here is how I understood not just whatvirtualfunctions are, but why they're required: Let's say you have these two classes: class Animal
+{
+    public:
+        void eat() { std::cout << ""I'm eating generic food.""; }
+};
+
+class Cat : public Animal
+{
+    public:
+        void eat() { std::cout << ""I'm eating a rat.""; }
+}; In your main function: Animal *animal = new Animal;
+Cat *cat = new Cat;
+
+animal->eat(); // Outputs: ""I'm eating generic food.""
+cat->eat();    // Outputs: ""I'm eating a rat."" So far so good, right? Animals eat generic food, cats eat rats, all withoutvirtual. Let's change it a little now so thateat()is called via an intermediate function (a trivial function just for this example): // This can go at the top of the main.cpp file
+void func(Animal *xyz) { xyz->eat(); } Now our main function is: Animal *animal = new Animal;
+Cat *cat = new Cat;
+
+func(animal); // Outputs: ""I'm eating generic food.""
+func(cat);    // Outputs: ""I'm eating generic food."" Uh oh... we passed a Cat intofunc(), but it won't eat rats. Should you overloadfunc()so it takes aCat*? If you have to derive more animals from Animal they would all need their ownfunc(). The solution is to makeeat()from theAnimalclass a virtual function: class Animal
+{
+    public:
+        virtual void eat() { std::cout << ""I'm eating generic food.""; }
+};
+
+class Cat : public Animal
+{
+    public:
+        void eat() { std::cout << ""I'm eating a rat.""; }
+}; Main: func(animal); // Outputs: ""I'm eating generic food.""
+func(cat);    // Outputs: ""I'm eating a rat."" Done."
+"I was looking for the fastest way topopcountlarge arrays of data. I encountered avery weirdeffect: Changing the loop variable fromunsignedtouint64_tmade the performance drop by 50% on my PC. #include <iostream>
+#include <chrono>
+#include <x86intrin.h>
+
+int main(int argc, char* argv[]) {
+
+    using namespace std;
+    if (argc != 2) {
+       cerr << ""usage: array_size in MB"" << endl;
+       return -1;
+    }
+
+    uint64_t size = atol(argv[1])<<20;
+    uint64_t* buffer = new uint64_t[size/8];
+    char* charbuffer = reinterpret_cast<char*>(buffer);
+    for (unsigned i=0; i<size; ++i)
+        charbuffer[i] = rand()%256;
+
+    uint64_t count,duration;
+    chrono::time_point<chrono::system_clock> startP,endP;
+    {
+        startP = chrono::system_clock::now();
+        count = 0;
+        for( unsigned k = 0; k < 10000; k++){
+            // Tight unrolled loop with unsigned
+            for (unsigned i=0; i<size/8; i+=4) {
+                count += _mm_popcnt_u64(buffer[i]);
+                count += _mm_popcnt_u64(buffer[i+1]);
+                count += _mm_popcnt_u64(buffer[i+2]);
+                count += _mm_popcnt_u64(buffer[i+3]);
+            }
+        }
+        endP = chrono::system_clock::now();
+        duration = chrono::duration_cast<std::chrono::nanoseconds>(endP-startP).count();
+        cout << ""unsigned\t"" << count << '\t' << (duration/1.0E9) << "" sec \t""
+             << (10000.0*size)/(duration) << "" GB/s"" << endl;
+    }
+    {
+        startP = chrono::system_clock::now();
+        count=0;
+        for( unsigned k = 0; k < 10000; k++){
+            // Tight unrolled loop with uint64_t
+            for (uint64_t i=0;i<size/8;i+=4) {
+                count += _mm_popcnt_u64(buffer[i]);
+                count += _mm_popcnt_u64(buffer[i+1]);
+                count += _mm_popcnt_u64(buffer[i+2]);
+                count += _mm_popcnt_u64(buffer[i+3]);
+            }
+        }
+        endP = chrono::system_clock::now();
+        duration = chrono::duration_cast<std::chrono::nanoseconds>(endP-startP).count();
+        cout << ""uint64_t\t""  << count << '\t' << (duration/1.0E9) << "" sec \t""
+             << (10000.0*size)/(duration) << "" GB/s"" << endl;
+    }
+
+    free(charbuffer);
+} As you see, we create a buffer of random data, with the size beingxmegabytes wherexis read from the command line. Afterwards, we iterate over the buffer and use an unrolled version of the x86popcountintrinsic to perform the popcount. To get a more precise result, we do the popcount 10,000 times. We measure the times for the popcount. In the upper case, the inner loop variable isunsigned, in the lower case, the inner loop variable isuint64_t. I thought that this should make no difference, but the opposite is the case. I compile it like this (g++ version: Ubuntu 4.8.2-19ubuntu1): g++ -O3 -march=native -std=c++11 test.cpp -o test Here are the results on myHaswellCore i7-4770KCPU @ 3.50 GHz, runningtest 1(so 1 MB random data): As you see, the throughput of theuint64_tversion isonly halfthe one of theunsignedversion! The problem seems to be that different assembly gets generated, but why? First, I thought of a compiler bug, so I triedclang++(UbuntuClangversion 3.4-1ubuntu3): clang++ -O3 -march=native -std=c++11 teest.cpp -o test Result:test 1 So, it is almost the same result and is still strange.But now it gets super strange.I replace the buffer size that was read from input with a constant1, so I change: uint64_t size = atol(argv[1]) << 20; to uint64_t size = 1 << 20; Thus, the compiler now knows the buffer size at compile time. Maybe it can add some optimizations! Here are the numbers forg++: Now, both versions are equally fast. However, theunsignedgot even slower! It dropped from26to20 GB/s, thus replacing a non-constant by a constant value lead to adeoptimization. Seriously, I have no clue what is going on here! But now toclang++with the new version: Wait, what?Now, both versions dropped to theslownumber of 15 GB/s. Thus, replacing a non-constant by a constant value even lead to slow code inbothcases for Clang! I asked a colleague with anIvy BridgeCPU to compile my benchmark. He got similar results, so it does not seem to be Haswell. Because two compilers produce strange results here, it also does not seem to be a compiler bug. We do not have an AMD CPU here, so we could only test with Intel. Take the first example (the one withatol(argv[1])) and put astaticbefore the variable, i.e.: static uint64_t size=atol(argv[1])<<20; Here are my results in g++: Yay, yet another alternative. We still have the fast 26 GB/s withu32, but we managed to getu64at least from the 13 GB/s to the 20 GB/s version!On my collegue's PC, theu64version became even faster than theu32version, yielding the fastest result of all.Sadly, this only works forg++,clang++does not seem to care aboutstatic. Can you explain these results? Especially: I know that optimization is a tricky territory, however, I never thought that such small changes can lead to a100% differencein execution time and that small factors like a constant buffer size can again mix results totally. Of course, I always want to have the version that is able to popcount 26 GB/s. The only reliable way I can think of is copy paste the assembly for this case and use inline assembly. This is the only way I can get rid of compilers that seem to go mad on small changes. What do you think? Is there another way to reliably get the code with most performance? Here is the disassembly for the various results: 26 GB/s version fromg++ / u32 / non-const bufsize: 0x400af8:
+lea 0x1(%rdx),%eax
+popcnt (%rbx,%rax,8),%r9
+lea 0x2(%rdx),%edi
+popcnt (%rbx,%rcx,8),%rax
+lea 0x3(%rdx),%esi
+add %r9,%rax
+popcnt (%rbx,%rdi,8),%rcx
+add $0x4,%edx
+add %rcx,%rax
+popcnt (%rbx,%rsi,8),%rcx
+add %rcx,%rax
+mov %edx,%ecx
+add %rax,%r14
+cmp %rbp,%rcx
+jb 0x400af8 13 GB/s version fromg++ / u64 / non-const bufsize: 0x400c00:
+popcnt 0x8(%rbx,%rdx,8),%rcx
+popcnt (%rbx,%rdx,8),%rax
+add %rcx,%rax
+popcnt 0x10(%rbx,%rdx,8),%rcx
+add %rcx,%rax
+popcnt 0x18(%rbx,%rdx,8),%rcx
+add $0x4,%rdx
+add %rcx,%rax
+add %rax,%r12
+cmp %rbp,%rdx
+jb 0x400c00 15 GB/s version fromclang++ / u64 / non-const bufsize: 0x400e50:
+popcnt (%r15,%rcx,8),%rdx
+add %rbx,%rdx
+popcnt 0x8(%r15,%rcx,8),%rsi
+add %rdx,%rsi
+popcnt 0x10(%r15,%rcx,8),%rdx
+add %rsi,%rdx
+popcnt 0x18(%r15,%rcx,8),%rbx
+add %rdx,%rbx
+add $0x4,%rcx
+cmp %rbp,%rcx
+jb 0x400e50 20 GB/s version fromg++ / u32&u64 / const bufsize: 0x400a68:
+popcnt (%rbx,%rdx,1),%rax
+popcnt 0x8(%rbx,%rdx,1),%rcx
+add %rax,%rcx
+popcnt 0x10(%rbx,%rdx,1),%rax
+add %rax,%rcx
+popcnt 0x18(%rbx,%rdx,1),%rsi
+add $0x20,%rdx
+add %rsi,%rcx
+add %rcx,%rbp
+cmp $0x100000,%rdx
+jne 0x400a68 15 GB/s version fromclang++ / u32&u64 / const bufsize: 0x400dd0:
+popcnt (%r14,%rcx,8),%rdx
+add %rbx,%rdx
+popcnt 0x8(%r14,%rcx,8),%rsi
+add %rdx,%rsi
+popcnt 0x10(%r14,%rcx,8),%rdx
+add %rsi,%rdx
+popcnt 0x18(%r14,%rcx,8),%rbx
+add %rdx,%rbx
+add $0x4,%rcx
+cmp $0x20000,%rcx
+jb 0x400dd0 Interestingly, the fastest (26 GB/s) version is also the longest! It seems to be the only solution that useslea. Some versions usejbto jump, others usejne. But apart from that, all versions seem to be comparable. I don't see where a 100% performance gap could originate from, but I am not too adept at deciphering assembly. The slowest (13 GB/s) version looks even very short and good. Can anyone explain this? No matter what the answer to this question will be; I have learned that in really hot loopseverydetail can matter,even details that do not seem to have any association to the hot code. I have never thought about what type to use for a loop variable, but as you see such a minor change can make a100%difference! Even the storage type of a buffer can make a huge difference, as we saw with the insertion of thestatickeyword in front of the size variable! In the future, I will always test various alternatives on various compilers when writing really tight and hot loops that are crucial for system performance. The interesting thing is also that the performance difference is still so high although I have already unrolled the loop four times. So even if you unroll, you can still get hit by major performance deviations. Quite interesting.","Culprit: False Data Dependency(and the compiler isn't even aware of it) On Sandy/Ivy Bridge and Haswell processors, the instruction: popcnt  src, dest appears to have a false dependency on the destination registerdest. Even though the instruction only writes to it, the instruction will wait untildestis ready before executing.  This false dependency is (now) documented by Intel as erratumHSD146 (Haswell)andSKL029 (Skylake) Skylake fixed this forlzcntandtzcnt.Cannon Lake (and Ice Lake) fixed this forpopcnt.bsf/bsrhave a true output dependency: output unmodified for input=0. (Butno way to take advantage of that with intrinsics- only AMD documents it and compilers don't expose it.) (Yes, these instructions all runon the same execution unit). This dependency doesn't just hold up the 4popcnts from a single loop iteration. It can carry across loop iterations making it impossible for the processor to parallelize different loop iterations. Theunsignedvs.uint64_tand other tweaks don't directly affect the problem. But they influence the register allocator which assigns the registers to the variables. In your case, the speeds are a direct result of what is stuck to the (false) dependency chain depending on what the register allocator decided to do. The difference between 20 GB/s and 26 GB/s seems to be a minor artifact of the indirect addressing. Either way, the processor starts to hit other bottlenecks once you reach this speed. To test this, I used inline assembly to bypass the compiler and get exactly the assembly I want. I also split up thecountvariable to break all other dependencies that might mess with the benchmarks. Here are the results: Sandy Bridge Xeon @ 3.5 GHz:(full test code can be found at the bottom) Different Registers:18.6195 GB/s .L4:
+    movq    (%rbx,%rax,8), %r8
+    movq    8(%rbx,%rax,8), %r9
+    movq    16(%rbx,%rax,8), %r10
+    movq    24(%rbx,%rax,8), %r11
+    addq    $4, %rax
+
+    popcnt %r8, %r8
+    add    %r8, %rdx
+    popcnt %r9, %r9
+    add    %r9, %rcx
+    popcnt %r10, %r10
+    add    %r10, %rdi
+    popcnt %r11, %r11
+    add    %r11, %rsi
+
+    cmpq    $131072, %rax
+    jne .L4 Same Register:8.49272 GB/s .L9:
+    movq    (%rbx,%rdx,8), %r9
+    movq    8(%rbx,%rdx,8), %r10
+    movq    16(%rbx,%rdx,8), %r11
+    movq    24(%rbx,%rdx,8), %rbp
+    addq    $4, %rdx
+
+    # This time reuse ""rax"" for all the popcnts.
+    popcnt %r9, %rax
+    add    %rax, %rcx
+    popcnt %r10, %rax
+    add    %rax, %rsi
+    popcnt %r11, %rax
+    add    %rax, %r8
+    popcnt %rbp, %rax
+    add    %rax, %rdi
+
+    cmpq    $131072, %rdx
+    jne .L9 Same Register with broken chain:17.8869 GB/s .L14:
+    movq    (%rbx,%rdx,8), %r9
+    movq    8(%rbx,%rdx,8), %r10
+    movq    16(%rbx,%rdx,8), %r11
+    movq    24(%rbx,%rdx,8), %rbp
+    addq    $4, %rdx
+
+    # Reuse ""rax"" for all the popcnts.
+    xor    %rax, %rax    # Break the cross-iteration dependency by zeroing ""rax"".
+    popcnt %r9, %rax
+    add    %rax, %rcx
+    popcnt %r10, %rax
+    add    %rax, %rsi
+    popcnt %r11, %rax
+    add    %rax, %r8
+    popcnt %rbp, %rax
+    add    %rax, %rdi
+
+    cmpq    $131072, %rdx
+    jne .L14 So what went wrong with the compiler? It seems that neither GCC nor Visual Studio are aware thatpopcnthas such a false dependency. Nevertheless, these false dependencies aren't uncommon. It's just a matter of whether the compiler is aware of it. popcntisn't exactly the most used instruction. So it's not really a surprise that a major compiler could miss something like this. There also appears to be no documentation anywhere that mentions this problem. If Intel doesn't disclose it, then nobody outside will know until someone runs into it by chance. (Update:As of version 4.9.2, GCC is aware of this false-dependency and generates code to compensate it when optimizations are enabled. Major compilers from other vendors, including Clang, MSVC, and even Intel's own ICC are not yet aware of this microarchitectural erratum and will not emit code that compensates for it.) Why does the CPU have such a false dependency? We can speculate: it runs on the same execution unit asbsf/bsrwhichdohave an output dependency.  (How is POPCNT implemented in hardware?).  For those instructions, Intel documents the integer result for input=0 as ""undefined"" (with ZF=1), but Intel hardware actually gives a stronger guarantee to avoid breaking old software: output unmodified.  AMD documents this behaviour. Presumably it was somehow inconvenient to make some uops for this execution unit dependent on the output but others not. AMD processors do not appear to have this false dependency. The full test code is below for reference: #include <iostream>
+#include <chrono>
+#include <x86intrin.h>
+
+int main(int argc, char* argv[]) {
+
+   using namespace std;
+   uint64_t size=1<<20;
+
+   uint64_t* buffer = new uint64_t[size/8];
+   char* charbuffer=reinterpret_cast<char*>(buffer);
+   for (unsigned i=0;i<size;++i) charbuffer[i]=rand()%256;
+
+   uint64_t count,duration;
+   chrono::time_point<chrono::system_clock> startP,endP;
+   {
+      uint64_t c0 = 0;
+      uint64_t c1 = 0;
+      uint64_t c2 = 0;
+      uint64_t c3 = 0;
+      startP = chrono::system_clock::now();
+      for( unsigned k = 0; k < 10000; k++){
+         for (uint64_t i=0;i<size/8;i+=4) {
+            uint64_t r0 = buffer[i + 0];
+            uint64_t r1 = buffer[i + 1];
+            uint64_t r2 = buffer[i + 2];
+            uint64_t r3 = buffer[i + 3];
+            __asm__(
+                ""popcnt %4, %4  \n\t""
+                ""add %4, %0     \n\t""
+                ""popcnt %5, %5  \n\t""
+                ""add %5, %1     \n\t""
+                ""popcnt %6, %6  \n\t""
+                ""add %6, %2     \n\t""
+                ""popcnt %7, %7  \n\t""
+                ""add %7, %3     \n\t""
+                : ""+r"" (c0), ""+r"" (c1), ""+r"" (c2), ""+r"" (c3)
+                : ""r""  (r0), ""r""  (r1), ""r""  (r2), ""r""  (r3)
+            );
+         }
+      }
+      count = c0 + c1 + c2 + c3;
+      endP = chrono::system_clock::now();
+      duration=chrono::duration_cast<std::chrono::nanoseconds>(endP-startP).count();
+      cout << ""No Chain\t"" << count << '\t' << (duration/1.0E9) << "" sec \t""
+            << (10000.0*size)/(duration) << "" GB/s"" << endl;
+   }
+   {
+      uint64_t c0 = 0;
+      uint64_t c1 = 0;
+      uint64_t c2 = 0;
+      uint64_t c3 = 0;
+      startP = chrono::system_clock::now();
+      for( unsigned k = 0; k < 10000; k++){
+         for (uint64_t i=0;i<size/8;i+=4) {
+            uint64_t r0 = buffer[i + 0];
+            uint64_t r1 = buffer[i + 1];
+            uint64_t r2 = buffer[i + 2];
+            uint64_t r3 = buffer[i + 3];
+            __asm__(
+                ""popcnt %4, %%rax   \n\t""
+                ""add %%rax, %0      \n\t""
+                ""popcnt %5, %%rax   \n\t""
+                ""add %%rax, %1      \n\t""
+                ""popcnt %6, %%rax   \n\t""
+                ""add %%rax, %2      \n\t""
+                ""popcnt %7, %%rax   \n\t""
+                ""add %%rax, %3      \n\t""
+                : ""+r"" (c0), ""+r"" (c1), ""+r"" (c2), ""+r"" (c3)
+                : ""r""  (r0), ""r""  (r1), ""r""  (r2), ""r""  (r3)
+                : ""rax""
+            );
+         }
+      }
+      count = c0 + c1 + c2 + c3;
+      endP = chrono::system_clock::now();
+      duration=chrono::duration_cast<std::chrono::nanoseconds>(endP-startP).count();
+      cout << ""Chain 4   \t""  << count << '\t' << (duration/1.0E9) << "" sec \t""
+            << (10000.0*size)/(duration) << "" GB/s"" << endl;
+   }
+   {
+      uint64_t c0 = 0;
+      uint64_t c1 = 0;
+      uint64_t c2 = 0;
+      uint64_t c3 = 0;
+      startP = chrono::system_clock::now();
+      for( unsigned k = 0; k < 10000; k++){
+         for (uint64_t i=0;i<size/8;i+=4) {
+            uint64_t r0 = buffer[i + 0];
+            uint64_t r1 = buffer[i + 1];
+            uint64_t r2 = buffer[i + 2];
+            uint64_t r3 = buffer[i + 3];
+            __asm__(
+                ""xor %%rax, %%rax   \n\t""   // <--- Break the chain.
+                ""popcnt %4, %%rax   \n\t""
+                ""add %%rax, %0      \n\t""
+                ""popcnt %5, %%rax   \n\t""
+                ""add %%rax, %1      \n\t""
+                ""popcnt %6, %%rax   \n\t""
+                ""add %%rax, %2      \n\t""
+                ""popcnt %7, %%rax   \n\t""
+                ""add %%rax, %3      \n\t""
+                : ""+r"" (c0), ""+r"" (c1), ""+r"" (c2), ""+r"" (c3)
+                : ""r""  (r0), ""r""  (r1), ""r""  (r2), ""r""  (r3)
+                : ""rax""
+            );
+         }
+      }
+      count = c0 + c1 + c2 + c3;
+      endP = chrono::system_clock::now();
+      duration=chrono::duration_cast<std::chrono::nanoseconds>(endP-startP).count();
+      cout << ""Broken Chain\t""  << count << '\t' << (duration/1.0E9) << "" sec \t""
+            << (10000.0*size)/(duration) << "" GB/s"" << endl;
+   }
+
+   free(charbuffer);
+} An equally interesting benchmark can be found here:http://pastebin.com/kbzgL8siThis benchmark varies the number ofpopcnts that are in the (false) dependency chain. False Chain 0:  41959360000 0.57748 sec     18.1578 GB/s
+False Chain 1:  41959360000 0.585398 sec    17.9122 GB/s
+False Chain 2:  41959360000 0.645483 sec    16.2448 GB/s
+False Chain 3:  41959360000 0.929718 sec    11.2784 GB/s
+False Chain 4:  41959360000 1.23572 sec     8.48557 GB/s"
+"Want to improve this question?Guide the asker to update the question so it focuses on a single, specific problem. Narrowing the question will help others answer the question concisely. You mayedit the questionif you feel you can improve it yourself. If edited, the question will be reviewed and might be reopened. Closed8 months ago. We are compiling an embedded C++ application that is deployed in a shielded device in an environment bombarded withionizing radiation. We are using GCC and cross-compiling for ARM. When deployed, our application generates some erroneous data and crashes more often than we would like. The hardware is designed for this environment, and our application has run on this platform for several years. Are there changes we can make to our code, or compile-time improvements that can be made to identify/correctsoft errorsand memory-corruption caused bysingle event upsets? Have any other developers had success in reducing the harmful effects of soft errors on a long-running application?","Working for about 4-5 years with software/firmware development and environment testing ofminiaturized satellites*, I would like to share my experience here. *(miniaturized satellites are a lot more prone to single event upsets than bigger satellites due to its relatively small, limited sizes for its electronic components) To be very concise and direct: there is no mechanism to recover fromdetectable, erroneous
+  situationby the software/firmware itselfwithout, at least, onecopyofminimum working versionof the software/firmwaresomewhereforrecoverypurpose - and with thehardware supporting the recovery(functional). Now, this situation is normally handled both in the hardware and software level. Here, as you request, I will share what we can do in the software level. ...recovery purpose.... Provide ability to update/recompile/reflash your software/firmware in real environment. This is analmost must-havefeature for any software/firmware in highly ionized environment. Without this, youcouldhave redundant software/hardware as many as you want but at one point, they are all going to blow up. So, prepare this feature! ...minimum working version...Have responsive, multiple copies, minimum version of the software/firmware in your code. This is like Safe mode in Windows. Instead of having only one, fully functional version of your software, have multiple copies of the minimum version of your software/firmware. The minimum copy will usually having much less size than the full copy and almost always haveonlythe following two or three features: ...copy... somewhere...Have redundant software/firmware somewhere. You could, withorwithout redundant hardware, try to have redundant software/firmware in your ARM uC. This is normally done by having two or more identical software/firmwarein separate addresseswhich sending heartbeat to each other - but only one will be active at a time. If one or more software/firmware is known to be unresponsive, switch to the other software/firmware. The benefit of using this approach is we can have functional replacement immediately after an error occurs - without any contact with whatever external system/party who is responsible to detect and to repair the error (in satellite case, it is usually the Mission Control Centre (MCC)). Strictly speaking, without redundant hardware, the disadvantage of doing this is you actuallycannoteliminateallsingle point of failures. At the very least, you will still haveonesingle point of failure, which isthe switch itself(or often the beginning of the code). Nevertheless, for a device limited by size in a highly ionized environment (such as pico/femto satellites), the reduction of the single point of failures to one pointwithoutadditional hardware will still be worth considering. Somemore, the piece of code for the switching would certainly be much less than the code for the whole program - significantly reducing the risk of getting Single Event in it. But if you are not doing this, you should have at least one copy in your external system which can come in contact with the device and update the software/firmware (in the satellite case, it is again the mission control centre). ...detectable erroneous situation..The error must bedetectable, usually by the hardwareerror correction/detection circuitor by a small piece of code for error correction/detection. It is best to put such code small, multiple, andindependentfrom the main software/firmware. Its main task isonlyfor checking/correcting. If the hardware circuit/firmware isreliable(such as it is more radiation hardened than the rests - or having multiple circuits/logics), then you might consider making error-correction with it. But if it is not, it is better to make it as error-detection. The correction can be by external system/device. For the error correction, you could consider making use of a basic error correction algorithm like Hamming/Golay23, because they can be implemented more easily both in the circuit/software. But it ultimately depends on your team's capability. For error detection, normally CRC is used. ...hardware supporting the recoveryNow, comes to the most difficult aspect on this issue. Ultimately, the recovery requires the hardware which is responsible for the recovery to beat leastfunctional. If the hardware is permanently broken (normally happen after itsTotal ionizing dosereaches certain level), then there is (sadly) no way for the software to help in recovery. Thus, hardware is rightly the utmost importance concern for a device exposed to high radiation level (such as satellite). In addition to the suggestion for above anticipating firmware's error due to single event upset, I would also like to suggest you to have: Error detection and/or error correction algorithm in the inter-subsystem communication protocol. This is another almost must have in order to avoid incomplete/wrong signals received from other system Filter in your ADC reading. Donotuse the ADC reading directly. Filter it by median filter, mean filter, or any other filters -nevertrust single reading value. Sample more, not less - reasonably."
+"I am the developer of some family tree software (written in C++ and Qt). I had no problems until one of my customers mailed me a bug report. The problem is that the customer has two children with their own daughter, and, as a result, he can't use my software because of errors. Those errors are the result of my various assertions and invariants about the family graph being processed (for example, after walking a cycle, the program states that X can't be both father and grandfather of Y). How can I resolve those errors without removing all data assertions?","It seems you (and/or your company) have a fundamental misunderstanding of what a family tree is supposed to be. Let me clarify, I also work for a company that has (as one of its products) a family tree in its portfolio, and we have been struggling with similar problems. The problem, in our case, and I assume your case as well, comes from theGEDCOMformat that is extremely opinionated about what a family should be. However this format contains some severe misconceptions about what a family tree really looks like. GEDCOM has many issues, such as incompatibility with same sex relations, incest, etc... Which in real life happens more often than you'd imagine (especially when going back in time to the 1700-1800). We have modeled our family tree to what happens in the real world: Events (for example, births, weddings, engagement, unions, deaths, adoptions, etc.). We do not put any restrictions on these, except for logically impossible ones (for example, one can't be one's own parent, relations need two individuals, etc...) The lack of validations gives us a more ""real world"", simpler and more flexible solution. As for this specific case, I would suggest removing the assertions as they do not hold universally. For displaying issues (that will arise) I would suggest drawing the same node as many times as needed, hinting at the duplication by lighting up all the copies on selecting one of them."
+"In templates, where and why do I have to puttypenameandtemplateon dependent names?What exactly are dependent names anyway? I have the following code: template <typename T, typename Tail> // Tail will be a UnionNode too.
+struct UnionNode : public Tail {
+    // ...
+    template<typename U> struct inUnion {
+        // Q: where to add typename/template here?
+        typedef Tail::inUnion<U> dummy; 
+    };
+    template< > struct inUnion<T> { };
+};
+template <typename T> // For the last node Tn.
+struct UnionNode<T, void> {
+    // ...
+    template<typename U> struct inUnion; // intentionally not defined
+    template< > struct inUnion<T> { };   // specialization only for T
+}; The problem I have is in thetypedef Tail::inUnion<U> dummyline. I'm fairly certain thatinUnionis a dependent name, and VC++ is quite right in choking on it. I also know that I should be able to addtemplatesomewhere to tell the compiler thatinUnionis atemplate-id, but where exactly? Should it then assume thatinUnionis a class template, i.e.inUnion<U>names a type and not a function?","(Seehere also for my C++11 answer) In order to parse a C++ program, the compiler needs to know whether certain names are types or not. The following example demonstrates that: t * f; How should this be parsed? For many languages a compiler doesn't need to know the meaning of a name in order to parse and basically know what action a line of code does. In C++, the above however can yield vastly different interpretations depending on whattmeans. If it's a type, then it will be a declaration of a pointerf. However if it's not a type, it will be a multiplication. So the C++ Standard says at paragraph (3/7): Some names denote types or templates. In general, whenever a name is encountered it is necessary to determine whether that name denotes one of these entities before continuing to parse the program that contains it. The process that determines this is called name lookup. How will the compiler find out what a namet::xrefers to, iftrefers to a template type parameter?xcould be a static int data member that could be multiplied or could equally well be a nested class or typedef that could yield to a declaration.If a name has this property - that it can't be looked up until the actual template arguments are known - then it's called adependent name(it ""depends"" on the template parameters). You might recommend to just wait till the user instantiates the template: Let's wait until the user instantiates the template, and then later find out the real meaning oft::x * f;. This will work and actually is allowed by the Standard as a possible implementation approach. These compilers basically copy the template's text into an internal buffer, and only when an instantiation is needed, they parse the template and possibly detect errors in the definition. But instead of bothering the template's users (poor colleagues!) with errors made by a template's author, other implementations choose to check templates early on and give errors in the definition as soon as possible, before an instantiation even takes place. So there has to be a way to tell the compiler that certain names are types and that certain names aren't. The answer is:Wedecide how the compiler should parse this. Ift::xis a dependent name, then we need to prefix it bytypenameto tell the compiler to parse it in a certain way. The Standard says at (14.6/2): A name used in a template declaration or definition and that is dependent on a template-parameter is
+  assumed not to name a type unless the applicable name lookup finds a type name or the name is qualified
+  by the keyword typename. There are many names for whichtypenameis not necessary, because the compiler can, with the applicable name lookup in the template definition, figure out how to parse a construct itself - for example withT *f;, whenTis a type template parameter. But fort::x * f;to be a declaration, it must be written astypename t::x *f;. If you omit the keyword and the name is taken to be a non-type, but when instantiation finds it denotes a type, the usual error messages are emitted by the compiler. Sometimes, the error consequently is given at definition time: // t::x is taken as non-type, but as an expression the following misses an
+// operator between the two names or a semicolon separating them.
+t::x f; The syntax allowstypenameonly before qualified names- it is therefor taken as granted that unqualified names are always known to refer to types if they do so. A similar gotcha exists for names that denote templates, as hinted at by the introductory text. Remember the initial quote above and how the Standard requires special handling for templates as well? Let's take the following innocent-looking example: boost::function< int() > f; It might look obvious to a human reader. Not so for the compiler. Imagine the following arbitrary definition ofboost::functionandf: namespace boost { int function = 0; }
+int main() { 
+  int f = 0;
+  boost::function< int() > f; 
+} That's actually a validexpression! It uses the less-than operator to compareboost::functionagainst zero (int()), and then uses the greater-than operator to compare the resultingboolagainstf. However as you might well know,boost::functionin real lifeis a template, so the compiler knows (14.2/3): After name lookup (3.4) finds that a name is a template-name, if this name is followed by a <, the < is
+  always taken as the beginning of a template-argument-list and never as a name followed by the less-than
+  operator. Now we are back to the same problem as withtypename. What if we can't know yet whether the name is a template when parsing the code? We will need to inserttemplateimmediately before the template name, as specified by14.2/4. This looks like: t::template f<int>(); // call a function template Template names can not only occur after a::but also after a->or.in a class member access. You need to insert the keyword there too: this->template f<int>(); // call a function template For the people that have thick Standardese books on their shelf and that want to know what exactly I was talking about, I'll talk a bit about how this is specified in the Standard. In template declarations some constructs have different meanings depending on what template arguments you use to instantiate the template: Expressions may have different types or values, variables may have different types or function calls might end up calling different functions. Such constructs are generally said todependon template parameters. The Standard defines precisely the rules by whether a construct is dependent or not. It separates them into logically different groups: One catches types, another catches expressions. Expressions may depend by their value and/or their type. So we have, with typical examples appended: Most of the rules are intuitive and are built up recursively: For example, a type constructed asT[N]is a dependent type ifNis a value-dependent expression orTis a dependent type. The details of this can be read in section(14.6.2/1) for dependent types,(14.6.2.2)for type-dependent expressions and(14.6.2.3)for value-dependent expressions. The Standard is a bit unclear about whatexactlyis adependent name. On a simple read (you know, the principle of least surprise), all it defines as adependent nameis the special case for function names below. But since clearlyT::xalso needs to be looked up in the instantiation context, it also needs to be a dependent name (fortunately, as of mid C++14 the committee has started to look into how to fix this confusing definition). To avoid this problem, I have resorted to a simple interpretation of the Standard text. Of all the constructs that denote dependent types or expressions, a subset of them represent names. Those names are therefore ""dependent names"". A name can take different forms - the Standard says: A name is a use of an identifier (2.11), operator-function-id (13.5), conversion-function-id (12.3.2), or template-id (14.2) that denotes an entity or label (6.6.4, 6.1) An identifier is just a plain sequence of characters / digits, while the next two are theoperator +andoperator typeform. The last form istemplate-name <argument list>. All these are names, and by conventional use in the Standard, a name can also include qualifiers that say what namespace or class a name should be looked up in. A value dependent expression1 + Nis not a name, butNis. The subset of all dependent constructs that are names is calleddependent name. Function names, however, may have different meaning in different instantiations of a template, but unfortunately are not caught by this general rule. Not primarily a concern of this article, but still worth mentioning: Function names are an exception that are handled separately. An identifier function name is dependent not by itself, but by the type dependent argument expressions used in a call. In the examplef((T)0),fis a dependent name. In the Standard, this is specified at(14.6.2/1). In enough cases we need both oftypenameandtemplate. Your code should look like the following template <typename T, typename Tail>
+struct UnionNode : public Tail {
+    // ...
+    template<typename U> struct inUnion {
+        typedef typename Tail::template inUnion<U> dummy;
+    };
+    // ...
+}; The keywordtemplatedoesn't always have to appear in the last part of a name. It can appear in the middle before a class name that's used as a scope, like in the following example typename t::template iterator<int>::value_type v; In some cases, the keywords are forbidden, as detailed below On the name of a dependent base class you are not allowed to writetypename. It's assumed that the name given is a class type name. This is true for both names in the base-class list and the constructor initializer list: template <typename T>
+ struct derive_from_Has_type : /* typename */ SomeBase<T>::type 
+ { }; In using-declarations it's not possible to usetemplateafter the last::, and the C++ committeesaidnot to work on a solution. template <typename T>
+ struct derive_from_Has_type : SomeBase<T> {
+    using SomeBase<T>::template type; // error
+    using typename SomeBase<T>::type; // typename *is* allowed
+ };"
+"I know that in C++11 we can now useusingto write type alias, liketypedefs: typedef int MyInt; Is, from what I understand, equivalent to: using MyInt = int; And that new syntax emerged from the effort to have a way to express ""template typedef"": template< class T > using MyType = AnotherType< T, MyAllocatorType >; But, with the first two non-template examples, are there any other subtle differences in the standard? For example,typedefs do aliasing in a ""weak"" way. That is it does not create a new type but only a new name (conversions are implicit between those names). Is it the same withusingor does it generate a new type? Are there any differences?","They are equivalent, from the standard (emphasis mine) (7.1.3.2): A typedef-name can also be introduced by an alias-declaration. The
+  identifier following the using keyword becomes a typedef-name and the
+  optional attribute-specifier-seq following the identifier appertains
+  to that typedef-name.It has the same semantics as if it were
+  introduced by the typedef specifier.In particular, it
+  does not define a new type and it shall not appear in the type-id."
+The community reviewed whether to reopen this question2 years agoand left it closed: Original close reason(s) were not resolved In what scenarios is it better to use astructvs aclassin C++?,"The differences between aclassand astructin C++ are: Both classes and structs can have a mixture ofpublic,protectedandprivatemembers, can use inheritance, and can have member functions. I would recommend you:"
+"What is the difference betweenpublic,private, andprotectedinheritance in C++?","class A 
+{
+    public:
+       int x;
+    protected:
+       int y;
+    private:
+       int z;
+};
+
+class B : public A
+{
+    // x is public
+    // y is protected
+    // z is not accessible from B
+};
+
+class C : protected A
+{
+    // x is protected
+    // y is protected
+    // z is not accessible from C
+};
+
+class D : private A    // 'private' is default for classes
+{
+    // x is private
+    // y is private
+    // z is not accessible from D
+}; IMPORTANT NOTE: Classes B, C and D all contain the variables x, y and z. It is just question of access. About usage of protected and private inheritance you could readhere."
+"I know that global variables in C sometimes have theexternkeyword. What is anexternvariable? What is the declaration like? What is its scope? This is related to sharing variables across source files, but how does that work precisely? Where do I useextern?","Usingexternis only of relevance when the program you're building
+consists of multiple source files linked together, where some of the
+variables defined, for example, in source filefile1.cneed to be
+referenced in other source files, such asfile2.c. It is important tounderstand the difference betweendefininga
+variable anddeclaringa
+variable: A variable isdeclaredwhen the compiler is informed that a
+variable exists (and this is its type); it does not allocate the
+storage for the variable at that point. A variable isdefinedwhen the compiler allocates the storage for
+the variable. You may declare a variable multiple times (though once is sufficient);
+you may only define it once within a given scope.
+A variable definition is also a declaration, but not all variable
+declarations are definitions. The clean, reliable way to declare and define global variables is to use
+a header file to contain anexterndeclarationof the variable. The header is included by the one source file that defines the variable
+and by all the source files that reference the variable.
+For each program, one source file (and only one source file) defines the
+variable.
+Similarly, one header file (and only one header file) should declare the
+variable.
+The header file is crucial; it enables cross-checking between
+independent TUs (translation units — think source files) and ensures
+consistency. Although there are other ways of doing it, this method is simple and
+reliable.
+It is demonstrated byfile3.h,file1.candfile2.c: extern int global_variable;  /* Declaration of the variable */ #include ""file3.h""  /* Declaration made available here */
+#include ""prog1.h""  /* Function declarations */
+
+/* Variable defined here */
+int global_variable = 37;    /* Definition checked against declaration */
+
+int increment(void) { return global_variable++; } #include ""file3.h""
+#include ""prog1.h""
+#include <stdio.h>
+
+void use_it(void)
+{
+    printf(""Global variable: %d\n"", global_variable++);
+} That's the best way to declare and define global variables. The next two files complete the source forprog1: The complete programs shown use functions, so function declarations have
+crept in.
+Both C99 and C11 require functions to be declared or defined before they
+are used (whereas C90 did not, for good reasons).
+I use the keywordexternin front of function declarations in headers
+for consistency — to match theexternin front of variable
+declarations in headers.
+Many people prefer not to useexternin front of function
+declarations; the compiler doesn't care — and ultimately, neither do I
+as long as you're consistent, at least within a source file. extern void use_it(void);
+extern int increment(void); #include ""file3.h""
+#include ""prog1.h""
+#include <stdio.h>
+
+int main(void)
+{
+    use_it();
+    global_variable += 19;
+    use_it();
+    printf(""Increment: %d\n"", increment());
+    return 0;
+} The fileprog1.mkis a makefile forprog1only.
+It will work with most versions ofmakeproduced since about the turn
+of the millennium.
+It is not tied specifically to GNU Make. # Minimal makefile for prog1
+
+PROGRAM = prog1
+FILES.c = prog1.c file1.c file2.c
+FILES.h = prog1.h file3.h
+FILES.o = ${FILES.c:.c=.o}
+
+CC      = gcc
+SFLAGS  = -std=c11
+GFLAGS  = -g
+OFLAGS  = -O3
+WFLAG1  = -Wall
+WFLAG2  = -Wextra
+WFLAG3  = -Werror
+WFLAG4  = -Wstrict-prototypes
+WFLAG5  = -Wmissing-prototypes
+WFLAGS  = ${WFLAG1} ${WFLAG2} ${WFLAG3} ${WFLAG4} ${WFLAG5}
+UFLAGS  = # Set on command line only
+
+CFLAGS  = ${SFLAGS} ${GFLAGS} ${OFLAGS} ${WFLAGS} ${UFLAGS}
+LDFLAGS =
+LDLIBS  =
+
+all:    ${PROGRAM}
+
+${PROGRAM}: ${FILES.o}
+    ${CC} -o $@ ${CFLAGS} ${FILES.o} ${LDFLAGS} ${LDLIBS}
+
+prog1.o: ${FILES.h}
+file1.o: ${FILES.h}
+file2.o: ${FILES.h}
+
+# If it exists, prog1.dSYM is a directory on macOS
+DEBRIS = a.out core *~ *.dSYM
+RM_FR  = rm -fr
+
+clean:
+    ${RM_FR} ${FILES.o} ${PROGRAM} ${DEBRIS} Rules to be broken by experts only, and only with good reason: A header file only containsexterndeclarations of variables — neverstaticor unqualified variable definitions. For any given variable, only one header file declares it (SPOT —
+Single Point of Truth). A source file never containsexterndeclarations of variables —
+source files always include the (sole) header that declares them. For any given variable, exactly one source file defines the variable,
+preferably initializing it too.  (Although there is no need to
+initialize explicitly to zero, it does no harm and can do some good,
+because there can be only one initialized definition of a particular
+global variable in a program). The source file that defines the variable also includes the header to
+ensure that the definition and the declaration are consistent. A function should never need to declare a variable usingextern. Avoid global variables whenever possible — use functions instead. The source code and text of this answer are available in mySOQ(Stack Overflow Questions)
+repository on GitHub in thesrc/so-0143-3204sub-directory. If you're not an experienced C programmer, you could (and perhaps
+should) stop reading here. With some (indeed, many) C compilers, you can get away with what's
+called a 'common' definition of a variable too.
+'Common', here, refers to a technique used in Fortran for sharing
+variables between source files, using a (possibly named) COMMON block.
+What happens here is that each of a number of files provides a tentative
+definition of the variable.
+As long as no more than one file provides an initialized definition,
+then the various files end up sharing a common single definition of the
+variable: #include ""prog2.h""
+
+long l;   /* Do not do this in portable code */
+
+void inc(void) { l++; } #include ""prog2.h""
+
+long l;   /* Do not do this in portable code */
+
+void dec(void) { l--; } #include ""prog2.h""
+#include <stdio.h>
+
+long l = 9;   /* Do not do this in portable code */
+
+void put(void) { printf(""l = %ld\n"", l); } This technique does not conform to the letter of the C standard and the
+'one definition rule' — it is officially undefined behaviour: J.2 Undefined behavior An identifier with external linkage is used, but in the program there
+does not exist exactly one external definition for the identifier, or
+the identifier is not used and there exist multiple external
+definitions for the identifier (6.9). §6.9 External definitions ¶5 Anexternal definitionis an external declaration that is also a
+definition of a function (other than an inline definition) or an
+object.
+If an identifier declared with external linkage is used in an
+expression (other than as part of the operand of asizeofor_Alignofoperator whose result is an integer constant), somewhere in
+the entire program there shall be exactly one external definition for
+the identifier; otherwise, there shall be no more than
+one.161) 161)Thus, if an identifier declared with external linkage
+is not used in an expression, there need be no external definition for
+it. However, the C standard also lists it in informative Annex J as one of
+theCommon extensions. J.5.11 Multiple external definitions There may be more than one external definition for the identifier of
+an object, with or without the explicit use of the keyword extern; if
+the definitions disagree, or more than one is initialized, the
+behavior is undefined (6.9.2). Because this technique is not always supported, it is best to avoid
+using it,especially if your code needs to be portable.
+Using this technique, you can also end up with unintentional type
+punning. If one of the files above declaredlas adoubleinstead of as along, C's type-unsafe linkers probably would not spot the mismatch.
+If you're on a machine with 64-bitlonganddouble, you'd not even
+get a warning; on a machine with 32-bitlongand 64-bitdouble,
+you'd probably get a warning about the different sizes — the linker
+would use the largest size, exactly as a Fortran program would take the
+largest size of any common blocks. Note that GCC 10.1.0, which was released on 2020-05-07, changes the
+default compilation options to use-fno-common, which means
+that by default, the code above no longer links unless you override the
+default with-fcommon(or use attributes, etc — see the link). The next two files complete the source forprog2: extern void dec(void);
+extern void put(void);
+extern void inc(void); #include ""prog2.h""
+#include <stdio.h>
+
+int main(void)
+{
+    inc();
+    put();
+    dec();
+    put();
+    dec();
+    put();
+} As noted in comments here, and as stated in my answer to a similarquestion, using multiple
+definitions for a global variable leads to undefined behaviour (J.2;
+§6.9), which is the standard's way of saying ""anything could happen"".
+One of the things that can happen is that the program behaves as you
+expect; and J.5.11 says, approximately, ""you might be lucky more often
+than you deserve"".
+But a program that relies on multiple definitions of an extern variable
+— with or without the explicit 'extern' keyword — is not a strictly
+conforming program and not guaranteed to work everywhere.
+Equivalently: it contains a bug which may or may not show itself. There are, of course, many ways in which these guidelines can be broken.
+Occasionally, there may be a good reason to break the guidelines, but
+such occasions are extremely unusual. int some_var;    /* Do not do this in a header!!! */ Note 1: if the header defines the variable without theexternkeyword,
+then each file that includes the header creates a tentative definition
+of the variable.
+As noted previously, this will often work, but the C standard does not
+guarantee that it will work. int some_var = 13;    /* Only one source file in a program can use this */ Note 2: if the header defines and initializes the variable, then only
+one source file in a given program can use the header.
+Since headers are primarily for sharing information, it is a bit silly
+to create one that can only be used once. static int hidden_global = 3;   /* Each source file gets its own copy  */ Note 3: if the header defines a static variable (with or without
+initialization), then each source file ends up with its own private
+version of the 'global' variable. If the variable is actually a complex array, for example, this can lead
+to extreme duplication of code.  It can, very occasionally, be a
+sensible way to achieve some effect, but that is very unusual. Use the header technique I showed first.
+It works reliably and everywhere.
+Note, in particular, that the header declaring theglobal_variableis
+included in every file that uses it — including the one that defines it.
+This ensures that everything is self-consistent. Similar concerns arise with declaring and defining functions —
+analogous rules apply.
+But the question was about variables specifically, so I've kept the
+answer to variables only. If you're not an experienced C programmer, you probably should stop reading here. Late Major Addition One concern that is sometimes (and legitimately) raised about the
+'declarations in headers, definitions in source' mechanism described
+here is that there are two files to be kept synchronized — the header
+and the source.  This is usually followed up with an observation that a
+macro can be used so that the header serves double duty — normally
+declaring the variables, but when a specific macro is set before the
+header is included, it defines the variables instead. Another concern can be that the variables need to be defined in each of
+a number of 'main programs'.  This is normally a spurious concern; you
+can simply introduce a C source file to define the variables and link
+the object file produced with each of the programs. A typical scheme works like this, using the original global variable
+illustrated infile3.h: #ifdef DEFINE_VARIABLES
+#define EXTERN /* nothing */
+#else
+#define EXTERN extern
+#endif /* DEFINE_VARIABLES */
+
+EXTERN int global_variable; #define DEFINE_VARIABLES
+#include ""file3a.h""  /* Variable defined - but not initialized */
+#include ""prog3.h""
+
+int increment(void) { return global_variable++; } #include ""file3a.h""
+#include ""prog3.h""
+#include <stdio.h>
+
+void use_it(void)
+{
+    printf(""Global variable: %d\n"", global_variable++);
+} The next two files complete the source forprog3: extern void use_it(void);
+extern int increment(void); #include ""file3a.h""
+#include ""prog3.h""
+#include <stdio.h>
+
+int main(void)
+{
+    use_it();
+    global_variable += 19;
+    use_it();
+    printf(""Increment: %d\n"", increment());
+    return 0;
+} The problem with this scheme as shown is that it does not provide for
+initialization of the global variable.  With C99 or C11 and variable argument
+lists for macros, you could define a macro to support initialization too.
+(With C89 and no support for variable argument lists in macros, there is no
+easy way to handle arbitrarily long initializers.) #ifdef DEFINE_VARIABLES
+#define EXTERN                  /* nothing */
+#define INITIALIZER(...)        = __VA_ARGS__
+#else
+#define EXTERN                  extern
+#define INITIALIZER(...)        /* nothing */
+#endif /* DEFINE_VARIABLES */
+
+EXTERN int global_variable INITIALIZER(37);
+EXTERN struct { int a; int b; } oddball_struct INITIALIZER({ 41, 43 }); Reverse contents of#ifand#elseblocks, fixing bug identified byDenis Kniazhev #define DEFINE_VARIABLES
+#include ""file3b.h""  /* Variables now defined and initialized */
+#include ""prog4.h""
+
+int increment(void) { return global_variable++; }
+int oddball_value(void) { return oddball_struct.a + oddball_struct.b; } #include ""file3b.h""
+#include ""prog4.h""
+#include <stdio.h>
+
+void use_them(void)
+{
+    printf(""Global variable: %d\n"", global_variable++);
+    oddball_struct.a += global_variable;
+    oddball_struct.b -= global_variable / 2;
+} Clearly, the code for the oddball structure is not what you'd normally
+write, but it illustrates the point.  The first argument to the second
+invocation ofINITIALIZERis{ 41and the remaining argument
+(singular in this example) is43 }.  Without C99 or similar support
+for variable argument lists for macros, initializers that need to
+contain commas are very problematic. Correct headerfile3b.hincluded (instead offileba.h) perDenis Kniazhev The next two files complete the source forprog4: extern int increment(void);
+extern int oddball_value(void);
+extern void use_them(void); #include ""file3b.h""
+#include ""prog4.h""
+#include <stdio.h>
+
+int main(void)
+{
+    use_them();
+    global_variable += 19;
+    use_them();
+    printf(""Increment: %d\n"", increment());
+    printf(""Oddball:   %d\n"", oddball_value());
+    return 0;
+} Any header should be protected against reinclusion, so that type
+definitions (enum, struct or union types, or typedefs generally) do not
+cause problems.  The standard technique is to wrap the body of the
+header in a header guard such as: #ifndef FILE3B_H_INCLUDED
+#define FILE3B_H_INCLUDED
+
+...contents of header...
+
+#endif /* FILE3B_H_INCLUDED */ The header might be included twice indirectly.  For example, iffile4b.hincludesfile3b.hfor a type definition that isn't shown,
+andfile1b.cneeds to use both headerfile4b.handfile3b.h, then
+you have some more tricky issues to resolve.  Clearly, you might revise
+the header list to include justfile4b.h.  However, you might not be
+aware of the internal dependencies — and the code should, ideally,
+continue to work. Further, it starts to get tricky because you might includefile4b.hbefore includingfile3b.hto generate the definitions, but the normal
+header guards onfile3b.hwould prevent the header being reincluded. So, you need to include the body offile3b.hat most once for
+declarations, and at most once for definitions, but you might need both
+in a single translation unit (TU — a combination of a source file and
+the headers it uses). However, it can be done subject to a not too unreasonable constraint.
+Let's introduce a new set of file names: external.hfor the EXTERN macro definitions, etc. file1c.hto define types (notably,struct oddball, the type ofoddball_struct). file2c.hto define or declare the global variables. file3c.cwhich defines the global variables. file4c.cwhich simply uses the global variables. file5c.cwhich shows that you can declare and then define the global variables. file6c.cwhich shows that you can define and then (attempt to) declare the global variables. In these examples,file5c.candfile6c.cdirectly include the headerfile2c.hseveral times, but that is the simplest way to show that the
+mechanism works.  It means that if the header was indirectly included
+twice, it would also be safe. The restrictions for this to work are: The header defining or declaring the global variables may not itself
+define any types. Immediately before you include a header that should define variables,
+you define the macro DEFINE_VARIABLES. The header defining or declaring the variables has stylized contents. /*
+** This header must not contain header guards (like <assert.h> must not).
+** Each time it is invoked, it redefines the macros EXTERN, INITIALIZE
+** based on whether macro DEFINE_VARIABLES is currently defined.
+*/
+#undef EXTERN
+#undef INITIALIZE
+
+#ifdef DEFINE_VARIABLES
+#define EXTERN              /* nothing */
+#define INITIALIZE(...)     = __VA_ARGS__
+#else
+#define EXTERN              extern
+#define INITIALIZE(...)     /* nothing */
+#endif /* DEFINE_VARIABLES */ #ifndef FILE1C_H_INCLUDED
+#define FILE1C_H_INCLUDED
+
+struct oddball
+{
+    int a;
+    int b;
+};
+
+extern void use_them(void);
+extern int increment(void);
+extern int oddball_value(void);
+
+#endif /* FILE1C_H_INCLUDED */ /* Standard prologue */
+#if defined(DEFINE_VARIABLES) && !defined(FILE2C_H_DEFINITIONS)
+#undef FILE2C_H_INCLUDED
+#endif
+
+#ifndef FILE2C_H_INCLUDED
+#define FILE2C_H_INCLUDED
+
+#include ""external.h""   /* Support macros EXTERN, INITIALIZE */
+#include ""file1c.h""     /* Type definition for struct oddball */
+
+#if !defined(DEFINE_VARIABLES) || !defined(FILE2C_H_DEFINITIONS)
+
+/* Global variable declarations / definitions */
+EXTERN int global_variable INITIALIZE(37);
+EXTERN struct oddball oddball_struct INITIALIZE({ 41, 43 });
+
+#endif /* !DEFINE_VARIABLES || !FILE2C_H_DEFINITIONS */
+
+/* Standard epilogue */
+#ifdef DEFINE_VARIABLES
+#define FILE2C_H_DEFINITIONS
+#endif /* DEFINE_VARIABLES */
+
+#endif /* FILE2C_H_INCLUDED */ #define DEFINE_VARIABLES
+#include ""file2c.h""  /* Variables now defined and initialized */
+
+int increment(void) { return global_variable++; }
+int oddball_value(void) { return oddball_struct.a + oddball_struct.b; } #include ""file2c.h""
+#include <stdio.h>
+
+void use_them(void)
+{
+    printf(""Global variable: %d\n"", global_variable++);
+    oddball_struct.a += global_variable;
+    oddball_struct.b -= global_variable / 2;
+} #include ""file2c.h""     /* Declare variables */
+
+#define DEFINE_VARIABLES
+#include ""file2c.h""  /* Variables now defined and initialized */
+
+int increment(void) { return global_variable++; }
+int oddball_value(void) { return oddball_struct.a + oddball_struct.b; } #define DEFINE_VARIABLES
+#include ""file2c.h""     /* Variables now defined and initialized */
+
+#include ""file2c.h""     /* Declare variables */
+
+int increment(void) { return global_variable++; }
+int oddball_value(void) { return oddball_struct.a + oddball_struct.b; } The next source file completes the source (provides a main program) forprog5,prog6andprog7: #include ""file2c.h""
+#include <stdio.h>
+
+int main(void)
+{
+    use_them();
+    global_variable += 19;
+    use_them();
+    printf(""Increment: %d\n"", increment());
+    printf(""Oddball:   %d\n"", oddball_value());
+    return 0;
+} prog5usesprog5.c,file3c.c,file4c.c,file1c.h,file2c.h,external.h. prog6usesprog5.c,file5c.c,file4c.c,file1c.h,file2c.h,external.h. prog7usesprog5.c,file6c.c,file4c.c,file1c.h,file2c.h,external.h. This scheme avoids most problems.  You only run into a problem if a
+header that defines variables (such asfile2c.h) is included by
+another header (sayfile7c.h) that defines variables.  There isn't an
+easy way around that other than ""don't do it"". You can partially work around the problem by revisingfile2c.hintofile2d.h: /* Standard prologue */
+#if defined(DEFINE_VARIABLES) && !defined(FILE2D_H_DEFINITIONS)
+#undef FILE2D_H_INCLUDED
+#endif
+
+#ifndef FILE2D_H_INCLUDED
+#define FILE2D_H_INCLUDED
+
+#include ""external.h""   /* Support macros EXTERN, INITIALIZE */
+#include ""file1c.h""     /* Type definition for struct oddball */
+
+#if !defined(DEFINE_VARIABLES) || !defined(FILE2D_H_DEFINITIONS)
+
+/* Global variable declarations / definitions */
+EXTERN int global_variable INITIALIZE(37);
+EXTERN struct oddball oddball_struct INITIALIZE({ 41, 43 });
+
+#endif /* !DEFINE_VARIABLES || !FILE2D_H_DEFINITIONS */
+
+/* Standard epilogue */
+#ifdef DEFINE_VARIABLES
+#define FILE2D_H_DEFINITIONS
+#undef DEFINE_VARIABLES
+#endif /* DEFINE_VARIABLES */
+
+#endif /* FILE2D_H_INCLUDED */ The issue becomes 'should the header include#undef DEFINE_VARIABLES?'
+If you omit that from the header and wrap any defining invocation with#defineand#undef: #define DEFINE_VARIABLES
+#include ""file2c.h""
+#undef DEFINE_VARIABLES in the source code (so the headers never alter the value ofDEFINE_VARIABLES), then you should be clean.  It is just a nuisance to
+have to remember to write the the extra line.  An alternative might be: #define HEADER_DEFINING_VARIABLES ""file2c.h""
+#include ""externdef.h"" /*
+** This header must not contain header guards (like <assert.h> must not).
+** Each time it is included, the macro HEADER_DEFINING_VARIABLES should
+** be defined with the name (in quotes - or possibly angle brackets) of
+** the header to be included that defines variables when the macro
+** DEFINE_VARIABLES is defined.  See also: external.h (which uses
+** DEFINE_VARIABLES and defines macros EXTERN and INITIALIZE
+** appropriately).
+**
+** #define HEADER_DEFINING_VARIABLES ""file2c.h""
+** #include ""externdef.h""
+*/
+
+#if defined(HEADER_DEFINING_VARIABLES)
+#define DEFINE_VARIABLES
+#include HEADER_DEFINING_VARIABLES
+#undef DEFINE_VARIABLES
+#undef HEADER_DEFINING_VARIABLES
+#endif /* HEADER_DEFINING_VARIABLES */ This is getting a tad convoluted, but seems to be secure (using thefile2d.h, with no#undef DEFINE_VARIABLESin thefile2d.h). /* Declare variables */
+#include ""file2d.h""
+
+/* Define variables */
+#define HEADER_DEFINING_VARIABLES ""file2d.h""
+#include ""externdef.h""
+
+/* Declare variables - again */
+#include ""file2d.h""
+
+/* Define variables - again */
+#define HEADER_DEFINING_VARIABLES ""file2d.h""
+#include ""externdef.h""
+
+int increment(void) { return global_variable++; }
+int oddball_value(void) { return oddball_struct.a + oddball_struct.b; } /* Standard prologue */
+#if defined(DEFINE_VARIABLES) && !defined(FILE8C_H_DEFINITIONS)
+#undef FILE8C_H_INCLUDED
+#endif
+
+#ifndef FILE8C_H_INCLUDED
+#define FILE8C_H_INCLUDED
+
+#include ""external.h""   /* Support macros EXTERN, INITIALIZE */
+#include ""file2d.h""     /* struct oddball */
+
+#if !defined(DEFINE_VARIABLES) || !defined(FILE8C_H_DEFINITIONS)
+
+/* Global variable declarations / definitions */
+EXTERN struct oddball another INITIALIZE({ 14, 34 });
+
+#endif /* !DEFINE_VARIABLES || !FILE8C_H_DEFINITIONS */
+
+/* Standard epilogue */
+#ifdef DEFINE_VARIABLES
+#define FILE8C_H_DEFINITIONS
+#endif /* DEFINE_VARIABLES */
+
+#endif /* FILE8C_H_INCLUDED */ /* Define variables */
+#define HEADER_DEFINING_VARIABLES ""file2d.h""
+#include ""externdef.h""
+
+/* Define variables */
+#define HEADER_DEFINING_VARIABLES ""file8c.h""
+#include ""externdef.h""
+
+int increment(void) { return global_variable++; }
+int oddball_value(void) { return oddball_struct.a + oddball_struct.b; } The next two files complete the source forprog8andprog9: #include ""file2d.h""
+#include <stdio.h>
+
+int main(void)
+{
+    use_them();
+    global_variable += 19;
+    use_them();
+    printf(""Increment: %d\n"", increment());
+    printf(""Oddball:   %d\n"", oddball_value());
+    return 0;
+} #include ""file2d.h""
+#include <stdio.h>
+
+void use_them(void)
+{
+    printf(""Global variable: %d\n"", global_variable++);
+    oddball_struct.a += global_variable;
+    oddball_struct.b -= global_variable / 2;
+} prog8usesprog8.c,file7c.c,file9c.c. prog9usesprog8.c,file8c.c,file9c.c. However, the problems are relatively unlikely to occur in practice,
+especially if you take the standard advice to Does this exposition miss anything? NBThese are toy programs with just barely enough code to make them
+marginally interesting.  There is repetition within the examples that
+could be removed, but isn't to simplify the pedagogical explanation.
+(For example: the difference betweenprog5.candprog8.cis the name
+of one of the headers that are included.  It would be possible to
+reorganize the code so that themain()function was not repeated, but
+it would conceal more than it revealed.)"
+I've come across this term POD-type a few times.What does it mean?,"PODstands forPlain Old Data- that is, a class (whether defined with the keywordstructor the keywordclass) without constructors, destructors and virtual members functions.Wikipedia's article on PODgoes into a bit more detail and defines it as: A Plain Old Data Structure in C++ is an aggregate class that contains only PODS as members, has no user-defined destructor, no user-defined copy assignment operator, and no nonstatic members of pointer-to-member type. Greater detail can be found inthis answer for C++98/03. C++11 changed the rules surrounding POD, relaxing them greatly, thusnecessitating a follow-up answer here."
+"I'm a bit confused regarding the difference betweenpush_backandemplace_back. void emplace_back(Type&& _Val);
+void push_back(const Type& _Val);
+void push_back(Type&& _Val); As there is apush_backoverload taking an rvalue reference, I don't see what the purpose ofemplace_backis.","In addition to what visitor said : The functionvoid emplace_back(Type&& _Val)provided by MSCV10 is non-conforming and redundant because as you noted it is strictly equivalent topush_back(Type&& _Val). But the real C++0x form ofemplace_backis really useful:void emplace_back(Args&&...); Instead of taking avalue_type, it takes a variadic list of arguments, so that means that you can now perfectly forward the arguments and construct directly an object into a container without a temporary at all. That's useful because no matter how much cleverness RVO and move semantics bring to the table, there are still complicated cases where apush_backis likely to make unnecessary copies (or move). For example, with the traditionalinsert()function of astd::map, you have to create a temporary, which will then be copied into astd::pair<Key, Value>, which will then be copied into the map : std::map<int, Complicated> m;
+int anInt = 4;
+double aDouble = 5.0;
+std::string aString = ""C++"";
+    
+// cross your finger so that the optimizer is really good
+m.insert(std::make_pair(4, Complicated(anInt, aDouble, aString))); 
+
+// should be easier for the optimizer
+m.emplace(4, anInt, aDouble, aString); So why didn't they implement the right version ofemplace_backin MSVC? Actually, it bugged me too a while ago, so I asked the same question on theVisual C++ blog. Here is the answer from Stephan T Lavavej, the official maintainer of the Visual C++ standard library implementation at Microsoft. Q: Are beta 2 emplace functions just some kind of placeholder right now? A: As you may know, variadic templates
+aren't implemented in VC10. We
+simulate them with preprocessor
+machinery for things likemake_shared<T>(), tuple, and the new
+things in<functional>. This
+preprocessor machinery is relatively
+difficult to use and maintain. Also,
+it significantly affects compilation
+speed, as we have to repeatedly
+include subheaders. Due to a
+combination of our time constraints
+and compilation speed concerns, we
+haven't simulated variadic templates
+in our emplace functions. When variadic templates are
+implemented in the compiler, you can
+expect that we'll take advantage of
+them in the libraries, including in
+our emplace functions. We take
+conformance very seriously, but
+unfortunately, we can't do everything
+all at once. It's an understandable decision. Everyone who tried just once to emulate variadic template with preprocessor horrible tricks knows how disgusting this stuff gets."
+What is the difference between g++ and gcc?  Which one of them should be used for general c++ development?,"gccandg++are compiler-drivers of the GNU CompilerCollection(which was once upon a time just the GNUC Compiler). Even though they automatically determine which backends (cc1cc1plus...) to call depending on the file-type, unless overridden with-x language, they have some differences. The probably most important difference in their defaults is which libraries they link against automatically. According to GCC's online documentationlink optionsandhow g++ is invoked,g++isroughlyequivalent togcc -xc++ -lstdc++ -shared-libgcc(the 1st is a compiler option, the 2nd two are linker options). This can be checked by running both with the-voption (it displays the backend toolchain commands being run). By default (and unlikegcc),g++ also adds linker option-lm-- to link againstlibmwhich contains implementations formath.h."
+Good links are appreciated.,"Whilestd::move()is technically a function - I would sayit isn'treallya function. It's sort of aconverterbetween ways the compiler considers an expression's value. The first thing to note is thatstd::move()doesn't actually move anything. It changes an expression from being anlvalue(such as a named variable) to being anxvalue. An xvalue tells the compiler: You can plunder me,moveanything I'm holding and use it elsewhere (since I'm going to be destroyed soon anyway)"". in other words, when you usestd::move(x), you're allowing the compiler to cannibalizex. Thus ifxhas, say, its own buffer in memory - afterstd::move()ing the compiler can have another object own it instead. You can also move from aprvalue(such as a temporary you're passing around), but this is rarely useful. Another way to ask this question is ""What would I cannibalize an existing object's resources for?"" well, if you're writing application code, you would probably not be messing around a lot with temporary objects created by the compiler. So mainly you would do this in places like constructors, operator methods, standard-library-algorithm-like functions etc. where objects get created and destroyed automagically a lot. Of course, that's just a rule of thumb. A typical use is 'moving' resources from one object to another instead of copying.  @Guillaume links tothis pagewhich has a straightforward short example: swapping two objects with less copying. template <class T>
+swap(T& a, T& b) {
+    T tmp(a);   // we've made a second copy of a
+    a = b;      // we've made a second copy of b (and discarded a copy of a)
+    b = tmp;    // we've made a second copy of tmp (and discarded a copy of b)
+} using move allows you to swap the resources instead of copying them around: template <class T>
+swap(T& a, T& b) {
+    T tmp(std::move(a));
+    a = std::move(b);   
+    b = std::move(tmp);
+} Think of what happens whenTis, say,vector<int>of size n. In the first version you read and write 3*n elements, in the second version you basically read and write just the 3 pointers to the vectors' buffers, plus the 3 buffers' sizes. Of course, classTneeds to know how to do the moving; your class should have a move-assignment operator and a move-constructor for classTfor this to work."
