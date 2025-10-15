@@ -1,7 +1,3 @@
-# Installation required:
-# pip install playwright beautifulsoup4 pandas
-# playwright install chromium
-
 from playwright.sync_api import sync_playwright
 from bs4 import BeautifulSoup
 import csv, re, time, random
@@ -150,11 +146,9 @@ def save_to_csv(data, filename='naukri_jobs.csv'):
         writer.writeheader()
         writer.writerows(data)
     print(f"\n✅ Saved {len(data)} jobs to {filename}")
-
-
 # ---------- MAIN ---------- #
 if __name__ == "__main__":
-    scraped_data = scrape_jobs_playwright(num_pages=40)
+    scraped_data = scrape_jobs_playwright(num_pages=42)
     save_to_csv(scraped_data)
 
 
