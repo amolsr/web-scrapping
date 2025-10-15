@@ -46,7 +46,7 @@ def extract_exp_sal_loc_from_job(job):
 
 
 # ---------- MAIN SCRAPER ---------- #
-def scrape_jobs_playwright(num_pages=40):
+def scrape_jobs_playwright(num_pages=42):
     all_jobs_data = []
     with sync_playwright() as p:
         # 🚀 Use non-headless mode + realistic user-agent
