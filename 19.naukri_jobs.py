@@ -46,7 +46,7 @@ def extract_exp_sal_loc_from_job(job):
 
 
 # ---------- MAIN SCRAPER ---------- #
-def scrape_jobs_playwright(num_pages=40):
+def scrape_jobs_playwright(num_pages=42):
     all_jobs_data = []
     with sync_playwright() as p:
         # 🚀 Use non-headless mode + realistic user-agent
@@ -146,8 +146,6 @@ def save_to_csv(data, filename='naukri_jobs.csv'):
         writer.writeheader()
         writer.writerows(data)
     print(f"\n✅ Saved {len(data)} jobs to {filename}")
-
-
 # ---------- MAIN ---------- #
 if __name__ == "__main__":
     scraped_data = scrape_jobs_playwright(num_pages=42)
