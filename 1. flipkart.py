@@ -1,25 +1,74 @@
-from bs4 import BeautifulSoup  #Importing the Beautiful Soup Library
-import requests				   #Importing the requests library
-import time					   #Importing the time library
-import csv					   #Importing the csv module
+import requests
+from bs4 import BeautifulSoup
+import csv
+import time
+import os
 
-response = requests.get('https://www.flipkart.com/search?q=nokia+smartphones&sid=tyy%2C4io&as=on&as-show=on&otracker=AS_QueryStore_OrganicAutoSuggest_0_10_na_na_pr&otracker1=AS_QueryStore_OrganicAutoSuggest_0_10_na_na_pr&as-pos=0&as-type=RECENT&suggestionId=nokia+smartphones&requestId=675612e2-512b-4d0e-8b75-6bdf91921d7c&as-backfill=on')
+BASE_URL = 'https://www.flipkart.com/search?q=smartphones'
 
-soup = BeautifulSoup(response.text, 'lxml')
-mname, mrating, mprice, mdesc = list(), list(), list(), list()
-mobile_name = soup.find_all(class_='_3wU53n')
-rating = soup.find_all(class_='hGSR34')
-price = soup.find_all(class_='_1vC4OE _2rQ-NK')
-description = soup.find_all(class_='vFw0gD')
+headers = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+}
 
-for a,b,c,d in zip(mobile_name, rating, price, description):
-	mname.append(a.get_text())
-	mrating.append(b.get_text())
-	mprice.append(c.get_text())
-	mdesc.append(d.get_text())
+products = []
 
-with open('flipkart.csv','w',encoding="utf-8", newline = '') as csvfile:
-	writer = csv.writer(csvfile)
-	writer.writerow(['Mobile Name', 'Ratings', 'Pricing', 'Description'])
-	for a,b,c,d in zip(mname, mrating, mprice, mdesc):
-		writer.writerow([a.strip(), b.strip(), c.strip(), d.strip()])
+for page in range(1, 42): 
+    print(f"Scraping page {page}...")
+    
+    url = f"{BASE_URL}&page={page}"
+    
+    response = requests.get(url, headers=headers)
+    soup = BeautifulSoup(response.text, 'lxml')
+
+    containers = soup.find_all('div', class_='cPHDOP') 
+
+    if not containers:
+        print(f"No more products found at page {page} (or selectors are broken). Stopping.")
+        break
+
+    for container in containers:
+        product_data = {}
+
+        try:
+            product_data['Name'] = container.find('div', class_='KzDlHZ').get_text().strip()
+        except AttributeError:
+            product_data['Name'] = None
+
+        try:
+            product_data['Price'] = container.find('div', class_='hl05eU').find('div').get_text().strip()
+        except AttributeError:
+            product_data['Price'] = None
+
+        try:
+            product_data['Rating'] = container.find('div', class_='XQDdHH').get_text().strip()
+        except AttributeError:
+            product_data['Rating'] = None
+
+        try:
+            spec_list_container = container.find('ul', class_='G4BRas')
+            specs = [spec.get_text().strip() for spec in spec_list_container.find_all('li', class_='_6NESgJ')]
+            product_data['Description'] = ' | '.join(specs)
+        except AttributeError:
+            product_data['Description'] = None
+        
+        if product_data['Name']: 
+            products.append(product_data)
+            
+    time.sleep(1)
+
+if products:
+    fieldnames = ['Name', 'Price', 'Rating', 'Description']
+    
+    output_dir = 'output'
+    csv_path = os.path.join(output_dir, 'flipkart_latest_smartphone.csv')
+    
+    os.makedirs(output_dir, exist_ok=True) 
+    
+    with open(csv_path, 'w', encoding="utf-8", newline='') as csvfile:
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(products)
+        
+    print(f"\nSuccessfully saved {len(products)} products to {csv_path}")
+else:
+    print("\nNo products were scraped. The selectors may need updating again.")
