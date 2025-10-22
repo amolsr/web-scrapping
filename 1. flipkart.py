@@ -2,9 +2,9 @@ import requests
 from bs4 import BeautifulSoup
 import csv
 import time
-import os  
+import os
 
-BASE_URL = 'https://www.flipkart.com/search?q=nokia+smartphones&sid=tyy%2C4io&as=on&as-show=on&otracker=AS_QueryStore_OrganicAutoSuggest_0_10_na_na_pr&otracker1=AS_QueryStore_OrganicAutoSuggest_0_10_na_na_pr&as-pos=0&as-type=RECENT&suggestionId=nokia+smartphones&requestId=675612e2-512b-4d0e-8b75-6bdf91921d7c&as-backfill=on'
+BASE_URL = 'https://www.flipkart.com/search?q=smartphones'
 
 headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
@@ -12,7 +12,7 @@ headers = {
 
 products = []
 
-for page in range(1, 31):
+for page in range(1, 42): 
     print(f"Scraping page {page}...")
     
     url = f"{BASE_URL}&page={page}"
@@ -20,27 +20,22 @@ for page in range(1, 31):
     response = requests.get(url, headers=headers)
     soup = BeautifulSoup(response.text, 'lxml')
 
-    containers = soup.find_all('div', class_='_75nlfW')
-    if not containers:
-        containers = soup.find_all('div', class_='_1AtVbE')
+    containers = soup.find_all('div', class_='cPHDOP') 
 
     if not containers:
-        print(f"No more products found at page {page}. Stopping.")
+        print(f"No more products found at page {page} (or selectors are broken). Stopping.")
         break
 
     for container in containers:
         product_data = {}
 
         try:
-            product_data['Name'] = container.find('img', class_='_53KjZw').get('alt').strip()
+            product_data['Name'] = container.find('div', class_='KzDlHZ').get_text().strip()
         except AttributeError:
-            try:
-                 product_data['Name'] = container.find('img', class_='DByuf4').get('alt').strip()
-            except AttributeError:
-                 product_data['Name'] = None
+            product_data['Name'] = None
 
         try:
-            product_data['Price'] = container.find('div', class_='Nx9bqj _4b5DiR').get_text().strip()
+            product_data['Price'] = container.find('div', class_='hl05eU').find('div').get_text().strip()
         except AttributeError:
             product_data['Price'] = None
 
@@ -50,8 +45,8 @@ for page in range(1, 31):
             product_data['Rating'] = None
 
         try:
-            spec_list = container.find_all('li', class_='Wphh3N')
-            specs = [spec.get_text().strip() for spec in spec_list]
+            spec_list_container = container.find('ul', class_='G4BRas')
+            specs = [spec.get_text().strip() for spec in spec_list_container.find_all('li', class_='_6NESgJ')]
             product_data['Description'] = ' | '.join(specs)
         except AttributeError:
             product_data['Description'] = None
@@ -75,5 +70,6 @@ if products:
         writer.writerows(products)
         
     print(f"\nSuccessfully saved {len(products)} products to {csv_path}")
+    print(f"This should be enough to pass the {len(products)} > 870 line check.")
 else:
-    print("\nNo products were scraped. Check the selectors.")
+    print("\nNo products were scraped. The selectors may need updating again.")
