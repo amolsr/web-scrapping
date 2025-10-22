@@ -13,7 +13,6 @@ headers = {
 }
 
 products = []
-
 search_queries = ['laptops', 'smartphones', 'headphones']
 
 for query in search_queries:
@@ -28,7 +27,7 @@ for query in search_queries:
         
         if "api-services-support@amazon.com" in response.text:
             print(f"Blocked by Amazon on page {page}. Moving to next query.")
-            break 
+            break
             
         soup = BeautifulSoup(response.text, 'lxml')
 
@@ -36,12 +35,13 @@ for query in search_queries:
 
         if not containers:
             print(f"No more products found at page {page}. Moving to next query.")
-            break 
+            break
+
         for container in containers:
             product_data = {}
 
             try:
-                name_element = container.find('span', class_='a-text-normal')
+                name_element = container.find('h2') # Was: container.find('span', class_='a-text-normal')
                 product_data['Name'] = name_element.get_text().strip()
             except AttributeError:
                 product_data['Name'] = 'N/A'
@@ -61,7 +61,6 @@ for query in search_queries:
             if product_data['Name'] != 'N/A':
                 products.append(product_data)
                 
-        # Wait a bit between pages
         time.sleep(1.5)
 
 if products:
