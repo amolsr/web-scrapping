@@ -70,6 +70,5 @@ if products:
         writer.writerows(products)
         
     print(f"\nSuccessfully saved {len(products)} products to {csv_path}")
-    print(f"This should be enough to pass the {len(products)} > 870 line check.")
 else:
     print("\nNo products were scraped. The selectors may need updating again.")
