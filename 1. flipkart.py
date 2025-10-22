@@ -60,7 +60,7 @@ if products:
     fieldnames = ['Name', 'Price', 'Rating', 'Description']
     
     output_dir = 'output'
-    csv_path = os.path.join(output_dir, 'flipkart_nokia_latest.csv')
+    csv_path = os.path.join(output_dir, 'flipkart_latest_smartphone.csv')
     
     os.makedirs(output_dir, exist_ok=True) 
     
