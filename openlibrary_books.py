@@ -15,7 +15,7 @@ API_SEARCH_URL = "https://openlibrary.org/search.json"
 OUTPUT_CSV = "output/openlibrary_books.csv"
 USER_AGENT = "OpenLibraryScraper/1.0 (+your_email@example.com)"
 CRAWL_DELAY = 1  # seconds
-MAX_PAGES = 5   # Number of pages to fetch (100 results per page)
+MAX_PAGES = 50   # Number of pages to fetch 
 
 
 def fetch_books(page=1):
