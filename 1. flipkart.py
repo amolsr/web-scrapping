@@ -14,7 +14,11 @@ soup = BeautifulSoup(response.text, 'lxml')
 
 products = []
 
-containers = soup.find_all('div', class_='_2kHMtA')
+containers = soup.find_all('div', class_='_75nlfW') 
+
+if not containers:
+    # Fallback to another common container class
+    containers = soup.find_all('div', class_='_1AtVbE')
 
 if not containers:
     print("Could not find any product containers. Flipkart's HTML has likely changed again!")
@@ -25,40 +29,40 @@ for container in containers:
     product_data = {}
 
     try:
-        product_data['Name'] = container.find('div', class_='_4rR01T').get_text().strip()
+        product_data['Name'] = container.find('img', class_='_53KjZw').get('alt').strip()
     except AttributeError:
-        product_data['Name'] = None
-
+        try:
+             product_data['Name'] = container.find('img', class_='DByuf4').get('alt').strip()
+        except AttributeError:
+             product_data['Name'] = None
     try:
-        product_data['Price'] = container.find('div', class_='_30jeq3 _1_WHN1').get_text().strip()
+        product_data['Price'] = container.find('div', class_='Nx9bqj _4b5DiR').get_text().strip()
     except AttributeError:
         product_data['Price'] = None
 
     try:
-        product_data['Rating'] = container.find('div', class_='_3LWZlK').get_text().strip()
+        product_data['Rating'] = container.find('div', class_='XQDdHH').get_text().strip()
     except AttributeError:
         product_data['Rating'] = None
 
     try:
-        spec_list = container.find('ul', class_='fMghEO')
-        specs = [spec.get_text().strip() for spec in spec_list.find_all('li', class_='rgWa7D')]
+        spec_list = container.find_all('li', class_='Wphh3N')
+        specs = [spec.get_text().strip() for spec in spec_list]
         product_data['Description'] = ' | '.join(specs)
     except AttributeError:
         product_data['Description'] = None
     
-    if product_data['Name']:
+    if product_data['Name']: 
         products.append(product_data)
 
 if products:
     fieldnames = ['Name', 'Price', 'Rating', 'Description']
     
-    with open('flipkart_nokia.csv', 'w', encoding="utf-8", newline='') as csvfile:
+    with open('flipkart_nokia_latest.csv', 'w', encoding="utf-8", newline='') as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-        
         writer.writeheader()
-        
         writer.writerows(products)
         
-    print(f"Successfully saved {len(products)} products to flipkart_nokia.csv")
+    print(f"Successfully saved {len(products)} products to flipkart_nokia_latest.csv")
 else:
     print("No products were scraped. Check the selectors.")
