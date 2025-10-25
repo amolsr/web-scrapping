@@ -1,8 +1,9 @@
 import requests
 from bs4 import BeautifulSoup
-import csv
 import time
 import os
+import argparse
+from output_manager import OutputManager
 
 BASE_URL = 'https://www.flipkart.com/search?q=smartphones'
 
@@ -56,19 +57,13 @@ for page in range(1, 42):
             
     time.sleep(1)
 
-if products:
-    fieldnames = ['Name', 'Price', 'Rating', 'Description']
-    
-    output_dir = 'output'
-    csv_path = os.path.join(output_dir, 'flipkart_latest_smartphone.csv')
-    
-    os.makedirs(output_dir, exist_ok=True) 
-    
-    with open(csv_path, 'w', encoding="utf-8", newline='') as csvfile:
-        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-        writer.writeheader()
-        writer.writerows(products)
-        
-    print(f"\nSuccessfully saved {len(products)} products to {csv_path}")
-else:
-    print("\nNo products were scraped. The selectors may need updating again.")
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description='Scrape Flipkart for smartphone data.')
+    parser.add_argument('--format', type=str, default='csv', help='Output format: csv, json, or xml')
+    args = parser.parse_args()
+
+    if products:
+        output_manager = OutputManager()
+        output_manager.save(products, 'flipkart_latest_smartphone', args.format)
+    else:
+        print("\nNo products were scraped. The selectors may need updating again.")
