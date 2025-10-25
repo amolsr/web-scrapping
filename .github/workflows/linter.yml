@@ -1,4 +1,4 @@
-name: PR Validation
+name: Linter
 
 on:
   pull_request:
@@ -8,20 +8,20 @@ on:
       - main
 
 jobs:
-  validate-files:
+  lint:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.x'
-      
+
       - name: Get changed files
         id: changed-files
         run: |
@@ -33,9 +33,13 @@ jobs:
           echo "changed_files<<EOF" >> $GITHUB_OUTPUT
           echo "$CHANGED_FILES" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
-      
-      - name: Validate PR requirements
-        run: python .github/scripts/validate_pr.py
-        env:
-          CHANGED_FILES: ${{ steps.changed-files.outputs.changed_files }}
 
+      - name: Run pylint on all Python files
+        if: false
+        run: |
+          git ls-files '*.py' | xargs pylint
+
+      - name: Run pylint on changed Python files
+        if: ${{ steps.changed-files.outputs.changed_files }}
+        run: |
+          echo "${{ steps.changed-files.outputs.changed_files }}" | grep '\.py$' | xargs pylint
