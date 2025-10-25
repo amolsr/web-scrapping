@@ -1,0 +1,51 @@
+Question,Option A,Option B,Option C,Option D,Correct Answer
+Where is the map definition file generally stored?,RECYCLE BIN,CGI-BIN,BIN,All of the above,CGI-BIN
+The latest HTML standard is,HTML 4.0,HTML 5.0,XML,SGML,HTML 5.0
+The MIME text file is saved with which of the following extension,THM extension,HTML extension,HTM extension,None,HTML extension
+To establish the base URL which of the following is used?,BASE element,HEAD element,both a and b,None,BASE element
+To get the current system date which of the following function is used in ASP?,CurrentDate(),getDate(),Now(),Date(),Date()
+What are the attributes used to change the size of an image?,Big and Small,Width and height,Top and bottom,None,Width and height
+What are the types of lists available in HTML?,"Ordered, unordered lists","Bulleted, numbered lists","Named, Unnamed lists",None of the above,"Ordered, unordered lists"
+What are variables used in JavaScript programs,Varying randomly,"Storing numbers, dates, and other values",Used as header files,none of the above,"Storing numbers, dates, and other values"
+What does MIME stand for?,Multipurpose Internet Mail Extra,Multi Internet Mail End,Multipurpose Internet Mail Email,Multipurpose Internet Mail Extensio,Multipurpose Internet Mail Extensio
+What is Document Object Model(DOM)?,a coding style,Specification,a parser,none,a parser
+What is the effect of the \<b> tag?,It converts the text within it to a bold tag.,It is used to write black-colored font,It is used to change the font size.,None,It converts the text within it to a bold tag.
+What is the function of the HTML style attribute?,It is used to add styles to an HTML element.,It is used to uniquely identify some specific styles of some elements.,Both (a) and (b),None,It is used to add styles to an HTML element.
+When is the body tag used?,after FORM tag,after Title tag,after EM tag,after HEAD tag,after HEAD tag
+The full form of DOM is?,Document-oriented memory,document object model,document object memory,none,document object model
+Which attribute is used to provide a unique name to an HTML element?,id,class,type,None,id
+Which HTML element is used to define description data?,\<li>,\<ol>,\<dd>,\<dl>,\<dd>
+Which of the following attribute defines the relationship between the current document and  URL?,URL,REV,REL,None,REL
+Which of the following attribute is used for merging two or more adjacent columns?,ROWSPAN,CELLSPACING,COLSPAN,CELLPADDING,COLSPAN
+Which of the following can read and render HTML web pages,Server,head Tak,web browser,empty,web browser
+Which of the following is used to allocate and manage resources for a network?,Bluetooth,Server,Node,None of the above,Server
+Which of the following is used to transmit information on the world wide web?,HPPT,HTTP,HTTTP,HTPP,HTTP
+Which of the following properties is used to change the font of text?,font-family,font-size,text-align,None,font-family
+Which of the following tags doesn’t require a closing tag?,\<br>,\<hr>,Both (a) and (b),None,Both (a) and (b)
+Why is XPATH used?,To address the server,to store the IP address of this server,to address the document by specifying a location path,none,to address the document by specifying a location path
+Why were cookies designed?,for server-side programming,For client-side programming,both a and b,None,for server-side programming
+Identify the container among the following,< body>,< select>,< input>,both a and b,both a and b
+Among the following operators identify the one which is used to allocate memory to array variables in JavaScript.,new,new malloc,alloc,malloc,new
+Among which of the following is HTML a subset.,SGMD,SGMT,SGML,None,SGML
+"Choose among the following, which is the most common internet protocol.",PPP,FTP,TCP/IP,SMTP,SMTP
+Choose the correct option related to XML.,It cannot be used as a database,it can be used as a database,it is a storage format but a textual storage format which can be called a language,"it is not a database, it is a language",it is a storage format but a textual storage format which can be called a language
+Choose the port number of FTP.,23,21,110,143,21
+Choose whether true or false:  The tag elements in XML are case-sensitive.,True,False,,,True
+Choose whether true or false:  XML is an imperative language.,True,False,,,False
+Full form of W3C is _____________,World Wide Websites community,World Wide Web community,World Wide Websites consortium,World Wide Web consortium,World Wide Web consortium
+How many sizes of headers are available in HTML by default?,5,1,3,6,6
+HTML files are saved by default with the extension?,.h,.html,.ht,None,.html
+Identified among the following which creates push button,RESET,CHECK BOX,INPUT,RADIO,RESET
+Identify among the following servers which allow LAN users to share data.,Communication server,Point server,Data server,File server,File server
+A website is a _______  cookie.,volatile,transient,in transient,non-volatile,transient
+Identify the empty or void element in HTML.,<sup>,<br>,<p>,< abbr>,<br>
+Identify the function in JavaScript which is used to send messages to users requesting for text input?,alert(),prompt(),display(),getInput(),prompt()
+Identify the incorrect HTML tag among the following,< input>,<select>,< list>,< textarea>,< list>
+Identify the method which is used to specify a container's layout in JSP.,setContainerLayout(),Layout(),setLayout(),none,setLayout()
+Identify the range of byte data types in JavaScript.,-10 to 9,- 128 to 127,-32768 to 32767,-2147483648 to 2147483647,- 128 to 127
+Identify the standard network protocol used to transfer computer files between a client and server on a computer network.,Physical,TCP/IP,FTP,Hyperlink,FTP
+Identify the tag used to give paragraph,<p>,<br>,<marquee>,< pre>,<p>
+Identify the tag which is used to define a concept in HTML.,<p>,<def>,<marquee>,< pre>,<def>
+Identify the total standard color names that HTML supports.,30,70,140,120,140
+On which model is www based upon,client-server,local server,3 tier,none of this,client-server
+Simple network management protocol uses which of the following port number,164,163,160,161,161
