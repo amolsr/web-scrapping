@@ -25,6 +25,7 @@ A comprehensive collection of web scraping scripts for extracting data from popu
 | **Sanfoundry** (`9. Sanfoundry.py`) | Extract educational content | `sanfoundry.csv` |
 | **Hacker News** (`10. HackNews.py`) | Scrape GitHub-related posts from Hacker News | `hacknews.csv` |
 | **Weather** (`Weather.py`) | Extract weather information | `weather.csv` |
+| **AllRecipes** (`allrecipes_scraper.py`) | Extract AllRecipes Top News | `allrecipes_news.csv` |
 
 ## 🚀 Quick Start
 
