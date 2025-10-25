@@ -22,10 +22,14 @@ jobs:
         with:
           python-version: '3.x'
 
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pylint
+
       - name: Get changed files
         id: changed-files
         run: |
-          # Get the list of changed files in the PR
           git fetch origin ${{ github.base_ref }}
           CHANGED_FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD)
           echo "Changed files:"
@@ -33,11 +37,6 @@ jobs:
           echo "changed_files<<EOF" >> $GITHUB_OUTPUT
           echo "$CHANGED_FILES" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
-
-      - name: Run pylint on all Python files
-        if: false
-        run: |
-          git ls-files '*.py' | xargs pylint
 
       - name: Run pylint on changed Python files
         if: ${{ steps.changed-files.outputs.changed_files }}
