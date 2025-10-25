@@ -1,45 +1,993 @@
-Sr.No,Laptop Name,Ratings,Prices
-,,,
-1,"Acer Aspire 3 Intel Core i5-10th Gen 15.6 - inch 1920 x 1080 Thin and Light Laptop (8GB Ram/1TB HDD/Window 10/Intel UHD Graphics/Black/1.9 kgs), A315-56",3.6 out of 5 stars,"52,999"
-,,,
-2,"Lenovo IdeaPad Slim 3i Intel Core i3 10th Gen 15.6"" FHD Thin and Light Laptop (4GB/1TB HDD/Windows10/Platinum Grey/1.85Kg), 81WE00RVIN",2.7 out of 5 stars,"32,990"
-,,,
-3,"ASUS VivoBook 15 Intel Celeron N3350 15.6-inch HD Laptop (4GB RAM/1TB HDD/Windows 10/Integrated Graphics/Black/2.0 kg), X540NA-GQ285T",3.7 out of 5 stars,"24,990"
-,,,
-4,"HP 15 10th Gen Intel Core i5 Processor 15.6-inch FHD Laptop (8GB/1TB HDD/Win 10 Home/MS Office/Finger Print Reader/Natural Silver), 15s du1034TU",4.0 out of 5 stars,"56,999"
-,,,
-5,"Mi Notebook 14 Intel Core i5-10210U 10th Gen Thin and Light Laptop(8GB/512GB SSD/Windows 10/Nvidia MX250 2GB Graphics/Silver/1.5Kg), XMA1901-DG+Webcam",3.9 out of 5 stars,"49,999"
-,,,
-6,"Lenovo Ideapad S340 Intel Core i3 10th Gen 14 inch FHD Thin and Light Laptop (8GB/256GB SSD/Windows 10/MS Office/Platinum Grey/1.55Kg), 81VV00ECIN",4.0 out of 5 stars,"42,506"
-,,,
-7,"HP 15s du2069TU 15.6-inch FHD Laptop (10th Gen i3-1005G1/4GB/1TB/Win 10/MS Office/1.75 kg), Jet Black",3.0 out of 5 stars,"38,990"
-,,,
-8,"Acer Aspire 3 A315-23 15.6-inch Laptop (AMD Athlon Silver 3050U dual-core/4GB/1TB HDD/Window 10, Home, 64Bit/AMD RadeonTM Graphics), Silver",3.5 out of 5 stars,"39,990"
-,,,
-9,"ASUS VivoBook 14 AMD Dual Core Athlon Silver 3050U 14-inch FHD Compact and Light Laptop (4GB RAM/1TB HDD/Windows 10/Integrated Graphics/Transparent Silver/1.60 kg), M409DA-EK715T",3.7 out of 5 stars,"31,940"
-,,,
-10,"Lenovo Ideapad S340 Intel Core i3 10th Gen 14 inch FHD Thin and Light Laptop (8GB/256GB SSD/Windows 10/MS Office/Platinum Grey/1.55Kg), 81VV00ECIN",4.0 out of 5 stars,"42,506"
-,,,
-11,"Lenovo V14 Intel Core i3 10th Gen 14-inch HD Thin and Light Laptop (4GB RAM/ 1TB HDD/ DOS/ Grey/ 1.6 kg), 82C4016RIH",2.2 out of 5 stars,"34,990"
-,,,
-12,"Acer Aspire 3 A315-23 15.6-inch Laptop (AMD Ryzen 5-3500U/8GB/512GB SSD/Window 10, Home, 64Bit/AMD Radeon Vega 8 Mobile Graphics), Silver",4.0 out of 5 stars,"41,905"
-,,,
-13,"HP 10th Gen Intel Core i3 15.6-inch Laptop (i3-1005G1/4GB/512GB SSD/Windows 10 Home/MS Office/Natural Silver/1.77kg), 15s fr1004tu",3.9 out of 5 stars,"39,990"
-,,,
-14,"Acer Aspire 3 Intel Core i3-10th Gen 15.6 - inch 1920 x 1080 Thin and Light Laptop (4GB Ram/1TB HDD/Window 10/Integrated Graphics/Shale Black/1.9 kgs), A315-56",2.9 out of 5 stars,"36,449"
-,,,
-15,"Acer Swift 3 AMD Ryzen 5 4500U 14-inch Display Ultra Thin and Light Laptop (8GB Ram/512GB SSD/Window 10, Home/AMD Radeon Graphics/ Pure Silver/1.2kgs), SF314-42",3.9 out of 5 stars,"61,645"
-,,,
-16,"HP Pavilion Gaming DK0268TX 15.6-inch Laptop (Core i5-9300H/8GB/512GB SSD/Windows 10 Home/4GB NVIDIA GeForce GTX 1650 Graphics), Shadow Black",4.2 out of 5 stars,"67,990"
-,,,
-17,"Apple MacBook Air (13-inch, 8GB RAM, 128GB Storage, 1.8GHz Intel Core i5) - Silver",4.3 out of 5 stars,"72,990"
-,,,
-18,"ASUS TUF Gaming FX505DT 15.6"" FHD 120Hz Laptop GTX 1650 4GB Graphics (Ryzen 5-3550H/8GB RAM/512GB PCIe SSD/Windows 10/Stealth Black/2.20 Kg), FX505DT-AL106T",4.2 out of 5 stars,"60,990"
-,,,
-19,"HP 14 10th Gen Intel Core i5 14-inch HD Laptop (i5-10210U/8GB/512GB SSD/Win 10/MS Office/Win 10/Jet Black/1.5 kg), 14-ck2018tu",4.3 out of 5 stars,"51,729"
-,,,
-20,"Lenovo Ideapad Slim 3i 10th Gen Intel Core i3 15.6 inch Full HD Thin and Light Laptop (4GB/1TB HDD/Windows 10/MS Office 2019/Platinum Grey/1.85Kg), 81WE00RCIN",2.5 out of 5 stars,"34,990"
-,,,
-21,"Acer Aspire 3 Intel Core i3-10th Gen 15.6 - inch 1920 x 1080 Thin and Light Laptop (4GB Ram/1TB HDD/Window 10/Integrated Graphics/Shale Black/1.9 kgs), A315-56",2.9 out of 5 stars,"36,449"
-,,,
-22,DELL Inspiron 3493 14-inch Laptop (10th Gen Core i5-1035G1/8GB/512GB SSD/Win 10 + MS Office/Intel HD Graphics/Silver) E-C560514WIN9,3.2 out of 5 stars,"56,002"
+Name,Price,Rating
+"acer [SmartChoice Aspire 3 Laptop Intel Core Celeron N4500 Processor Laptop (8 GB LPDDR4X SDRAM/256 GB SSD/Win11 Home/38 WHR/HD Webcam) A325-45 with 39.63 cm (15.6"") HD Display, Pure Silver, 1.5 KG","₹20,990",3.4
+"Acer SmartChoice Aspire Lite, AMD Ryzen 5-5625U Processor, 16 GB/512 GB, Full HD, 15.6""/39.62 cm, Windows 11 Home, Steel Gray, 1.59 kg, AL15-41, Metal Body, Thin and Light Laptop","₹32,490",3.9
+"Lenovo 14 (2025), Intel Core i5 13th Gen 13420H - (24 GB/512 GB SSD/Intel UHD Graphics/Windows 11 Home) Thin and Light Business Laptop/14.0"" FHD Display/Iron Grey/1.4 kg/Microsoft Office 2021","₹48,560",N/A
+"HP 15 (2025), AMD - (4 GB/128 GB SSD/AMD Radeon Graphics/DOS NO Windows) Thin and Light Business Laptop/15.6"" HD Display/Black/1.5 kg","₹22,790",4.7
+"HP 15s, 12th Gen Intel Core i3-1215U (8GB DDR4, 512GB SSD) Anti-Glare, 15.6""/39.6cm,FHD, Win 11, MS Office 21, Silver, 1.69kg, fy5006tu/fd0751tu/fd0752tu, UHD Graphics, HD Camera, Dual Speakers Laptop","₹32,490",4.0
+"HP 15, 13th Gen Intel Core i3-1315U (12GB DDR4, 512GB SSD) FHD, Anti-Glare, Micro-Edge, 15.6''/39.6cm, Win11, M365 Basic(1yr)* Office24, Silver, 1.59kg, fd0573TU, FHD Camera w/Shutter Laptop","₹36,490",4.0
+"Lenovo 14 (2025), Intel Core i5 13th Gen 13420H - (8 GB/512 GB SSD/Intel UHD Graphics/Windows 11 Home) Thin and Light Business Laptop/14.0"" FHD Display/Iron Grey/1.4 kg/Microsoft Office 2021","₹44,790",N/A
+"HP 15, 13th Gen Intel Core i5-1334U, (16GB DDR4,512GB SSD) Anti-Glare, Micro-Edge, FHD, 15.6''/39.6cm, Win11, M365 Basic(1yr)* Office24, Silver, 1.59kg, fd0577TU, Iris Xe, FHD Camera w/Shutter Laptop","₹51,990",3.8
+"ASUS Vivobook 15, Smartchoice, AMD Ryzen 7 5825U, 16GB RAM, 512GB SSD, FHD 15.6"", Windows 11, Office Home 2024, Quiet Blue, 1.7Kg, M1502YA-BQ703WS, AMD Radeon iGPU, M365 Basic (1Year)*, 42Whr Laptop","₹41,990",3.9
+"Acer Aspire Lite, Intel Core i5 13th Gen - 1334U, 16GB RAM, 512GB SSD, Full HD 15.6""/39.62 cm, Windows 11 Home, MS Office, Steel Gray, 1.59 KG, AL15-53, Metal Body, Thin and Light Premium Laptop","₹41,990",3.7
+"Lenovo V15 G4 AMD Ryzen 5 7520U 15.6 inch FHD Laptop, AMD Graphics, 16GB DDR5 5500Mhz Ram, 512GB SSD NVMe, Windows 11, Dolby Audio, Arctic Grey, 1 Year Onsite Brand Warranty","₹34,989",4.0
+"Lenovo V15 Intel Core i3 13th Gen (16GB RAM/512GB SSD/Windows 11 Home/Office 2024/Iron Grey) 15.6"" FHD (1920x1080) Antiglare 250 Nits Thin & Light Laptop/1Y Onsite/1.65 kg, 83CCA08KIN","₹36,990",3.5
+ULTIMUS APEX Laptop Intel Celeron Dual Core 8 GB LPDDR4 512 GB SSD Expandable~1TB 14.1 FHD IPS Laptop Anti-Glare Ultra Thin Bezel 180° Hinge 3.0x3 USB HDMI SD Card Slot Win 11 Home 1.25KG Silver,"₹16,870",3.7
+"Lenovo V15 G4 AMD Athlon Silver 7120U Laptop 8GB LPDDR5 Ram, 512 GB SSD PCIe, Windows 11 Lifetime Validity,15.6"" FHD Screen, AMD Radeon 610M, Silver, 1 Year Brand Warranty","₹25,979",4.1
+"Dell Vostro, Intel Core i3 13th Gen - 1305U, 16GB DDR4 RAM, 512GB, FHD 15.6""/39.6 cm, Windows 11, Office H&S 2024, Carbon Grey, 1.66Kg, 120Hz 250 nits Narrow Border Display, Intel UHD Graphics Laptop","₹34,990",3.5
+HP 255 Athlon 4 GB/ 256 GB SSD/DOS,"₹22,387",3.8
+"HP Smartchoice Victus, 13th Gen Intel Core i5-13420H, 4GB RTX 3050, 16GB DDR4(Upgradeable) 512GB SSD, 144Hz, 300nits, FHD, 15.6’’/39.6cm, Win11, Office24, Blue, 2.29kg, fa2190/fa2191tx Gaming Laptop","₹62,990",3.7
+"ASUS Vivobook 15, Smartchoice,Intel Core i5 13th Gen 13420H,16GB RAM, 512GB SSD, FHD 15.6"",Windows 11, Office Home 2024, Quiet Blue, 1.70 kg, X1502VA-BQ836WS,Intel UHD iGPU, M365 Basic (1Year)* Laptop","₹48,990",4.0
+ULTIMUS APEX Laptop Intel Celeron Dual Core 8 GB LPDDR4 512 GB SSD Expandable~1TB 14.1 FHD IPS Laptop Anti-Glare Ultra Thin Bezel 180° Hinge 3.0x3 USB HDMI SD Card Slot Win 11 Home 1.25KG Silver,"₹16,870",3.7
+HP 255 Athlon 4 GB/ 256 GB SSD/DOS,"₹22,387",3.8
+"ASUS Vivobook 14, (i5 14th Gen) Intel Core 5 120U, Thin & Light Laptop(16GB RAM/512GB SSD/FHD/14/60Hz/Fingerprint Reader/M365 Basic (1Year)*/Office Home 2024/Quiet Blue/1.4 Kg) X1404VAP-EB542WS","₹44,990",3.6
+"Lenovo Smartchoice Ideapad Slim 3 13Th Gen Intel Core I7-13620H 15.3 Inch(38.8Cm) WUXGA IPS Laptop(16GB RAM/512GB SSD/Windows 11/Office Home 2024/Backlit Keyboard/1Yr ADP Free/Grey/1.6Kg),83K100CJIN","₹61,990",4.0
+"HP 14 245 G10 (2025), AMD Ryzen 5 7520U Quad Core - (8 GB/512 GB SSD/AMD Radeon Graphics/Windows 11) Thin and Light Business Laptop/14.0"" HD Display/Ash Grey/1.36 kg MS Office 2021","₹28,990",3.7
+"Lenovo {SmartChoice)Chromebook Intel Celeron N4500 (4GB RAM/64GB eMMC 5.1/11.6 Inch (29.46cm)/HD Display/2Wx2 Stereo Speakers/HD Camera/Chrome OS/Blue/1.21Kg), 82UY0014HA","₹12,990",3.7
+"ASUS TUF A15 (2025), AMD Ryzen 7 7445HS, Gaming Laptop(RTX 3050,75W TGP,16GB DDR5(Upgradeable Upto 64GB )512GB SSD,FHD,15.6"",144Hz,RGB Keyboard,48Whrs,Windows 11,Graphite Black,2.3 Kg) FA506NCG-HN199W","₹63,990",4.1
+"ASUS Vivobook Go 15, AMD Ryzen 3 7320U Thin & Light Laptop(AMD Radeon iGPU/8GB RAM/512GB SSD/FHD/15.6""/60Hz/Windows 11/M365 Basic (1Year)*/Office Home 2024/Mixed Black/1.63 Kg) E1504FA-NJ130WS","₹28,985",4.3
+"MSI Modern 15,AMD 7th Gen. Ryzen 5 7430U,40CM FHD 60Hz Thin & Light Laptop (16GB/512GB NVMe SSD/Windows 11 Home/Office 2021/AMD Radeon/Classic Black/1.75Kg) B7M-445IN","₹36,990",4.1
+"HP 15, 13th Gen Intel Core i7-1355U (16GB DDR4, 512GB SSD) FHD, Anti-Glare, 15.6’’/39.6cm, Win11, M365(1yr)* Office 24, Silver, 1.59kg, Iris Xe, FHD Camera w/Shutter, Backlit Laptop fd0468tu/fd0515tu","₹63,990",3.9
+"Acer SmartChoice ALG, 13th Gen Intel Core i5-13420H, NVIDIA GeForce RTX 3050-6GB DDR6, 16GB RAM, 512GB SSD, FHD 15.6""/39.62 cm, 144Hz, Windows 11 Home, Steel Gray, 1.99 KG, AL15G-53,Gaming Laptop","₹57,990",3.8
+"Lenovo ThinkBook 16 AMD Ryzen 7 7735HS (16GB RAM/512GB SSD/Windows 11 Home/Backlit Keyboard/Fingerprint) 16"" WUXGA IPS 300 Nits Thin & Light Laptop/1Y Warranty/Aluminium Top/1.7kg, 21MWA0AUIN",N/A,3.4
+"HP 15, AMD Ryzen 7 5825U (16GB DDR4, 512GB SSD) FHD, Anti-Glare, Micro-Edge,15.6''/39.6cm, Win11, M365(1yr)* Office24, Silver, 1.59kg, fc0476AU, Radeon Graphics, FHD Camera w/Shutter, Backlit Laptop","₹46,490",4.0
+"Acer Aspire 3 12th Gen Intel Core i3-1215U Premium Laptop (8GB RAM/512GB SSD/Windows 11 Home) A325-51,15.6"" Full HD IPS Display, 54Whr Battery, Silver, 1.69 Kg","₹27,990",4.0
+"ASUS Vivobook Go 14, AMD Ryzen 3 7320U, 8GB RAM, 512GB SSD, FHD 14"", Windows 11, Office Home 2024, Mixed Black, 1.38 kg, E1404FA-NK3325WS, AMD Radeon iGPU, M365 Basic (1Year)*, Thin & Light Laptop","₹28,990",4.0
+"Lenovo IdeaPad Slim 3, 12th Gen Intel Core i5-12450H (16GB LPDDR5, 512GB SSD), Anti-glare, FHD 15.6""(39.6cm), Win 11, Office Home 2024, Arctic Grey, 1.62Kg, 83ER00MDIN, Thin & Light, Backlit KB Laptop","₹45,460",4.1
+"ASUS Vivobook 15, Intel Core i3 13th Gen 1315U, 8GB RAM, 512GB SSD, FHD 15.6"", Windows 11, Office Home 2024, Cool Silver, 1.7Kg, X1504VA-NJ3320WS, Intel UHD iGPU, M365 Basic (1Year)* Laptop","₹32,889",4.1
+"Walker Best Student &Office Work Laptop|Thin & Light|14.1"" 1920 * 1080 Resolution FHD IPS Display |4GB RAM,128GB SSD|Celeron Processor N4020 (Gemini Lake)| Windows 11 Home |Grey","₹12,190",3.1
+"HP 255 G10 AMD Ryzen™ 7 7730U Octa CORE (16 GB/512 GB SSD/Windows 11/ AMD Radeon™ Graphics) MS Office Thin and Light Laptop/ 15.6"" FHD Display Anti-Glare,Turbo Silver/1.5 kg 1 Year Brand Warranty","₹43,999",4.6
+"Acer Nitro V 15, AMD Ryzen 5 6600H Hexa-core Processor,NVIDIA GeForce RTX 4050-6GB GDDR6,16 GB, 512 GB, Full HD IPS, 15.6""/39.62 cm, 165 Hz, Win 11 Home,Obsidian Black, 2.1 kg, ANV15-41,Gaming Laptop","₹62,990",4.6
+"HP 15, 13th Gen Intel Core i5-1334U (16GB DDR4, 512GB SSD) Anti-Glare, Micro-Edge, 15.6''/39.6cm, FHD, Win 11, Office 24, Silver, 1.59kg, fd0467tu, Iris Xe Graphics, FHD Camera, Backlit KB Laptop","₹50,990",3.7
+"Dell Inspiron 3535, Windows 11 Home, AMD Ryzen 3 7320U Processor, (8GB RAM/512GB SSD/Window 11/Ms Office' 21/15.6""(39.62 Cm) FHD Display/15 Month Mcafee/Carbon Black/1.67Kg Thin & Light Laptop","₹29,502",4.1
+"HP 15, AMD Ryzen 7 7735HS (16GB DDR5,512GB SSD) FHD, Anti-Glare, Micro-Edge, 15.6''/39.6cm, Win11, M365 Basic(1yr)* Office24, Silver, 1.59kg, fc1038AU, AMD Radeon FHD Camera w/Shutter, Backlit Laptop","₹57,990",4.0
+"Primebook 2 Neo 2025 (New Launch) | 6GB RAM, 128GB Storage (Upgradable Upto 512GB) | MediaTek Helio G99 | Android 15 (PrimeOS3.0) | in-Built AI | 11.6” Thin & Light Laptop | Type-C, USB, MicroSD Ports","₹15,490",4.6
+"HP 15 (2025), AMD Ryzen 3 7330U Quad Core - (16 GB/512 GB SSD/AMD Radeon Graphics/Windows 11 Pro) Thin and Light Business Laptop/15.6"" FHD Display/Backlit Keyboard/Turbo Silver/1.5 kg/MS Office 2021","₹31,450",5.0
+"HP Victus, 13th Gen Intel Core i7-13620H, 8GB RTX 5060, 24GB DDR5(Upgradeable) 1TB SSD, 144Hz, 300nits, IPS, FHD, 15.6""/39.6cm, Win11, M365* Office 24, Mica Silver, 2.29Kg, fa2308TX, RGB Laptop","₹1,13,990",5.0
+"Lenovo IdeaPad 1, 8GB RAM, 512GB SSD, HD 15.6""(39.6cm), Windows 11, Grey, 1.55Kg, 82LX00F7IN, 3 Month Game Pass Laptop","₹25,490",3.8
+"Lenovo 14 (2025), Intel Core i3 13th Gen 1315U - (16 GB/512 GB SSD/Intel UHD Graphics/Windows 11 Home) Thin and Light Business Laptop/14.0"" FHD Display/Iron Grey/1.4 kg/MSO 2021","₹32,700",1.0
+"Acer ALG, Intel Core i7-13th Gen 13620H Processor, NVIDIA GeForce RTX 3050 6GB(16GB/1TB) FHD, 15.6""/39.62 cm, 144Hz, Win 11 Home, Steel Gray, 1.99kg, AL15G-53, Backlit Keyboard, Gaming Laptop","₹77,500",3.5
+"Lenovo 14 (2025), Intel Core i5 13th Gen 13420H - (16 GB/512 GB SSD/Intel UHD Graphics/Windows 11 Home) Thin and Light Business Laptop/14.0"" FHD Display/Iron Grey/1.4 kg/Microsoft Office 2021","₹46,480",N/A
+"HP Smartchoice Victus, AMD Ryzen 5 8645HS, 6GB RTX 3050, 31 Tops, 16GB DDR5(Upgradeable) 512GB SSD, 144Hz, 300nits, FHD, 15.6""/39.6cm, Win11, M365* Office24, Blue, 2.3kg, fb3009AX, AI Gaming Laptop","₹64,990",3.8
+"Dell 15 Intel Core i5 13th Gen - 1334U, 16GB DDR4 RAM, 512GB SSD, FHD 15.6""/39.62 cm, Windows 11, MSO'21, Grey, 1.66kg, 120Hz 250 nits Display, 15 Month McAfee, Thin & Light Laptop","₹49,990",3.5
+"acer Aspire Lite, 12th gen, Intel Core i5-12450H Processor, 16 GB, 512GB, 15.6""/39.62 cm, Windows 11 Home, MSO, Pure Silver, 1.70 kg, AL15-52H, Backlit Keyboard","₹40,990",3.9
+"Lenovo V15 AMD Ryzen 7 7730U 15.6"" (39.62cm) FHD 250 Nits Antiglare Thin and Light Laptop (16GB/512GB SSD/Windows 11/Iron Grey/1.65 Kg) Grey","₹42,490",4.1
+"Lenovo 14 (2025), Intel Core i5 13th Gen 13420H - (16 GB/512 GB SSD/Intel UHD Graphics/Windows 11 Home) Thin and Light Business Laptop/14.0"" FHD Display/Iron Grey/1.4 kg/Microsoft Office 2021","₹46,480",N/A
+"HP Omen, Intel Core Ultra 9 285H, 8GB RTX 5070, 32GB DDR5, 1TB SSD, 165Hz, 2k WUXGA, 3ms, 400 nits, 16''/40.6cm, Win11, M365* Office24, Black, 2.42kg, an0012TX, Unleashed Mode, RGB, AI Gaming Laptop","₹1,63,990",4.8
+"HP 15s, 12th Gen Intel Core i5 16GB RAM/512GB SSD 15.6-inch(39.6 cm) Micro-Edge Anti-Glare FHD Laptop/Win 11/Intel Iris Xe Graphics/Dual Speakers/Alexa/Backlit KB/MSO/Fast Charge, 15s- fq5112TU","₹52,100",4.0
+"Lenovo Legion 5 Intel Core i7-14650HX 16"" (40.64cm) WQXGA IPS 350Nits 165Hz Gaming Laptop (16GB/1TB SSD/Win 11/Office 2021/NVIDIA RTX 4070 8GB/100%sRGB/Alexa/3 Month Game Pass/Grey/2.3Kg), 83DG009DIN","₹1,69,990",4.0
+"Lenovo V15 Gen 4 Laptop, 15.6"" FHD Display, AMD Ryzen 3 7320U Processor, RJ-45, USB-C, HDMI, Windows 11 /MS Office (8GB LPDDR5 RAM 5500 MHz | 512GB PCIe SSD), Silver, 1 Year Brand Warranty","₹27,710",3.4
+"HP Smartchoice Victus, 13th Gen i7-13620H, 6GB RTX 4050, 16GB DDR4(Upgradeable) 512GB SSD, 144Hz, 300nits, FHD, 15.6''/39.6cm, Win11, M365* Office24, Mica Silver, 2.3kg, fa2100/03/04tx, Gaming Laptop","₹81,990",3.4
+"Lenovo 15 (2025), Intel Core i3 12th Gen 1215U - (16 GB/512 GB SSD/Intel UHD Graphics/Windows 11 Home) Thin and Light Business Laptop/15.6"" FHD Display/Iron Grey/1.6 kg/MS Office 2021","₹32,600",3.0
+"Lenovo V14 Intel Core i5 13th Gen 14"" FHD (1920x1080) Antiglare 250 Nits Thin and Light Laptop (16GB RAM/512GB SSD/Windows 11 Home/Office 2024/Iron Grey/1.43 kg), 83A0A0PTIN","₹46,990",3.6
+"Lenovo IdeaPad Slim 3 13th Gen Intel Core i5-13420H 15.3 inch (38.8cm) WUXGA IPS Laptop (24GB RAM/1TB SSD/Windows 11/Office Home 2024/Backlit Keyboard/1Yr ADP Free/Grey/1.6Kg), 83K100PLIN","₹57,490",4.5
+"HP Victus, 13th Gen Intel Core i5-13420H, 4GB NVIDIA RTX 2050 Gaming Laptop (16GB RAM, 1TB SSD) 144Hz, IPS, 15.6""/39.6cm, Flicker-Free, Win11,Office21, Mica Silver, 2.3Kg, Enhanced Cooling, fa1307tx","₹67,799",4.0
+"HP 15, 13th Gen Intel Core i5-13420H, (16GB DDR4, 512GB SSD), FHD, Anti-Glare, Micro-Edge, 15.6''/39.6cm, Win11, M365 Basic(1yr)* Office24, Silver, 1.65kg, fr0028TU, Camera w/Shutter, Backlit Laptop","₹56,490",4.2
+"HP 15, Intel Ultra 5 125H, 12 Tops (16GB DDR5, 512GB SSD) FHD, IPS, 15.6''/39.6cm, Win11, M365 Basic(1yr)* Office24, Silver, 1.65kg, fd1254TU, Intel Graphics, FHD Camera w/Shutter, AI Powered Laptop","₹62,490",4.0
+"Dell 15DC15250, Intel Core i5 13th Gen - 1334U, 16GB RAM, 1TB SSD, FHD 15.6""/39.62 cm, Windows 11, MSO'24, Silver, 1.62kg, Backlit Keyboard, 15 Month McAfee, Thin & Light Laptop","₹54,990",3.8
+"HP 15 Laptop,13th Gen Intel Core i5-1334U, 16GB DDR4, 512GB SSD, 15.6-inch(39.6cm), Anti-Glare, FHD Laptop, Intel Iris Xe Graphics, Backlit KB, (Win 11, M.S. Office 24, Silver, 1.59kg) 15-FD0467TU","₹49,050",3.8
+"HP 15 (2023), Intel Core i3 (8 GB/512 GB SSD/Intel UHD Graphics/Windows 10 Thin and Light Business Laptop/15.6"" HD Display/Ash Grey/1.5 kg","₹34,060",4.1
+"Cable World® Educational Laptop Computer Toy for Kids Above 3 Years - 20 Fun Activity Learning Machine, Now Learn Letter, Words, Games, Mathematics, Music, Logic, Memory Tool",₹649,3.9
+"HP Professional 15 (2025), Intel Core i5 13th Gen 1334U - (32 GB/512 GB SSD/Intel Iris Xe Graphics/Windows 11 Pro) Thin and Light Business Laptop/15.6"" FHD Display/Backlit/Turbo Silver/1.5 kg/MSO 2021","₹52,280",1.0
+"Lenovo IdeaPad Slim 3 14th Gen Intel Core 5 210H 15.3 inch (38.8cm) WUXGA IPS Laptop (16GB RAM/512GB SSD/Windows 11/Office Home 2024/Backlit Keyboard/1Yr ADP Free/Grey/1.6Kg), 83K4004UIN","₹54,980",3.4
+"Acer Aspire Lite, 13th Gen, Intel Core i3-1305U, 8GB RAM, 512GB SSD, Full HD, 15.6""/39.62cm, Windows 11 Home, Steel Gray, 1.59KG, AL15-53, Metal Body, 36 WHR, Thin and Light Premium Laptop","₹30,990",3.8
+"HP 15, AMD Ryzen 3 7320U (8GB LPDDR5, 512GB SSD) FHD, Anti-Glare, Micro-Edge, 15.6""/39.6cm, Win 11, Office 21, Silver, 1.59kg, fc0154AU, AMD Radeon Graphics, 1080p FHD Camera Laptop","₹29,890",4.0
+"Acer Aspire 3 (2025) Intel Core i3 13th Gen 1305U - (24 GB/512 GB SSD/Intel UHD Graphics/Windows 11 Home) Thin and Light Laptop/15.6"" FHD IPS Display/Metal Body/Silver/1.5 Kg/MSO 2021/3 Years Warranty","₹32,000",3.1
+"HP Pro Book14[New Launch], 13th Gen Intel Core i5-1335U Turbo Boost, 24GB DDR4, 512GB SSD, Win11 Pro, MSO21, 3 Year Warranty, IPS 14"" FHD HDR Laptop, Finger Print, Backlit KB, Metal Body, Anti Virus","₹71,900",3.5
+"acer Aspire Go 14, Intel Core Ultra 5 125H (14th Gen),16GB DDR5 RAM/512GB SSD, WUXGA IPS, 14.0""/35.56 cm, Win 11, MS Office, Steel Gray, 1.5 kg, AG14-71M,Backlit Keyboard, AI Powered Premium Laptop","₹52,990",3.5
+"Lenovo V14 G4 (2024), Intel Core i3 13th Gen 1315U - (16GB/512GB SSD/Intel UHD Graphics/Windows 11) Thin and Light Smart Laptop/14.0"" FHD Display/Iron Grey/1.57 kg/MS Office","₹33,100",3.5
+"Lenovo LOQ, Intel Core i7 13th Gen 13650HX, NVIDIA RTX 4060 8GB, 24GB RAM, 512GB SSD, 15.6""(39.6cm), Windows 11, Office Home 2024, Grey, 2.4Kg, 83DV00X8IN, 100% sRGB, 3 Mon. Game Pass Gaming Laptop","₹99,990",3.8
+"Lenovo LOQ 2024 13Th Gen Intel Core I5-13450HX | NVIDIA RTX 3050 6GB (16GB RAM/512GB SSD/15.6"" (39.6Cm)/Windows 11/Office Home 2024/100% Srgb/3 Mon. Game Pass/Grey/2.4Kg), 83DV00XCIN Gaming Laptop","₹78,290",4.4
+"Acer Aspire 3, 13th Gen, Intel Core i5-1334U Processor Laptop with 35.56 cm (14"") FHD LED-Backlit IPS Display (16GB RAM/512GB SSD/Intel Graphics/Win11Home) A324-53 Backlit Keyboard Steel Gray 1.45KG","₹39,990",4.2
+"Lenovo ThinkBook 16 AMD Ryzen 7 7735HS (16GB RAM/512GB SSD/Win 11 Home/Office 2024/Backlit Keyboard/Fingerprint) 16"" WUXGA IPS 300 Nits Thin & Light Laptop/1Y Warranty/Aluminium Top/1.7kg, 21MWA0R4IN","₹52,990",4.0
+"Lenovo IdeaPad Slim 3 14th Gen Intel Core 5 210H 15.3 inch (38.8cm) WUXGA IPS Laptop (16GB RAM/512GB SSD/Windows 11/Office Home 2024/Backlit Keyboard/1Yr ADP Free/Grey/1.6Kg), 83K4004UIN","₹54,980",3.4
+"Lenovo LOQ, Intel Core i7 13th Gen 13650HX, NVIDIA RTX 4060 8GB, 24GB RAM, 512GB SSD, 15.6""(39.6cm), Windows 11, Office Home 2024, Grey, 2.4Kg, 83DV00X8IN, 100% sRGB, 3 Mon. Game Pass Gaming Laptop","₹99,990",3.8
+"Lenovo V14 G4 (2024), Intel Core i3 13th Gen 1315U - (16GB/512GB SSD/Intel UHD Graphics/Windows 11) Thin and Light Smart Laptop/14.0"" FHD Display/Iron Grey/1.57 kg/MS Office","₹33,100",3.5
+"Cable World® Educational Laptop Computer Toy for Kids Above 3 Years - 20 Fun Activity Learning Machine, Now Learn Letter, Words, Games, Mathematics, Music, Logic, Memory Tool",₹649,3.9
+"HP 15 (2023), Intel Core i3 (8 GB/512 GB SSD/Intel UHD Graphics/Windows 10 Thin and Light Business Laptop/15.6"" HD Display/Ash Grey/1.5 kg","₹34,060",4.1
+"Lenovo LOQ 2024 13Th Gen Intel Core I5-13450HX | NVIDIA RTX 3050 6GB (16GB RAM/512GB SSD/15.6"" (39.6Cm)/Windows 11/Office Home 2024/100% Srgb/3 Mon. Game Pass/Grey/2.4Kg), 83DV00XCIN Gaming Laptop","₹78,290",4.4
+"Acer Aspire 3 (2025) Intel Core i3 13th Gen 1305U - (24 GB/512 GB SSD/Intel UHD Graphics/Windows 11 Home) Thin and Light Laptop/15.6"" FHD IPS Display/Metal Body/Silver/1.5 Kg/MSO 2021/3 Years Warranty","₹32,000",3.1
+"Dell 15DC15250, Intel Core i5 13th Gen - 1334U, 16GB RAM, 1TB SSD, FHD 15.6""/39.62 cm, Windows 11, MSO'24, Silver, 1.62kg, Backlit Keyboard, 15 Month McAfee, Thin & Light Laptop","₹54,990",3.8
+"acer Aspire Go 14, Intel Core Ultra 5 125H (14th Gen),16GB DDR5 RAM/512GB SSD, WUXGA IPS, 14.0""/35.56 cm, Win 11, MS Office, Steel Gray, 1.5 kg, AG14-71M,Backlit Keyboard, AI Powered Premium Laptop","₹52,990",3.5
+"Acer Aspire Lite, 13th Gen, Intel Core i3-1305U, 8GB RAM, 512GB SSD, Full HD, 15.6""/39.62cm, Windows 11 Home, Steel Gray, 1.59KG, AL15-53, Metal Body, 36 WHR, Thin and Light Premium Laptop","₹30,990",3.8
+"MSI Vector GP76, Intel 12th Gen. i7-12700H, 44CM FHD 360Hz Gaming Laptop (16GB/1TB NVMe SSD/Windows 11 Home/Nvidia GeForce RTX 3070Ti, GDDR6 8GB/Black/2.9Kg), 12UGSO-868IN","₹1,44,511.",4.0
+"HP 15, AMD Ryzen 3 7320U (8GB LPDDR5, 512GB SSD) FHD, Anti-Glare, Micro-Edge, 15.6""/39.6cm, Win 11, Office 21, Silver, 1.59kg, fc0154AU, AMD Radeon Graphics, 1080p FHD Camera Laptop","₹29,890",4.0
+"ASUS Vivobook Go 15, Intel Celeron N4500, Fingerprint Sensor (Intel HD iGPU/8GB RAM/512GB SSD/FHD/15.6""/60Hz/42WHrs/Windows 11/M365 Basic (1Year)*/Office Home 2024/Star Black/1.57 kg) E510KA-EJ9011WS","₹23,990",2.5
+"Lenovo 15 (2025), AMD Ryzen 5 7520U Quad Core - (16 GB/512 GB SSD/AMD Radeon 610M Graphics/Windows 11 Pro) Thin and Light Business Laptop/15.6"" FHD Display/Arctic Grey/1.6 kg/MS Office 2021","₹34,990",3.7
+"ASUS Chromebook CX1405, Intel Celeron N4500, 8GB RAM, 128GB, FHD 14""(35.56cm), Chrome OS, Quiet Blue, 1.4Kg, CX1405CKA-S60394, Intel UHD Graphics, 42WHrs, Thin & Light Laptop","₹20,990",3.6
+"Lenovo ThinkBook 16 AMD Ryzen 5 7535HS (16GB RAM/512GB SSD/Win 11 Home/Office 2024/Backlit Keyboard/Fingerprint) 16"" WUXGA IPS 300 Nits Thin & Light Laptop/1Y Warranty/Aluminium Top/1.7kg, 21MWA0BSIN","₹44,490",3.7
+"Apple 2025 MacBook Air (13-inch, Apple M4 chip with 10-core CPU and 8-core GPU, 16GB Unified Memory, 256GB) - Sky Blue","₹96,990",4.6
+"2022 Apple MacBook Air Laptop with M2 chip: 13.6-inch Liquid Retina Display, 16GB RAM, 256GB SSD Storage, Backlit Keyboard, 1080p FaceTime HD Camera. Works with iPhone and iPad; Silver","₹94,990",5.0
+"acer Professional 14[New Launch], 13th Gen Intel Core i7-1355U Turbo Boost, 32GB DDR4, 1TB SSD, Win11 Pro, MSO21, 14inch FHD Laptop, 3 Year Warranty, Metal ID, Fingerprint, Backlit KB, Silver, 1.34kg","₹64,880",3.9
+"MSI Vector GP76, Intel 12th Gen. i7-12700H, 44CM FHD 360Hz Gaming Laptop (16GB/1TB NVMe SSD/Windows 11 Home/Nvidia GeForce RTX 3070Ti, GDDR6 8GB/Black/2.9Kg), 12UGSO-868IN","₹1,44,511.",4.0
+"HP Smartchoice Victus, 13th Gen Intel Core i7-13620H, 8GB RTX 5050, 24GB DDR5(Upgradeable) 1TB SSD, 144Hz, FHD, 15.6''/39.6cm, Win11, M365* Office24, Mica Silver, 2.29kg, fa2309TX, RGB Gaming Laptop","₹1,02,990",3.7
+"acer Aspire Lite (2025) AMD Ryzen 3 Quad Core 5300U - (16 GB/512 GB SSD/AMD Radeon Graphics/Windows 11 Home) AL15-41 Thin and Light Laptop (15.6 Inch FHD, Steel Grey, 1.5 Kg/MS Office 2021","₹27,990",5.0
+"HP 15, 13th Gen Intel Core i3-1315U Laptop (8GB DDR4,512GB SSD) Anti-Glare, Micro-Edge,15.6' FHD, Win11,MS Office Home21, Silver,1.59kg, FHD Camera w/Privacy Shutter, fd0569TU","₹33,880",3.9
+"DELL 14 (2025) Intel Core i3 13th Gen 1305U - (8 GB/512 GB SSD/Intel UHD Graphics/Windows 11 Home) Thin and Light Business Laptop/14.0"" FHD+ IPS Display/Ice Blue/1.4 kg/MSO 2021/1 Year ADP Warranty","₹32,150",4.2
+"DELL 15 (2025) Intel Core i3 13th Gen 1315U - (32 GB/512 GB SSD/Intel UHD Graphics/Windows 11 Home) Thin and Light Business Laptop/15.6"" HD Display/Smoky Black/1.5 kg/MSO 2021/1 Year ADP Warranty","₹41,490",5.0
+"HP 15, AMD Ryzen 5 7520U (8GB LPDDR5, 512GB SSD) Anti-Glare, FHD,15.6-inch (39.6 cm) Win 11, Office 21, FHD Camera with Privacy Shutter,15s-fc0155AU","₹33,990",3.8
+"Apple 2024 MacBook Air 15″ Laptop with M3 chip: 38.91 cm (15.3″) Liquid Retina Display, 16GB Unified Memory, 512GB SSD Storage, Backlit Keyboard, 1080p FaceTime HD Camera, Touch ID- Space Grey","₹1,44,990",4.6
+"HP 15, 13th Gen Intel Core i5-1334U, (16GB DDR4,512GB SSD) Anti-Glare, Micro-Edge, FHD, 15.6''/39.6cm, Win11, M365 Basic(1yr)* Office24, Silver, 1.59kg, fd0577TU, Iris Xe, FHD Camera w/Shutter Laptop","₹51,990",3.8
+"HP Omen, 14th Gen Intel Core i7-14650HX, 8GB RTX 5050, 24GB DDR5(Upgradeable) 1TB SSD, 165Hz, 2k WUXGA, 3ms, 400 nits, 16''/40.6cm, Win11, M365* Office24, Black, 2.43kg, am0241TX, RGB Gaming Laptop","₹1,32,990",4.2
+"HP Professional 15 (2025), Intel Core i5 13th Gen 1334U - (16 GB/512 GB SSD/Intel Iris Xe Graphics/Windows 11 Pro) Thin and Light Business Laptop/15.6"" FHD Display/Backlit/Turbo Silver/1.5 kg/MSO 2021","₹48,960",N/A
+"HP 15 (2025), AMD Ryzen 5 7520U Quad Core - (16 GB/512 GB SSD/AMD Radeon Graphics/Windows 11 Home) Thin and Light Business Laptop/15.6"" FHD Display/Backlit + Fingerprint/Silver/1.5 kg/MS Office 2021","₹37,990",N/A
+"Lenovo IdeaPad Slim 3, Intel Core i3 13th Gen 1315U, 8GB RAM, 512GB SSD, FHD 15.6""(39.6cm), Windows 11, Office 2024, Grey, 1.6Kg, 82X700G5IN, Alexa Built-in, 1Yr ADP Free, 3 Month Game Pass Laptop","₹34,990",4.8
+"HP 15, 13th Gen Intel Core i5-1334U Laptop (12GB DDR4,512GB SSD) Anti-Glare,Micro-Edge,15.6''/39.6cm, FHD, Win11,M365,Office24, Silver,1.59kg, Iris Xe Graphics, FHD Camera w/Privacy Shutter, fd0575TU","₹47,990",3.5
+"ASUS Vivobook 15,13th Gen,Intel Core i7-13620H(Intel UHD iGPU/16GB RAM/1TB SSD/FHD/15.6""/60Hz/Backlit Keyboard/42Whr/Windows 11/M365 Basic (1Year)*/Office Home 2024/Quiet Blue/1.7 Kg)X1502VA-BQ1298WS","₹62,990",3.8
+"HP 14 (2025), AMD Ryzen 5 7520U Quad Core - (8 GB/512 GB SSD/AMD Radeon Graphics/Windows 11 Home) Thin and Light Business Laptop/14.0"" HD Display/Ash Grey/1.36 kg/MS Office 2021","₹28,990",4.0
+"Lenovo IdeaPad Slim 5 AMD Ryzen 5 7535HS 13.3 inch (33.7cm) WUXGA IPS Laptop (16GB RAM/512GB SSD/Windows 11/Microsoft 365 Basic + Office Home 2024/Backlit Keyboard/1Yr ADP Free/Grey/1.6Kg), 83J2004HIN","₹57,990",4.2
+"Apple 2025 MacBook Air (15-inch, Apple M4 chip with 10-core CPU and 10-core GPU, 16GB Unified Memory, 256GB) - Sky Blue","₹1,20,990",4.6
+"Apple 2024 MacBook Air (13-inch, Apple M3 chip with 8‑core CPU and 10‑core GPU, 24GB Unified Memory, 512GB) - Space Gray","₹1,44,699",4.1
+"HP 15 (2025), AMD Ryzen 5 7520U Quad Core - (16 GB/512 GB SSD/AMD Radeon Graphics/Windows 11 Home) Thin and Light Business Laptop/15.6"" FHD Display/Backlit + Fingerprint/Silver/1.5 kg/MS Office 2021","₹37,990",N/A
+"Acer Aspire 3, 13th Gen, Intel Core i5-1334U Processor Laptop with 35.56 cm (14"") FHD LED-Backlit IPS Display (16GB RAM/512GB SSD/Intel Graphics/Win11Home) A324-53 Backlit Keyboard Steel Gray 1.45KG","₹39,990",4.2
+"Lenovo IdeaPad 1 AMD Ryzen 5 5500U 15.6"" HD Thin and Light Laptop (8GB RAM/512GB SSD/Windows 11 Home/Office Home 2024/1 Year ADP Free/Grey/1.6Kg), 82R4011MIN","₹32,890",4.0
+"ASUS Vivobook Go 14, AMD Ryzen 5 7520U, 16GB RAM, 512GB SSD, FHD 14"", Windows 11, Office Home 2024, Cool Silver, 1.38kg, E1404F04FA-NK5541WS, AMD Radeon iGPU, 42WHrs, M365 Basic (1Year)* Laptop","₹37,990",3.8
+"DELL 14 (2025) Intel Core i3 13th Gen 1305U - (8 GB/512 GB SSD/Intel UHD Graphics/Windows 11 Home) Thin and Light Business Laptop/14.0"" FHD+ IPS Display/Ice Blue/1.4 kg/MSO 2021/1 Year ADP Warranty","₹32,150",4.2
+"ASUS Vivobook 15,13th Gen,Intel Core i7-13620H(Intel UHD iGPU/16GB RAM/1TB SSD/FHD/15.6""/60Hz/Backlit Keyboard/42Whr/Windows 11/M365 Basic (1Year)*/Office Home 2024/Quiet Blue/1.7 Kg)X1502VA-BQ1298WS","₹62,990",3.8
+"HP 15, AMD Ryzen 5 7520U (8GB LPDDR5, 512GB SSD) Anti-Glare, FHD,15.6-inch (39.6 cm) Win 11, Office 21, FHD Camera with Privacy Shutter,15s-fc0155AU","₹33,990",3.8
+"Lenovo IdeaPad Slim 5 AMD Ryzen 5 7535HS 13.3 inch (33.7cm) WUXGA IPS Laptop (16GB RAM/512GB SSD/Windows 11/Microsoft 365 Basic + Office Home 2024/Backlit Keyboard/1Yr ADP Free/Grey/1.6Kg), 83J2004HIN","₹57,990",4.2
+"Lenovo IdeaPad Pro 5, Intel Core Ultra 9 185H, 32GB RAM, 1TB SSD, 2.8K OLED 14""(35.5cm), Windows 11, Office Home 2024, Grey, 1.46Kg, 83D2004XIN, Built-in AI, 400Nits, 120Hz, 1Yr ADP Free Laptop","₹1,17,990",4.2
+"HP 15, 13th Gen Intel Core i5-1334U Laptop (12GB DDR4,512GB SSD) Anti-Glare,Micro-Edge,15.6''/39.6cm, FHD, Win11,M365,Office24, Silver,1.59kg, Iris Xe Graphics, FHD Camera w/Privacy Shutter, fd0575TU","₹47,990",3.5
+"HP Smartchoice Victus, 13th Gen Intel Core i7-13620H, 8GB RTX 5050, 24GB DDR5(Upgradeable) 1TB SSD, 144Hz, FHD, 15.6''/39.6cm, Win11, M365* Office24, Mica Silver, 2.29kg, fa2309TX, RGB Gaming Laptop","₹1,02,990",3.7
+"Dell Inspiron 3530, Intel Core i7 13th Gen - 1355U, 16GB RAM, 512GB SSD, FHD 15.6""/39.62 cm, Windows 11, Office H&S 2024, Silver, 1.62kg, Backlit KB, M365, 15 Month McAfee, Thin & Light Laptop","₹67,490",3.9
+"Lenovo 14 (2025), Intel Core i5 12th Gen 1235U - (24 GB/512 GB SSD/Intel Iris Xe Graphic/Windows 11 Home) Thin and Light Business Laptop/14.0"" FHD Display/Iron Grey/1.4 kg/MSO 2021/1 Year ADP Warranty","₹47,990",N/A
+"Lenovo IdeaPad Slim 3, Intel Core i3 13th Gen 1315U, 8GB RAM, 512GB SSD, FHD 15.6""(39.6cm), Windows 11, Office 2024, Grey, 1.6Kg, 82X700G5IN, Alexa Built-in, 1Yr ADP Free, 3 Month Game Pass Laptop","₹34,990",4.8
+"Commercial 14 H, Intel 13th Gen i7-13700H, 36CM Business Laptop(32GB/1TB NVMe SSD/Windows 11 Pro/Intel Xe Graphics/Solid Grey/1.6Kg), A13MG vPro-065IN","₹1,05,511.",4.4
+"ASUS Vivobook 16, Intel Core i5-13420H Processor,(16GB RAM/512GB SSD/16 FHD+ (1920 x 1200)/Win 11/M365 Basic (1Year)*/Backlit Keyboard/Office Home 2024/Silver/1.88 kg),X1605VA-MB1627WS","₹51,590",4.1
+"Apple 2025 MacBook Air (13-inch, Apple M4 chip with 10-core CPU and 8-core GPU, 16GB Unified Memory, 256GB) - Sky Blue","₹96,990",4.6
+"2022 Apple MacBook Air Laptop with M2 chip: 13.6-inch Liquid Retina Display, 16GB RAM, 256GB SSD Storage, Backlit Keyboard, 1080p FaceTime HD Camera. Works with iPhone and iPad; Silver","₹94,990",5.0
+"HP Smartchoice Victus, 13th Gen Intel Core i7-13620H, 8GB RTX 5050, 24GB DDR5(Upgradeable) 1TB SSD, 144Hz, FHD, 15.6''/39.6cm, Win11, M365* Office24, Mica Silver, 2.29kg, fa2309TX, RGB Gaming Laptop","₹1,02,990",3.7
+"ASUS Vivobook 16, Intel Core i5-13420H Processor,(16GB RAM/512GB SSD/16 FHD+ (1920 x 1200)/Win 11/M365 Basic (1Year)*/Backlit Keyboard/Office Home 2024/Silver/1.88 kg),X1605VA-MB1627WS","₹51,590",4.1
+"Lenovo IdeaPad Slim 3, Intel Core i7-13620H, 13th Gen, 16GB RAM, 512GB SSD, FHD IPS 300 Nits, 15""/38.1cm, Windows 11, MSOffice 21, Grey, 1.6Kg, 83EM008GIN,1Yr ADP Free,Alexa Built-in Laptop","₹60,780",4.1
+"Commercial 14 H, Intel 13th Gen i7-13700H, 36CM Business Laptop(32GB/1TB NVMe SSD/Windows 11 Pro/Intel Xe Graphics/Solid Grey/1.6Kg), A13MG vPro-065IN","₹1,05,511.",4.4
+"(Refurbished) Acer Aspire Lite AMD Ryzen 5-5625U Premium Thin and Light Laptop (8 GB RAM/512 GB SSD/Windows 11 Home) AL15-41, 39.62 cm (15.6"") Full HD Display, Metal Body, Steel Gray, 1.59 KG","₹26,341",3.2
+"Lenovo Ideapad 1 AMD Ryzen 5 5625U (16GB RAM/512GB SSD/Windows 11/Office Home 2024/15.6 Inch (39.6Cm)/FHD IPS Display/3Months Game Pass/Grey/1.6Kg), 82R4011CIN/0DIN Laptop","₹38,000",4.0
+"Lenovo 15 (2025), Intel Core i5 12th Gen 1235U - (16 GB/512 GB SSD/Intel Iris Xe Graphics/Windows 11 Pro) Thin and Light Business Laptop/15.6"" FHD Display/Iron Grey/1.6 kg/MS Office 2021","₹43,190",2.5
+"ASUS Vivobook 15,13th Gen,Intel Core i5-13420H(Intel UHD iGPU/16GB RAM/1TB SSD/FHD/15.6""/60Hz/Backlit Keyboard/Windows 11/M365 Basic (1Year)*/Office Home 2024/Quiet Blue/1.70 kg) X1502VA-BQ1297WS","₹52,990",3.9
+"HP 15, 13th Gen Intel Core i5-1334U, (16GB DDR4,512GB SSD) Anti-Glare, Micro-Edge, FHD, 15.6''/39.6cm, Win11, M365 Basic(1yr)* Office24, Silver, 1.59kg, fd0577TU, Iris Xe, FHD Camera w/Shutter Laptop","₹51,990",3.8
+"Lenovo IdeaPad Slim 3, 12th Gen Intel Core i5-12450H (16GB LPDDR5, 512GB SSD), Anti-glare, FHD 15.6""(39.6cm), Win 11, Office Home 2024, Arctic Grey, 1.62Kg, 83ER00MDIN, Thin & Light, Backlit KB Laptop","₹45,460",4.1
+"Dell Inspiron 3535, AMD Ryzen 5-7530U, 16GB RAM, 512GB SSD, FHD WVA IPS 15.6""/39.62 cm, Windows 11, MSO'24, Platinum Silver, 1.67kg, 120Hz, Standard Keyboard, 15 Month McAfee, Thin & Light Laptop","₹39,990",4.2
+"ASUS TUF A16 (2025), AMD Ryzen 7 7445HS, Gaming Laptop (RTX 4050-6GB/140W TGP/16GB RAM/1TB SSD/FHD+/16""/144Hz/56Whrs/Windows 11/M365 Basic (1Year)*/Office Home 2024/Mecha Gray/2.2Kg) FA607NUG-RL189WS","₹86,990",4.1
+"Lenovo IdeaPad Slim 3 Intel Core i3 12th Gen 15.6 inch (39.62cm) FHD Thin & Light Laptop (8GB/512GB SSD/Windows 11/Office 2021/3months Game Pass/Arctic Grey/1.63Kg), 82RK00VWIN","₹33,390",4.1
+"ASUS Vivobook 15,13th Gen,Intel Core i3-1315U (Intel UHD /16GB RAM/512GB SSD/FHD/15.6""/60Hz/Win 11/M365 Basic (1Year)*/Backlit Keyboard/Office Home 2024/Quiet Blue/1.70 kg) X1504VA-NJ2325WS","₹37,940",4.1
+"Acer Aspire 3 (2025) Intel Core i3 13th Gen 1305U - (16 GB/512 GB SSD/Intel UHD Graphics/Windows 11 Home) Thin and Light Laptop/15.6"" FHD IPS Display/Metal Body/Silver/1.5 Kg/MSO 2021/3 Years Warranty","₹30,540",3.2
+Microsoft New Surface Laptop (7th Edition) - Windows 11 Home Copilot + PC - 13.8” LCD - Snapdragon X Plus (10 Core) 16GB RAM 512GB SSD - Platinum - ZGM-00023,"₹1,31,990",4.7
+"ASUS Vivobook Go 14, AMD Ryzen 5 7520U, 16GB RAM, 512GB SSD, FHD 14"", Windows 11, Office Home 2024, Black, 1.38kg, E1404FA-NK5542WS, AMD Radeon iGPU, 42WHrs, M365 Basic (1Year)* Laptop","₹37,990",3.8
+"Acer NITRO V 15, AMD Ryzen 7-7445HS octa-core processor, NVIDIA GeForce RTX 4050- 6 GB GDDR6(16GB DDR5, 512GB)IPS FHD, 15.6""/ 39.62cm, 165Hz, Win 11 Home, Obsidian black, 2.1KG, ANV15-42 Gaming Laptop","₹71,990",3.7
+"Apple 2024 MacBook Air 15″ Laptop with M3 chip: 38.91 cm (15.3″) Liquid Retina Display, 16GB Unified Memory, 512GB SSD Storage, Backlit Keyboard, 1080p FaceTime HD Camera, Touch ID- Space Grey","₹1,44,990",4.6
+"Lenovo Smartchoice Ideapad Slim 3 13Th Gen Intel Core I7-13620H 15.3 Inch(38.8Cm) WUXGA IPS Laptop(16GB RAM/512GB SSD/Windows 11/Office Home 2024/Backlit Keyboard/1Yr ADP Free/Grey/1.6Kg),83K100CJIN","₹61,990",4.0
+"HP 15 (2025), AMD Ryzen 3 7320U Quad Core - (16 GB/512 GB SSD/AMD Radeon Graphics/Windows 11 Pro) Thin and Light Business Laptop/15.6"" FHD Display/Turbo Silver/1.5 kg/MS Office 2021","₹29,860",3.5
+"acer TravelLite Smart FHD TL04-51M Laptop, Intel Core i5 1334u 13th Gen 8 Core with 16GB Ram / 512GB NVMe SSD/Intel Iris Xe Graphics/Windows 11 / MS-Office / 14 Inch / 1 Year Brand Warranty","₹38,990",5.0
+"Lenovo V15 G4 AMD Ryzen 5 7520U DOS 15.6 inch FHD Thin & Lite Laptop, AMD Graphics, 16GB DDR5 5500Mhz Ram, 512GB SSD,Dolby Audio,Premium Grey, 1 Year Onsite Brand Warranty","₹34,480",3.8
+"Dell Inspiron 3530, Intel Core i5-1334U, 13th Gen, 16GB RAM, 512 SSD, FHD, 15.6""/39.62cm, Windows 11, MS Office 24, Black, 1.62KG, McAfee 15 Month, Thin & Light Laptop","₹46,685",2.9
+"acer TL 14 [New Launch], Intel Core i5-1334U Turbo Boost, 16GB DDR4 RAM, 512GB SSD, 14 Inch Full HD, Windows 11Pro, MSO21, 1.34KG, Metal Body, Privacy Shutter, Light Laptop, with 12 Months Anti Virus","₹47,990",3.5
+"Lenovo Smartchoice Ideapad 5 2-in-1 13th Gen Intel Core i5-13420H (16GB RAM/512GB SSD/Windows 11/Office Home 2024/WUXGA IPS/14 (35.5cm)/Touchscreen 2-in-1/3Mon.Game Pass/Grey/1.6kg), 83KX0059IN Laptop","₹67,990",4.2
+"Lenovo Smartchoice Yoga Slim 7 Intel Core Ultra 7 155H Built-in AI 14""(35.5cm) WUXGA-OLED 400Nits Laptop (32GB RAM/1TB SSD/60Hz/100% DCI-P3/Win11/Office Home 2024/1Yr ADP Free/Grey/1.39Kg), 83CV008XIN","₹99,990",4.0
+"Lenovo V15 AMD Ryzen 3 7320U 15.6"" (39.62cm) FHD 250 Nits Antiglare Thin and Light Laptop (8GB/512GB SSD/Windows 11 Home/Arctic Grey/1.65 Kg), 82YU00W7IN","₹27,900",3.9
+"HP 14 (2025), Intel Core i3 13th Gen 1315U - (16 GB/512 GB SSD/Intel UHD Graphics/Windows 11 Pro) Thin and Light Business Laptop/14.0"" HD Display/Ash Grey/1.4 kg/MS Office 2021","₹35,750",2.7
+"ASUS Vivobook 15, Intel Core i5 13th Gen 1335U, 16GB RAM, 512GB SSD, FHD 15.6"", Windows 11, Office 2021, Cool Silver, 1.70kg, X1504VA-NJ540WS, Intel Iris Xᵉ iGPU, 42WHrs, Thin & Light Laptop","₹45,989",3.9
+"ASUS Zenbook 14, Smartchoice,AMD Ryzen AI 5 340, AI PC(AMD Radeon Graphics/16GB RAM/512GB SSD/3K OLED/14/120Hz/Windows 11/M365 Basic (1Year)*/Office Home 2024/Jade Black/1.2 Kg) UM3406KA-PP240WS","₹87,990",4.1
+"ASUS Vivobook Go 15, AMD Ryzen 5 7520U Thin & Light Laptop(AMD Radeon iGPU/16GB RAM/512GB SSD/FHD/15.6""/60Hz/Windows 11/M365 Basic (1Year)*/Office Home 2024/Cool Silver/1.63 Kg) E1504FA-NJ5541WS","₹37,990",4.0
+"Lenovo IdeaPad 3, Intel Core i3-1215U, 12th Gen, 8GB RAM, 512GB SSD, FHD, 14""/35.5cm, Windows 11, MSOffice 2021, Arctic Grey, 1.43Kg, 82RJ00FUIN, 1 Year Warranty, 3months Game Pass, Thin& Light Laptop","₹33,100",3.6
+"ASUS Vivobook S14, Intel Core Ultra 5 225H, Metallic Design Laptop (Intel iGPU/16GB RAM/512GB SSD/FHD+/14""/60Hz/Windows 11/M365 Basic (1Year)*/Office Home 2024/Matte Gray/1.4 Kg) S3407CA-LY057WS","₹69,990",4.4
+"DELL 15 (2025) Intel Core i3 12th Gen 1215U - (16 GB/512 GB SSD/UHD Graphics/Windows 11 Home) Thin and Light Business Laptop/15.6"" HD Display/Smoky Black/1.8 kg/MS Office 2021/3 Years Warranty","₹37,700",4.3
+"Apple 2025 MacBook Air (13-inch, Apple M4 chip with 10-core CPU and 8-core GPU, 16GB Unified Memory, 256GB) - Sky Blue","₹96,990",4.6
+"ASUS Vivobook Go 15, AMD Ryzen 5 7520U Thin & Light Laptop(AMD Radeon iGPU/16GB RAM/512GB SSD/FHD/15.6""/60Hz/Windows 11/M365 Basic (1Year)*/Office Home 2024/Cool Silver/1.63 Kg) E1504FA-NJ5541WS","₹37,990",4.0
+"Acer Aspire 3 Intel Core i3-1305U Processor Laptop with 35.56 cm (14"") Full HD LED-Backlit IPS Display (16 GB RAM/512 GB SSD/WiFi 6/Intel Graphics/Win11 Home/65W) A324-53, Steel Gray, 1.45KG","₹29,990",3.7
+"acer TL 14 [New Launch], Intel Core i5-1334U Turbo Boost, 16GB DDR4 RAM, 512GB SSD, 14 Inch Full HD, Windows 11Pro, MSO21, 1.34KG, Metal Body, Privacy Shutter, Light Laptop, with 12 Months Anti Virus","₹47,990",3.5
+"Dell Inspiron 3530, Intel Core i5-1334U, 13th Gen, 16GB RAM, 512 SSD, FHD, 15.6""/39.62cm, Windows 11, MS Office 24, Black, 1.62KG, McAfee 15 Month, Thin & Light Laptop","₹46,685",2.9
+"HP Pavilion x360, 13th Gen Intel Core i5-1335U (16GB DDR4, 512GB SSD) Touchscreen, 14""/35.6cm, FHD, Win 11, Office 21, Silver, 1.51kg, ek1074tu/1148tu, Iris Xe, FPR, 5MP Camera, Backlit KB Laptop","₹64,490",3.7
+"HP 14 (2025), Intel Core i3 13th Gen 1315U - (16 GB/512 GB SSD/Intel UHD Graphics/Windows 11 Pro) Thin and Light Business Laptop/14.0"" HD Display/Ash Grey/1.4 kg/MS Office 2021","₹35,750",2.7
+"Lenovo IdeaPad 3, Intel Core i3-1215U, 12th Gen, 8GB RAM, 512GB SSD, FHD, 14""/35.5cm, Windows 11, MSOffice 2021, Arctic Grey, 1.43Kg, 82RJ00FUIN, 1 Year Warranty, 3months Game Pass, Thin& Light Laptop","₹33,100",3.6
+"ASUS Vivobook 15, Intel Core i5 13th Gen 1335U, 16GB RAM, 512GB SSD, FHD 15.6"", Windows 11, Office 2021, Cool Silver, 1.70kg, X1504VA-NJ540WS, Intel Iris Xᵉ iGPU, 42WHrs, Thin & Light Laptop","₹45,989",3.9
+"HP Victus, AMD Ryzen 7 7445HS, 6GB RTX 4050, 16GB DDR5(Upgradeable) 512GB SSD, 144Hz, IPS, 300nits, FHD, 15.6''/39.6cm, Win11, M365* Office24, Blue, 2.29kg, fb3118AX, Backlit, DTS Audio, Gaming Laptop","₹79,990",3.8
+"DELL 15 (2025) Intel Core i3 12th Gen 1215U - (16 GB/512 GB SSD/UHD Graphics/Windows 11 Home) Thin and Light Business Laptop/15.6"" HD Display/Smoky Black/1.8 kg/MS Office 2021/3 Years Warranty","₹37,700",4.3
+"HP Pavilion x360, 13th Gen Intel Core i5-1335U (16GB DDR4, 1TB SSD) FHD, 14''/35.6 cm, Touchscreen 2-in-1, Win 11, Office 21, Silver, 1.51 kg, ek1010TU/1149tu, FPR, 5MP Camera, B&O, Backlit Laptop","₹68,990",3.7
+"ASUS Vivobook Go 14, AMD Ryzen 5 7520U, 16GB RAM, 512GB SSD, FHD 14"", Windows 11, Office Home 2024, M365 Basic (1Year)*, Black, 1.38kg, E1404FA-EB2542WS, AMD Radeon iGPU, 42WHrs, Thin & Light Laptop","₹37,990",4.0
+"Acer Aspire 14, Intel Core i5-13500H Processors, 16 GB, 512 GB, WUXGA IPS, 14""/35.56 cm, Windows 11 Home, MS Office, Pure Silver, 1.44 kg, AS14H-53, Thin and Light Laptop","₹47,990",3.6
+"Lenovo IdeaPad Slim 3, Intel Core 12th Gen, 8GB RAM, 512GB SSD, FHD 15.6""(39.62cm), Windows 11, Office Home 2024, Arctic Grey, 1.63Kg, 82RK01ABIN, Intel UHD Graphics, Thin & Light, 1Yr ADP Free Laptop","₹31,990",3.9
+"Lenovo Smartchoice Ideapad 5 2-in-1 13th Gen Intel Core i5-13420H (16GB RAM/512GB SSD/Windows 11/Office Home 2024/WUXGA IPS/14 (35.5cm)/Touchscreen 2-in-1/3Mon.Game Pass/Grey/1.6kg), 83KX0059IN Laptop","₹67,990",4.2
+"ASUS Vivobook S14, Intel Core Ultra 5 225H, Metallic Design Laptop (Intel iGPU/16GB RAM/512GB SSD/FHD+/14""/60Hz/Windows 11/M365 Basic (1Year)*/Office Home 2024/Matte Gray/1.4 Kg) S3407CA-LY057WS","₹69,990",4.4
+"HP 255 G10 AMD Ryzen 5 Quad Core 7520U - (8 GB/512 GB SSD) Thin and Light Laptop (15.6 inch, Matt Silver, 1.45 kg)","₹29,990",2.9
+"Lenovo IdeaPad Slim 3, AMD Ryzen 5 5625U, 16GB RAM, 512GB SSD, FHD 15.6""(39.6cm), Windows 11, Office Home 2024, Grey, 1.6Kg, 82XM00QDIN, Integrated AMD Radeon Graphics, Thin and Light Laptop","₹38,000",3.8
+"MSI Titan 18 HX AI,Intel Series 2 Core Ultra 9 285HX,46CM UHD+ MiniLED 120Hz Gaming Laptop(64GB/6TB NVMe SSD/Windows 11 Home/GeForce RTX 5090,GDDR6 24GB/Core Black/3.6Kg), A2XWJG-486IN","₹6,05,990",3.8
+"Lenovo Yoga Slim 7 (Smartchoice) Intel Core Ultra 9 185H 14""(35.5cm) WUXGA-OLED Laptop (32GB RAM/1TB SSD/AI PC/Windows 11/Microsoft 365 Basic + Office Home 2024/1Yr ADP Free/Grey/1.39Kg), 83CV00B3IN","₹1,09,990",4.2
+"HP 15, 13th Gen Intel Core i3-1315U (8GB DDR4, 512GB SSD) FHD Anti-Glare Micro-Edge, 15.6""/39.6cm, Windows 11, MS Office, Grey, 1.59kg, fd0006TU/FD0465TU, Intel UHD Graphics, 1080p FHD Camera Laptop","₹35,500",3.9
+"HP 15 AMD Ryzen 3 7320U (8GB Ram/512GB SSD/Fhd/15.6"" (39.6 Cm)/Backlit Keyboard/Windows 11/Ms Office 21/1.59Kg/Silver) Fc0026Au Laptop","₹30,660",4.1
+"ASUS TUF F16, 14th Gen, Smartchoice,Intel Core i7 14650HX, Gaming Laptop(RTX 5060-8GB/16GB/1TB /FHD+/16""/165Hz/90WHrs/Windows 11/M365 Basic (1Year)*/Office 2024/Jaeger Gray/2.2 Kg) FX608JMR-RV049WS","₹1,39,990",4.5
+"Lenovo V15 AMD Ryzen 7 7730U 15.6"" (39.62cm) FHD 250 Nits Antiglare Thin and Light Laptop (Free MS Office) Lifetime (16GB/512GB SSD/Windows 11/Iron Grey/1.65 Kg) 1 Year Brand Warranty, 83CRA01SIN","₹43,990",3.9
+"ASUS TUF F16,13th Gen,Intel Core i5-13450HX,Gaming Laptop(RTX 5050-8GB/115W TGP/16GB RAM/1TB SSD/FHD+/16""/165Hz/90Whr/Windows 11/M365 Basic (1Year)*/Office Home 2024/Jaeger Gray/2.5 Kg)FX608JH-RV057WS","₹99,990",4.2
+"Dell 15, AMD Ryzen 7-7730U, 16GB DDR4, 512GB SSD, FHD 15.6""/39.6 cm, Windows 11, Office H&S 2024, Platinum Silver, 1.63 Kg, 120Hz 250 nits, AMD Radeon Graphics, Standard Keyboard, Thin & Light Laptop","₹47,990",3.8
+"Lenovo LOQ, AMD Ryzen 5 7235HS, NVIDIA RTX 3050 6GB, 24GB RAM, 512GB SS SSD, 15.6""(39.6cm), Windows 11, Office Home 2024, Grey, 2.4Kg, 83JC00EFIN, 100% sRGB, 3 Mon. Game Pass Gaming Laptop","₹65,490",4.2
+"Lenovo Ideapad Slim 3 13Th Gen Intel Core I5-13420H 15.3""(38.8Cm) WUXGA IPS Laptop(16GB RAM/512GB SSD/Windows 11/Office Home 2024/Backlit Keyboard/1Yr ADP Free/3 Mon. Game Pass/Grey/1.6Kg) 83K100C6IN","₹54,158",5.0
+Google Pixelbook Go 128GB Multi-Touch Chromebook/Laptop (Just Black),"₹64,990",4.4
+Microsoft New Surface Laptop (7th Edition) - Windows 11 Home Copilot + PC - 13.8” LCD PixelSense Touchscreen - Qualcomm Snapdragon X Plus (10 Core) - 16GB RAM - 512GB SSD - Graphite - ZGM-00059,"₹1,29,990",5.0
+"Alienware New 16 Area-51 Gaming Laptop, AI Enabled Core Ultra 9 275HX Processor, 64GB DDR5, 2TB SSD, RTX 5090, 24 GB GDDR7 Graphics, 16.0"" WQXGA 240Hz 500 nits Display, Liquid Teal Color, 3.4kg","₹4,84,990",5.0
+"ASUS ROG Strix G16, AMD Ryzen 9 8940HX, Gaming Laptop(RTX 5060-8GB/115W TGP/16GB/1TB /2.5K QHD+/16""/240Hz/90WHrs/Windows 11/M365 Basic (1Year)*/Office Home 2024/Eclipse Gray/2.5 Kg) G614PM-S5046WS","₹1,69,990",4.4
+"Dell 15, AMD Ryzen 7-7730U, 16GB DDR4, 512GB SSD, FHD 15.6""/39.6 cm, Windows 11, Office H&S 2024, Platinum Silver, 1.63 Kg, 120Hz 250 nits, AMD Radeon Graphics, Standard Keyboard, Thin & Light Laptop","₹47,990",3.8
+"Lenovo LOQ, AMD Ryzen 5 7235HS, NVIDIA RTX 3050 6GB, 24GB RAM, 512GB SS SSD, 15.6""(39.6cm), Windows 11, Office Home 2024, Grey, 2.4Kg, 83JC00EFIN, 100% sRGB, 3 Mon. Game Pass Gaming Laptop","₹65,490",4.2
+"HP Omen 16 Max, Intel Core Ultra 9 275HX processor,16GB NVIDIA RTX 5080 Gaming AI Laptop (32GB DDR5,1TB SSD) 60-240 Hz,3Ms,IPS,WQXGA,16''/40.6Cm,Win11,M365* Office24,Black,2.68Kg,RGB Backlit, Ah0076Tx","₹3,09,990",3.6
+Microsoft New Surface Laptop (7th Edition) - Windows 11 Home Copilot + PC - 13.8” LCD PixelSense Touchscreen - Qualcomm Snapdragon X Plus (10 Core) - 16GB RAM - 512GB SSD - Graphite - ZGM-00059,"₹1,29,990",5.0
+"ASUS Vivobook 15, Intel Core i7 13th Gen 13620H, 16GB RAM, 512GB SSD, FHD 15.6"", Windows 11, Office Home 2024, Cool Silver, 1.70kg, X1502VA-BQ837WS, Intel UHD iGPU, M365 Basic (1Year)* Laptop","₹58,990",3.7
+"Alienware New 16 Area-51 Gaming Laptop, AI Enabled Core Ultra 9 275HX Processor, 64GB DDR5, 2TB SSD, RTX 5090, 24 GB GDDR7 Graphics, 16.0"" WQXGA 240Hz 500 nits Display, Liquid Teal Color, 3.4kg","₹4,84,990",5.0
+"Dell Inspiron 7440, Intel Core 7 150U, 16GB RAM, 1TB SSD, FHD+ 250nits Touch, 14""/35.62cm, Windows 11, MS Office 21, Ice Blue, 1.71KG, Dell Active Pen, Backlit KB+FPR, McAfee 15 Months, 2-in-1 Laptop","₹85,512",3.5
+"MSI Katana 15, Intel 13th Gen. i7-13620H, 40CM FHD 144Hz Gaming Laptop (16GB/1TB NVMe SSD/Windows 11 Home/NVIDIA GeForce RTX 4050, GDDR6 6GB/Black/2.5Kg) B13VEK-2432IN","₹85,990",5.0
+"Dell Alienware x15 R1 Gaming Laptop, Intel Core i7-11800H Processor/ 16GB/ 1TB SSD/Win 11 + MSO'21/ NVIDIA RTX 3060 6GB/ 15.6"" (39.62cm) FHD 300 nits 360Hz + Alien FX/Lunar Light/ 2.27kg","₹2,46,990",N/A
+"Stealth 14 AI Studio, Intel Core Ultra 7 155H, Built-in AI,36CM 2.8K OLED 120Hz Gaming Laptop(32GB/1TB NVMe SSD/Windows 11 Home/NVIDIA GeForce RTX 4070, GDDR6 8GB /Star Blue/1.7Kg), A1VGG-054IN","₹1,36,229",2.3
+"HP Pavilion Plus, Intel Core i5-1335U-13th Gen Laptop, (16GB LPDDR5x,512GB SSD),IPS, 300 nits, 14''(35.6cm) 2K,Win 11, M365 Basic(1yr), Office Home 24, Silver,1.38kg, 5MP Camera w/Shutter, ew0107TU","₹65,990",4.0
+"Sword 16 HX, Intel 14th Gen. i7-14700HX, 41CM 16:10 FHD+ 144Hz Gaming Laptop(16GB/1TB NVMe SSD/Windows 11 Home/NVIDIA GeForce RTX 4050, GDDR6 6GB /Cosmos Gray/2.3Kg), 14VEKG-210IN","₹99,990",3.2
+"Lenovo IdeaPad Slim 5, AMD Ryzen AI 7 350, 24GB RAM, 1TB SSD, WUXGA OLED 14""(35.5cm), Win11, Office Home'24, Grey, 1.4Kg, 83HX001NIN, Copilot+ PC, Backlit Keyboard, 1Yr ADP Free AI Powered Laptop","₹79,990",3.7
+"Lenovo V15 12th Gen Intel Core i5-1235U 15.6"" FHD Thin and Light Laptop (8GB RAM/512GB SSD/Windows 11 Home/MS Office Home & Student 2021/Iron Grey/1.70 kg), 82TTA07QIH","₹40,890",4.0
+"ASUS Zenbook 14, Intel Core Ultra 5 Series 2, 16GB RAM, 1TB SSD, 3K OLED 14"", Touchscreen, Win 11, Office Home 2024, Ponder Blue, 1.28kg, UX3405CA-PZ162WS, Intel Arc iGPU, M365 Basic (1Year)* Laptop","₹92,990",4.0
+"HP 14, 13th Gen Intel Core i5-1334U Laptop (16GB DDR4,512GB SSD) Anti-Glare, Micro-Edge, 14/35.6cm, FHD, Win11, M365 Basic(1yr),Office Home24, Silver,1.4kg, FHD Camera w/Privacy Shutter,ep0340TU","₹54,499",N/A
+"Dell 15 Laptop DC15250-15.6-inch FHD (1920x1080) 120Hz Display, Intel Core i5-1334U Processor, 16GB DDR4 RAM, 512GB SSD, Intel UHD Graphics, Windows 11 Home, Onsite Service - Platinum Silver","₹52,850",4.4
+"Lenovo LOQ 2024 12Th Gen Intel Core I5-12450HX | NVIDIA RTX 3050 6GB (16GB RAM/512GB SSD/15.6"" (39.6Cm)/Windows 11/Office Home 2024/100% Srgb/3 Mon. Game Pass/Grey/2.4Kg), 83GS00LNIN Gaming Laptop","₹68,490",3.7
+"acer Aspire Go 14, Intel Core Ultra 5 125H (14th Gen),16GB DDR5 RAM/1TB SSD, WUXGA IPS, 14.0""/35.56 cm, Win 11, MS Office, Steel Gray, 1.5 kg, AG14-71M,Backlit Keyboard, AI Powered Premium Laptop","₹56,990",3.5
+"ASUS Gaming V16 (2025), 14th Gen,Intel Core 7 240H Gaming Laptop(RTX 5050-8GB/16GB RAM/512GB SSD/FHD+/16""/144Hz/Backlit Keyboard/Windows 11/M365*/Office Home 2024/Matte Black/1.95 Kg) V3607VH-RP038WS","₹99,990",N/A
+"ASUS TUF A16 (2025), AMD Ryzen 7 7445HS, Gaming Laptop (RTX 4050-6GB/140W TGP/32GB RAM/1TB SSD/FHD+/16""/56Whrs/Windows 11/M365 Basic (1Year)*/Office Home 2024/Mecha Gray/2.2Kg) FA607NUG-RL191WS","₹97,990",4.1
+"Lenovo IdeaPad Slim 5 Intel Core Ultra 7 155H Built-in AI 16"" (40.64cm) WUXGA-IPS 300Nits Thin & Light Laptop (16GB/1TB SSD/Win 11/100% sRGB/MSO/1Yr ADP Free/3 Month Game Pass/Grey/1.8Kg), 83DC008VIN","₹86,990",4.0
+"Dell New Inspiron 13 Laptop with AI Enabled Intel Core Ultra 7 155H Processor, 16GB LPDDR5X, 1TB SSD, 13.3"" (33.78cm) QHD+ 300nits, Backlit KB + FPR, Win 11+MSO'24, 15 Month McAfee, Silver, 1.24kg","₹1,01,490",3.0
+"Dell Inspiron 5440, Intel Core i5-1334U, 13th Gen, 16GB DDR5, 1TB SSD, FHD+AG NonTouch WVA, 14""/35.56cm, Windows 11, MS Office 21, Ice Blue, 1.54KG, Backlit KB + FPR, 250 nits, McAfee 15 Month Laptop","₹71,700",4.0
+"HP OmniBook 5 OLED (Previously Pavilion), Snapdragon X Processor (16GB LPDDR5x, 512GB SSD) 2K, 14''/35.6cm, Win11, M365 Basic(1yr)* Office24, Silver, 1.35kg, he0014QU, Light-Weight, Next-Gen AI Laptop","₹66,990",4.0
+"Lenovo Yoga Slim 9 Intel Evo Core Ultra 7 258V Touchscreen Laptop (32GB RAM/1TB SSD/14 (35.5cm)/4K WQUXGA OLED/AI PC AI Now/Copilot+ PC/Windows 11/Office 2024/1Yr ADP/Teal/1.2Kg), 83CX002LIN","₹1,99,990",5.0
+"ASUS Vivobook 16,Intel Core Ultra 5 (Series 2),Thin & Light(Intel iGPU/16GB RAM/512GB SSD/FHD+/16""/60Hz/Backlit Keyboard/Windows 11/M365 Basic (1Year)*/Office Home 2024/Blue/1.88 kg) X1607CA-MB139WS","₹65,990",4.4
+"HP Victus, Intel Core i7, 13th Gen-13620H, 6 GB RTX 3050 Gaming Laptop, (16GB DDR4, 512GB SSD) 144Hz,300 nits, IPS, 15.6inch(39.6cm) Win 11, M365* Office24, Blue,2.29kg, Backlit,fa2077tx","₹79,990",5.0
+"Lenovo Yoga 9 2-in-1 Aura Edition Intel Core Ultra 7 258V (32GB RAM/1TB SSD/14 (35.5cm)/4K WQUXGA OLED/47 Tops NPU/Copilot+PC/Windows 11/Office Home 2024+AI Now/Yoga Pen/Blue/1.3Kg), 83LC001FIN","₹1,97,504",5.0
+"HP 14, 13th Gen Intel Core i5-1335U, 16GB DDR4, 512GB SSD, (Win 11, Office 21, Silver, 1.4kg), Anti-Glare, IPS, 14-inch(35.6cm) FHD Laptop, Intel Iris Xe Graphics, FHD Camera, Backlit KB, gr0001TU","₹54,390",4.0
+"HP Smartchoice OmniBook 5 (Previously Pavilion) 50 TOPS, AMD Ryzen AI 7 350 (16GB LPDDR5X, 512GB SSD) WUXGA 2K, Touch, 16''/40.6cm, Win11,Office24, Silver, 1.8kg, ag1048au, Next-Gen AI Copilot+ Laptop","₹78,490",4.2
+"Lenovo LOQ, AMD Ryzen 5 7235HS, NVIDIA RTX 3050 6GB, 12GB RAM, 512GB SSD, 15.6""(39.6cm), 144Hz, Windows 11, Office Home 2024, Grey, 2.4Kg, 83JC00EEIN, 3 Mon. Game Pass Gaming Laptop","₹62,490",4.3
+"ASUS Gaming V16 (2025), 14th Gen,Intel Core 7 240H Gaming Laptop(RTX 5050-8GB/16GB RAM/512GB SSD/FHD+/16""/144Hz/Backlit Keyboard/Windows 11/M365*/Office Home 2024/Matte Black/1.95 Kg) V3607VH-RP038WS","₹99,990",N/A
+"Lenovo LOQ 2024 12Th Gen Intel Core I5-12450HX | NVIDIA RTX 3050 6GB (16GB RAM/512GB SSD/15.6"" (39.6Cm)/Windows 11/Office Home 2024/100% Srgb/3 Mon. Game Pass/Grey/2.4Kg), 83GS00LNIN Gaming Laptop","₹68,490",3.7
+"acer Aspire Go 14, Intel Core Ultra 5 125H (14th Gen),16GB DDR5 RAM/1TB SSD, WUXGA IPS, 14.0""/35.56 cm, Win 11, MS Office, Steel Gray, 1.5 kg, AG14-71M,Backlit Keyboard, AI Powered Premium Laptop","₹56,990",3.5
+"Lenovo LOQ, Intel Core i7 14th Gen 14700HX, NVIDIA RTX 5050 8GB, 16GB RAM, 1TB SSD, 15.6""(39.6cm), 144Hz, Windows 11, Office 2024, Grey, 2.4Kg, 83JE00U6IN, 440 AI Tops, 3 Mon. Game Pass Gaming Laptop","₹1,22,490",4.6
+"Lenovo LOQ, Intel Core i7 13th Gen 13700HX, NVIDIA RTX 5060 8GB, 16GB RAM, 1TB SSD, 15.6""(39.6cm), 144Hz, Windows 11, Office 2024, Grey, 2.4Kg, 83JE00U4IN, 572 AI Tops, 3 Mon. Game Pass Gaming Laptop","₹1,22,490",4.6
+"ASUS TUF Gaming F15 13th Gen, Intel Core i7-13620H Gaming Laptop(NVIDIA RTX 4050-6GB/140W RGP/16GB RAM/512GB SSD/FHD/15.6""/144Hz/RGB KB/90WHr/Windows 11/Office 2021/Mecha Gray/2.20 Kg) FX507VU-LP210WS","₹92,990",3.8
+"MSI Thin 15, Intel 13th Gen. i5-13420H, 40CM FHD 144Hz Gaming Laptop (16GB/512GB NVMe SSD/Windows 11 Home/NVIDIA GeForce RTX 3050, GDDR6 4GB/Cosmos Gray/1.86Kg) B13UC-125IN","₹68,990",4.3
+"ASUS Vivobook 16,Intel Core Ultra 5 (Series 2),Thin & Light(Intel iGPU/16GB RAM/512GB SSD/FHD+/16""/60Hz/Backlit Keyboard/Windows 11/M365 Basic (1Year)*/Office Home 2024/Blue/1.88 kg) X1607CA-MB139WS","₹65,990",4.4
+"ASUS Vivobook 16X 12th Gen,Intel Core i7-12700H Fingerprint Creator/Gaming Laptop(NVIDIA RTX 3050-4GB/16GB RAM/512GB SSD/FHD+/16.0""/144Hz/Windows 11/Office 2021/Cool Silver/1.67 kg) K3605ZC-RP628WS","₹65,990",2.5
+"Lenovo IdeaPad Slim 3 13th Gen Intel Core i5-13420H 14 inch (36.8cm) WUXGA IPS Laptop (16GB RAM/512GB SSD/Windows 11/Office Home 2024/Backlit Keyboard/1Yr ADP Free/Grey/1.4Kg), 83K00034IN",N/A,4.0
+OneAssist 2 Years Total Protection Plan for Laptop Between INR 60001-70000 (E-Mail Delivery Only),"₹3,299",3.3
+HP F6V97AA#ACJ External USB DVD-RW Drive,"₹2,499",4.3
+"Microsoft New Surface Pro (11Th Edition) - Windows 11 Home Copilot + Pc - 13"" LCD Pixelsense Touchscreen - Qualcomm Snapdragon X Plus (10 Core,Wi-Fi) - 16Gb Ram - 256Gb Ssd - Platinum - ZHX-00014","₹1,04,990",4.3
+"ASUS TUF Gaming F16,Smartchoice,Intel Core 5 Processor 210H,14th Gen Gaming Laptop(RTX 4050-6GB/140WTGP/16GB/512GB/FHD+/16""/144Hz/Win 11/M365 Basic(1Year)*/Office-24/Mecha Gray/2.20 Kg)FX677VU-RL055WS","₹83,990",3.5
+"Acko 2 Year Extended Warranty Plan for Laptop Between INR 60,001-100,000 (Email delivery)","₹4,599",3.1
+OneAssist 2 Years Total Protection Plan for Laptop Between INR 40001-50000 (E-Mail Delivery Only),"₹2,299",3.6
+"Acko 1 Year Extended Warranty for Laptops from Rs 40,000 to Rs 60,000 (E-mail delivery)","₹1,749",3.5
+"Acko 1 Year Extended Warranty for Laptops from Rs 60,000 to Rs 1,00,000 (E-mail delivery)","₹2,399",3.7
+"Acko 1 Year Extended Warranty for Laptops Below from 20,000 to 30,000 (Email delivery)",₹749,3.6
+OneAssist 2 Years Total Protection Plan for Laptop Between INR 100001-120000 (E-Mail Delivery Only),"₹5,599",3.1
+OneAssist 2 Years Total Protection Plan for Laptop Between INR 70001-80000 (E-Mail Delivery Only),"₹3,799",3.2
+"Lenovo 2years Extended Warranty with Onsite Service (for Entry Laptops) - Email Delivery, No Physical Kit","₹3,855",3.9
+"Acko 1 Year Extended Warranty for Laptops from Rs 30,000 to Rs 40,000 (E-mail delivery)","₹1,249",3.5
+OneAssist 2 Years Total Protection Plan for Laptop Between INR 25001-30000 (E-Mail Delivery Only),"₹1,399",3.5
+"Dell 2years Extended Warranty for INSPIRON 7000 & 2-in-1 / G-Series for Laptops (Email Delivery, No Physical Kit)","₹5,499",3.4
+OneAssist 2 Years Total Protection Plan for Laptop Upto INR 20000 (E-Mail Delivery Only),₹849,3.9
+"Acko 2 Year Extended Warranty Plan for Laptop Between INR 20,001-30,000 (Email delivery)","₹1,449",3.5
+OneAssist 1 Year Total Protection Plan for Accidental and Liquid Damage of Laptop Between INR 50001-60000 (E-Mail Delivery Only),"₹1,999",4.2
+"AXL VayuBook Laptop 14.1 Inch FHD IPS Display (4GB Ram,128GB SSD) 1920 * 1080 Resolution | HD Gemini Lake N4020 | Windows 11 Home | UHD Graphics 600 (Cloud Silver)","₹11,990",3.3
+"HP 15, 12th Gen Intel Core i3-1215U Laptop (8GB RAM, 512GB SSD) 15.6""/39.62cm, FHD, Win 11, MS Office 2021, Silver, 1.59Kg, Dual Speakers, FD0061TU",N/A,3.5
+"Alienware New 16 Area-51 Gaming Laptop, AI Enabled Core Ultra 9 275HX Processor, 64GB DDR5, 2TB SSD, RTX 5090, 24 GB GDDR7 Graphics, 16.0"" WQXGA 240Hz 500 nits Display, Liquid Teal Color, 3.4kg","₹4,84,990",5.0
+"Lenovo IdeaPad Flex 5 AMD Ryzen 5 5625U (16GB RAM/512GB SSD/14 (35.5cm)/WUXGA IPS/Windows 11/Office Home 2024/Lenovo Digital Pen/1Yr ADP/Grey/1.5Kg), 82XX00G4IN Convertible Laptop","₹57,990",4.2
+"Lenovo V15 AMD Ryzen 3 7320U 15.6"" (39.62cm) FHD 250 Nits Antiglare Thin and Light Laptop (8GB/512GB SSD/Windows 11 Home/Arctic Grey/1.65 Kg), 82YU00W7IN","₹27,900",3.9
+"Lenovo IdeaPad Slim 3 Intel Core i3-1115G4 11th Gen 15.6"" (39.62cm) FHD Laptop (8GB/256GB SSD/Win 11/Office 2021/3 Month Game Pass/Arctic Grey/1.65Kg), 82H803TXIN","₹36,990",4.2
+"Samsung Galaxy Book4 | Intel Core 5 120U (14th Gen) |16GB RAM | 512GB SSD | Windows 11 Pro | Fingerprint Reader | Intel Iris XE Graphics | RJ45 |15.6""/39.6 cm Full HD |1.53KG | Silver- NP754XGK-LS2IN","₹52,890",N/A
+"ASUS Zenbook 14, Smartchoice,AMD Ryzen AI 5 340, AI PC(AMD Radeon Graphics/16GB RAM/512GB SSD/3K OLED/14/120Hz/Windows 11/M365 Basic (1Year)*/Office Home 2024/Jade Black/1.2 Kg) UM3406KA-PP240WS","₹87,990",4.1
+"HP Victus, 13th Gen Intel Core i5-13420H, RTX 2050, Upgrade(Upto 32GB) 16GB DDR4, 512GB SSD, FHD, 144Hz, IPS, 300 nits, 15.6''/39.6cm, Win11, M365* Office24, Mica Silver, 2.3kg, fa2703tx Gaming Laptop","₹60,900",3.7
+"ASUS Vivobook S14, Intel Core Ultra 7 255H, 16GB RAM, 512GB SSD, FHD+ 14"", Windows 11,Office Home 2024 M365 Basic (1Year)*, Cool Silver, 1.4Kg, S3407CA-LY084WS, Intel Arc iGPU, Metallic Design Laptop","₹79,990",4.4
+"Acer Aspire 3 Intel Core i3-1215U Processor Laptop with 35.56 cm (14"") Full HD LED-Backlit IPS Display (16 GB RAM/512 GB SSD/WiFi 6/Intel Graphics/Win11 Home/65W) A324-51, Steel Gray, 1.45KG","₹29,990",4.0
+"HP 14 AI, Intel Core Ultra 7 155H (16GB DDR5, 512GB SSD) FHD, Anti-Glare, 14""/35.6cm, Win11, Office21, Silver, 1.4kg, gr1023TU, Intel Arc Graphics, FHD Camera w/Shutter, Backlit Kb AI Powered Laptop","₹80,350",3.2
+"HP 15, 13th Gen Intel Core i3-1315U Laptop (8GB DDR4,512GB SSD) Anti-Glare, Micro-Edge,15.6' FHD, Win11,MS Office Home21, Silver,1.59kg, FHD Camera w/Privacy Shutter, fd0569TU","₹33,880",3.9
+"ASUS Gaming V16 (2025), 14th Gen,Intel Core 7 240H Gaming Laptop(RTX 5050-8GB/16GB RAM/512GB SSD/FHD+/16""/144Hz/Backlit Keyboard/Windows 11/M365*/Office Home 2024/Matte Black/1.95 Kg) V3607VH-RP038WS","₹99,990",N/A
+"Alienware 16 Aurora, Intel Core 7-240H, NVIDIA RTX 5060-8GB GDDR7, 16GB DDR5 RAM, 1TB SSD, WQXGA 16""/40.64 cm, 2560x1600, Windows 11, Interstellar Indigo, 2.57 Kg, Cryo Chamber Cooling Gaming Laptop","₹1,31,990",3.6
+"Stealth 14 AI Studio, Intel Core Ultra 7 155H, Built-in AI,36CM 2.8K OLED 120Hz Gaming Laptop(32GB/1TB NVMe SSD/Windows 11 Home/NVIDIA GeForce RTX 4070, GDDR6 8GB /Star Blue/1.7Kg), A1VGG-054IN","₹1,36,229",2.3
+"JioBook 11 with Lifetime Office | Android 4G Laptop Mediatek 8788 (JioOS) | Octa-core | 4GB RAM | 64 eMMC Storage | Thin and Light Laptop (11.6 inch, 990 Grams) | Dual Band WiFi + SIM | Blue","₹10,990",3.0
+"Lenovo 14 (2025), Intel Core i3 12th Gen 1215U - (16 GB/512 GB SSD/Intel UHD Graphics/Windows 11 Home) Thin and Light Business Laptop/14.0"" FHD Display/Iron Grey/1.4 kg/MS Office 2021","₹33,990",N/A
+"Lenovo IdeaPad Slim 3, AMD Ryzen 5 5625U, 16GB RAM, 512GB SSD, FHD 15.6""(39.6cm), Windows 11, Office Home 2024, Grey, 1.6Kg, 82XM00QDIN, Integrated AMD Radeon Graphics, Thin and Light Laptop","₹38,000",3.8
+"Samsung Galaxy Book4 (Gray, 16GB RAM, 512GB SSD) | 15.6"" Full HD Screen | Intel Core i5 1335U Processor | Windows 11 Home | MS Office 2021 | Fingerprint Reader | Intel Iris XE Graphics | RJ45 LAN Port","₹49,500",4.0
+"ASUS TUF F16,14th Gen,Intel Core i7 14650HX,Gaming Laptop(RTX 5070-8GB/115W TGP/32GB/1TB /2.5K QHD+/16""/165Hz/90WHrs/Windows 11/M365 Basic (1Year)*/Office Home 2024/Jaeger Gray/2.2 Kg)FX688JPR-QT043WS","₹1,79,990",4.3
+"ASUS Vivobook 16X, 16"" FHD+ (1920 x 1200), Intel Core i5-13420H, (16GB RAM/512GB SSD/RTX 3050/Windows 11/M365 Basic (1Year)*/Office Home 2024/Cool Silver/1.80 kg), K3605VC-RP413WS","₹58,990",3.5
+"ASUS Vivobook Go 15, AMD Ryzen 5 7520U Thin & Light Laptop(AMD Radeon iGPU/16GB RAM/512GB SSD/FHD/15.6""/60Hz/Windows 11/M365 Basic (1Year)*/Office Home 2024/Cool Silver/1.63 Kg) E1504FA-NJ5541WS","₹37,990",4.0
+"Lenovo V15 Thin & Light Laptop, 15.6"" FHD Display, Intel Core i5 12th Gen (1235U), 16GB DDR4 RAM, 512GB SSD, Webcam, HDMI, Wi-Fi-6, Windows 11, Intel Iris Xe Graphics, Black,1 Year Brand Warranty","₹42,900",3.7
+"Lenovo V15 Intel Celeron N4500 15.6"" (39.62 cm) FHD (1920x1080) Antiglare 250 Nits Thin and Light Laptop (8GB RAM/256GB SSD/Windows 11 Home/Black/1Y Onsite/1.7 kg), 82QYA00MIN","₹23,999",3.8
+"HP Laptop 14, AMD Ryzen 5 7520U, 14-inch (35.6 cm), FHD, 8GB LPDDR5, 512GB SSD, AMD Radeon Graphics, FHD Camera w/Privacy Shutter, Backlit KB (Win 11, MSO 2021, Silver, 1.4 kg), em0026AU","₹34,980",3.7
+"HP 14 (2025), AMD Ryzen 5 7520U Quad Core - (8 GB/512 GB SSD/AMD Radeon Graphics/Windows 11 Home) Thin and Light Business Laptop/14.0"" HD Display/Ash Grey/1.36 kg/MS Office 2021","₹28,990",4.0
+"Acer Aspire 3, 13th Gen, Intel Core i3-1305U, 8GB RAM, 512GB SSD, Full HD 14""/35.56cm, Windows 11 Home, Steel Gray, 1.45KG, A324-53, WiFi 6, Intel Graphics, 65W Battery Laptop","₹28,990",3.7
+"HP Professional 14 (2025), Intel Core i5 13th Gen 1334U - (32 GB/512 GB SSD/Intel Iris Xe Graphic/Windows 11 Pro) Thin and Light Business Laptop/14.0"" FHD/Backlit + Fingerprint/Silver/1.4 Kg/MSO 2021","₹55,990",5.0
+"HP Professional 15, 13th Gen Intel Core i5-1334U Turbo Boost, 32GB DDR4, 512 GB SSD, (Win 11 Pro, MSO 21Pro, Silver Gray,1.59kg), 15.6 inch FHD, UHD Graphics, Laptop, Finger Print, Backlit KB, 250 G10","₹53,260",2.6
+"Dell 2years Extended Warranty for INSPIRON 7000 & 2-in-1 / G-Series for Laptops (Email Delivery, No Physical Kit)","₹5,499",3.4
+"ASUS Vivobook Go 15 (2025), AMD Ryzen 5 7520U Thin & Light Laptop(AMD Radeon iGPU/16GB RAM/512GB SSD/FHD/15.6""/60Hz/Windows 11/M365 Basic (1Year)*/Office Home 2024/Mixed Black/1.63Kg)E1504FA-NJ1505WS","₹37,499",2.8
+"HP 15, 12th Gen Intel Core i3-1215U Laptop (8GB RAM, 512GB SSD) 15.6""/39.62cm, FHD, Win 11, MS Office 2021, Silver, 1.59Kg, Dual Speakers, FD0061TU",N/A,3.5
+"Alienware New 16 Area-51 Gaming Laptop, AI Enabled Core Ultra 9 275HX Processor, 64GB DDR5, 2TB SSD, RTX 5090, 24 GB GDDR7 Graphics, 16.0"" WQXGA 240Hz 500 nits Display, Liquid Teal Color, 3.4kg","₹4,84,990",5.0
+"Lenovo ThinkBook 14 Intel Core 5 210H 14th Gen(16GB/1TB SSD/Win11 Home/Fingerprint Reader) 14"" WUXGA IPS 300 Nits Antiglare Thin & Light Laptop/Aluminium Top/Arctic Grey/1Y Warranty/1.36Kg,21SGA02XIG","₹64,990",N/A
+"HP 15 (2025), AMD Ryzen 3 7320U Quad Core - (16 GB/512 GB SSD/AMD Radeon Graphics/Windows 11 Pro) Thin and Light Business Laptop/15.6"" FHD Display/Turbo Silver/1.5 kg/MS Office 2021","₹29,860",3.5
+"HP Pavilion, Intel Core Ultra 5-125U Ai Powered Laptop (16GB RAM, 512GB SSD) IPS, 2K, WUXGA, Anti-Glare, 16""/40cm, Win 11, Office 2021, Silver, 1.77Kg, Intel Graphics, FHD Camera, af0015TU","₹68,990",3.4
+"Acer Predator Helios 16 Gaming Laptop 14th Gen Intel Core i9 Processor (Windows 11 Home/16 GB/1 TB SSD/NVIDIA GeForce RTX 4070) PH16-72 with 40.64 cm (16"") WQXGA Display","₹1,64,990",3.9
+"Lenovo V15 AMD Ryzen 7 7730U 15.6"" (39.62cm) FHD 250 Nits Antiglare Thin and Light Laptop (16GB/512GB SSD/Windows 11/Iron Grey/1.65 Kg) Grey","₹42,490",4.1
+OneAssist 2 Years Total Protection Plan for Laptop Between INR 20001-25000 (E-Mail Delivery Only),"₹1,149",3.2
+"(Refurbished) Lenovo IdeaPad 3 12th Gen Intel Core i3-1215U 14 Inch (35.5cm) FHD Thin & Light Laptop (8GB/512GB SSD/Win 11/Office 2021/1Yr ADP Free/3months Game Pass/Arctic Grey/1.43Kg), 82RJ00FUIN","₹25,916",3.9
+"Dell Inspiron 3530 Laptop, 13th Generation Intel Core i7-1355U Processor, 16GB, 512GB, 15.6"" (39.62cm) FHD 120Hz Display, Backlit KB, Windows 11 + MSO'21, 15 Month McAfee, Silver, Thin & Light-1.62kg","₹65,990",4.0
+"HP OmniBook 5 OLED (Previously Pavilion), Snapdragon X Processor (16GB LPDDR5x, 512GB SSD) 2K, 14''/35.6cm, Win11, M365 Basic(1yr)* Office24, Silver, 1.35kg, he0014QU, Light-Weight, Next-Gen AI Laptop","₹66,990",4.0
+"Lenovo IdeaPad Slim 3 14th Gen Intel Core 5 15.6 inch (39.6cm) FHD IPS Laptop (16GB RAM/512GB SSD/Windows 11/MS Office 2021/Backlit Keyboard/1Yr ADP Free/3 Mon. Game Pass/Grey/1.6Kg), 83E6001UIN","₹50,990",3.9
+Dell Latitude Intel 3450 Core i5-13th Gen / 16GB RAM / 512GB SSD / 3 Year Warranty/Windows 11 Pro / 14inch Screen with Backpack,"₹61,250",3.0
+"DELL Renewed Intel Core i3 11th Gen 1305U - (8 GB/256 GB SSD/Intel UHD Graphics/Windows 11 Pro) Thin and Light Business Laptop/14.0"" FHD+ IPS Display/Ice Blue/1.4 kg/MSO 2021/1 Year ADP Warranty.","₹34,150",3.2
+"Lenovo 15 (2025), AMD Ryzen 5 7520U Quad Core - (16 GB/512 GB SSD/AMD Radeon 610M Graphics/Windows 11 Home) Thin and Light Business Laptop/15.6"" FHD Display/Arctic Grey/1.6 kg/MS Office 2021","₹34,990",4.4
+"DELL 14 (2025) Intel Core i5 13th Gen 1335U - (16 GB/512 GB SSD/Intel Graphics/Windows 11 Pro) Thin and Light Business Laptop/14.1"" FHD Display/Grey/1.5 kg/MS Office 2021/3 Years ADP Warranty","₹59,000",5.0
+"HP 245 Notebook, AMD Ryzen 5 7520U, 8GB DDR4, 512GB SSD, 14-inch(35.6cm),Anti-Glare, HD Laptop, AMD Radeon Graphics, (DOS, Silver,1.36kg) G10","₹27,990",N/A
+"ASUS Gaming V16, Intel Core 7 240H Gaming Laptop(RTX 5060-8GB/16GB RAM/512GB SSD/FHD+/16""/144Hz/Backlit Keyboard/Windows 11/M365 Basic (1Year)*/Office Home 2024/Matte Black/1.95 Kg) V3607VM-RP057WS","₹1,09,990",2.0
+"Lenovo IdeaPad Slim 3 Intel Core i3-1115G4 11th Gen 15.6"" (39.62cm) FHD Laptop (8GB/256GB SSD/Win 11/Office 2021/3 Month Game Pass/Arctic Grey/1.65Kg), 82H803TXIN","₹36,990",4.2
+"HP Laptop 250R G9 (2024), Intel Core i3 13th Gen 1315U - (8GB/512GB SSD/Intel UHD Graphics/DOS) Thin and Light Business Laptop/15.6"" (39.62cm)/Ash Grey/1.57 kg","₹32,600",4.0
+"Apple 2025 MacBook Air (13-inch, Apple M4 chip with 10-core CPU and 8-core GPU, 16GB Unified Memory, 256GB) - Sky Blue","₹96,990",4.6
+"Apple 2024 MacBook Air 15″ Laptop with M3 chip: 38.91 cm (15.3″) Liquid Retina Display, 24GB Unified Memory, 512GB SSD Storage, Backlit Keyboard, 1080p FaceTime HD Camera, Touch ID- Space Grey","₹1,67,990",5.0
+"Lenovo V15 12th Gen Intel Core i5-1235U 15.6"" FHD Thin and Light Laptop (8GB RAM/512GB SSD/Windows 11 Home/MS Office Home & Student 2021/Iron Grey/1.70 kg), 82TTA07QIH","₹40,890",4.0
+"HP Laptop 15, Enhanced by AI, AMD Ryzen 5 7535HS, 15.6-inch (39.6cm), FHD, 8GB DDR5, 512GB SSD, AMD Radeon Graphics, 1080p FHD Camera w/Privacy Shutter, Backlit KB (Win 11, Silver, 1.59kg), fc1004AU","₹39,900",3.8
+"2022 Apple MacBook Air Laptop with M2 chip: 13.6-inch Liquid Retina Display, 16GB RAM, 256GB SSD Storage, Backlit Keyboard, 1080p FaceTime HD Camera. Works with iPhone and iPad; Silver","₹94,990",5.0
+"Lenovo IdeaPad 1 AMD Ryzen 5 5500U 15.6"" HD Thin and Light Laptop (8GB RAM/512GB SSD/Windows 11 Home/Office Home 2024/1 Year ADP Free/Grey/1.6Kg), 82R4011MIN","₹32,890",4.0
+"Apple 2024 MacBook Air 15″ Laptop with M3 chip: 38.91 cm (15.3″) Liquid Retina Display, 16GB Unified Memory, 512GB SSD Storage, Backlit Keyboard, 1080p FaceTime HD Camera, Touch ID- Space Grey","₹1,44,990",4.6
+"Apple 2025 MacBook Air (15-inch, Apple M4 chip with 10-core CPU and 10-core GPU, 16GB Unified Memory, 256GB) - Sky Blue","₹1,20,990",4.6
+"Redmi 13 5G Prime Edition, Black Diamond, 8GB+128GB | India Debut SD 4 Gen 2 AE | 108MP Pro Grade Camera | 6.79in Largest Display in Segment","₹10,999",4.1
+"iQOO Z10 Lite 5G (Titanium Blue, 8GB RAM, 256GB Storage) | 6000 mAh Battery | Dimensity 6300 5G Processor with 433K+* AnTuTu Score | IP64 Rated & Military Grade Shock-Resistance*","₹12,998",4.0
+"realme NARZO 80 Lite 4G (Beach Gold, 6GB+128GB) | 6300mAh Segment's Biggest Battery | 7.94mm Slim Design | 300% Ultra Volume | Pulse Light: 9 Colors, 5 Glow Modes | Ai Assist","₹7,198",4.2
+"realme 14x 5G Smartphone 8+128GB red, 6.67-inch Screen, 120Hz Display, 6000mAh Battery, 80MP, MediaTek Dimensity 6300, ArmorShell Protection, IP69","₹14,399",4.2
+"O3 Pro (Glossy Black, 4 GB RAM, 64 GB Storage)| Bigger 6.56"" HD+ Display | 50 MP AI Triple Rear Camera | 8 MP Front Camera| 5000 mAh Battery | 10W Charging | Charger in Box","₹5,749",4.0
+"realme NARZO 80 Lite 5G (Crystal Purple, 6GB+128GB) | 6000mAh Long-Lasting Battery | MediaTek Dimensity 6300 5G | AI Assist | IP64 Rated Water & Dust Resistance | Military-Grade Durability","₹9,798",4.2
+"Motorola G45 5G (Brilliant Blue, 8GB RAM, 128GB Storage)","₹11,899",4.1
+"POCO M7 5G, Ocean Blue (6GB, 128GB)","₹8,498",4.1
+"POCO C75 5G, Aqua Bliss (4GB, 64GB)","₹7,299",4.2
+"realme NARZO 80 Lite 4G (Obsidian Black, 4GB+64GB) | 6300mAh Segment's Biggest Battery | 7.94mm Slim Design | 300% Ultra Volume | Pulse Light: 9 Colors, 5 Glow Modes | Ai Assist","₹6,298",4.2
+"Samsung Galaxy S24 FE 5G AI Smartphone (Graphite, 8GB RAM, 128GB Storage)","₹32,819",4.3
+XIAOMI 14 Civi Panda White (12GB RAM 512GB Storage) | 50 MP Leica Triple Camera| SD 8s Gen 3 | 1.5K Quad Curved AMOLED HyperOS,"₹29,249",4.1
+"Samsung Galaxy F05 (Twilight Blue, 64 GB) (4 GB RAM)","₹6,799",4.1
+realme 14X 5G Smartphone Dimensity 6300 6nm Chip 8GB RAM 128GB ROM 6.67 Inch HD+ IP69 Waterproof 6000mAh Battery 45W Fast Charge Support Fingerprint GPS WiFi Bluetooth Black,"₹13,699",4.2
+"realme NARZO 80 Pro 5G (Racing Green,8GB+256GB) | Segment's 1st MediaTek Dimensity 7400 Chipset | 6000mAh Titan Battery + 80W Ultra Charge | 4500nits HyperGlow Esports Display | IP69 Waterproof","₹18,998",4.4
+"iQOO Z10 5G (Stellar Black, 12GB RAM, 256GB Storage) | India's Biggest Ever 7300 mAh Battery | Snapdragon 7s Gen 3 Processor | Brightest Quad Curved AMOLED Display in The Segment","₹24,999",4.3
+realme 14X 5G Smartphone Dimensity 6300 6nm Chip 8GB RAM 128GB ROM 6.67 Inch HD+ IP69 Waterproof 6000mAh Battery 45W Fast Charge Support Fingerprint GPS WiFi Bluetooth Black,"₹13,699",4.2
+XIAOMI 14 Civi Panda White (12GB RAM 512GB Storage) | 50 MP Leica Triple Camera| SD 8s Gen 3 | 1.5K Quad Curved AMOLED HyperOS,"₹29,249",4.1
+"Samsung Galaxy M36 5G (Serene Green, 8 GB RAM, 256 GB Storage)| Circle to Search| Google Gemini| Corning Gorilla Glass Victus+| 7.7mm Slim| AI Enhanced 50 MP OIS Triple Camera| Unmatched Nightography","₹17,499",3.8
+"Samsung Galaxy M35 5G (DayBreak Blue,8GB RAM,128GB Storage)| Corning Gorilla Glass Victus+| AnTuTu Score 595K+| Vapour Cooling Chamber| 6000mAh Battery| 120Hz Super AMOLED Display| AI| Without Charger","₹18,499",4.2
+"Motorola G45 5G (Brilliant Blue, 8GB RAM, 128GB Storage)","₹11,899",4.1
+"iQOO Z10 Lite 5G (Cyber Green, 6GB RAM, 128GB Storage) | 6000 mAh Battery | Dimensity 6300 5G Processor with 433K+* AnTuTu Score | IP64 Rated & Military Grade Shock-Resistance*","₹10,998",4.0
+"realme NARZO 80 Pro 5G (Racing Green,8GB+256GB) | Segment's 1st MediaTek Dimensity 7400 Chipset | 6000mAh Titan Battery + 80W Ultra Charge | 4500nits HyperGlow Esports Display | IP69 Waterproof","₹18,998",4.4
+"Redmi 13 5G Prime Edition, Orchid Pink, 8GB+128GB | India Debut SD 4 Gen 2 AE | 108MP Pro Grade Camera | 6.79in Largest Display in Segment","₹10,999",4.1
+"realme 15T 5G Smartphone 8+256GB Suit Titanium,6.67inch Screen, 120Hz Display,7000mAh Battery,60W Fast Charge,Front & Rear Dual 50MP Cameras, Dimensity 6400 Max 5G Chipset,IP69","₹22,999",4.3
+"Samsung Galaxy A55 5G (Awesome Iceblue, 8GB RAM, 256GB Storage) | AI | Metal Frame | 50 MP Main Camera (OIS) | Super HDR Video| Nightography | IP67 | Corning Gorilla Glass Victus+ | sAMOLED Display","₹25,999",4.2
+"iQOO Z10x 5G (Titanium, 8GB RAM, 256GB Storage) | 6500 mAh Large Capacity Battery | Dimensity 7300 Processor | Military-Grade Durability","₹15,998",4.3
+"Acer Super ZX 5G (Lunar Blue, 6GB RAM, 128GB Storage) | 120 Hz FHD+ Display | 5000 mAh Ultra-Thin Battery | Dimensity 6300 5G Processor | Sony 64MP AI Camera","₹9,998",3.4
+"Redmi A4 5G (Sparkle Purple, 4GB RAM, 64GB Storage) | Segment Largest 6.88in 120Hz | 50MP Dual Camera | 18W Fast Charging | Charger in The Box","₹7,499",4.0
+"Redmi A4 5G (Starry Black, 6GB RAM, 128GB Storage) | Segment Largest 6.88in 120Hz | 50MP Dual Camera | 18W Fast Charging | Charger in The Box","₹8,999",4.0
+"HONOR X9c 5G Dual SIM (8GB RAM, 256GB Storage) | Ultra Durable | 108MP AI OIS Camera | 6600mAh Battery | 3840Hz Risk-Free Dimming Display | with Charger (Jade Cyan)","₹19,998",4.2
+POCO M6 Plus 5G Ice Silver 8GB RAM 128GB ROM,"₹10,299",4.0
+Redmi A3X Ocean Green 4GB RAM 128GB ROM,"₹6,530",3.9
+"iQOO Z10x 5G (Ultramarine, 8GB RAM, 128GB Storage) | 6500 mAh Large Capacity Battery | Dimensity 7300 Processor | Military-Grade Durability","₹14,498",4.3
+"Samsung Galaxy M06 5G (Blazing Black, 4GB RAM, 128 GB Storage) | MediaTek Dimensity 6300 | AnTuTu Score 422K+ | 12 5G Bands | 25W Fast Charging | 4 Gen of OS Upgrades | Without Charger","₹7,999",3.9
+"OPPO F29 Pro 5G (Marble White, 12GB RAM, 256GB Storage) with No Cost EMI/Additional Exchange Offers","₹27,999",4.2
+"iQOO Neo 10R 5G (Moonknight Titanium, 8GB RAM, 256GB Storage) | Snapdragon 8s Gen 3 Processor | India's Slimmest 6400mAh Battery Smartphone | Segment's Most Stable 90FPS for 5 Hours","₹26,998",4.4
+Redmi A3X Midnight Black 4GB RAM 128GB ROM,"₹6,584",3.9
+"Samsung Galaxy M06 5G (Sage Green, 4GB RAM, 128 GB Storage) | MediaTek Dimensity 6300 | AnTuTu Score 422K+ | 12 5G Bands| 25W Fast Charging | 4 Gen of OS Upgrades | Without Charger","₹7,999",3.9
+"Motorola Edge 50 Pro (Moonlight Pearl, 12+256)","₹23,400",4.1
+"Lava Bold N1 5G (Champagne Gold, 4GB RAM, 64GB Storage) |Bigger 6.75"" HD+ Notch Display | Octacore 5G Processor | 13 MP AI Camera |5000 mAh Battery| IP54 Rated Dust & Water Splash Proof","₹6,999",4.1
+"Motorola g45 5G (Pantone Moss, 128 GB) (8 GB RAM)","₹11,980",4.1
+"realme NARZO 80 Pro 5G (Speed Silver,12GB+256GB) | Segment's 1st MediaTek Dimensity 7400 Chipset | 6000mAh Titan Battery + 80W Ultra Charge | 4500nits HyperGlow Esports Display | IP69 Waterproof","₹19,998",4.4
+"realme C71 4G Smartphone 6GB+128GB Obsidian Black,6.75 inch Screen, 90Hz Eye Comfort Display, 6300mAh Battery, 37MP Cameras, Octa-core Chipset, IP54","₹7,999",4.5
+"Oppo K13 5G (Prism Black, 8GB RAM 128GB Storage)","₹17,250",4.3
+"CMF Phone 2 Pro 5G (Light Green, 8GB RAM, 256GB Storage) | Dimensity 7300 Pro Processor | 5000mAh Battery 33W Fast Charging | 2TB Expandable | 50MP+50MP+8MP Camera |","₹18,599",4.0
+"Infinix Note 50s 5G+ (Titanium Grey, 6GB RAM, 128GB Storage) | Slimmest 3D Curved 144Hz AMOLED Display | 5500mAH Battery | Dual Speakers by JBL | 90FPS BGMI | 64MP Sony Camera","₹14,999",4.2
+"OPPO Reno13 5G (Luminous Blue,8 GB RAM, 128 GB Storage) with No Cost EMI/Additional Exchange Offers","₹23,999",4.1
+"CMF Phone 2 Pro 5G (Light Green, 8GB RAM, 256GB Storage) | Dimensity 7300 Pro Processor | 5000mAh Battery 33W Fast Charging | 2TB Expandable | 50MP+50MP+8MP Camera |","₹18,599",4.0
+"Infinix Note 50s 5G+ (Titanium Grey, 6GB RAM, 128GB Storage) | Slimmest 3D Curved 144Hz AMOLED Display | 5500mAH Battery | Dual Speakers by JBL | 90FPS BGMI | 64MP Sony Camera","₹14,999",4.2
+OnePlus 13 | Smarter with OnePlus AI | Lifetime Display Warranty |16GB RAM 512GB Storage Black Eclipse | Official Smartphone for BGMS 2025,"₹76,999",4.5
+"Vivo V60 5G (Mist Gray, 12GB RAM, 256GB Storage) with No Cost EMI/Additional Exchange Offers","₹40,999",4.2
+"Samsung Galaxy S25 Ultra 5G AI Smartphone (Titanium Silverblue, 12GB RAM, 512GB Storage), 200MP Camera, S Pen Included, Long Battery Life","₹1,35,499",4.3
+"Lava Bold N1 Pro (Stealth Black, 4 GB RAM, 128 GB Storage)| Bigger 6.67"" HD+ IP54 Display | 120 Hz Refresh Rate | 50 MP AI Triple Rear Camera | 8 MP Front Camera| 5000 mAh Battery| Charger in Box","₹6,399",4.0
+"iQOO Z10R 5G (Moonstone, 8GB RAM, 128GB Storage) | 32MP 4K Selfie Camera | Quad-Curved AMOLED Display | Dimensity 7400 Processor with 750K+ AnTuTu","₹19,498",4.3
+"OPPO K13x 5G 6000mAh and 45W SUPERVOOC Charger & AI (Midnight Violet, 128 GB) (6 GB RAM)","₹11,990",4.1
+"Lava O3 (Glossy Blue, 3 GB RAM, 64 GB Storage) | Biggest 6.75"" HD+ Display | 13MP AI Dual Rear Camera | 5000 mAh Battery | Secure Face Unlock | Fingerprint Reader | Charger & Phone-Cover in Box","₹5,699",3.9
+"Tecno POP 9 5G Midnight Shadow, 4GB+128GB| Segment's 1st 48MP Sony AI Camera| Segment's 1st with NFC |D6300 Processor |4+ Year Lag Free Fluency |5000 mAh Battery |Dual Speaker |Without Charger","₹8,299",4.0
+"Samsung Galaxy A35 5G (Awesome Lilac, 8GB RAM, 128GB Storage) | Premium Glass Back | 50 MP Main Camera (OIS) | Nightography | IP67 | Corning Gorilla Glass Victus+ | sAMOLED with Vision Booster","₹18,872",4.1
+Redmi 15 5G Sandy Purple 8GB + 256GB | Segment's Largest 7000mAhA Battery | Segment's Largest Display 17.53cm(6.9) Up to 144Hz | Snapdragon 6s Gen 3 | 18W Reverse Charging | 50MP AI Dual Camera,"₹16,998",3.9
+"realme GT 7 Pro (Galaxy Grey,12GB+256GB) | India's First Snapdragon 8 Elite Processor | 3X Periscope Flagship Camera| RealWorld Eco² OLED Plus Display","₹44,998",4.2
+"Samsung Galaxy S24 Ultra 5G AI Smartphone with Galaxy AI (Titanium Gray, 12GB, 256GB Storage), Snapdragon 8 Gen 3, 200 MP Camera with ProVisual Engine and 5000mAh Battery","₹79,999",4.5
+"OnePlus Nord CE4 Lite 5G (Mega Blue, 8GB RAM, 128GB Storage)","₹15,999",4.2
+"realme P3x 5G Smartphone 8+128GB Lunar Silver,6.72-inch Screen,120Hz Display,6000mAh Battery,45W SuperVOOC, 50MP Camera, MediaTek Dimensity 6400 Processor, IP64","₹12,790",3.7
+"Samsung Galaxy M36 5G (Velvet Black, 8 GB RAM, 128 GB Storage)| Circle to Search| Google Gemini| Corning Gorilla Glass Victus+| 7.7mm Slim| AI Enhanced 50 MP OIS Triple Camera| Unmatched Nightography","₹15,499",3.8
+"HONOR X9c 5G Dual SIM (8GB RAM, 256GB Storage) | Ultra Durable | 108MP AI OIS Camera | 6600mAh Battery | 3840Hz Risk-Free Dimming Display | with Charger (Titanium Black)","₹19,998",4.2
+"Redmi A4 5G (Sparkle Purple, 4GB RAM, 128GB Storage) | Segment Largest 6.88in 120Hz | 50MP Dual Camera | 18W Fast Charging | Charger in The Box","₹8,349",4.0
+"Motorola G45 5G (Viva Magenta, 8GB RAM, 128GB Storage)","₹12,200",4.1
+"iQOO Z10R 5G (Moonstone, 8GB RAM, 128GB Storage) | 32MP 4K Selfie Camera | Quad-Curved AMOLED Display | Dimensity 7400 Processor with 750K+ AnTuTu","₹19,498",4.3
+"Redmi A4 5G (Starry Black, 4GB RAM, 64GB Storage) | Segment Largest 6.88in 120Hz | 50MP Dual Camera | 18W Fast Charging | Charger in The Box","₹7,499",4.0
+OnePlus 13 | Smarter with OnePlus AI | Lifetime Display Warranty |16GB RAM 512GB Storage Black Eclipse | Official Smartphone for BGMS 2025,"₹76,999",4.5
+"Samsung Galaxy M36 5G (Velvet Black, 6 GB RAM, 128 GB Storage)| Circle to Search| Google Gemini| Corning Gorilla Glass Victus+| 7.7mm Slim| AI Enhanced 50 MP OIS Triple Camera| Unmatched Nightography","₹13,999",3.8
+"iQOO Z10x 5G (Ultramarine, 8GB RAM, 128GB Storage) | 6500 mAh Large Capacity Battery | Dimensity 7300 Processor | Military-Grade Durability","₹14,498",4.3
+"Infinix Note 50s 5G+ (Titanium Grey, 6GB RAM, 128GB Storage) | Slimmest 3D Curved 144Hz AMOLED Display | 5500mAH Battery | Dual Speakers by JBL | 90FPS BGMI | 64MP Sony Camera","₹14,999",4.2
+"Samsung Galaxy M07 (Black, 4GB RAM, 64GB Storage) | MediaTek Helio G99 | IP54 Rating | 50MP Auto Focus Camera | 7.6mm Slim | 5000mAh Battery| 25W Fast Charging | 6 Gen of OS Upgrades | Without Charger","₹6,799",3.6
+"realme 14x 5G Smartphone 8+128GB Crystal Black, 6.67-inch Screen, 120Hz Display, 6000mAh Battery, 80MP, MediaTek Dimensity 6300, ArmorShell Protection, IP69","₹14,399",4.2
+"Lava Bold N1 5G (Champagne Gold, 4GB RAM, 64GB Storage) |Bigger 6.75"" HD+ Notch Display | Octacore 5G Processor | 13 MP AI Camera |5000 mAh Battery| IP54 Rated Dust & Water Splash Proof","₹6,999",4.1
+Redmi A5 Just Black (3GB RAM 64GB Storage) | Royale Design | Segment's Largest 17.47cm(6.88) and Smoothest 120Hz Display | 5200mAh Large Battery | Expandable Storage up to 2TB,"₹6,099",3.9
+"Lava O3 (Glossy Blue, 3 GB RAM, 64 GB Storage) | Biggest 6.75"" HD+ Display | 13MP AI Dual Rear Camera | 5000 mAh Battery | Secure Face Unlock | Fingerprint Reader | Charger & Phone-Cover in Box","₹5,699",3.9
+Redmi 15 5G Sandy Purple 8GB + 256GB | Segment's Largest 7000mAhA Battery | Segment's Largest Display 17.53cm(6.9) Up to 144Hz | Snapdragon 6s Gen 3 | 18W Reverse Charging | 50MP AI Dual Camera,"₹16,998",3.9
+"iQOO Neo 10R 5G (Moonknight Titanium, 12GB RAM, 256GB Storage) | Snapdragon 8s Gen 3 Processor | India's Slimmest 6400mAh Battery Smartphone | Segment's Most Stable 90FPS for 5 Hours","₹28,998",4.4
+"Motorola G05 4G (Forest Green, 4GB RAM, 64GB Storage)","₹7,322",3.9
+"Vivo Y29 5G (Diamond Black, 6GB RAM, 128GB Storage) with No Cost EMI/Additional Exchange Offers","₹15,499",4.2
+"Oppo K13 5G with 7000mAh and 80W SUPERVOOC Charger in-The-Box, ICY Purple (8GB, 256GB)","₹20,999",4.3
+"Samsung Galaxy A35 5G (Awesome Navy, 8GB RAM, 256GB Storage) | Premium Glass Back | 50 MP Main Camera (OIS) | Nightography | IP67 | Corning Gorilla Glass Victus+ | sAMOLED with Vision Booster","₹22,858",4.2
+"Samsung Galaxy F16 5G, Vibing Blue (4GB, 128GB)","₹11,600",5.0
+"Motorola G35 5G (Midnight Black, 4GB RAM, 128GB Storage)","₹10,499",4.0
+"realme P3x 5G Smartphone 6+128GB Lunar Silver,6.72-inch Screen,120Hz Display,6000mAh Battery,45W SuperVOOC, 50MP Camera, MediaTek Dimensity 6400 Processor, IP64","₹11,999",3.8
+"OnePlus 13R | Smarter with OnePlus AI | Lifetime Display Warranty (12GB RAM, 256GB Storage Nebula Noir)","₹42,999",4.4
+"VIVO Y19 5G (Titanium Silver, 6GB RAM, 128GB Storage) with No Cost EMI/Additional Exchange Offers","₹12,999",4.2
+"Redmi Note 14 SE 5G, Titan Black (6GB, 128GB)","₹13,499",3.9
+"Samsung Galaxy A35 5G (Awesome Iceblue, 8GB RAM, 128GB Storage) Without Offer","₹18,700",4.2
+Motorola Edge 60 Fusion XT2503-2 8 + 256 GB Pan tone Zephyr,"₹20,300",4.2
+"realme C73 5G Smartphone 4+64GB Jade Green, 6.67-inch Screen, 120Hz Display,6000mAh Battery, 40MP Camera, MediaTek Dimensity 6300 Processor, IP64","₹10,099",4.4
+"Motorola Edge 50 Fusion 5G (Marshmallow Blue, 12GB RAM, 256GB Storage)","₹21,497",4.1
+"Samsung Galaxy M56 5G (Black, 8 GB RAM, 128 GB Storage)| Slimmest Phone in The Segment| Gorilla Glass Victus+| 10 Bit HDR Video| Enhanced Nightography| 4nm Processor| AI | Vapor Cooling Chamber","₹24,999",4.3
+"Samsung Galaxy M06 5G (Blazing Black, 6GB RAM, 128 GB Storage) | MediaTek Dimensity 6300 | AnTuTu Score 422K+ | 12 5G Bands | 25W Fast Charging | 4 Gen of OS Upgrades | Without Charger","₹8,999",3.9
+"Samsung Galaxy S25 Ultra 5G AI Smartphone (Titanium Silverblue, 12GB RAM, 512GB Storage), 200MP Camera, S Pen Included, Long Battery Life","₹1,35,499",4.3
+"Samsung Galaxy M36 5G (Orange Haze, 8 GB RAM, 128 GB Storage)| Circle to Search| Google Gemini| Corning Gorilla Glass Victus+| 7.7mm Slim| AI Enhanced 50 MP OIS Triple Camera| Unmatched Nightography","₹15,499",3.8
+"Lava Agni 3 5G (Heather Glass, 8GB+256GB) | India's 1st Dual AMOLED | 1.5K Curved Display | Dimensity 7300X | 50MP Triple AI Telephoto Camera | 66W Fast Charge | with Charging Adapter","₹20,999",4.1
+"Samsung Galaxy M35 5G (Moonlight Blue,8GB RAM,256GB Storage)| Corning Gorilla Glass Victus+| AnTuTu Score 595K+| Vapour Cooling Chamber| 6000mAh Battery| 120Hz Super AMOLED Display| AI|Without Charger","₹21,499",4.2
+"Acer Super ZX 5G (Cosmic Green, 8GB RAM, 128GB Storage) | 120 Hz FHD+ Display | 5000 mAh Ultra-Thin Battery | Dimensity 6300 5G Processor | Sony 64MP AI Camera","₹10,998",3.4
+"Oppo K13 5G (Prism Black, 8GB RAM 128GB Storage)","₹17,250",4.3
+"realme NARZO 80 Lite 5G (Onyx Black, 4GB+128GB) | 6000mAh Long-Lasting Battery | MediaTek Dimensity 6300 5G | AI Assist | IP64 Rated Water & Dust Resistance | Military-Grade Durability","₹9,499",4.2
+OnePlus 13s | Snapdragon® 8 Elite | Best Battery Life Ever on a Compact Phone | Lifetime Display Warranty | 12GB+256GB | Green Silk,"₹50,999",4.5
+"OPPO K13x 5G 6000mAh and 45W SUPERVOOC Charger & AI (Midnight Violet, 128 GB) (6 GB RAM)","₹11,990",4.1
+Apple iPhone 15 (128 GB) - Black,"₹52,499",4.5
+"Samsung Galaxy M36 5G (Velvet Black, 6 GB RAM, 128 GB Storage)| Circle to Search| Google Gemini| Corning Gorilla Glass Victus+| 7.7mm Slim| AI Enhanced 50 MP OIS Triple Camera| Unmatched Nightography","₹13,999",3.8
+"Samsung Galaxy S24 Ultra 5G AI Smartphone with Galaxy AI (Titanium Gray, 12GB, 256GB Storage), Snapdragon 8 Gen 3, 200 MP Camera with ProVisual Engine and 5000mAh Battery","₹79,999",4.5
+"Vivo Y29 5G (Diamond Black, 6GB RAM, 128GB Storage) with No Cost EMI/Additional Exchange Offers","₹15,499",4.2
+"Samsung Galaxy S24 5G AI Smartphone (Onyx Black, 8GB, 256GB Storage)","₹46,900",4.3
+"OPPO Reno13 5G (Luminous Blue,8 GB RAM, 128 GB Storage) with No Cost EMI/Additional Exchange Offers","₹23,999",4.1
+"Oppo K13 5G with 7000mAh and 80W SUPERVOOC Charger in-The-Box, ICY Purple (8GB, 256GB)","₹20,999",4.3
+"Samsung Galaxy M17 5G (Sapphire Black, 6GB RAM, 128GB Storage)| Circle to Search| Gemini Live| 50MP OIS Triple Camera| IP54 Rating| Gorilla Glass Victus| AI| 6 Gen of OS Upgrades| Without Charger","₹14,249",4.3
+"Lava Storm Play 5G (Dune Titanium, 8+8*GB RAM, 256 GB Storage)|India's First MT D7060 Processor with 525k Antutu |50 MP AI Camera | 6.75"" HD+ Display| 5000 mAh Battery |IP64 Dust & Water Proof","₹12,499",4.0
+"Samsung Galaxy A55 5G (Awesome Navy, 12GB RAM, 256GB Storage) | AI | Metal Frame | 50 MP Main Camera (OIS) | Super HDR Video| Nightography | IP67 | Corning Gorilla Glass Victus+ | sAMOLED Display","₹28,999",4.2
+"iPhone 16 128 GB: 5G Mobile Phone with Camera Control, A18 Chip and a Big Boost in Battery Life. Works with AirPods; Teal","₹66,900",4.5
+"iPhone Air 1 TB: Thinnest iPhone Ever, 16.63 cm (6.5″) Display with Promotion up to 120Hz, Powerful A19 Pro Chip, Center Stage Front Camera, All-Day Battery Life; Sky Blue","₹1,59,900",2.6
+"Oppo K13 5G with 7000mAh and 80W SUPERVOOC Charger in-The-Box, ICY Purple (8GB, 256GB)","₹20,999",4.3
+"Lava Agni 3 5G (Pristine Glass, 8GB+128GB) | India's 1st dual AMOLED | Dimensity 7300X | 50MP Triple AI Camera | 66W Fast Charge,5000 mAh Battery | Clean UI | Free Replacement @ Home | Without Charger","₹16,999",4.1
+"Motorola G86 Power 5G (Cosmic Sky, 8GB RAM + 128GB)","₹15,800",3.8
+"OnePlus Nord CE4 (Celadon Marble, 8GB RAM, 128GB Storage) | Lifetime Display Warranty | Qualcomm® Snapdragon™ 7 Gen 3 - Best in The Segment | 50 MP Camera with OIS","₹18,999",4.3
+"Motorola G05 4G (Forest Green, 4GB RAM, 64GB Storage)","₹7,322",3.9
+"Samsung Galaxy F06 5G (Bahama Blue, 128 GB) (6 GB RAM)","₹9,699",4.1
+Motorola Edge 60 Fusion XT2503-2 8 + 256 GB Pan tone Zephyr,"₹20,300",4.2
+"realme P3x 5G Smartphone 6+128GB Lunar Silver,6.72-inch Screen,120Hz Display,6000mAh Battery,45W SuperVOOC, 50MP Camera, MediaTek Dimensity 6400 Processor, IP64","₹11,999",3.8
+OnePlus 13s | Snapdragon® 8 Elite | Best Battery Life Ever on a Compact Phone | Lifetime Display Warranty | 12GB+512GB | Green Silk,"₹55,999",4.5
+"Samsung Galaxy A35 5G (Awesome Navy, 8GB RAM, 256GB Storage) | Premium Glass Back | 50 MP Main Camera (OIS) | Nightography | IP67 | Corning Gorilla Glass Victus+ | sAMOLED with Vision Booster","₹22,858",4.2
+"OnePlus Nord CE4 Lite 5G (Mega Blue, 8GB RAM, 128GB Storage)","₹15,999",4.2
+Apple iPhone 15 (128 GB) - Black,"₹52,499",4.5
+"VIVO Y19 5G (Titanium Silver, 6GB RAM, 128GB Storage) with No Cost EMI/Additional Exchange Offers","₹12,999",4.2
+"realme NARZO 70 Turbo 5G (Turbo Green,6GB RAM,128GB Storage) | Segment's Fastest Dimensity 7300 Energy 5G Chipset | Motorsports Inspired Design","₹13,999",4.2
+"Tecno POP 9 5G Midnight Shadow, 4GB+128GB| Segment's 1st 48MP Sony AI Camera| Segment's 1st with NFC |D6300 Processor |4+ Year Lag Free Fluency |5000 mAh Battery |Dual Speaker |Without Charger","₹8,299",4.0
+"Lava Storm Play 5G (Frosty Blue, 6+6*GB RAM, 128GB Storage) | World's First MTK D7060 Processor | 500k+ Antutu | LPDDR5 RAM | UFS 3.1 Storage | 50MP AI Camera | 120Hz Refresh Rate | IP64 Protection","₹9,999",4.0
+"Motorola G05 4G (Plum Red, 4GB RAM, 64GB Storage)","₹7,199",4.2
+"Samsung Galaxy A35 5G (Awesome Lilac, 8GB RAM, 256GB Storage) | Premium Glass Back | 50 MP Main Camera (OIS) | Nightography | IP67 | Corning Gorilla Glass Victus+ | sAMOLED with Vision Booster","₹22,999",4.1
+"Samsung Galaxy S23 Ultra 5G AI Smartphone (Green, 12GB, 256GB Storage)","₹79,999",4.5
+"Honor X7c 5G Dual SIM | 8GB RAM, 256GB Storage | 50MP AI Camera | 5 Star SGS Rated | IP64 Standards | 120Hz Refresh Rate | 5200mAh Battery | Without Charger | (Moonlight White)","₹13,998",3.3
+"realme 15 5G Smartphone 8+256GB Pink,144Hz HyperGlow 4D Curve Display,7000mAh Battery,80W SuperVOOC,Dual 50MP 4K Cameras,Dimensity 7300+ Chipset,IP69","₹26,099",4.3
+"Motorola Moto G85 5G (128, Cobalt Blue, New)","₹16,050",4.2
+"Lava Storm Lite 5G (Astral Blue, 4+4*GB RAM, 64GB Storage) | India's First MTK Dimensity 6400 Processor | 50MP AI Camera | IP64 Rated | 120 Hz Display | 5000mAh Battery | Supports All 5G Bands","₹7,999",4.0
+"Motorola G96 (Pantone Greener Pastures, 8GB RAM, 256GB Storage)","₹17,990",3.5
+"OPPO Reno13 5G (Ivory White,8 GB RAM, 128 GB Storage) with No Cost EMI/Additional Exchange Offers","₹23,999",4.1
+"OPPO A5 Pro 5G (Feather Blue, 8GB RAM, 256GB Storage)|6.67” HD+ 120Hz Refresh Rate Screen | 45W SUPERVOOC|with No Cost EMI/Additional Exchange Offers.","₹19,998",3.7
+"realme 14 Pro Lite 5G Smartphone 8GB+128GB Gold, 6.7 inch Screen, 120Hz Curved Vision Display, 5200mAh Battery, 45W Ultra Charge, 92MP Cameras, Snapdragon® 7s Gen 2 5G Chipset, IP65","₹18,490",3.5
+"Samsung Galaxy Z Fold5 5G AI Smartphone (Phanton Black, 12GB RAM, 512GB Storage)","₹97,499",4.0
+"vivo T4R (White, 8GB RAM, 256GB Storage)","₹22,999",5.0
+"Lava Bold N1 Lite (Crystal Gold, 3 GB RAM, 64 GB Storage) | 6.75"" HD+ Display | 13MP AI Dual Rear Camera | 5000 mAh Battery | Secure Face Unlock | Fingerprint Reader | Charger & Phone-Cover in Box","₹5,698",4.8
+"Infinix GT 30 Pro 5G+ (Dark Flare, 12GB RAM, 256GB Storage) | MediaTek D8350 Ultimate | 120FPS BGMI Gaming | Gaming Triggers | 1.5 Million+ AnTuTu AI (Without Offers)","₹26,990",3.7
+"OPPO A5 5G (Aurora Green, 6GB RAM, 128GB Storage) with No Cost EMI/Additional Exchange Offers","₹15,498",4.5
+"Infinix GT 30 Pro 5G+ (Dark Flare, 12GB RAM, 256GB Storage) | MediaTek D8350 Ultimate | 120FPS BGMI Gaming | Gaming Triggers | 1.5 Million+ AnTuTu AI (Without Offers)","₹26,990",3.7
+"Motorola g86 Power 5G (Pantone Spellbound, 8GB RAM, 128GB Storage) | 6.7"" 1.5K pOLED Display | 50MP Sony OIS Camera | 6720mAh Battery | TurboPower 33W Charging | Dimensity 7400 Processor","₹15,899",3.8
+"Samsung Galaxy A17 5G (Blue, 8GB RAM, 256GB Storage) | with Travel Adapter | 50 MP No Shake Camera | Gemini Live | Circle to Search | Super AMOLED | Corning Gorilla Glass Victus | 7.5mm Sleek | AI","₹23,499",3.9
+"OPPO K13 5G with 7000mAh and 80W SUPERVOOC Charger in-The-Box, ICY Purple (8GB, 128GB)","₹17,495",4.3
+"iPhone Air 256 GB: Thinnest iPhone Ever, 16.63 cm (6.5″) Display with Promotion up to 120Hz, Powerful A19 Pro Chip, Center Stage Front Camera, All-Day Battery Life; Sky Blue","₹1,19,900",2.6
+"Motorola G35 5G (Leaf Green, 4+128)","₹10,097",4.0
+"Vivo V50e 5G (Pearl White, 8GB RAM, 128GB Storage) with No Cost EMI/Additional Exchange Offers","₹26,999",4.1
+"Motorola G45 5G (Brilliant Green, 8GB RAM, 128GB Storage) | 6.5"" FHD+ Display | Snapdragon 6 Gen1 Processor | 50MP Camera | 16MP Front Camera | 5000mAh Battery | 33W Charging","₹11,739",4.0
+"Motorola G96 144Hz 3D Curved pOLED (Pastures, 8GB RAM, 128GB Storage)","₹16,993",4.4
+"Samsung Galaxy F06 5G, Bahama Blue (4GB, 128GB)","₹8,529",3.9
+Nothing Phone (3a) Black 256GB 8GB RAM,"₹25,699",4.4
+"OPPO K13x 5G 6000mAh and 45W SUPERVOOC Charger & AI (Sunset Peach, 128 GB) (6 GB RAM)","₹12,479",4.2
+"Motorola G86 Power 5G (Pantone Golden Cypres, 8GB RAM, 128GB Storage) | 6.7"" 1.5K pOLED Display | 50MP Sony OIS Camera | 6720mAh Battery | TurboPower 33W Charging | Dimensity 7400 Processor","₹16,498",4.2
+HMD Crest 5G | Segment First 50 MP Selfie Camera | 50 MP Dual Rear AI Camera | FHD+ OLED Display | 6 GB RAM & 128 GB Storage | Android 14 | 33W Fast Charger in Box | Midnight Blue,"₹8,999",3.8
+"VIVO T4 5G (Emerald Blaze, 8GB RAM+256GB Storage)",N/A,4.1
+"OPPO Reno14Pro 5G (Titanium Grey, 12GB RAM, 256GB Storage)","₹49,998",4.4
+"Vivo Y400 5G (Olive Green, 8GB RAM, 128GB Storage) with No Cost EMI/Additional Exchange Offers","₹21,998",3.9
+"Samsung Galaxy F06 5G, Lit Voilet (6GB, 128GB)","₹9,699",3.5
+"Vivo Y400 5G (Olive Green, 8GB RAM, 256GB Storage) with No Cost EMI/Additional Exchange Offers","₹23,998",3.9
+"OPPO A5X 5G (Midnight Blue, 6GB RAM, 128GB Storage) with Exchange Bonus or No Cost EMI","₹13,999",4.0
+Redmi Note 14 Pro+ 5G Titan Black 12GB RAM 512GB Storage| 50 MP Triple Camera with Telephoto | Corning Gorilla Glass Victus 2 | IP 68 | SD 7s Gen 3,"₹31,998",4.0
+"OPPO A3X 5G (Sparkle Black, 4GB RAM, 64GB Storage)|6.67” HD+ 120Hz Refresh Rate Screen | 45W SUPERVOOC|with No Cost EMI/Additional Exchange Offers","₹9,499",4.1
+OnePlus Nord CE5 | Massive 7100mAh Battery | MediaTek Dimensity 8350 Apex | Powered by OnePlus AI | 12GB + 256GB | Black Infinity,"₹28,998",4.3
+"Google Pixel 9A (Obsidian, 256 GB) (8 GB RAM)","₹41,519",4.2
+"Motorola Edge 60 Fusion 5G (Pantone Mykonos Blue, 256 GB) (12 GB RAM)","₹23,384",4.0
+"Samsung Galaxy A56 5G (Awesome Light Gray, 12GB, 256GB) | Metal Frame | Gemini Live | Awesome Intelligence (AI): Circle to Search, Instant Slo-Mo, Auto-Trim, Object Eraser | Flagship Grade Camera","₹40,999",4.3
+"Lava Bold N1 Lite (Crystal Gold, 3 GB RAM, 64 GB Storage) | 6.75"" HD+ Display | 13MP AI Dual Rear Camera | 5000 mAh Battery | Secure Face Unlock | Fingerprint Reader | Charger & Phone-Cover in Box","₹5,698",4.8
+"vivo V60e 5G (Elite Purple, 8GB RAM, 256GB Storage) with No Cost EMI/Additional Exchange Offers","₹31,999",4.1
+OnePlus Nord CE5 | Massive 7100mAh Battery | MediaTek Dimensity 8350 Apex | Powered by OnePlus AI | 8GB + 256GB | Nexus Blue,"₹26,998",4.3
+"Vivo V60 5G (Mist Gray, 16GB RAM, 512GB Storage) with No Cost EMI/Additional Exchange Offers","₹45,999",4.2
+"Redmi Note 14 5G (Titan Black, 8GB RAM 256GB Storage) | Global Debut MTK Dimensity 7025 Ultra | 2100 nits Segment Brightest 120Hz AMOLED | 50MP Sony LYT 600 OIS+EIS Triple Camera","₹18,499",3.9
+"Redmi 14C 5G (Stardust Purple, 4GB RAM, 128GB Storage) | Superfast 4nm Snapdragon 4 Gen 2 | 120Hz 17.47cm (6.88”) Display | 5160mAh Battery | 50MP Dual Camera | Premium Starlight Design","₹9,998",4.0
+Apple iPhone 15 (128 GB) - Black,"₹52,499",4.5
+"iPhone 17 Pro 1 TB: 15.93 cm (6.3″) Display with Promotion up to 120Hz, A19 Pro Chip, Breakthrough Battery Life, Pro Fusion Camera System with Center Stage Front Camera; Cosmic Orange","₹1,74,900",3.0
+"Google Pixel 9A (Porcelain, 256 GB) (8 GB RAM)","₹42,090",4.1
+"Motorola Edge 50 Fusion 5G (Forest Blue, 12GB RAM, 256GB Storage)","₹21,664",4.1
+Motorola Edge 60 Pro (Blue 12GB RAM 256GB Storage),"₹30,149",4.2
+"POCO M6 5G (Polaris Green,4GB RAM, 128GB Storage) | MediaTek Dimensity 6100+ 5G Processor | 5000 mAh Battery + 18W Fast Charging | 50 MP AI Dual-Camera System| Airtel Locked","₹9,190",4.0
+"Samsung Galaxy S24 FE 5G (Mint, 8GB RAM+ 256GB Storage) | Exynos 2400e Processor | Dynamic AMOLED Display | Dual Nano-SIM | 4700mAh Battery","₹38,790",4.5
+"Samsung Galaxy F55 5G (Raisin Black, 128 GB) (8 GB RAM)","₹19,349",4.0
+"Motorola Edge 50 Fusion tG (Forest Green, 12GB RAM + 256GB Storage)","₹20,500",4.3
+"Motorola G96 144Hz 3D Curved pOLED (CATTLEYAORCHID, 8GB RAM, 128GB Storage)","₹17,805",3.8
+"iPhone 16 128 GB: 5G Mobile Phone with Camera Control, A18 Chip and a Big Boost in Battery Life. Works with AirPods; Teal","₹66,900",4.5
+"iPhone Air 1 TB: Thinnest iPhone Ever, 16.63 cm (6.5″) Display with Promotion up to 120Hz, Powerful A19 Pro Chip, Center Stage Front Camera, All-Day Battery Life; Space Black","₹1,59,900",2.6
+"Oppo K13 5G (Prism Black, 8GB RAM 256GB Storage)","₹19,738",4.2
+"Motorola Edge 60 Fusion (Pantone Amazonite, 12GB RAM, 256GB Storage)","₹21,980",4.2
+"Motorola Edge 50 Fusion 5G (Hot Pink, 12GB RAM, 256GB Storage)","₹20,799",4.2
+"Infinix Zero Flip 5G (Rock Black, 8GB RAM, 512GB Storage) 8GB Virtual RAM, 120HZ Punch Hole Display, MediaTek D8020, Dual JBL Speakers, 4720mAh Battery, 3D Pets","₹39,999",4.2
+"Motorola razr 50 Ultra (Midnight Blue, 12GB RAM, 512GB Storage) | with Moto Buds+ | Moto ai | 4.0"" External AMOLED Display | Snapdragon 8s Gen 3 | 6.9"" AMOLED 165Hz Display | 32MP Selfie Camera","₹54,870",4.0
+"realme 13 5G (Speed Green, 8GB RAM, 128GB Storage) | Expandable Upto 2TB | Up to 18GB Dynamic RAM | 50MP AI Dual Camera | 6.72"" AMOLED Display | 45W Ultra Charging | Dimensity 6300 Processor","₹14,690",4.1
+"Samsung Galaxy A26 5G (Awesome Mint, 8GB, 256GB) | Awesome Intelligence (AI) | Circle to Search | Gemini Live | FHD+ sAMOLED Display | 50MP OIS Camera | IP67 Rated","₹26,999",3.8
+"Motorola G85 (Olive Green, 12GB RAM, 256GB Storage)","₹19,999",3.3
+"iPhone 17 512 GB: 15.93 cm (6.3″) Display with Promotion, A19 Chip, Center Stage Front Camera for Smarter Group Selfies, Improved Scratch Resistance, All-Day Battery Life; Black","₹1,02,900",4.4
+Apple iPhone 15 (128 GB) - Green,"₹50,990",4.5
+"iPhone Air 512 GB: Thinnest iPhone Ever, 16.63 cm (6.5″) Display with Promotion up to 120Hz, Powerful A19 Pro Chip, Center Stage Front Camera, All-Day Battery Life; Sky Blue","₹1,39,900",2.6
+"vivo T4R (White, 8GB RAM, 256GB Storage)","₹22,999",5.0
+"Samsung Galaxy Z Fold7 5G Smartphone with Galaxy AI (JetBlack, 12GB RAM, 256GB Storage), Ultra Sleek Design with 200MP Camera, Powerful Snapdragon 8 Elite, Google Gemini","₹1,74,999",4.2
+"Motorola G96 144Hz 3D Curved pOLED (Pastures, 8GB RAM, 128GB Storage)","₹16,993",4.4
+"Samsung Galaxy A55 5G (Awesome Iceblue, 12GB RAM, 256GB Storage) | AI | Metal Frame | 50 MP Main Camera (OIS) | Super HDR Video| Nightography | IP67 | Corning Gorilla Glass Victus+ | sAMOLED Display","₹28,999",4.2
+"Samsung Galaxy A17 5G (Blue, 8GB RAM, 256GB Storage) | with Travel Adapter | 50 MP No Shake Camera | Gemini Live | Circle to Search | Super AMOLED | Corning Gorilla Glass Victus | 7.5mm Sleek | AI","₹23,499",3.9
+"Xiaomi Redmi Go Phone (Blue, 8GB ROM, 1GB RAM)","₹5,299",2.7
+"realme NARZO 70 Turbo 5G (Turbo Purple,6GB RAM,128GB Storage) | Segment's Fastest Dimensity 7300 Energy 5G Chipset | Motorsports Inspired Design","₹14,290",4.2
+"Samsung Galaxy M17 5G (Sapphire Black, 4GB RAM, 128GB Storage)| Circle to Search| Gemini Live| 50MP OIS Triple Camera| IP54 Rating| Gorilla Glass Victus| AI| 6 Gen of OS Upgrades| Without Charger","₹12,999",4.3
+"iPhone 16 128 GB: 5G Mobile Phone with Camera Control, A18 Chip and a Big Boost in Battery Life. Works with AirPods; Pink","₹66,900",4.5
+"iPhone 17 Pro 512 GB: 15.93 cm (6.3″) Display with Promotion up to 120Hz, A19 Pro Chip, Breakthrough Battery Life, Pro Fusion Camera System with Center Stage Front Camera; Deep Blue","₹1,54,900",3.0
+"Samsung Galaxy A35 5G (Awesome Lilac, 8GB RAM, 256GB Storage) | Premium Glass Back | 50 MP Main Camera (OIS) | Nightography | IP67 | Corning Gorilla Glass Victus+ | sAMOLED with Vision Booster","₹22,999",4.1
+POCO M6 Plus 5G Graphite Black 8GB RAM 128GB ROM,"₹10,299",4.0
+"Samsung Galaxy A36 5G (Awesome Black, 12GB, 256GB) | Gemini Live | Awesome Intelligence (AI): Circle to Search, My Filter, Object Eraser | 4nm Snapdragon Processor | Flagship Grade Camera","₹33,499",4.1
+"Lava Storm Play 5G (Dune Titanium, 6+6*GB RAM, 128GB Storage) | World's First MTK D7060 Processor | 500k+ Antutu | LPDDR5 RAM | UFS 3.1 Storage | 50MP AI Camera | 120Hz Refresh Rate | IP64 Protection","₹9,999",4.0
+"iQOO Z10 5G (Stellar Black, 8GB RAM, 256GB Storage) | India's Biggest Ever 7300 mAh Battery | Snapdragon 7s Gen 3 Processor | Brightest Quad Curved AMOLED Display in The Segment","₹22,998",4.3
+"POCO M6 Pro 5G (Power Black, 4GB RAM, 128GB Storage) | Snapdragon 4 Gen 2 | 6.79"" Large Screen with 90Hz Refresh Rate | 50 MP Dual AI Camera","₹10,999",4.0
+"realme NARZO 80 Lite 5G (Onyx Black, 6GB+128GB) | 6000mAh Long-Lasting Battery | MediaTek Dimensity 6300 5G | AI Assist | IP64 Rated Water & Dust Resistance | Military-Grade Durability","₹9,798",4.2
+"Lava Storm Lite 5G (Astral Blue, 4+4*GB RAM, 64GB Storage) | India's First MTK Dimensity 6400 Processor | 50MP AI Camera | IP64 Rated | 120 Hz Display | 5000mAh Battery | Supports All 5G Bands","₹7,999",4.0
+"Lava Storm 5G (Thunder Black, 8GB RAM, 128GB ROM) | Powerful MediaTek Dimensity 6080 Processor | 50MP Ultrawide Rear+16MP Front Camera |No Bloatware | Segment's Most Affordable 5G Smartphone on Amazon","₹10,499",4.0
+"Samsung Galaxy S24 FE 5G (Graphite, 8GB RAM, 256GB Storage) | Exynos 2400e Processor | Dynamic AMOLED Display | Dual Nano-SIM | 4700mAh Battery","₹39,970",4.4
+"realme P3 5G with 6.67″ FHD+ 120Hz AMOLED Display (8 GB RAM, 128 GB ROM) Space Silver","₹16,998",3.8
+"Google Pixel 6 5G (Sorta Seafoam, 8GB RAM, 128GB Storage)","₹23,999",4.1
+"Samsung Galaxy F15 5G (Jazzy Green, 4GB RAM, 128 GB Storage)","₹12,999",4.0
+"MOTOROLA G60 (Moonless, 128 GB) (6 GB RAM)","₹12,700",4.1
+"Motorola g31 (Meteorite Grey, 128 GB) (6 GB RAM)","₹9,899",3.8
+"Samsung Galaxy S24 FE 5G AI Smartphone (Blue, 8GB RAM, 128GB Storage)","₹33,560",4.2
+"Lava Blaze AMOLED 2 5G (Feather White, 6 GB RAM, 128 GB Storage) | 6.67"" FHD+ AMOLED Display | MTK D7060 Processor | 50 MP Front Camera | LPDDR5 UFS 3.1 ROM | 5000 mAh | 33W Fast Charging","₹13,499",4.2
+"Motorola g31 (Baby Blue, 64 GB) (4 GB RAM)","₹7,495",3.8
+PEACE MINI 1 Mini 3'' Inch 4G Smartphone (3GB RAM 32GB Storage) (Black),"₹4,400",N/A
+"VIVO T4R 5G, Twilight Blue (8GB, 256GB)","₹22,930",4.0
+"Samsung Galaxy F15 5G (Jazzy Green, 6GB RAM, 128 GB Storage)","₹16,999",4.2
+"Vivo Y22 (Metaverse Green, 4GB RAM, 128GB Storage) with No Cost EMI/Additional Exchange Offers","₹13,300",4.1
+Redmi 9 Power (Mighty Black 4GB RAM 64GB Storage) - 6000mAh Battery |FHD+ Screen | 48MP Quad Camera | Alexa Hands-Free Capable,"₹8,299",4.2
+"Samsung Galaxy A35 5G (Awesome Iceblue, 8GB RAM, 128GB Storage) | Premium Glass Back | 50 MP Main Camera (OIS) | Nightography | IP67 | Corning Gorilla Glass Victus+ | sAMOLED with Vision Booster","₹19,999",4.2
+"Vivo Y22 (Metaverse Green, 4GB RAM, 128GB Storage) with No Cost EMI/Additional Exchange Offers","₹13,300",4.1
+"VIVO T4R 5G, Twilight Blue (8GB, 256GB)","₹22,930",4.0
+"Motorola Edge 60 Fusion 5G, Pantone Mykonos Blue (8GB, 256GB)","₹20,699",4.2
+"Infinix Zero 40 5G, Violet Garden (12GB, 256 GB)","₹25,999",3.6
+"Google Pixel 6a 5G (Sage, 6GB RAM, 128GB Storage)","₹22,999",4.1
+"Redmi 7A (Matte Black, 2GB RAM, 32GB Storage)","₹6,990",4.0
+"OPPO Reno14 5G (Forest Green, 8GB RAM, 256GB Storage) with No Cost EMI/Additional Exchange Offers","₹37,998",4.3
+"Redmi Note 12 5G (Frosted Green,8GB RAM, 256GB Storage)","₹18,499",4.0
+"POCO M7 Plus 5G, Carbon Black (8GB, 128GB)","₹13,499",N/A
+"Redmi 12 (Moonstone Silver,6GB RAM, 128GB Storage) Without Offer","₹12,999",3.6
+"Motorola Edge 50 Fusion 5G (Marshmallow Blue, 8GB RAM, 128GB Storage)","₹19,585",4.2
+"Vivo V30e 5G Smartphone (Velvet Red, 8GB RAM, 128GB Storage)","₹24,990",4.2
+"Motorola Edge 60 Stylus (Web, 8+256)","₹19,770",4.0
+"Xiaomi Redmi Go Phone (Black, 16 GB 1 GB RAM)","₹5,399",3.3
+"Samsung Galaxy S25 Ultra 5G (Titanium Gray, 12GB RAM, 256GB Storage)","₹1,05,000",3.4
+"realme GT 7T 5G Smartphone 12GB+256GB Yellow,6.80 inch Screen, 120Hz Refresh, 7000mAh Battery, 120W Ultra Charge, 90MP AI Cameras, Dimensity 8400-MAX chipset, IP69","₹33,998",4.6
+"Nokia All-New 105 Single Sim Keypad Phone with Built-in UPI Payments, Long-Lasting Battery, Wireless FM Radio | Charcoal","₹1,199",3.9
+"Google Pixel 6a 5G (Charcoal, 6GB RAM, 128GB Storage)","₹21,499",4.0
+"OPPO F19 Pro (Fluid Black, 8GB RAM, 128GB Storage) with No Cost EMI/Additional Exchange Offers",N/A,4.1
+"HP H150 Wireless Earbuds, Compatible with Tablets, Smartphones, PCs, and Other Devices with Bluetooth,Noise-Reduction,Water Resistant Design,Black,0.036kg",₹855,3.2
+DJI OSMO Mobile SE Intelligent Gimbal 3-Axis Phone Portable and Foldable Android and iPhone with ShotGuides Smartphone with ActiveTrack 5.0 Vlogging Stabilizer YouTube Video,"₹5,999",4.3
+"FKU F12 Screen Magnifier for Cell Phone with Bluetooth Speaker, Foldable Phone Stand Holder, Compatible with All Smartphones","₹1,899",4.1
+"Portronics MODESK Universal Mobile Holder Stand with Metal Body, Anti Skid Design, Light Weight for All Smartphones, Tablets, Kindle, iPad(Black)",₹119,4.2
+Spigen Dashboard & Windshield Car Mobile Holder [Strong Suction Cup][360° Rotational][Stable Hold] Compatible with Most Smartphone Devices - Black,₹699,4.4
+"redcop MicroSDXC Memory Card 64GB with Full Size Adapter – Upto 150MB/s |Class 10 UHS-3 V30 A1| 5 Year Warranty |High-Speed Storage Sd Card for Smartphones, Cameras, Laptops, Gaming Devices & Drones",₹359,4.2
+"ZEBRONICS BMH110, Bike Smartphones Mobile Holder, Upto 6.1 Inches, 360° Rotatable, One Press Lock and Release, Stable and Secure, Anti-Skid Silicone Pads, Cable Management, for Maps & Navigation",₹179,4.0
+Amazon Basics – Bike Phone Mount Cell Phone Holder | 360° Rotation | Universal Bicycle Handlebar Mount with Sensitive Touch Screen | Fits 4–7.2 Inches Smartphones | Black,₹423,3.6
+"Mi Complete Protect (1year) - Brand Authorised Plan for Smartphones Between 26000-27999 (Email Delivery, No Physical Product)","₹1,120",5.0
+CMF BY NOTHING Phone 1 5G (128 GB) (6 GB RAM) (Orange),"₹15,401",4.2
+"POCO M6 5G (Polaris Green,4GB RAM, 128GB Storage) | MediaTek Dimensity 6100+ 5G Processor | 5000 mAh Battery + 18W Fast Charging | 50 MP AI Dual-Camera System| Airtel Locked","₹9,190",4.0
+"Google Pixel 6 5G (Sorta Seafoam, 8GB RAM, 128GB Storage)","₹23,999",4.1
+POCO C61 Mystical Green 4GB RAM 64GB ROM,"₹6,819",4.0
+"vivo T3 Pro 5G (Sandstone Orange, 8GB RAM+ 256GB Storage) | Snapdragon 7 Gen 3 Processor | 120Hz AMOLED Display | Dual Nano-SIM | 5500mAh Battery",N/A,4.2
+"Infinix Zero Flip 5G (Rock Black, 8GB RAM, 512GB Storage) 8GB Virtual RAM, 120HZ Punch Hole Display, MediaTek D8020, Dual JBL Speakers, 4720mAh Battery, 3D Pets","₹39,999",4.2
+SHIVANSH Bold NEO 3 INCH 4G Phone 3GB RAM 32 GB ROM Dual SIM Android Smartphone (Color Depend on Stock),"₹4,640",2.2
+"POCO M6 5G (Orion Blue, 6GB RAM, 128GB Storage)","₹12,880",4.1
+"Samsung Galaxy F15 5G (Jazzy Green, 4GB RAM, 128 GB Storage)","₹12,999",4.0
+Samsung Galaxy S23 Ultra,"₹1,14,700",N/A
+"Google Pixel 8 5G (Obsidian, 8GB RAM, 128GB Storage)","₹38,999",N/A
+"Motorola Edge 50 Fusion 5G (Hot Pink, 8GB RAM, 128GB Storage)","₹19,489",4.2
+"Redmi Note 8 (Neptune Blue, 4GB RAM, 64GB Storage) | Snapdragon 665 Processor | 48 MP Quad Camera","₹7,219",4.2
+"Nothing Phone (3), Black (16GB, 512 GB)","₹52,900",N/A
+"HUMBLE Universal 360° Rotatable Dashboard Mount Smartphone Holder Anti-Slip Silicone Mount for Car, Office & Home Adjustable Stand for Portrait & Landscape Viewing",₹179,3.9
+"Motorola razr 60 Ultra (Pantone Rio Red, 16 GB RAM, 512 GB Storage) | Snapdragon® 8 Elite Mobile Platform | 6.9"" AMOLED Upto 165Hz Display | 50 MP + 50 MP + 50MP Triple Camera","₹79,999",3.7
+"Google Pixel 7a 5G (Snow, 8GB RAM, 128GB Storage)","₹26,999",1.0
+"Vivo Y22 (Metaverse Green, 4GB RAM, 128GB Storage) with No Cost EMI/Additional Exchange Offers","₹13,300",4.1
+"Redmi Note 8 Pro (Shadow Black, 6GB RAM, 128GB Storage with Helio G90T Processor)","₹10,849",4.3
+"Micromax All-New J3 Plus Sleek & Stylish |Keypad Mobile with 1.77"" Screen|1000 MAH Battery | Bright Torch| Wireless FM | Green Black","₹1,000",3.7
+"Samsung Galaxy M55s 5G (Coral Green,8GB RAM,128GB Storage) | 50MP Triple Cam| 5000mAh Battery| Snapdragon 7 Gen 1 | 4 Gen. OS Upgrade & 5 Year Security Update| Super AMOLED+ Display| Without Charger","₹18,699",3.8
+"Vivo V60 5G (Mist Gray, 12GB RAM, 256GB Storage) with No Cost EMI/Additional Exchange Offers","₹40,999",4.2
+"Redmi A3X (Midnight Black, 3GB RAM, 64GB Storage) | Premium Halo Design | 90Hz Display | Powerful Octa Core Processor","₹6,497",4.0
+"Tecno POP 9 5G Midnight Shadow, 4GB+128GB| Segment's 1st 48MP Sony AI Camera| Segment's 1st with NFC |D6300 Processor |4+ Year Lag Free Fluency |5000 mAh Battery |Dual Speaker |Without Charger","₹8,299",4.0
+"Samsung Galaxy S25 Ultra 5G AI Smartphone (Titanium Silverblue, 12GB RAM, 256GB Storage), 200MP Camera, S Pen Included, Long Battery Life",N/A,4.3
+"Samsung Galaxy F06 5G (Lit Violet, 128 GB) (4 GB RAM)","₹8,999",N/A
+"Samsung Galaxy A35 5G (Awesome Iceblue, 8GB RAM, 128GB Storage) | Premium Glass Back | 50 MP Main Camera (OIS) | Nightography | IP67 | Corning Gorilla Glass Victus+ | sAMOLED with Vision Booster","₹19,999",4.2
+"Samsung Galaxy A36 5G (Awesome Lavender, 8GB, 256GB) | Gemini Live | Awesome Intelligence (AI): Circle to Search, My Filter, Object Eraser | 4nm Snapdragon Processor | Flagship Grade Camera","₹30,999",4.1
+Xtracover 1 Year Extended Warranty on Smartphone Having Price Range of Rs. 150001-175000 (E-Mail Delivery Only),"₹9,029",N/A
+"Lava Storm Lite 5G (Cosmic Titanium, 4+4*GB RAM, 64GB Storage) | India's First MTK Dimensity 6400 Processor | 50MP AI Camera | IP64 Rated | 120 Hz Display | 5000 mAh Battery | Supports All 5G Bands","₹7,999",4.0
+"Motorola G86 Power 5G (Pantone Golden Cypres, 8GB RAM, 128GB Storage) | 6.7"" 1.5K pOLED Display | 50MP Sony OIS Camera | 6720mAh Battery | TurboPower 33W Charging | Dimensity 7400 Processor","₹16,498",4.2
+"Motorola G96 (Pantone Greener Pastures, 8GB RAM, 256GB Storage)","₹17,990",3.5
+Apple iPhone 15 (128 GB) - Pink,"₹53,100",4.5
+"vivo V60e 5G (Elite Purple, 8GB RAM, 128GB Storage) with No Cost EMI/Additional Exchange Offers","₹29,999",4.1
+"Redmi Note 14 5G (Mystique White, 6GB RAM 128GB Storage) | Global Debut MTK Dimensity 7025 Ultra | 2100 nits Segment Brightest 120Hz AMOLED | 50MP Sony LYT 600 OIS+EIS Triple Camera","₹16,498",3.9
+"POCO C71, Power Black (4GB, 64GB)","₹6,099",4.1
+Apple iPhone 15 (128 GB) - Black,"₹52,499",4.5
+"iPhone 17 Pro 1 TB: 15.93 cm (6.3″) Display with Promotion up to 120Hz, A19 Pro Chip, Breakthrough Battery Life, Pro Fusion Camera System with Center Stage Front Camera; Cosmic Orange","₹1,74,900",3.0
+"POCO C71, Power Black (4GB, 64GB)","₹6,099",4.1
+"Redmi Note 14 5G (Titan Black, 8GB RAM 128GB Storage) | Global Debut MTK Dimensity 7025 Ultra | 2100 nits Segment Brightest 120Hz AMOLED | 50MP Sony LYT 600 OIS+EIS Triple Camera","₹16,998",3.9
+XIAOMI 14 Civi Matcha Green (8GB RAM 256GB Storage) | 50 MP Leica Triple Camera| SD 8s Gen 3 | 1.5K Quad Curved AMOLED HyperOS,"₹26,249",4.1
+"Vivo Y400 5G (Glam White, 8GB RAM, 256GB Storage) with No Cost EMI/Additional Exchange Offers","₹23,998",3.9
+"Motorola g45 5G (Pantone Moss, 128 GB) (8 GB RAM)","₹11,980",4.1
+"realme C73 5G Smartphone 4+64GB Jade Green, 6.67-inch Screen, 120Hz Display,6000mAh Battery, 40MP Camera, MediaTek Dimensity 6300 Processor, IP64","₹10,099",4.4
+POCO M6 Plus 5G Ice Silver 6GB RAM 128GB ROM,"₹10,499",4.1
+"Motorola G05 4G (Plum Red, 4GB RAM, 64GB Storage)","₹7,199",4.2
+"iPhone 16 128 GB: 5G Mobile Phone with Camera Control, A18 Chip and a Big Boost in Battery Life. Works with AirPods; Teal","₹66,900",4.5
+"iPhone Air 512 GB: Thinnest iPhone Ever, 16.63 cm (6.5″) Display with Promotion up to 120Hz, Powerful A19 Pro Chip, Center Stage Front Camera, All-Day Battery Life; Sky Blue","₹1,39,900",2.6
+"OPPO A5 Pro 5G (Mocha Brown, 8GB RAM, 128GB Storage)|6.67” HD+ 120Hz Refresh Rate Screen | 45W SUPERVOOC|with No Cost EMI/Additional Exchange Offers","₹17,998",3.7
+XIAOMI 14 Civi Cruise Blue (8GB RAM 256GB Storage) | 50 MP Leica Triple Camera| SD 8s Gen 3 | 1.5K Quad Curved AMOLED HyperOS,"₹26,199",4.1
+"OnePlus 13R | Smarter with OnePlus AI | Lifetime Display Warranty (12GB RAM, 256GB Storage Astral Trail)","₹42,999",4.4
+"POCO M6 5G (Galactic Black, 4GB RAM, 64GB Storage) | MediaTek Dimensity 6100+ 5G Processor | 5000 mAh Battery + 18W Fast Charging | 50 MP AI Dual-Camera System & Side Fingerprint Sensor","₹7,999",4.0
+"Samsung Galaxy A06 5G (Gray, 4GB RAM, 128GB Storage) | 50MP Dual Camera | 4 Gen OS Upgrades | IP54 Rating | Voice Focus","₹11,199",4.0
+"Motorola razr 50 5G (Beach Sand, 8GB RAM, 256GB Storage) | 6.9"" LTPO AMOLED 120Hz Display | 3.6"" OLED 90Hz Cover Display | 50MP + 13MP Cameras | 32MP Selfie | Android 15","₹35,699",3.5
+"POCO M7 Pro 5G, Olive Twilight (8GB, 256GB)","₹14,149",4.1
+"iQOO Neo 10R 5G (Moonknight Titanium, 8GB RAM, 128GB Storage) | Snapdragon 8s Gen 3 Processor | India's Slimmest 6400mAh Battery Smartphone | Segment's Most Stable 90FPS for 5 Hours","₹24,999",4.4
+"iPhone 17 512 GB: 15.93 cm (6.3″) Display with Promotion, A19 Chip, Center Stage Front Camera for Smarter Group Selfies, Improved Scratch Resistance, All-Day Battery Life; Black","₹1,02,900",4.4
+"realme C71 4G Smartphone 4GB+64GB Black,6.745 inch Screen, 90Hz Eye Comfort Display, 6300mAh Battery, 37MP Cameras, Unisoc T7250 Chip, IP54","₹6,787",5.0
+"Motorola G96 5G (Blue, 8 GB RAM, 256 GB)","₹18,190",4.0
+"boAt 2025 Launch Rockerz 411, 40Ms Low Latency, 40Hrs Battery, 40Mm Drivers, ENx Tech, Stream Ad Free Music via App Support, Bluetooth Headphones, Wireless Over Ear Headphone with Mic (Active Black)","₹1,299",4.2
+Boat BassHeads 100 in-Ear Headphones with Mic (Black),₹339,4.1
+"boAt Rockerz 480, RGB LEDs,6 Light Modes, 40mm Drivers,Beast Mode, 60H Battery, ENx Tech, Stream Ad Free Music via App Support, Bluetooth Headphones, Wireless Over Ear Headphone with Mic (White Sabre)","₹1,599",4.1
+"boAt Rockerz 550/Rockerz 558 Over Ear Bluetooth Headphones with Upto 20 Hours Playback, 50MM Drivers, Soft Padded Ear Cushions and Physical Noise Isolation(Black)","₹1,499",4.0
+"Zebronics Zeb-Storm On Ear Wired Headphone with 3.5mm Jack, Built in Microphone for Calling, 1.5 Meter Cable, Soft Ear Cushion, Adjustable Headband, Foldable Ear Cups and Lightweight Design (Black)",₹399,3.7
+"Sony WH-CH520 Wireless Bluetooth Headphones On Ear with Mic, Up to 50Hrs Battery, Quick Charge, DSEE Upscale, Multipoint Connectivity, Voice Assistant, Customized EQ-Blue","₹3,489",4.2
+"JBL C100SI Wired In Ear Headphones With Mic, Pure Bass Sound, One Button Multi-Function Remote, Premium Metallic Finish, Angled Buds For Comfort Fit (Black)",₹579,4.0
+"Boat Rockerz 425 Bluetooth Wireless Over Ear Headphones with Mic Signature Sound, Beast Mode for Gaming, Enx Tech, ASAP Charge, 25H Playtime, Bluetooth V5.2 (Active Black)","₹1,099",3.7
+"boAt 2025 Launch Rockerz 421, 40H Battery, Low Latency(40Ms), 40Mm Drivers, Enx Tech, Stream Ad Free Music via App Support, Bluetooth Headphones, Wireless Over Ear Headphone with Mic (Bold Blue)","₹1,299",4.2
+"boAt Rockerz 450, 15 HRS Battery, 40mm Drivers, Padded Ear Cushions, Integrated Controls, Dual Modes, On Ear Bluetooth Headphones, Wireless Headphone with Mic (Luscious Black)","₹1,399",4.0
+"JBL Tune 510BT, On Ear Wireless Headphones with Mic, up to 40 Hours Playtime, Pure Bass, Quick Charging, Dual Pairing, Bluetooth 5.0 & Voice Assistant Support for Mobile Phones (Black)","₹2,299",4.1
+"Amazon Basics Wireless Over Ear Headphones, Bluetooth 5.4, 40mm Drivers, 18H Playtime, Foldable Lightweight Design with Aux Support, Deep Bass & Mic, Black","₹1,179",4.5
+"JBL Tune 770NC Wireless Over Ear ANC Headphones with Mic, Upto 70 Hrs Battery, Speed Charge : 5 min Charge Gives up to 3H of Playback, Google Fast Pair, Dual Pairing, BT 5.3 (Black)","₹4,998",4.0
+"HP H200 On Ear Wireless Headset, Black","₹1,299",4.0
+"Noise Airwave Max 4 Wireless Over Ear Headphones with 70H Playtime, ENC, 40mm Driver, Low Latency(up to 40ms), Dual Pairing, BT v5.4 (Calm Beige)","₹2,499",3.7
+"ZEBRONICS Thunder Bluetooth 5.3 Wireless Headphones with 60H Backup, Gaming Mode, Dual Pairing, ENC, AUX, Micro SD, Voice Assistant, Comfortable Earcups, Call Function (Brown)",₹699,3.8
+"Noise Airwave Max 4 Wireless Over Ear Headphones with 70H Playtime, ENC, 40mm Driver, Low Latency(up to 40ms), Dual Pairing, BT v5.4 (Calm Beige)","₹2,499",3.7
+"ZEBRONICS Duke Plus, Wireless Over Ear Headphone with ANC, ENC, Gaming Mode, Dual Pairing, Rapid Charge, Upto 70* Hours Backup, Bluetooth v5.4, AUX, Comfortable Earcushion, Deep Bass (Beige)","₹1,299",3.8
+"pTron Studio Evo 70hrs Playtime Wireless Over Ear Headphones with HD Mic, Low-Latency Game/Movie/Music Modes, Punchy Bass, BT5.3, Dual Device Pairing, Voice Assistant & Type-C Fast Charging (Beige)",₹799,4.1
+"Boat Bassheads 900 Pro Wired Headphones with 40Mm Drivers, Lightweight Foldable Design, Over Ear, Remote Control, Unidirectional Retractable Mic, Adjustable Headband & USB Type-A Compatibility(Black)","₹1,049",4.1
+"HP H200 On Ear Wireless Headset, Black","₹1,299",4.0
+"boAt Rockerz 650 Pro (2025 Launch),Touch/Swipe Controls,Dolby Audio,80Hrs Battery,2Mics Enx,Fast Charge,App Support,Dual Pair,Bluetooth Over Ear Headphones,Wireless Headphone with Mic (Sage Green)","₹2,499",4.2
+"Sony WH-CH720N Active Noise Cancellation Wireless Bluetooth Over Ear Headphones with Mic, Adaptive Sound Control, Quick Charge, Up to 35Hrs Battery, Customized EQ- Black","₹7,013",4.2
+"Ambrane Wired Headphones in Earphones with in-Line Mic for Clear Calling, 14Mm Dynamic Drivers for Boostedbass, 3.5Mm Jack, Multi-Functional Controller (Stringz 38 Lite, Blue)",₹179,3.8
+"Zebronics Jet PRO Premium Wired Gaming On Ear Headphone with LED for Headband + earcups, 40mm Neodymium Drivers, 2 Meter Braided Cable, with mic, Suspension Design, 3.5mm + USB Connector (Black, Blue)",₹799,3.9
+"Bose New QuietComfort Ultra Wireless Noise Cancelling Headphones with Spatial Audio, Over-The-Ear Headphones with Mic, Up to 24 Hours of Battery Life, White Smoke","₹24,989",4.2
+"ZEBRONICS Zeb-Thunder PRO On-Ear Wireless Headphone Up to 60 Hours Playback, Wired Mode, USB-C Type Charging(Black)",₹799,3.7
+"GOBOULT Newly Launched Fluid X Pro Ear Bluetooth Headphones with 70H Playtime, 40mm Bass Drivers, Zen™ ENC Mic, Type-C Fast Charging, 4 EQ Modes, AUX Option, IPX5 Wireless Headphones (Beige)","₹1,999",4.2
+Logitech H111 Wired On Ear Headphones With Mic Black,₹693,3.9
+"boAt 2025 Launch Rockerz 113, 40H Battery, Dual Pair, Fast Charge, ENx Tech, Stream Ad Free Music via App Support, Magnetic Buds, Bluetooth Neckband, Wireless with Mic in Ear Earphones (Active Black)",₹699,4.0
+"Sony WH-1000XM5 Best Active Noise Cancelling Wireless Bluetooth Over Ear Headphones with Mic for Clear Calling,Battery Life 30 Hours -White","₹24,490",4.4
+"Sennheiser Momentum 4 Wireless Over Ear Headphones, German Design, ANC, 60h Battery, Customizable Sound, 4 Digital Mics for Crystal-Clear Calls, Multipoint Connectivity, 2 Yr Warranty, White","₹25,990",4.4
+Marshall Major IV Wireless Bluetooth On Ear Headphone with Mic (Black),"₹8,999",4.3
+"Sony WH-1000XM5 Best Active Noise Cancelling Wireless Bluetooth Over Ear Headphones with Mic for Clear Calling,Battery Life 30 Hours -White","₹24,490",4.4
+"boAt BassHeads 225 in-Ear Super Extra Bass Wired Headphones, with Mic (Black)",₹499,4.0
+"Sennheiser Momentum 4 Wireless Over Ear Headphones, German Design, ANC, 60h Battery, Customizable Sound, 4 Digital Mics for Crystal-Clear Calls, Multipoint Connectivity, 2 Yr Warranty, White","₹25,990",4.4
+"Portronics Muffs M2 Bluetooth Headphones On Ear with Upto 40 Hrs Playtime, 40mm Dynamic Drivers, AUX 3.5mm, Powerful Bass, Laptop & PC Support, Type C Charging Port, Foldable Design(Black)",₹819,3.9
+"OnePlus Bullets Wireless Z3 in Ear Neckband with 12.4Mm Drivers, 3D Spatial Audio,10 Mins Charge for 27 Hrs Playback, AI Call Noise Cancellation, 4 EQ Preset, Dynamic Bass Enhancement & BT5.4, Black","₹1,299",4.1
+"GOBOULT Newly Launched Soniq Over Ear Bluetooth Headphones with 70H Playtime, 40mm Bass Drivers, Zen™ ENC Mic, Type-C Fast Charging, Dual Device Pairing, AUX Option, Wireless Headphones (Black)","₹1,999",3.9
+"boAt Rockerz 512 ANC,(~40dB) Hybrid ANC, 80H Battery, 40mm Drivers, 40ms Low Latency, ENx Tech,Stream Ad Free Music via App Support, Bluetooth Headphones, Wireless Headphone with Mic (Cosmic Black)","₹2,799",4.2
+"Sounce Portable Carrying Case Cover for Boult Newly Launched Q Over-Ear Bluetooth Headphones | Hard EVA Travel Storage Case with Shockproof, Waterproof, andPremium Protective Cover – Black",₹224,4.2
+"OnePlus Compatible Bluetooth JO25 Neckband – Earphones with Mic, Bass Boost, Crystal Calls for Nord 2T, CE, 11RT, 9RT",₹455,2.3
+"Sony MDR-ZX110A On Ear Stereo Wired Headphones (White), Without Mic",₹907,4.0
+"Boat Rockerz 430, 40mm Drivers, 40ms Latency, 40H Battery, ENx Tech, Adaptive Fit, Stream Ad Free Music via App Support, Bluetooth Headphones, Wireless Over Ear Headphone with Mic (Black Sabre)","₹1,199",3.4
+"Sony ULT Wear WH-ULT900N Noise Cancellation Wireless Bluetooth Over Ear Headphones with Massive Bass, Up to 50Hrs Battery-Black","₹12,599",4.3
+"boAt 2025 Launch Rockerz 413, 60H Battery, 40Mm Drivers, Dual Pair,ENx Tech, Low Latency, Stream Ad Free Music via App Support, Bluetooth Headphones, Wireless Over Ear Headphone with Mic (Ash Grey)","₹1,299",3.8
+"boAt 2025 Launch Rockerz 412, 60H Battery, 40Mm Drivers, 40Ms Low Latency, ENx Tech, Stream Ad Free Music via App Support, Bluetooth Headphones, Wireless Over Ear Headphone with Mic (Bold Blue)","₹1,299",3.6
+"Sony WH-1000XM4 Industry Leading Wireless Noise Cancellation Bluetooth Over Ear Headphones with Mic for Phone Calls, 30 Hours Battery Life, Quick Charge, AUX, Touch Control and Voice Control - Black","₹19,990",4.5
+"Sennheiser HD 450BT Wireless Headphones, German Design, ANC, Alexa Built-in, 30H Battery, Comfortable & Lightweight Over Ear Design, Built-in Mic for Clear Calls, Fast Charging, 2Y Warranty, Black","₹6,990",3.7
+"soundcore H30i Wireless On-Ear Headphones, Foldable Design, Pure Bass, 70H Playtime, Bluetooth 5.3, Lightweight and Comfortable, App Connectivity, Multipoint Connection","₹1,498",4.2
+"Boat Rockerz 430, 40mm Drivers, 40ms Latency, 40H Battery, ENx Tech, Adaptive Fit, Stream Ad Free Music via App Support, Bluetooth Headphones, Wireless Over Ear Headphone with Mic (Black Sabre)","₹1,199",3.4
+"boAt 2025 Launch Rockerz 412, 60H Battery, 40Mm Drivers, 40Ms Low Latency, ENx Tech, Stream Ad Free Music via App Support, Bluetooth Headphones, Wireless Over Ear Headphone with Mic (Bold Blue)","₹1,299",3.6
+"boAt 2025 Launch Rockerz 413, 60H Battery, 40Mm Drivers, Dual Pair,ENx Tech, Low Latency, Stream Ad Free Music via App Support, Bluetooth Headphones, Wireless Over Ear Headphone with Mic (Ash Grey)","₹1,299",3.8
+"Sennheiser HD 400s Wired Over Ear Headphones with Mic, German Engineering, Dynamic Bass-Driven Sound, Foldable Lightweight Design, One-Button Control, Best for Calls, Noise-Isolating Fit, Black","₹4,990",4.4
+"soundcore by Anker,Space One Active Noise Cancelling Bluetooth Over Ear Headphones with Travel Pouch,2X Stronger Voice Reduction,40H ANC Playtime,App Control,Ldac Hi-Res,Ergo Design for Comfort Fit","₹5,999",3.9
+"HyperX Cloud Stinger 2 Core Essential PC Gaming Wired Headset, Lightweight Over Ear Headset with mic, Swivel-to-Mute Function, 40mm Drivers (683L9AA), Black","₹2,499",4.0
+"hayden HY-HD10 Professional Studio Headphones Over-Ear, 50mm Drivers, Foldable, Lightweight, Dual Detachable Cables (2.8m Coiled & 1.2m with Mic) for DJ, Gaming, Recording, Mixing, Monitoring (Black)","₹1,849",4.4
+"Razer BlackShark V2 X Wired Gaming On Ear Headset - Black|7.1 Surround Sound-50mm Drivers-Memory Foam Cushion-for PC,PS4,PS5,Switch,Xbox One,Xbox Series X|S,Mobile-3.5mm Audio Jack-RZ04-03240100-R3M1","₹2,995",4.3
+amazon basics Pro Series Wireless Noise Cancelling ANC Over Ear Headphone | Bluetooth Headset | USB Charging | 10 m Paring Distance | 74 Hours Battery Life | 40 mm Drivers | IPX4 Rated (Beige),"₹1,749",4.1
+"Sennheiser HD 599 Open‑Back Audiophile Headphones, German-Irish Craftsmanship, Wide Soundstage, Detachable Cables, Ergonomic acoustic refinement design, Comfort-Fit for Gaming, 2‑Year Warranty","₹9,490",4.6
+"ZEBRONICS Thunder Max Bluetooth Over Ear Headphone with 120*Hrs Playback, 3 EQ Modes, 40mm Bass Driver, Fast Charging, Gaming Mode, Dual Pairing, BT v5.4, AUX, Metallic Finish (Black)",₹999,3.6
+"OnePlus Bullets Bluetooth Wireless in Ear Z2 Earphones with Mic, Bombastic Bass, 12.4 mm Drivers, 10 Mins Charge, 20 Hrs Music, 30 Hrs Battery Life, IP55 Dust & Water Resistant (Beam Blue)","₹1,649",4.1
+"GOBOULT Made in India Q Over Ear Bluetooth Headphones with 70H Playtime, 40mm Bass Drivers, Zen™ ENC Mic, Type-C Fast Charging, 4 EQ Modes, IPX5 Headphones Wireless with mic (Beige)","₹1,799",4.0
+"ZEBRONICS Bro in Ear Wired Earphones with Mic, 3.5mm Audio Jack, 10mm Drivers, Phone/Tablet Compatible (Green)",₹99,3.5
+"Sony WH-CH720N, Wireless Over-Ear Active Noise Cancellation Headphones with Mic, up to 50 Hours Playtime, Multi-Point Connection, App Support, AUX & Voice Assistant Support for Mobile Phones (White)","₹6,864",4.2
+"boAt 2025 Launch Rockerz 413, 60H Battery, 40Mm Drivers, Dual Pair,ENx Tech, Low Latency, Stream Ad Free Music via App Support, Bluetooth Headphones, Wireless Over Ear Headphone with Mic (Ash Grey)","₹1,299",3.8
+"boAt 2025 Launch Rockerz 412, 60H Battery, 40Mm Drivers, 40Ms Low Latency, ENx Tech, Stream Ad Free Music via App Support, Bluetooth Headphones, Wireless Over Ear Headphone with Mic (Bold Blue)","₹1,299",3.6
+Sony ZX Series MDR-ZX310AP Wired Headband Stereo On Ear Headset -Blue,"₹1,499",3.9
+"Sony MDR-ZX110A On Ear Stereo Wired Headphones (White), Without Mic",₹907,4.0
+"Sony WH-CH720N Active Noise Cancellation Wireless Bluetooth Over Ear Headphones with Mic, Adaptive Sound Control, Quick Charge, Up to 35Hrs Battery, Customized EQ- Blue","₹6,964",4.2
+"ZEBRONICS Bro in Ear Wired Earphones with Mic, 3.5mm Audio Jack, 10mm Drivers, Phone/Tablet Compatible (Green)",₹99,3.5
+"boAt New Launch Rockerz 650 Pro,Touch/Swipe Controls,Dolby Audio,80Hrs Battery,2Mics Enx,Fast Charge,App Support,Dual Pair,Bluetooth Headphones,Over Ear Wireless Headphone with Mic (Silver Frost)","₹2,499",4.2
+"Sennheiser HD 450BT Wireless Headphones, German Design, ANC, Alexa Built-in, 30H Battery, Comfortable & Lightweight Over Ear Design, Built-in Mic for Clear Calls, Fast Charging, 2Y Warranty, Black","₹6,990",3.7
+"soundcore H30i Wireless On-Ear Headphones, Foldable Design, Pure Bass, 70H Playtime, Bluetooth 5.3, Lightweight and Comfortable, App Connectivity, Multipoint Connection","₹1,498",4.2
+Sony WH-CH720NB Noise Canceling Wireless Bluetooth Headphones - Built-in Microphone - up to 35 Hours Battery Life and Quick Charge - Black - International Version,"₹7,999",4.6
+"Sony WH-CH720N Noise Cancellation Wireless Bluetooth Over Ear Headphones with Mic, Up to 35Hrs Battery- Pink","₹7,990",4.2
+"ZEBRONICS Duke Wireless Bluetooth Over Ear Headphone with Upto 60h Backup, Dual Pairing, Gaming Mode, Environmental Noise Cancellation (ENC), LED Lights, Deep Bass, Voice Assistant Support (Beige)",₹899,3.8
+"Razer BlackShark V2 X Wired Gaming On Ear Headset - Black|7.1 Surround Sound-50mm Drivers-Memory Foam Cushion-for PC,PS4,PS5,Switch,Xbox One,Xbox Series X|S,Mobile-3.5mm Audio Jack-RZ04-03240100-R3M1","₹2,995",4.3
+"boAt 2025 Launch Rockerz 412, 60H Battery, 40Mm Drivers, 40Ms Low Latency, ENx Tech, Stream Ad Free Music via App Support, Bluetooth Headphones, Wireless Over Ear Headphone with Mic (Active Black)","₹1,299",3.6
+Ant Esports H1100 Pro RGB Wired Over Ear Gaming Headphones for PC / PS4 / PS5 / Xbox One / Switch1 with mic Frost White,"₹1,199",4.0
+"JBL Live 770NC True Adaptive Noise Cancellation Headphones Wireless Over Ear, Spatial Sound, 65Hrs Playtime, Speed Charge, Multipoint Connect and Personi-Fi 2.0, BT 5.3, Google Fast Pair, Alexa, Black","₹7,998",4.2
+"Skullcandy Crusher ANC 2 Over-Ear Wireless Headphones 100 dB| Active Noise Cancellation, Sensory Bass, Dual Pairing, 50H Battery, Rapid Charge, Alexa Built-in | Plasma, Red","₹17,999",4.2
+"pTron Boom Play X3 In-Ear Type C Wired Headphones with Mic, 10mm Drivers for Pristine Sound, In-line Controls, 90 Degree USB-C Connector, 1.2m Tangle-Free Cable, Metal Buds & Wide Compatibility(Black)",₹399,3.9
+"Marshall Minor Iv Wireless in Ear Earbuds with 30+ Hours of Playtime, Water-Resistant, Wireless Charging- Black","₹9,999",3.8
+Blaupunkt BH61 Moksha True Active Noise Cancellation I Perfect ANC from The External Environment I HD Sound with Perfect Balance of Tones I High Sensitivity Mic I German Style & Long Usage Guarantee,"₹2,498",4.1
+"JBL C50HI, Wired in Ear Headphones with Mic, One Button Multi-Function Remote, Lightweight & Comfortable fit (Black)",₹449,3.9
+M.G.R.J® Portable Carrying Case Cover for Boat Rockerz 450 Bluetooth On Ear Headphones (Hard|EVA|Black),₹349,4.2
+"boAt Rockerz 460, 30H Battery, 40mm Drivers, Beast Mode, ENx, Dual Pair, Adaptive Fit, Stream Ad Free Music via App Support, Bluetooth Headphones, Wireless Over Ear Headphone with Mic (Active Black)","₹1,099",4.1
+"ZEBRONICS Envy 2, Wireless Over Ear Headphone, ENC, Upto 65* Hours Playback, Gaming Mode, Dual Pairing, Bluetooth v5.3, AUX, Call Function, Voice Assistant, Foldable Design, Detachable Mic (Black)","₹1,399",3.8
+Apple EarPods (USB-C) ​​​​​​​,"₹1,599",4.3
+"pTron Basspods P11 in-Ear TWS Earbuds w/Dual HD Mic, Pristine Sound, 24hrs Playtime, Mini Buds, Movie/Music Modes, Bluetooth V5.1 Wireless Headphones, Voice Assist, Type-C Charging & IPX4(Coal Black)",₹599,3.6
+"JBL Tune 760NC, Wireless Over Ear Active Noise Cancellation Headphones with Mic, Upto 50 Hours Playtime, Multi-Device Connectivity, Pure Bass, AUX & Voice Assistant Support for Mobile Phones (Blue)","₹3,999",3.6
+"Noise Airwave Max 5 Wireless Over-Ear Headphones with Adaptive Hybrid ANC (up to 50dB), HFA Tech, 80H Playtime, Dual Pairing(Calm Beige)","₹4,999",4.2
+"Kratos N4 Bluetooth Neckband with 52H Playtime, Deep Bass, Stereo Sound, HD Calls, Magnetic Earbuds, Type-C Fast Charging, Rich Audio, Hollow Switch for Comfort & Style",₹499,4.0
+"Marshall Major V Wireless On Ear Headphones, Black","₹14,999",4.5
+"Sennheiser ACCENTUM Plus Wireless Over Ear Headphones,German Design,Adaptive ANC,50H Battery,Sound Personalization,Touch Control,Multipoint Connectivity,Clear Calls,10Min Charge = 5H,2Y Warranty,Black","₹15,990",4.1
+"Aune SR7000 Full-Size Closed-Back Headphones with MLD Driver, Dynamic Driver, Detachable Cable, Over-Ear HiFi Hi-Res Audiophile Headphones for HiFi System, Home Audio, DAP","₹1,24,661",4.2
+boAt Bassheads 900 On Ear Wired Headphone With Mic,"₹1,099",4.1
+"boAt 2025 Launch Airdopes Plus 311,Glass Design,ENx Tech,50 H Battery, Fast Charge, Stream Ad Free Music via App Support, Bluetooth Earbuds, TWS Ear Buds Wireless Earphones with mic (Midnight Black)",₹799,3.8
+"icall P47 Wireless Bluetooth Headphones with Mic, Foldable Over-Ear Headset with SD Card Support, Deep Bass & Volume Control (RED)",₹390,4.1
+"Sony WH-1000XM6 The Best Wireless Noise Canceling Headphones, HD NC Processor QN3, 12 Microphones, Adaptive NC Optimizer, Mastered by Engineers, Studio-Quality- Black","₹39,989",4.4
+"GOBOULT Made in India Newly Launched Q Over Ear Bluetooth Headphones with 70H Playtime, 40mm Bass Driver, Zen™ ENC Mic, Type-C Fast Charging, 4 EQ Mode, IPX5 headphones wireless with mic (Powder Blue)","₹1,799",4.9
+Sennheiser Professional Audio HD 200 PRO Wired Over Ear Headphones Without mic (Black),"₹4,090",4.2
+"OnePlus Nord Buds 2r True Wireless in Ear Earbuds with Mic, 12.4mm Drivers, Playback:Upto 38hr case,4-Mic Design, IP55 Rating [ Misty Grey ]","₹1,399",4.2
+"GOBOULT Flex On Ear Bluetooth Headphones with 80H Playtime, 40mm Bass Drivers, Zen™ ENC Mic, Type-C Fast Charging, Bluetooth 5.4, AUX Option, 60ms Low Latency, IPX5, Wireless Headphone (Jet Black)","₹1,499",3.9
+"Dyazo Computer Wired Headphones | Headset with Mic | 3.5 MM Jack | Compatible for Laptops, PC, Notebooks (Black)",₹469,4.0
+"Skullcandy Riff 2 On-Ear Wireless Headphones, 34 Hr Battery, Microphone, Works with iPhone Android and Bluetooth Devices - Black","₹3,799",4.1
+"Bose QuietComfort Wireless Noise Cancelling Headphones, Bluetooth Over Ear Headphones with Up to 24 Hours of Battery Life, Sandstone - Limited Edition Color","₹18,999",4.3
+"HAMMER Bash Vivid ANC Wireless Bluetooth Over-Ear Headphones with 23 dB Active Noise Cancellation, 70h Playtime, Type-C Fast Charging, 40mm Sound Drivers, Wired/Wireless, Comfort Fit, Foldable Black","₹1,999",4.2
+"Sennheiser ACCENTUM Wireless Special Edition-Over Ear Headphones with Hybrid ANC,50 Hr Battery & Free BTD 600 Bluetooth Dongle Worth 5,990 Streaming & Crystal Clear Calls,Designed in Germany - Copper","₹13,990",4.2
+"Noise Airwave Max 3 Bluetooth On Ear Headphones with 70H Playtime, 40mm Driver, Low Latency(up to 45ms),Dual Pairing, BT v5.3 (Midnight Blue)","₹1,499",3.9
+"Wireless Bluetooth Headphones | P47 Extra Bass Over-Ear Headset with Mic for Gym, Running, Travel, Music & Gaming | Bluetooth 5.0, FM, SD Card, AUX",₹499,N/A
+"Sennheiser HD 599 Special Edition Open‑Back Audiophile Headphones, German-Irish Craftsmanship, Detachable Cables, E.A.R. Technology for Wide Sound Field, Comfort-Fit for Gaming, 2‑Year Warranty","₹8,990",4.5
+"Noise Buds N1 Truly Wireless Earbuds with Chrome Finish, 40H of Playtime, Quad Mic with ENC, Ultra Low Latency Gaming (Up to 40 Ms), Instacharge(10 Min=120 Min), Bluetooth V5.3(Ice Blue)","₹1,199",3.9
+"EarFun Kids Headphones with Mic for Boys and Girls, Over Ear HD Stereo Headphone for Children, 85/94dB Volume Limiter, Sharing Port, Foldable On Ear Headsets with Mic for School/Pad/PC/Travel, Blue","₹1,015",4.4
+"Wireless Earbuds with Ultra Bass Technology 2.0, 48dB Hybrid ANC, IP55 Water Resistant, ChatGPT Integration, Bluetooth 5.4, 6 HD Mics, Mint Green(Green NOTH Square Glass)",₹749,1.0
+"Jabra Evolve 10, On Ear Noise Cancellation Mic with Fully Adjustable Boom Arm and USB-A Connectivity Stereo Headset, Black","₹2,999",3.9
+"Noise Master Buds Max, Sound by Bose Wireless Over-Ear Headphones with Segment Leading Adaptive ANC, Dynamic EQ, LHDC 5.0, Immersive Spatial Audio,Upto 60H Playtime, App Support (Titanium)","₹10,999",4.6
+"Srhythm NC25 Wireless Headphones Bluetooth 5.3,Lightweight Noise Cancelling Headset Over-Ear with Low Latency,Green","₹4,886",4.2
+"JBL Tune 520C On Ear Type C Wired Headphone, Pure Bass Sound,3-Button Remote with Microphone,Comfort Fit and Foldable Design(Black)","₹1,998",3.6
+"JBL Quantum 100M2 Wired Gaming Headphones, Supports Windows sonic spatial audio, 40mm Realistic Dynamic Drivers, Omnidirectional Detachable Mic, Breathable Memory Foam cushions, PC/Xbox/PS/3.5mm-Black","₹2,999",4.5
+"boAt 2025 Launch Rockerz Prime 255Z, Spatial Audio,ENx Tech, Dual Pair, 50H Battery, Stream Ad Free Music via App Support, Magnetic Buds, Bluetooth Neckband, Wireless with Mic Earphones (Onyx Black)","₹1,099",4.0
+"ZEBRONICS Boom Wired Headphone, Over Ear, in-Line MIC, Foldable, 1.5 Meter Cable, for 3.5mm (Mobile | Tablet | Laptop | MAC), Soft Cushion, 40mm Drivers (Beige)",₹549,3.1
+"HP H300 Over Ear Wireless Headset, Black",₹999,3.6
+"ZEBRONICS Havoc Premium Gaming Headphone with Dolby Atmos Subscription, 50mm Neodymium Drivers, Extra Soft Ear Cushion, Suspension Headband,Braided Cable (White)","₹1,399",3.9
+Marshall Monitor III Active Noise Canceling Over Ear Bluetooth Headphones,"₹29,999",4.5
+"GOBOULT Newly Launched Anchor Bluetooth Wireless Over Ear Headphones with Mic, Active Noise Cancellation, 72H Playtime, AUX Option, Type-C Fast Charging, 40mm Bass Drivers, Gaming ANC Headphones.","₹2,499",4.1
+"truke Newly Launched BTG 500 Over The Ear Gaming Headphone with 40mm Drivers, 10H of Playtime, Dual Pairing, Gaming Mode (50ms Latency) with RGB LEDs, TF Card with Volume Control, BT 5.4 (Sky Blue)",₹899,4.1
+"HP H300 Over Ear Wireless Headset, Black",₹999,3.6
+"truke Newly Launched BTG 500 Over The Ear Gaming Headphone with 40mm Drivers, 10H of Playtime, Dual Pairing, Gaming Mode (50ms Latency) with RGB LEDs, TF Card with Volume Control, BT 5.4 (Sky Blue)",₹899,4.1
+"Logitech G435 Light Speed and Lightweight Gaming Bluetooth Wireless Over Ear Headphones with Mic, 18H Battery, Compatible for Dolby Atmos, Pc, Ps4, Ps5, Mobile - (Black)","₹5,045",4.1
+"JBL Tune 510BT, On Ear Wireless Headphones with Mic, up to 40 Hours Playtime, Pure Bass, Quick Charging, Dual Pairing, Bluetooth 5.0 & Voice Assistant Support for Mobile Phones (White)","₹2,299",4.0
+AKG K52 Closed Back Headphones,"₹2,490",4.2
+"Portronics Conch Gama in-Ear Wired Earphone, 1.2m Tangle Free Cable, in-Line Mic, Noise Isolation 3.5mm Aux Port and High Bass(Black)",₹247,3.9
+PHILIPS Audio Upbeat Tauh201 Wired On Ear Headphones with Mic (Black),₹999,3.9
+"Bang & Olufsen Beoplay H100 Premium Wireless Active Noise Cancelling Over-Ear Headphones with Protective Carrying Case, Sunset Apricot","₹4,29,303",4.1
+"Sennheiser HD 820 Closed-Back Hi-Res Audiophile Headphones, German Precision, 56 mm Ring Radiator Transducers, Resonance-Reducing Glass Covers, Low Distortion, Rich Bass, Premium Comfort, 2Y Warranty",N/A,3.6
+"JBL Tour One M2 Adaptive Noise Cancelling Bluetooth Over Ear Headphones,Spatial Sound,Smart Ambient,50Hrs Playtime,BT 5.3 Le,Quick Charge,Multi Point Conectivity,Built-in Alexa,2 Years Warranty(Black)","₹14,998",4.0
+Audeze LCD-X Over Ear Open Back Headphone New 2021 Version Creator Package with Carry case,N/A,4.5
+"Bose New QuietComfort Ultra Wireless Noise Cancelling Headphones with Spatial Audio, Over-The-Ear Headphones with Mic, Up to 24 Hours of Battery Life, Black","₹24,989",4.2
+"HAMMER Bash Pro 33 dB Hybrid ANC Over Ear Wireless Headphones, 4 Mics for Clear Calling, Charge 10mins = 300mins playtime, 40mm Driver, Transparency Mode, 37Hrs Playtime, Super soft Cushion, 5.3 Black","₹3,799",4.1
+Audio-Technica ATH-AWKT Over-Ear Headphones with Kokutan (Striped Ebony),"₹4,16,722",N/A
+"Bowers & Wilkins Px8 Over Ear Wireless Headphones, Advanced Active Noise Cancellation, Luxurious Materials, 30-Hour Battery Life, 15-Min Quick Charging, Tan","₹1,00,000",4.4
+"OnePlus Compatible JO25 Wireless Neckband – Bluetooth Earphones, Mic, Hi-Fi Sound, Dual Pairing for Nord 2T, CE, 11RT, 9RT",₹477,2.5
+"OnePlus Compatible JO25 Wireless Neckband – Bluetooth Earphones, Mic, Hi-Fi Sound, Dual Pairing for Nord 2T, CE, 11RT, 9RT",₹477,2.5
+"Bowers & Wilkins Px8 Over Ear Wireless Headphones, Advanced Active Noise Cancellation, Luxurious Materials, 30-Hour Battery Life, 15-Min Quick Charging, Tan","₹1,00,000",4.4
+"FRONTECH Wired Over-Ear Multimedia Headphones with Mic | 3.5mm Single Audio Jack| Adjustable Headband & Soft Cushions | Compatible with PC, Laptop & Mobile – White & Blue (HF-3452)",₹419,3.8
+"ZEBRONICS Zeb-Dynamic with Bluetooth Supporting Headphone, Aux Input, Call Function and Media/Volume Control",₹799,3.2
+"amazon basics On Ear Wired Headphones with Boom Mic | Supreme Sound | Lightweight | Cushioned Ear Cups | Built-in Mic | Perfect for Computers, Smartphones, Tablets & Daily Use (Black)",₹359,3.1
+"HAMMER New Launch Bash Lite Bluetooth Over The Ear Headphones with Wireless and Wired Mode, Mic, Deep Bass, 40mm Drivers, 10 Hours Playtime, Bluetooth v5.3 Headset Best for Travel, Gym, Gaming(Black)",₹999,2.6
+Denon AHD-9200 Over-Ear Headphones,N/A,3.1
+"Sony WH-1000XM4 Noise Cancellation Wireless Bluetooth Over-Ear Headphones with Mic, Hi-Res Audio, Up to 30 Hrs Battery- Blue","₹18,720",4.5
+"boAt Airdopes 91 Prime, 45HRS Battery, 13mm Drivers, Metallic Finish, Low Latency,ENx Tech, Fast Charge, v5.3 Bluetooth TWS in Ear Earbuds Wireless Earphones with mic (Midnight Black)",₹799,3.4
+"Apple AirPods Max Wireless Over-Ear Headphones, Pro-Level Active Noise Cancellation, Transparency Mode, Personalised Spatial Audio, USB-C Charging, Bluetooth Headphones for iPhone - Blue","₹59,900",3.6
+HyperX Cloud Stinger 2 Core Gaming Headset for PlayStation - White (6H9B5AA),"₹2,399",3.9
+"icall P47 Wireless Bluetooth Headphones, Deep Bass Sound, Foldable Design with Built-in Mic (Black)",₹388,N/A
+"Sennheiser HD 350BT Wireless Headphones, German Design, Upto 30H Battery, Comfortable & Lightweight Over Ear Design, Built-in Mic for Clear Calls, Fast Charging, 2Y Warranty, Black",N/A,4.3
+"YUSONIC kids wireless Headphones, bluetooth teen headphones,over ear isolation headphone foldable with Built-in Mic for Cell Phones TV Tablet School network Boys Girls (e6 blue)","₹5,788",4.2
+INVICTO Wireless Bluetooth Over Ear Headphone with Mic,₹546,3.7
+"ZEBRONICS Silencio 111,Over Ear Wireless Headphone,Hybrid ANC (50dB),55*Hrs Backup,Transparency Mode,40mm Titanium Drivers,3 EQ Modes,ENC,Gaming Mode,Dual Pairing,Rapid Charge,Bluetooth v5.4 (Blue)","₹2,499",3.8
+"soundcore by Anker Q20i Wireless Bluetooth Over-Ear Headphones with Hybrid Active Noise Cancelling, 40h Playtime in ANC Mode, Hi-Res Audio, Deep Bass, Personalization via App (Black)","₹3,659",4.3
+"GOBOULT Newly Launched Fluid X Headphones Bluetooth Wireless with 60H Playtime, 40mm Bass Driver, Zen ENC Mic, Type-C Charging, Combat™Gaming Mode, BTv 5.4, Headphones Wireless with mic (White)","₹1,599",4.1
+"Logitech G435 Light Speed and Lightweight Gaming Bluetooth Wireless Over Ear Headphones with Mic, 18H Battery, Compatible for Dolby Atmos, Pc, Ps4, Ps5, Mobile - (Black)","₹5,045",4.1
+"HAMMER Bash Pro 33 dB Hybrid ANC Over Ear Wireless Headphones, 4 Mics for Clear Calling, Charge 10mins = 300mins playtime, 40mm Driver, Transparency Mode, 37Hrs Playtime, Super soft Cushion, 5.3 Black","₹3,799",4.1
+"pTron Boom Ultima 4D Dual Driver, in Ear Gaming Wired Headphones with in-Line Mic, Volume Control & Passive Noise Cancelling Boom 3 Earphones - (Dark Blue)",₹299,3.6
+"Apple AirPods Max Wireless Over-Ear Headphones, Pro-Level Active Noise Cancellation, Transparency Mode, Personalised Spatial Audio, USB-C Charging, Bluetooth Headphones for iPhone - Blue","₹59,900",3.6
+Sony MDR-EX15AP EX Stereo Headphones with Mic (Black),₹549,3.8
+"Portronics Conch Gama in-Ear Wired Earphone, 1.2m Tangle Free Cable, in-Line Mic, Noise Isolation 3.5mm Aux Port and High Bass(Black)",₹247,3.9
+Audio-Technica ATH-AWKT Over-Ear Headphones with Kokutan (Striped Ebony),"₹4,16,722",N/A
+AKG K52 Closed Back Headphones,"₹2,490",4.2
+"Spigen Audio Newly Launched SA-HP P10 Wireless Over Ear Headphones with 60H Playtime, Upto 43dB Multi-Mode Adaptive ANC Pro, EQ Customizing App, 5-MIC, Gaming Mode, 40mm Driver - Black","₹4,899",3.7
+"GOBOULT Newly Launched Fluid X Pro Ear Bluetooth Headphones with 70H Playtime, 40mm Bass Drivers, Zen™ ENC Mic, Type-C Fast Charging, 4 EQ Modes, AUX Option, IPX5 Wireless Headphones (Beige)","₹1,999",4.2
+K92 Closed back headphones,"₹2,950",4.2
+"Sounce Headphone Case for Boat Rockerz 450, 480, 480 w/RGB, 450 Pro, 425, 410, 370, ZEBRONICS Thunder, Sony WH-CH520, MDR-ZX310AP, JBL Tune 510BT Hard EVA Shell Travel Pouch (Black)",₹224,4.3
+"OnePlus Compatible JO25 Wireless Neckband – Bluetooth Earphones, Mic, Hi-Fi Sound, Dual Pairing for Nord 2T, CE, 11RT, 9RT",₹477,2.5
+"Portronics Conch Theta A in Ear 3.5mm Wired Earphones with In Line HD Mic, Powerful Audio, 14.2mm Dynamic Driver, Unique Earbuds Design, TPE Anti Tangle Wire,In line Controls,Wide Compatibility(White)",₹229,4.0
+"HAMMER New Launch Bash Lite Bluetooth Over The Ear Headphones with Wireless and Wired Mode, Mic, Deep Bass, 40mm Drivers, 10 Hours Playtime, Bluetooth v5.3 Headset Best for Travel, Gym, Gaming(Black)",₹999,2.6
+"boAt Airdopes 311 Pro, 50HRS Battery, Fast Charge, Dual Mics ENx Tech, Transparent LID, Low Latency, IPX4, IWP Tech, v5.3 Bluetooth Earbuds, TWS Ear Buds Wireless Earphones with mic (Active Black)",₹799,3.6
+Denon AHD-9200 Over-Ear Headphones,N/A,3.1
+"ZEBRONICS Zeb-Dynamic with Bluetooth Supporting Headphone, Aux Input, Call Function and Media/Volume Control",₹799,3.2
+"HP H300 Over Ear Wireless Headset, Black",₹999,3.6
+"HP H200 On Ear Wireless Headset, Black","₹1,299",4.0
+"Bose QuietComfort Wireless Noise Cancelling Headphones, Bluetooth Over Ear Headphones with Up to 24 Hours of Battery Life, Chilled Lilac - Limited Edition","₹18,999",4.6
+"KERHAND Bluetooth Noise Cancelling Headphones for Kids,Foldable Cat Headphone with LED Light Up Ear,Cat Ear Headphones for Toddler with Microphone/TF Card,Kids Bluetooth Headphones for ipad","₹5,548",4.4
+"Cosmic Byte Immortal 2.4Ghz Wireless + Bluetooth + Wired Headphone, 20ms Latency, 40Hrs Battery Life, 50mm Driver, RGB LED, Fabric Cushions, Detachable ENC Microphone (Black)","₹2,299",3.8
+Bang & Olufsen Wireless Headphones Noise Cancelling Bluetooth Beoplay HX Gold Tone,"₹1,40,285.",4.3
+FiiO FA19 10 Balanced Armature in Ear Monitors | Audiophile Earphones with Detachable Pure Silver MMCX Headphone Cable,"₹1,83,618.",4.4
+"Bowers & Wilkins Px7 S2E Wireless Over Ear Headphones (2023 Model) - Enhanced Noise Cancellation & Transparency Mode, Six Mics, Music App Compatible, 30-Hour Playback Time, Ocean Blue","₹38,949",4.4
+"Wireless Neckband Bluetooth Earphones, Black, in-Ear Design (Green)",₹499,N/A
+"SilisoundTek Bone Conduction Headphones Bluetooth,Upgraded IPX7 Waterproof Wireless Earbuds,Open Ear Headphones Bluetooth 5.3 with Mic,10H Playtime for Running,Cycling,Hiking,Gym,Workout. (Orange)","₹6,814",4.1
+"Sonos Ace | Noise Cancelling Wireless Over-Ear Headphones with Bluetooth, 30-Hour Battery Life, Spatial Audio, Dolby Atmos, Dynamic Head Tracking - Black","₹29,999",4.4
+ArtSpark Cute Cat Wired Earphones for Kids – Gaming Headphones with Mic for Girls & Boys,₹330,N/A
+"OIVO INDIA Headphone Stand Headset Holder with Aluminum Supporting Bar Flexible Headrest ABS Solid Base for All Headphones Size (No Headphones, Only Stand)",₹279,4.4
+"Kreo Beluga V2 Wired Over Ear Gaming Headset, 50mm Oraphene Drivers, Duel Chamber, Flip to Mute Mic, Memory Foam Earpads, Lightweight Aluminum Built, PC, PS4, PSS Mobile","₹2,299",4.1
+Bowers & Wilkins Flagship Wireless Headphones Noise Cancelling Headphones Tan Leather B&W Px8/T - Over Ear,"₹1,00,000",4.7
+Jabra Evolve2 65 Link380a MS Bluetooth Wireless On Ear Headphone with Mic (Black),"₹26,437",4.3
+Ant Esports H525 Pro RGB Gaming Headset Gaming Over Ear Wired Headphones with Mic| 2 * 3.5MM Jack + USB for RGB Light |50 MM Drivers | Compatible with PC/ PS4/Xbox One/Nintendo/Mobile_Black,₹849,3.6
+"Truefree O1 Open Ear Bluetooth 5.3 Sports Headphones, Wireless Air Conduction, 4 Mic Clear Calls, 16.2 mm Drivers, 45 Hours Playtime","₹7,446",4.2
+"3.5mm in-Ear Headphones with Microphone, Volume Control, 14mm Drivers, Multifunction Button, 1.2 Meter Tangle-Free Cable, Sleek Lightweight Eartips",₹250,3.3
+"SIGNATIZE Bluetooth Earphone in Ear Wireless Neckband, with Mic,Above 20 Hours Playtime, Magnetic Earbuds, Lightweight v5.3 Bluetooth Headset for Running, Gyming & Travelling (Red)",₹319,3.6
+Bang & Olufsen Wireless Headphones Noise Cancelling Bluetooth Beoplay HX Gold Tone,"₹1,40,285.",4.3
+"Cosmic Byte Stardust Wired On Ear Headphones with Mic Flexible for PS4, Xbox One, Laptop, PC, iPhone and Android Phones (Black,Blue)",₹779,4.0
+"Cosmic Byte Immortal 2.4Ghz Wireless + Bluetooth + Wired Headphone, 20ms Latency, 40Hrs Battery Life, 50mm Driver, RGB LED, Fabric Cushions, Detachable ENC Microphone (Black)","₹2,299",3.8
+"Bose QuietComfort Wireless Noise Cancelling Headphones, Bluetooth Over Ear Headphones with Up to 24 Hours of Battery Life, Chilled Lilac - Limited Edition","₹18,999",4.6
+"PHILIPS Audio TAH4209BK/00 Bluetooth Headphones,Lightweight and Foldable Design, 32mm Neodynamic Drivers, 55H Playtime, USB Type-C Fast Charging, Built-in Mic for Smartphone, Laptop, Tablet (Black)","₹2,399",4.0
+"Wireless Neckband Bluetooth Earphones, Black, in-Ear Design (Green)",₹499,N/A
+"Bowers & Wilkins Px7 S2E Wireless Over Ear Headphones (2023 Model) - Enhanced Noise Cancellation & Transparency Mode, Six Mics, Music App Compatible, 30-Hour Playback Time, Ocean Blue","₹38,949",4.4
+"boAt 2025 Launch Airdopes 219, 4Mics ENx, 40H Battery, Best in Segment for Calling, Stream Ad Free Music via App Support, Bluetooth Earbuds, TWS Ear Buds Wireless Earphones with mic (Forest Sage)",N/A,4.0
+"Kreo Beluga V2 Wired Over Ear Gaming Headset, 50mm Oraphene Drivers, Duel Chamber, Flip to Mute Mic, Memory Foam Earpads, Lightweight Aluminum Built, PC, PS4, PSS Mobile","₹2,299",4.1
+"Skullcandy Jib in-Ear Wired Earbuds with Mic, Supreme Sound, Noise-Isolating Fit, Tangle-Free Cable, 3.5mm Jack for Phones, Laptops & Tablets (Black)",₹399,3.9
+Bowers & Wilkins Flagship Wireless Headphones Noise Cancelling Headphones Tan Leather B&W Px8/T - Over Ear,"₹1,00,000",4.7
+"Sonos Ace | Noise Cancelling Wireless Over-Ear Headphones with Bluetooth, 30-Hour Battery Life, Spatial Audio, Dolby Atmos, Dynamic Head Tracking - Black","₹29,999",4.4
+Razer Barracuda X (2022) - Wireless Multi-Platform Gaming and Mobile Headset - Black - FRML Packaging RZ04-04430100-R3M1,"₹6,599",4.2
+realme Buds 3 (3.5 mm) Wired in Ear Earphones with Mic (Black),₹598,3.8
+"HBYCDSTF Wireless Bluetooth Headphones with Colorful LED Lights, Built-in Mic, Light Weight, Foldable, Wired HiFi Stereo Headphones for Classroom/Home Office/PC/Mobile Phone/Kids Adult (Blue) (Black)","₹5,214",4.2
+Sony MDR-7506 Professional Wired On Ear Headphones (Best Compatible with Professional Cinema Line Camera) - Black,"₹8,990",4.5
+"Beyerdynamic DT 770 PRO 80 Ω Studio Headphones, Closed Systems,","₹15,999",4.6
+"Jiade USB Headset with Microphone, Type-c/USB/3.5mm Jack 3-in-1 PC Headset, Wired & Noise Cancelling Headphone with Mic Mute for Call Centers, Teams, Zoom, Home Office, Online Courses","₹7,510",3.9
+"JBUNION Kids Bluetooth Headphones Lightweight Wireless Headphones for Kids with LED Lights, 75/85/94dBA Safe Volume Limit, Built-in Mic, Boys Girl Head Phone for School/Tablet/Travel/Airplane","₹6,807",4.3
+"PHILIPS Award Winning Wireless On Ear Headphones TAH8506BK, Sleek Design with Noise Cancellation Pro, Upto 60 Hrs of Play time, Touch Control (Black), Sensitivity: 96 dB (1K Hz)","₹9,099",4.2
+"OneOdio Over Ear Headphones Studio Wired Bass Headsets with 50mm Driver, Foldable Lightweight Headphones with Shareport and Mic for DJ Monitoring Mixing Guitar PC TV with Microphone (Pro-30)","₹3,008",4.2
+"SENLOO Pink Gaming Headset with Mic for PC Computer Mac Laptop, Over-Ear Wired Gaming Headphones with Microphone, Volume Control, Compatible with PS4 Xbox PS5 Controller Phone","₹7,032",N/A
+OneAssist 1 Year Extended Warranty Plan for Headphones Between INR 500-1000 (E-Mail Delivery),₹89,3.8
+OneAssist 2 Years Extended Warranty Plan for Headphones Between INR 20001-30000 (E-Mail Delivery),"₹2,529",4.1
+OneAssist 1 Year Extended Warranty Plan for Headphones Between INR 7501-10000 (E-Mail Delivery),₹659,4.0
+"Bywulanda USB Type C Kids Headphone for School, 94dB Safe Volume Limited, Foldable Stereo Sound Tangle-Free Type C Cord, On-Ear Headphones for Boys/Girls/Students/Tablet/Travel","₹4,208",N/A
+"Wantek Wireless Headset with Mic- USB & Bluetooth Connectivity, 50-Hour Battery Life, AI Noise Cancelling Adjustable Microphone Charging Dock, Comfort Fit for Home/Office/Mobile Phone","₹13,177",4.7
+OneAssist 2 Years Extended Warranty Plan for Headphones Between INR 500-1000 (E-Mail Delivery),₹149,3.8
+OneAssist 1 Year Extended Warranty Plan for Headphones Between INR 2001-2500(E-Mail Delivery),₹209,4.1
+Microsoft Surface Headphones 2 Bluetooth Wireless Over Ear Headphones With Microphone Black,"₹24,990",4.3
+"soundcore by Anker Q20i Wireless Bluetooth Over-Ear Headphones with Hybrid Active Noise Cancelling, 40h Playtime in ANC Mode, Hi-Res Audio, Deep Bass, Personalization via App (Black)","₹3,659",4.3
+"GOBOULT Newly Launched Fluid X Pro Ear Bluetooth Headphones with 70H Playtime, 40mm Bass Drivers, Zen™ ENC Mic, Type-C Fast Charging, 4 EQ Modes, AUX Option, IPX5 Wireless Headphones (Beige)","₹1,999",4.2
+"Bywulanda USB Type C Kids Headphone for School, 94dB Safe Volume Limited, Foldable Stereo Sound Tangle-Free Type C Cord, On-Ear Headphones for Boys/Girls/Students/Tablet/Travel","₹4,208",N/A
+"Wantek Wireless Headset with Mic- USB & Bluetooth Connectivity, 50-Hour Battery Life, AI Noise Cancelling Adjustable Microphone Charging Dock, Comfort Fit for Home/Office/Mobile Phone","₹13,177",4.7
+Microsoft Surface Headphones 2 Bluetooth Wireless Over Ear Headphones With Microphone Black,"₹24,990",4.3
+"HiBOMASOON Bone Conduction Headphones, IPX8 Waterproof Bluetooth 5.3 On Ear Headphones with 32G MP3 Memory for Swimming, Running, Cycling - Swimming Headphones Underwater(Black)","₹12,575",3.2
+"EPOS Impact 860T ANC - Advanced Noise Cancelling Headset for Open Office Environments, Super Wideband Audio, USB-C Connectivity, Certified for Microsoft Teams","₹11,171",4.3
+OneAssist 1 Year Extended Warranty Plan for Headphones Between INR 2501-3000 (E-Mail Delivery),₹209,3.9
+OneAssist 2 Years Extended Warranty Plan for Headphones Between INR 1001-2000 (E-Mail Delivery),₹209,3.8
+OneAssist 2 Years Extended Warranty Plan for Headphones Between INR 2001-3000 (E-Mail Delivery),₹349,3.8
+"GOBOULT Newly Launched Fluid X Headphones Bluetooth Wireless with 60H Playtime, 40mm Bass Driver, Zen ENC Mic, Type-C Charging, Combat™Gaming Mode, BTv 5.4, Headphones Wireless with mic (Jet Black)","₹1,599",4.1
+"Spigen Audio Newly Launched SA-HP P10 Wireless Over Ear Headphones with 60H Playtime, Upto 43dB Multi-Mode Adaptive ANC Pro, EQ Customizing App, 5-MIC, Gaming Mode, 40mm Driver - Black","₹4,899",3.7
+"Fotgear Open-Ear True Wireless Headphones - Bluetooth 5.3 Air Conduction Earbuds with Earhooks & Dual Mic, Headsets Compatible with iPhone & Android, IPX5 Waterproof Earphones for Sports, Black","₹4,799",3.5
+ERAZER AI Translation Earbuds Real Time 135 Languages Translator Ear Buds with Glowing Earhook Wireless Earphones Bluetooth 5.4 Translating Headphones fit iOS &Android for Travel Business Meeting,"₹6,499",3.7
+OneAssist 2 Years Extended Warranty Plan for Headphones Between INR 10001-15000 (E-Mail Delivery),"₹1,269",4.3
+OneAssist 1 Year Extended Warranty Plan for Headphones Between INR 1501-2000 (E-Mail Delivery),₹129,4.0
+OneAssist 1 Year Extended Warranty Plan for Headphones Between INR 4001-5000 (E-Mail Delivery),₹369,4.0
+OneAssist 2 Years Extended Warranty Plan for Headphones Between INR 4001-5000 (E-Mail Delivery),₹629,4.0
+OneAssist 1 Year Extended Warranty Plan for Headphones Between INR 20001-30000 (E-Mail Delivery),"₹1,669",3.8
+OneAssist 2 Years Extended Warranty Plan for Headphones Between INR 7501-10000 (E-Mail Delivery),"₹1,129",4.4
+"HP H300 Over Ear Wireless Headset, Black",₹999,3.6
+"HP H200 On Ear Wireless Headset, Black","₹1,299",4.0
+"GOBOULT Newly Launched Fluid X Pro Ear Bluetooth Headphones with 70H Playtime, 40mm Bass Drivers, Zen™ ENC Mic, Type-C Fast Charging, 4 EQ Modes, AUX Option, IPX5 Wireless Headphones (Black)","₹1,999",4.2
+"GOBOULT Newly Launched Fluid X Headphones Bluetooth Wireless with 60H Playtime, 40mm Bass Driver, Zen ENC Mic, Type-C Charging, Combat™Gaming Mode, BTv 5.4, Headphones Wireless with mic (White)","₹1,599",4.1
+realme Buds 3 (3.5 mm) Wired in Ear Earphones with Mic (Black),₹598,3.8
+Ant Esports H525 Pro RGB Gaming Headset Gaming Over Ear Wired Headphones with Mic| 2 * 3.5MM Jack + USB for RGB Light |50 MM Drivers | Compatible with PC/ PS4/Xbox One/Nintendo/Mobile_Black,₹849,3.6
+"Cosmic Byte GS430 Gaming wired over ear Headphone, 7 Color RGB LED and Microphone",₹999,4.0
+Razer Barracuda X (2022) - Wireless Multi-Platform Gaming and Mobile Headset - Black - FRML Packaging RZ04-04430100-R3M1,"₹6,599",4.2
+Audio-Technica Ath-M50X Wired Over Ear Headphones Without Mic (Black),"₹10,749",4.6
+"Razer Kraken X Lite Ultralight Gaming Headset: 7.1 Surround Sound Capable - Lightweight Frame - Bendable Cardioid Microphone - for PC, Xbox, PS4, Nintendo Switch - Classic Black","₹1,999",4.1
+OneAssist 1 Year Extended Warranty Plan for Headphones Between INR 500-1000 (E-Mail Delivery),₹89,3.8
+"Skullcandy Crusher ANC 2 Over-Ear Wireless Headphones 100 dB| Active Noise Cancellation, Sensory Bass, Dual Pairing, 50H Battery, Rapid Charge, Alexa Built-in | Bone, Off White","₹14,999",4.2
+"OneOdio A70 Bluetooth Over Ear Headphones, Wireless Headphones w/ 72H Playtime, Hi-Res, 3.5mm/6.35mm Wired Audio Jack for Studio Monitor & Mixing DJ E-Guitar AMP, Computer Laptop PC Tablet (Black)","₹4,199",4.4
+"truke Newly Launched Buds Liberty Open Ear Wireless Earbuds with 360Spatial™ Audio Experience, 16mm Beryllium Speaker, 60H Playtime, Quad Mic for Crystal-Clear Calls, Fast Charging, BT5.4","₹1,399",3.8
+Audio-Technica ATH-M40X Professional Studio Monitor Over-Ear Headphones (Black),"₹9,799",4.4
+"HyperX Cloudx Stinger 2 Core Gaming Headphones for Xbox-Black (6H9B8Aa),On Ear,Wired","₹2,399",4.5
+"Beyerdynamic DT 770 PRO 80 Ω Studio Headphones, Closed Systems,","₹15,999",4.6
+"EPOS Impact 860T ANC - Advanced Noise Cancelling Headset for Open Office Environments, Super Wideband Audio, USB-C Connectivity, Certified for Microsoft Teams","₹11,171",4.3
+"boAt Rockerz 235 Pro Wireless Bluetooth Neckband in Ear Earphone, Upto 20 hrs of Playtime, Beast Mode, Low Latency, IPX5 Water & Sweat Resistance, ENx Technology, Bluetooth v5.2(Active Black)",₹899,4.0
+"Sennheiser Momentum 4 Wireless Over Ear Headphones, Free BTD 600 Bluetooth Dongle, ANC, 60h Battery, Customizable Sound, Crystal-Clear Calls, Multipoint Connectivity, 2Y Warranty, Black/Copper","₹25,990",4.4
+"JBL Tune 770NC Wireless Over Ear ANC Headphones with Mic, Upto 70 Hrs Battery, Speed Charge : 5 min Charge Gives up to 3H of Playback, Google Fast Pair, Dual Pairing, BT 5.3 (White)","₹4,998",4.0
+OneAssist 2 Years Extended Warranty Plan for Headphones Between INR 20001-30000 (E-Mail Delivery),"₹2,529",4.1
+"soundcore by Anker R50i VI True Wireless Earbuds, 10mm Drivers with Big Bass, Bluetooth 5.3, 30H Long Playtime, Water-Resistant, 2 Mics for AI Clear Calls, 22 Preset EQs, Customization via App",₹898,4.2
+"GOBOULT X Mustang Q Over Ear Bluetooth Headphones with 70H Playtime, 40mm Bass Drivers, Zen ENC Mic, Type-C Fast Charging, 4 EQ Modes, Bluetooth 5.4, AUX Option, IPX5 Wireless Headphones","₹2,229",4.0
+"OneOdio A70 Bluetooth Over Ear Headphones, Wireless Headphones w/ 72H Playtime, Hi-Res, 3.5mm/6.35mm Wired Audio Jack for Studio Monitor (Silver)","₹4,199",4.4
+"pTron Studio Urban 35dB Active Noise Cancellation Bluetooth Wireless Over Ear Headphones with Mic, 72Hrs Playtime, 40mm Bass Drivers, TruTalk AI-ENC Calls,40ms Low Latency Gaming, Foldable Cups(Black)","₹2,499",4.8
+"boAt Airdopes 311 Pro, 50HRS Battery, Fast Charge, Dual Mics ENx Tech, Transparent LID, Low Latency, IPX4, IWP Tech, v5.3 Bluetooth Earbuds, TWS Ear Buds Wireless Earphones with mic (Active Black)",₹799,3.6
+"ZEBRONICS Zeb-Dynamic with Bluetooth Supporting Headphone, Aux Input, Call Function and Media/Volume Control",₹799,3.2
+"PHILIPS Award Winning Wireless On Ear Headphones TAH8506BK, Sleek Design with Noise Cancellation Pro, Upto 60 Hrs of Play time, Touch Control (Black), Sensitivity: 96 dB (1K Hz)","₹9,099",4.2
+CLAW SM50 Professional Studio Monitoring DJ Wired Over Ear Headphones with 2 Detachable Cables (2.8m Coiled Cable & 1.2m Straight Cable with Mic and in-line Controls) (SM50 Black),"₹2,364",4.2
+"ZEBRONICS Duke 2 PRO, On Ear Wireless Headphone, 50 Hours Playback, ENC, Rapid Charging, Dual Pairing, 3 EQ Modes, Bluetooth v5.4, Call Function, Voice Assistant, Gaming Mode (Black)","₹1,099",4.0
+ArtSpark Cute Cat Wired Earphones for Kids – Gaming Headphones with Mic for Girls & Boys,₹330,N/A
+"Skullcandy Cassette Bluetooth 5.0 On-Ear Wireless Headphones with Mic, 22Hr Playtime, Rapid Charge, Collapsible Design – Black","₹2,799",3.9
+"Compatable with Ultrapods TWS Earbud, Bluetooth with Display, Transparent Design, True Wireless, White with Type C Fast Charging",N/A,N/A
+"Voods Heads Pro, On Ear Headphones, 120H Battery, 40mm Drivers, Foldable Design, Dual Pairing, Padded Cushions, Headphones Bluetooth Wireless, Voice Assistant, IP65 Rating (Brown)","₹1,049",3.6
+"soundcore by Anker H30i Wireless On-Ear Headphones, Foldable Design, Pure Bass, 70H Playtime, Bluetooth 5.3, Lightweight and Comfortable, App Connectivity, Multipoint Connection (Black)","₹1,498",4.2
+"Wantek Phone Headset with Microphone Noise Cancelling, Telephone Headsets 2.5mm Jack for Panasonic AT&T ML17929 Vtech RCA Cisco Uniden Polycom Grandstream Home Office Cordless DECT Phones(F600J25P)","₹6,823",4.2
+K72 Closed back studio headphones,"₹2,660",4.3
+"SHOKZ Openrun Pro 2 Mini Bone Conduction Sport Headphones, Open Ear Wireless Earphones With Bluetooth 5.3, Noise Cancelling Mics, IP55 Waterproof, 12H Playtime For Running, USB-C Qiuck Charge (Black)","₹15,299",4.5
+"GEARZTOUCH OASI'S inEar TypeC Earphone, in-Line Volume Controller & Powerful HD Mic, Clear Sound, Noise Isolation Compatible with Oneplus, Samsung, Oppo, Vivo, Redmi Having only TypeC Port (Blue)",₹299,4.2
+"Cosmic Byte Stardust Wired On Ear Headphones with Mic Flexible for PS4, Xbox One, Laptop, PC, iPhone and Android Phones (Black,Blue)",₹779,4.0
+ACwO Twister 515 Wireless Over-Ear Headphones | X-Fidelity Acoustics | 40mm Bass BooMX™ Drivers | ANC 25dB | Dual EQ Modes | 65H Playtime | 45ms Low Latency | AI-ENC Calls | IPX5 - Steel Blue,"₹2,099",4.4
+"pTron Studio Urban 35dB Active Noise Cancellation Bluetooth Wireless Over Ear Headphones with Mic, 72Hrs Playtime, 40mm Bass Drivers, TruTalk AI-ENC Calls,40ms Low Latency Gaming, Foldable Cups(Black)","₹2,499",4.8
+"OOGE Echo 300 Wireless Bluetooth Headphones (White) | 10mm Drivers, Soft Cushions, Balanced Acoustic Sound, AUX Support, Bluetooth 5.3, Long Battery Life, Foldable, Lightweight, Clear Audio",₹971,3.4
+"Fire-Boltt Aero TWS Ear Buds Custom EQ, Wireless Bluetooth 5.4, 50H Playtime, 50ms Low Latency, Fast Charging Case, App Support, Touch Controls, IPX4 Waterproof, Gaming & Music",₹799,4.2
+"Srhythm NC25 Hybrid Noise Cancelling Headphones Over Ear, Wireless Bluetooth 5.3, 50H Playtime, Transparency Mode,Black","₹4,886",4.2
+"OneOdio A70 Bluetooth Over Ear Headphones, Wireless Headphones w/ 72H Playtime, Hi-Res, 3.5mm/6.35mm Wired Audio Jack for Studio Monitor & Mixing DJ E-Guitar AMP, Computer Laptop PC Tablet (Red)","₹4,199",4.4
+"Srhythm NC25 Wireless Headphones Bluetooth 5.3,Lightweight Noise Cancelling Headset Over-Ear with Low Latency,Green","₹4,886",4.2
+"Black-R Wireless Earphone Bluetooth Headphones in Ear Neckband with Upto 130 Hours Playback, Bluetooth V5.4, Smart Bass, Lowest Latency Gaming, Wireless Headset, R-008 (Black)",₹264,3.5
+"Sony INZONE H3, MDR-G300 Wired Gaming Headset, Over-Ear Headphones with 360 Spatial Sound, USB Wired Over-Ear Professional + USB Connector, flip to Mute mic, App Support & PC Compatible (White)","₹5,000",4.0
+"Skullcandy Riff 2 On-Ear Wireless Headphones, 34 Hr Battery, Microphone, Works with iPhone Android and Bluetooth Devices - Black","₹3,799",4.1
+"ARTIX CL750 On-Ear Headphones Wired with Mic and Volume Control — Noise Isolating Corded Over Ear Headphones with Microphone for Laptop and Computer, Plug in Headset with Cord (Aux Jack 3.5mm)","₹1,450",4.2
+"Metaind Wired USB Headphone with Noise Cancelling Mic | HD Sound & Comfort for Zoom, Teams & Call Centers | USB Headset for PC & Laptop | Model: Meta_MT50 (Black)","₹1,245",4.1
+"Audio-Technica Ath-M20Xbt Wireless Over-Ear Headphones, Bluetooth 5.0, 60-Hour Battery Life, 40 mm Drivers, Hi-Fi Sound, Built-in Mic, AAC/SBC Codec Support (Black)","₹7,989",4.2
+"Portronics Harmonics Z7 Bluetooth Wireless in Ear Earphones with Upto 40 Hours Playback, 10mm Dynamic Driver, Gaming Mode, High Bass, IPX4 Water and Sweat Resistant, Type C Fast Charging(Black)",₹499,4.0
+"Wireless Earbuds with Bluetooth 5.4, White, 4 HD Mics, Dual-Device Connection, Clear Voice Technology, ChatGPT Integration, Fast Pair(White NOTH Square)",₹749,4.5
+"truke Newly Launched BTG 500 Over The Ear Gaming Headphone with 40mm Drivers, 10H of Playtime, Dual Pairing, Gaming Mode (50ms Latency) with RGB LEDs, TF Card with Volume Control, BT 5.4 (Sky Blue)",₹899,4.1
+OneOdio Bluetooth Over Ear Headphones - Wireless/Wired 110 Hrs Stereo Sound Bluetooth Foldable Headsets with Deep Bass 50mm Neodymium Drivers for PC/Phone - Studio Wireless Pro C (Black),"₹4,199",4.3
+"Daemon Cat Ear Headphones, Wireless Bluetooth & Wired, Over-Ear, Pink, Kids/Teens/Adults, LED Lights, Built-in Mic & Mute Button, Comfortable & Foldable, Multi-Use","₹1,143",3.4
+Sennheiser Professional Audio HD 280 PRO Wired Over Ear Headphones without microphone,"₹6,490",4.2
+"amazon basics Tri-Mode Wireless RGB Gaming Headphones with Detachable Mic,Volume Scroller,Microphone On/Off Button,Type-C Charging Jack, for PC and Laptop. (Black)","₹2,234",4.0
+"HyperX Cloudx Stinger 2 Core Gaming Headphones for Xbox-Black (6H9B8Aa),On Ear,Wired","₹2,399",4.5
+"Skullcandy Icon ANC On-Ear Wireless Bluetooth Headphones - Active Noise Cancelling, 97.5dB 60Hr Battery + Rapid Charge, Mic, Adjustable Stay-Aware Mode – Black","₹7,499",4.3
+Razer Barracuda X (2022) - Wireless Multi-Platform Gaming and Mobile Headset - Black - FRML Packaging RZ04-04430100-R3M1,"₹6,599",4.2
+Sony MDR-EX15AP EX Stereo Headphones with Mic (Black),₹549,3.8
+"JBL Tune 720BT - Wireless Over-Ear Headphones with JBL Pure Bass Sound, Bluetooth 5.3, Up to 76H Battery Life and Speed Charge, Lightweight, Comfortable and Foldable Design (Purple)","₹20,538",4.5
+"soundcore by Anker,Space One,Active Noise Cancelling in Ear Headphones,2X Stronger Voice Reduction,40H ANC Playtime,App Control,Ldac Hi-Res Wireless Audio,Comfortable Fit,Clear Calls,Bluetooth 5.3","₹5,699",3.9
+"Fire-Boltt Aero TWS Ear Buds Custom EQ, Wireless Bluetooth 5.4, 50H Playtime, 50ms Low Latency, Fast Charging Case, App Support, Touch Controls, IPX4 Waterproof, Gaming & Music",₹799,4.2
+"Fire-Boltt Aero TWS Ear Buds Custom EQ, Wireless Bluetooth 5.4, 50H Playtime, 50ms Low Latency, Fast Charging Case, App Support, Touch Controls, IPX4 Waterproof, Gaming & Music",₹999,4.2
+"soundcore by Anker R50i VI True Wireless Earbuds, 10mm Drivers with Big Bass, Bluetooth 5.3, 30H Long Playtime, Water-Resistant, 2 Mics for AI Clear Calls, 22 Preset EQs, Customization (Blue)",₹898,4.2
+Audio-Technica SonicPro ATH-AVC200,"₹2,299",4.1
+"GOBOULT Z20 Pro Made in India Ear Buds Wireless with 60H Playtime, 4 Mics for Clear Calling, 45ms Low Latency Gaming, IPX5, 13mm Bass Driver Earbuds Buds TWS Bluetooth Wireless Earphones(Powder Blue)","₹1,639",4.0
+"Ant Esports H530 Multi-Platform Pro RGB Gaming Headsetfor PC / PS4 / PS5 / Xbox One / Switch1 with mic, Black Red",₹848,3.6
+"amazon basics Tri-Mode Wireless RGB Gaming Headphones with Detachable Mic,Volume Scroller,Microphone On/Off Button,Type-C Charging Jack, for PC and Laptop. (Black)","₹2,234",4.0
+Apple EarPods with 3.5mm Headphone Plug,"₹1,650",4.0
+"Hp Wired On Ear Headphones With Mic With 3.5 Mm Drivers, In-Built Noise Cancelling, Foldable And Adjustable For Laptop/Pc/Office/Home/ 1 Year Warranty (B4B09Pa)",₹699,3.5
+"MAONO AU-MH501 Over-Ear Studio Monitoring Headphones for Recording Studio, Youtuber, Music Creation with 50mm Driver and Lightweight Foldable Design","₹2,399",4.1
+icall P47 Gaming Over Ear Bluetooth Headphones Wireless with Mic (White),₹392,3.0
+"truke Newly Launched BTG 500 Over The Ear Gaming Headphone with 40mm Drivers, 10H of Playtime, Dual Pairing, Gaming Mode (50ms Latency) with RGB LEDs, TF Card with Volume Control, BT 5.4(Metal Black)",₹899,4.1
+"truke Buds F1 Ultra True Wireless in Ear Earbuds Spatial Audio Experience, 60H Playtime Ear Buds, Quad Mics Crystal-Clear Calls, Fast Charging, Bluetooth 5.3, Noise Cancellation, Gaming Mode (Black)",₹699,3.8
+"PHILIPS Award Winning Wireless On Ear Headphones TAH8506BK, Sleek Design with Noise Cancellation Pro, Upto 60 Hrs of Play time, Touch Control (Black), Sensitivity: 96 dB (1K Hz)","₹9,099",4.2
+Audio-Technica ATH-M30X On-Ear Stereo Headphone (Black),"₹6,499",4.6
+OneAssist 2 Years Extended Warranty Plan for Headphones Between INR 2001-3000 (E-Mail Delivery),₹349,3.8
+"iClever BTH13 Bluetooth Kids Headphones with Mic, Over Ear Headphone Wireless Cat Ear Headphone for Girls Birthday Gift Safe Volume Limited, 45H Playtime, Portable Headset for iPad, Purple","₹2,565",4.4
+"Skullcandy Grom Over-Ear Wireless Headphones for Kids, Volume-Limiting to 85dB + 45Hr Playtime + Rapid Charge Override Function, Adjustable Headband Strap & Collapsible Design- Black","₹3,799",4.4
+"Daemon Cat Ear Headphones, Wireless Bluetooth & Wired, Over-Ear, Pink, Kids/Teens/Adults, LED Lights, Built-in Mic & Mute Button, Comfortable & Foldable, Multi-Use","₹1,143",3.4
+FiiO FA19 10 Balanced Armature in Ear Monitors | Audiophile Earphones with Detachable Pure Silver MMCX Headphone Cable,"₹1,83,618.",4.4
+Sony MDR-EX14AP Wired in Ear Headphone with Mic (Black),₹599,3.7
+"RTUSIA Small Bluetooth On Ear Headphones Wrap Around Head - Sports Wireless Headset with Built in Microphone and Crystal-Clear Sound, Foldable and Carried in The Purse, and 12-Hour Battery Life, Black","₹1,999",3.7
+"soundcore R50I NC by Anker Noise Cancelling in Ear Earbuds,Strong 42Db Adaptive Noise Cancelling,Powerful Bass,45H Playtime,2-in-1 Case and Phone Stand,Ip54,Fast Charge 10Min = 120 Min,Bluetooth 5.4","₹1,379",4.0
+"Logitech H540 Stereo Wired Headphones On Ear Headphones With Mic With Noise-Cancelling Usb, On Ear Controls, Mute Indicator Light, Pc/Mac/Laptop - (Black)","₹3,993",4.0
+"pTron Tangentbeat in Ear Bluetooth 5.0 Wireless Headphones with Mic, Deep Bass, 10mm Drivers, Clear Calls, Dual Pairing, Fast Charging, Magnetic Buds, Voice Assistant & IPX4 Wireless Neckband (Black",₹549,3.8

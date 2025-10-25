@@ -1,0 +1,73 @@
+[MASTER]
+ignore=tests,venv,__pycache__,.venv,.github
+persistent=yes
+load-plugins=pylint.extensions.docparams,pylint.extensions.typing
+jobs=4
+extension-pkg-whitelist=numpy,pandas
+
+[MESSAGES CONTROL]
+disable=
+    missing-module-docstring,
+    missing-class-docstring,
+    missing-function-docstring,
+    too-few-public-methods,
+    too-many-arguments,
+    too-many-locals,
+    too-many-instance-attributes,
+    too-many-branches,
+    too-many-statements,
+    too-many-return-statements,
+    broad-except,
+    invalid-name,
+    fixme,
+    import-error,
+    no-member,
+    unused-argument
+
+enable=
+    useless-return,
+    redefined-outer-name,
+    reimported,
+    inconsistent-return-statements,
+    duplicate-code,
+    unreachable,
+    unneeded-not,
+    wrong-import-order,
+    wrong-import-position,
+    missing-docstring,
+    missing-docstring-tags
+
+[REPORTS]
+output-format=colorized
+reports=no
+score=yes
+
+[FORMAT]
+max-line-length=120
+indent-string='    '
+expected-line-ending-format=LF
+
+[DESIGN]
+max-args=8
+max-locals=25
+max-branches=15
+max-statements=80
+max-returns=8
+
+[DOCSTRING]
+docstring-min-length=10
+ignore-private-functions=yes
+
+[TYPECHECK]
+ignored-modules=requests,bs4,airflow,pandas,numpy
+
+[IMPORTS]
+known-standard-library=airflow
+known-third-party=requests,beautifulsoup4,pandas,numpy
+# Adjust import grouping style (works in recent pylint)
+import-graph=no
+import-graph-output-format=dot
+
+[LOGGING]
+logging-format-style=old
+

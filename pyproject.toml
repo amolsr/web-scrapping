@@ -1,0 +1,14 @@
+[project]
+name = "web-scrapping"
+version = "0.1.0"
+description = "Repository for web scrappers"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "pylint>=4.0.2",
+]
+
+[dependency-groups]
+dev = [
+    "pylint-ignore>=2021.1024",
+]
