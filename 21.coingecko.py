@@ -1,49 +1,51 @@
 """
-CoinGecko Cryptocurrency Scraper
-Scrapes top 50 cryptocurrencies by market cap from CoinGecko.
-Outputs: CSV file in output/coingecko.csv
+CoinGecko scraper script
+Uses CoinGecko API to fetch cryptocurrency data
+Outputs CSV to output/coingecko.csv
 """
 
-import requests
 import csv
 import os
+import sys
+import requests
 
-# Ensure output folder exists
-os.makedirs("output", exist_ok=True)
 
-# API URL for top cryptocurrencies in USD
-url = "https://api.coingecko.com/api/v3/coins/markets"
-params = {
-    "vs_currency": "usd",
-    "order": "market_cap_desc",
-    "per_page": 50,
-    "page": 1,
-    "sparkline": False
-}
+def fetch_coingecko_data():
+    """Fetch top 50 cryptocurrencies from CoinGecko API and save to CSV."""
+    url = "https://api.coingecko.com/api/v3/coins/markets"
+    params = {
+        "vs_currency": "usd",
+        "order": "market_cap_desc",
+        "per_page": 50,
+        "page": 1,
+        "sparkline": False
+    }
 
-try:
-    response = requests.get(url, params=params)
-    response.raise_for_status()
+    try:
+        response = requests.get(url, params=params, timeout=10)
+        response.raise_for_status()
+    except requests.exceptions.RequestException as err:
+        print(f"Error fetching data: {err}")
+        sys.exit()
+
     data = response.json()
-except requests.exceptions.RequestException as e:
-    print(f"Error fetching data: {e}")
-    exit()
+    os.makedirs("output", exist_ok=True)
 
-# Prepare CSV file
-csv_file = "output/coingecko.csv"
-with open(csv_file, "w", newline="", encoding="utf-8") as f:
-    writer = csv.writer(f)
-    # Write header
-    writer.writerow(["Name", "Symbol", "Current Price (USD)", "Market Cap (USD)", "24h Change (%)", "Coin URL"])
-    
-    # Write data
-    for coin in data:
-        name = coin.get("name", "N/A")
-        symbol = coin.get("symbol", "N/A").upper()
-        price = coin.get("current_price", "N/A")
-        market_cap = coin.get("market_cap", "N/A")
-        change_24h = coin.get("price_change_percentage_24h", "N/A")
-        url_coin = f"https://www.coingecko.com/en/coins/{coin.get('id')}"
-        writer.writerow([name, symbol, price, market_cap, change_24h, url_coin])
+    csv_path = os.path.join("output", "coingecko.csv")
+    with open(csv_path, "w", encoding="utf-8", newline="") as file:
+        writer = csv.writer(file)
+        writer.writerow(["Name", "Symbol", "Price (USD)", "Market Cap", "24h Change (%)"])
+        for coin in data:
+            writer.writerow([
+                coin.get("name", "N/A"),
+                coin.get("symbol", "N/A").upper(),
+                coin.get("current_price", "N/A"),
+                coin.get("market_cap", "N/A"),
+                coin.get("price_change_percentage_24h", "N/A")
+            ])
 
-print(f"Successfully scraped {len(data)} cryptocurrencies. CSV saved to {csv_file}")
+    print(f"Data saved to {csv_path}")
+
+
+if __name__ == "__main__":
+    fetch_coingecko_data()
