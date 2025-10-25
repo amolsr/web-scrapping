@@ -81,7 +81,7 @@ if articles:
     fieldnames = ['Headline', 'Link']
     
     output_dir = 'output'
-    csv_path = os.path.join(output_dir, 'allrecipes_news.csv')
+    csv_path = os.path.join(output_dir, 'allrecipes_scraper.csv')
     
     os.makedirs(output_dir, exist_ok=True) 
     
