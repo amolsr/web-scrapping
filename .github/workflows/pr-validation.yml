@@ -38,4 +38,14 @@ jobs:
         run: python .github/scripts/validate_pr.py
         env:
           CHANGED_FILES: ${{ steps.changed-files.outputs.changed_files }}
+      
+      - name: Run pylint on all Python files
+        if: false
+        run: |
+          git ls-files '*.py' | uv run xargs pylint
+
+      - name: Run pylint on changed Python files
+        if: ${{ steps.changed-files.outputs.changed_files }}
+        run: |
+          echo "${{ steps.changed-files.outputs.changed_files }}" | grep '\.py$' | uv run xargs pylint
 

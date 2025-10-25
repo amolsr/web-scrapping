@@ -10,22 +10,6 @@ A comprehensive collection of web scraping scripts for extracting data from popu
 - **Educational**: Perfect for learning web scraping techniques
 - **Open Source**: Contribute and improve the collection
 
-## 📋 Available Scrapers
-
-| Scraper | Description | Output |
-|---------|-------------|---------|
-| **Flipkart** (`1. flipkart.py`) | Extract Nokia smartphone data (name, rating, price, description) | `flipkart.csv` |
-| **YouTube** (`2. youtube.py`) | Scrape YouTube video information | `youtube.csv` |
-| **YouTube Links** (`3. youtube_links.py`) | Extract YouTube video links | `youtube_links.csv` |
-| **IMDB** (`4. imdb.py`) | Get top-rated movies with rankings, ratings, and director info | `imdb.csv` |
-| **Amazon** (`5. Amazon.py`) | Extract Amazon product data | `Amazon.csv` |
-| **GitHub** (`6. Github.py`) | Scrape GitHub repository information | `github.csv` |
-| **Udemy** (`7. Udemy.py`) | Extract Udemy course data | `udemy.csv` |
-| **College Notices** (`8. college_notice_scrapper.py`) | Scrape college notice board | `notice.csv` |
-| **Sanfoundry** (`9. Sanfoundry.py`) | Extract educational content | `sanfoundry.csv` |
-| **Hacker News** (`10. HackNews.py`) | Scrape GitHub-related posts from Hacker News | `hacknews.csv` |
-| **Weather** (`Weather.py`) | Extract weather information | `weather.csv` |
-
 ## 🚀 Quick Start
 
 ### Prerequisites
@@ -103,7 +87,7 @@ web-scrapping/
 ├── 8. college_notice_scrapper.py  # College notices scraper
 ├── 9. Sanfoundry.py        # Sanfoundry educational content
 ├── 10. HackNews.py         # Hacker News GitHub posts
-├── Weather.py              # Weather information scraper
+├── weather.py              # Weather information scraper
 ├── output/                 # Generated CSV files
 │   ├── flipkart.csv
 │   ├── imdb.csv
