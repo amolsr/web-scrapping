@@ -1,4 +1,5 @@
 name: AI PR Reviewer
+
 on:
   pull_request:
     types: [opened, synchronize]
@@ -9,20 +10,49 @@ jobs:
     permissions:
       pull-requests: write
       contents: read
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # ✅ ensures full git history is available
 
-      - name: Generate AI Review
+      - name: Prepare Diff and Generate AI Review
         id: ai_review
         run: |
-          REVIEW=$(curl -s -X POST "https://api.openai.com/v1/chat/completions" \
+          # ✅ Ensure base branch is fetched (adjust 'main' if your default branch differs)
+          git fetch origin main || echo "⚠️ Could not fetch origin/main; continuing with local HEAD diff."
+
+          # ✅ Generate a meaningful diff (fallback if origin/main not available)
+          DIFF=$(git diff origin/main...HEAD || git diff HEAD^ HEAD)
+
+          if [ -z "$DIFF" ]; then
+            echo "⚠️ No diff found; skipping AI review."
+            echo "REVIEW<<EOF" >> $GITHUB_ENV
+            echo "No code changes detected — nothing to review." >> $GITHUB_ENV
+            echo "EOF" >> $GITHUB_ENV
+            exit 0
+          fi
+
+          echo "🧠 Sending diff of $(echo "$DIFF" | wc -l) lines to OpenAI..."
+
+          RESPONSE=$(curl -s -X POST "https://api.openai.com/v1/chat/completions" \
             -H "Content-Type: application/json" \
             -H "Authorization: Bearer ${{ secrets.OPENAI_API_KEY }}" \
             -d '{
               "model": "gpt-4o-mini",
-              "messages": [{"role": "user", "content": "Review this diff for potential improvements:\n'"$(git diff origin/main...HEAD)"'"}]
-            }' | jq -r '.choices[0].message.content')
+              "messages": [
+                {"role": "system", "content": "You are a strict and detail-oriented senior code reviewer."},
+                {"role": "user", "content": "Review this code diff for potential improvements, bugs, and readability suggestions. Respond concisely:\n'"$DIFF"'"}
+              ]
+            }')
+
+          REVIEW=$(echo "$RESPONSE" | jq -r '.choices[0].message.content')
+
+          if [ "$REVIEW" = "null" ] || [ -z "$REVIEW" ]; then
+            REVIEW="⚠️ The AI review could not be generated. Please check the workflow logs."
+          fi
+
           echo "REVIEW<<EOF" >> $GITHUB_ENV
           echo "$REVIEW" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
