@@ -16,6 +16,7 @@ products = []
 search_queries = ['laptops', 'smartphones', 'headphones']
 
 print("this is some update")
+print("this is some update 1")
 
 for query in search_queries:
     print(f"\n--- Scraping for query: '{query}' ---")
@@ -81,4 +82,5 @@ if products:
     print(f"\nSuccessfully saved {len(products)} total products to {csv_path}")
 else:
     print("\nNo products were scraped. Amazon may have changed its HTML or blocked the request.")
+
 
