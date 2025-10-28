@@ -15,16 +15,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0   # ✅ ensures full git history is available
+          fetch-depth: 0   
 
       - name: Prepare Diff and Generate AI Review
         id: ai_review
         run: |
-          # ✅ Ensure base branch is fetched (adjust 'main' if your default branch differs)
-          git fetch origin main || echo "⚠️ Could not fetch origin/main; continuing with local HEAD diff."
-
-          # ✅ Generate a meaningful diff (fallback if origin/main not available)
-          DIFF=$(git diff origin/main...HEAD || git diff HEAD^ HEAD)
+          DIFF=$(git diff origin/master...HEAD || git diff HEAD^ HEAD)
 
           if [ -z "$DIFF" ]; then
             echo "⚠️ No diff found; skipping AI review."
