@@ -4,6 +4,8 @@ A comprehensive collection of web scraping scripts for extracting data from popu
 
 ## 🌟 Features
 
+
+
 - **Multiple Website Support**: Scrape data from 10+ popular websites
 - **CSV Output**: All scrapers export data in CSV format for easy analysis
 - **Easy to Use**: Simple Python scripts with clear documentation
