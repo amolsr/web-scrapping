@@ -1,6 +1,8 @@
 # Web Scraping Collection 🕷️
 
 A comprehensive collection of web scraping scripts for extracting data from popular websites. This project demonstrates various web scraping techniques using Python and provides ready-to-use scripts for data extraction.
+<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/f2518991-a261-4c67-95e3-43e09ff421c6" />
+
 
 ## 🌟 Features
 
