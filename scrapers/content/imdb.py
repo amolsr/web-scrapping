@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup  #Importing the Beautiful Soup Library
 import requests				   #Importing the requests library
 import time					   #Importing the time library
 import csv					   #Importing the csv module
+from pathlib import Path
 
 response = requests.get('https://www.imdb.com/chart/top')
 soup = BeautifulSoup(response.text, 'lxml')
@@ -22,7 +23,11 @@ for i in slink:
     soup1 = BeautifulSoup(response.text, 'lxml')
     link1 = soup1.find_all('a')
     sdirector.append(link1[120].get_text())
-with open('imdb.csv','w',encoding="utf-8", newline = '') as csvfile:
+# Get project root (go up from scrapers/content/)
+project_root = Path(__file__).parent.parent.parent
+output_path = project_root / 'output' / 'imdb.csv'
+output_path.parent.mkdir(exist_ok=True)
+with open(output_path,'w',encoding="utf-8", newline = '') as csvfile:
 	writer = csv.writer(csvfile)
 	writer.writerow(['Rank', 'Name', 'Year', 'Rating', 'Link', 'Director'])
 	for a,b,c,d,e,f in zip(srank, sname, syear, srating, slink, sdirector):

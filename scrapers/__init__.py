@@ -1,0 +1,2 @@
+"""Web scraping collection package."""
+

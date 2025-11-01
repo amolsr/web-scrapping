@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import csv
 import time
 import os
+from pathlib import Path
 
 headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
@@ -66,10 +67,11 @@ for query in search_queries:
 if products:
     fieldnames = ['Name', 'Price', 'Rating']
     
-    output_dir = 'output'
-    csv_path = os.path.join(output_dir, 'Amazon.csv')
-    
-    os.makedirs(output_dir, exist_ok=True) 
+    # Get project root (go up from scrapers/ecommerce/)
+    project_root = Path(__file__).parent.parent.parent
+    output_dir = project_root / 'output'
+    output_dir.mkdir(exist_ok=True)
+    csv_path = output_dir / 'Amazon.csv' 
     
     with open(csv_path, 'w', encoding="utf-8", newline='') as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)

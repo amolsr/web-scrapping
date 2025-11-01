@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import csv
 import time
 import os
+from pathlib import Path
 
 BASE_URL = 'https://www.flipkart.com/search?q=smartphones'
 
@@ -59,10 +60,11 @@ for page in range(1, 42):
 if products:
     fieldnames = ['Name', 'Price', 'Rating', 'Description']
     
-    output_dir = 'output'
-    csv_path = os.path.join(output_dir, 'flipkart_latest_smartphone.csv')
-    
-    os.makedirs(output_dir, exist_ok=True) 
+    # Get project root (go up from scrapers/ecommerce/)
+    project_root = Path(__file__).parent.parent.parent
+    output_dir = project_root / 'output'
+    output_dir.mkdir(exist_ok=True)
+    csv_path = output_dir / 'flipkart_latest_smartphones.csv' 
     
     with open(csv_path, 'w', encoding="utf-8", newline='') as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)

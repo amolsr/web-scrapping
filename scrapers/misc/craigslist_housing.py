@@ -1,6 +1,7 @@
 import requests
 import csv
 import os
+from pathlib import Path
 
 API_URL = "https://sapi.craigslist.org/web/v8/postings/search/batch"
 PARAMS = {
@@ -10,8 +11,10 @@ PARAMS = {
     "cc": "us",
 }
 
-CSV_FILE = "output/craigslist_housing.csv"
-os.makedirs(os.path.dirname(CSV_FILE), exist_ok=True)
+# Get project root (go up from scrapers/misc/)
+project_root = Path(__file__).parent.parent.parent
+CSV_FILE = str(project_root / "output" / "craigslist_housing.csv")
+Path(CSV_FILE).parent.mkdir(exist_ok=True)
 
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "

@@ -9,10 +9,14 @@ Requirements:
 import requests
 import csv
 import time
+from pathlib import Path
 
 BASE_URL = "https://openlibrary.org"
 API_SEARCH_URL = "https://openlibrary.org/search.json"
-OUTPUT_CSV = "output/openlibrary_books.csv"
+# Get project root (go up from scrapers/content/)
+project_root = Path(__file__).parent.parent.parent
+OUTPUT_CSV = project_root / "output" / "openlibrary_books.csv"
+OUTPUT_CSV.parent.mkdir(exist_ok=True)
 USER_AGENT = "OpenLibraryScraper/1.0 (+your_email@example.com)"
 CRAWL_DELAY = 1  # seconds
 MAX_PAGES = 50   # Number of pages to fetch 
@@ -77,7 +81,7 @@ def main():
 
     if all_books:
         keys = ["Title", "Author", "Subjects", "PublishYear", "Link"]
-        with open(OUTPUT_CSV, "w", newline="", encoding="utf-8") as f:
+        with open(str(OUTPUT_CSV), "w", newline="", encoding="utf-8") as f:
             writer = csv.DictWriter(f, fieldnames=keys)
             writer.writeheader()
             writer.writerows(all_books)

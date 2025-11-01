@@ -4,10 +4,13 @@ import time
 import os
 import random
 from datetime import datetime
+from pathlib import Path
 
-OUTPUT_DIR = "output"
-OUTPUT_CSV = os.path.join(OUTPUT_DIR, "olx_listings.csv")
-os.makedirs(OUTPUT_DIR, exist_ok=True)
+# Get project root (go up from scrapers/ecommerce/)
+project_root = Path(__file__).parent.parent.parent
+OUTPUT_DIR = project_root / "output"
+OUTPUT_DIR.mkdir(exist_ok=True)
+OUTPUT_CSV = OUTPUT_DIR / "olx_listings.csv"
 
 SESSION = requests.Session()
 
@@ -107,7 +110,7 @@ def save_csv(rows):
         print("No rows to save.")
         return
     keys = list(rows[0].keys())
-    with open(OUTPUT_CSV, "w", newline="", encoding="utf-8") as f:
+    with open(str(OUTPUT_CSV), "w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=keys)
         writer.writeheader()
         writer.writerows(rows)

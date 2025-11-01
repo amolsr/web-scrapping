@@ -30,7 +30,7 @@ pip install requests beautifulsoup4 lxml
 
 2. **Run any scraper**
    ```bash
-   python "1. flipkart.py"
+   python scrapers/ecommerce/flipkart.py
    ```
 
 3. **Check the output**
@@ -59,7 +59,7 @@ Nokia 6.1 Plus,4.2,₹12,999,4GB RAM | 64GB Storage
 ### Basic Usage
 ```python
 # Run a specific scraper
-python "4. imdb.py"
+python scrapers/content/imdb.py
 
 # The script will automatically:
 # 1. Fetch data from the website
@@ -79,22 +79,50 @@ Each script can be easily modified to:
 
 ```
 web-scrapping/
-├── 1. flipkart.py          # Flipkart smartphone scraper
-├── 2. youtube.py           # YouTube video scraper
-├── 3. youtube_links.py     # YouTube links extractor
-├── 4. imdb.py              # IMDB top movies scraper
-├── 5. Amazon.py            # Amazon product scraper
-├── 6. Github.py            # GitHub repository scraper
-├── 7. Udemy.py             # Udemy course scraper
-├── 8. college_notice_scrapper.py  # College notices scraper
-├── 9. Sanfoundry.py        # Sanfoundry educational content
-├── 10. HackNews.py         # Hacker News GitHub posts
-├── weather.py              # Weather information scraper
+├── scrapers/               # All scraper scripts organized by category
+│   ├── ecommerce/          # E-commerce website scrapers
+│   │   ├── flipkart.py     # Flipkart smartphone scraper
+│   │   ├── amazon.py       # Amazon product scraper
+│   │   └── olx.py          # OLX listings scraper
+│   ├── job_boards/         # Job board scrapers
+│   │   ├── indeed.py       # Indeed job listings
+│   │   ├── naukri_jobs.py  # Naukri job listings
+│   │   ├── apnajob.py      # ApnaJob listings
+│   │   ├── jobhai.py       # JobHai listings
+│   │   ├── welcome_to_the_jungle.py  # Welcome to the Jungle jobs
+│   │   └── craigslist_jobs.py  # Craigslist jobs
+│   ├── educational/       # Educational platform scrapers
+│   │   ├── udemy.py        # Udemy course scraper
+│   │   ├── sanfoundry.py   # Sanfoundry educational content
+│   │   ├── college_notice_scraper.py  # College notices scraper
+│   │   ├── javaguide.py    # Java Guide content
+│   │   └── indiabix_networking.py  # IndiaBix networking Q&A
+│   ├── social_media/       # Social media and developer platforms
+│   │   ├── youtube.py       # YouTube video scraper
+│   │   ├── youtube_links.py # YouTube links extractor
+│   │   ├── reddit.py       # Reddit posts scraper
+│   │   ├── hackernews.py   # Hacker News posts
+│   │   ├── stack_overflow.py  # Stack Overflow questions
+│   │   └── github.py       # GitHub repository scraper
+│   ├── content/            # Content and media scrapers
+│   │   ├── imdb.py         # IMDB top movies scraper
+│   │   ├── books_toscrape.py  # Books.toscrape.com scraper
+│   │   ├── quotes_toscrape.py  # Quotes to scrape
+│   │   ├── wikipedia.py    # Wikipedia table scraper
+│   │   └── openlibrary_books.py  # Open Library books
+│   ├── misc/               # Miscellaneous scrapers
+│   │   ├── coinmarketcap.py  # Cryptocurrency market data
+│   │   ├── weather.py      # Weather information scraper
+│   │   ├── craigslist_housing.py  # Craigslist housing
+│   │   └── syntaxminds.py  # SyntaxMinds content
+│   └── utils/              # Utility functions
+│       └── __init__.py     # Helper functions for scrapers
 ├── output/                 # Generated CSV files
-│   ├── flipkart.csv
+│   ├── flipkart_latest_smartphones.csv
 │   ├── imdb.csv
 │   ├── github.csv
 │   └── ...
+├── main.py                 # Main entry point
 └── README.md               # This file
 ```
 
